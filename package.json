@@ -4,7 +4,7 @@
         "type": "git",
         "url": "https://github.com/wanyuaning/notebook.git"
     },
-    "homepage": "https://wmgcuan.github.io/ewan/#/",
+    "homepage": "https://wanyuaning.github.io/notebook/",
     "version": "1.0.0",
     "description": "云笔记",
     "main": "index.js",
