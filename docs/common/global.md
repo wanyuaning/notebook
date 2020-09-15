@@ -1,3 +1,38 @@
+### nginx
+windows: 
+安装：http://nginx.org/en/download.html  
+配置：c:\nginx\conf\nginx.conf
+启动：c:\server\nginx-1.0.2 > start nginx 或 c:\server\nginx-1.0.2 > nginx.exe    
+重启：c:\server\nginx-1.0.2 > nginx.exe -s reload  
+停止：c:\server\nginx-1.0.2 > nginx.exe -s stop 或 c:\server\nginx-1.0.2 > nginx.exe -s quit
+mac: 
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"  // 安装brew
+如果卡住：Cloning into '/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core'...
+则：
+cd /usr/local/Homebrew/Library/Taps/
+mkdir homebrew
+cd homebrew
+git clone https://mirrors.ustc.edu.cn/homebrew-core.git
+安装：brew install nginx   
+配置：/usr/local/etc/nginx/nginx.conf
+启动：nginx    重启：nginx -s reload  停止：nginx -s stop
+```
+http {
+    server {
+        listen 8080;
+        server_name localhost;
+        # 把默认location注释掉
+        # 反向代理
+        location / {
+            proxy_pass http://localhost:8001;
+        }
+        location /api/ {
+            proxy_pass http://localhost:8000;
+            proxy_set_header Host $host;
+        }
+    }
+}
+```
 ### 文档
 >$ sudo npm i docsify-cli -g<br>
 >$ docsify init ./docs<br>
