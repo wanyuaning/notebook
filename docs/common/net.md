@@ -1,5 +1,5 @@
-Chrome DevTools  https://developers.google.com/web/tools/chrome-devtools/rendering-tools
-MDN web docs  https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
+[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/rendering-tools)
+[MDN web docs](https://developer.mozilla.org/zh-CN/)
 
 在线har文件解析：http://ericduran.github.io/chromeHAR/
 《使用 HTML5 和 Node 构建超媒体 API》

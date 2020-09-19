@@ -5,7 +5,7 @@
         "url": "https://github.com/wanyuaning/notebook.git"
     },
     "homepage": "https://wanyuaning.github.io/notebook/",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "云笔记",
     "main": "index.js",
     "scripts": {
