@@ -2,6 +2,67 @@
 [全局&工具](common/global.md)
 [网络&资源](common/net.md)
 
+### JavaScript
+原型与原型链
+执行上下文与执行上下文栈
+作用域与作用域链
+闭包
+高阶函数
+
+数据类型
+基本类型：String  Number  Boolean   null  undefined  Symbol
+对象类型：
+类对象：Object Array  Function Map  Set  Date  RegExp  Error
+实例对象：{} [] fn
+
+#### Array
+```
+增删改：shift [unshift push] pop   -+splice(s,l,增,增,增...]) sort([函数])  reverse()  
+信息：内容 slice(s,e)   位置 indexOf(项,s) lastIndexOf(项,s)   字符 toString() join('*') 拷贝 slice() concat([],arr)
+ 
+遍历数组：arr.forEach((e,i,arr)=>{ })
+        arr.map(x=>x*2)
+最大验证：[1,2].every(e=>e<3)   true
+最小验证：[1,2].some(e=>e==2)   true
+过滤：[1,2,3,4].filter(e=>e%2===0)  [2,4]
+第一个验证值：[1,2,3,4].find(e=>e>2);  3
+第一个验证索引：findIndex
+
+var a=[]; var b=a.unshift(1,2);  a: [1, 2]  b: 2
+var a=[1,2,3,4]; a.splice(1,2,22,33);  a:[1,22,33,4]
+var a=[1,3,2]; var b = a.sort(); b.pop();  a:[1,2,3] b:[1,2]
+var a=new Array(2);  a:[,]
+var a=new Array(2,3);  a:[2,3]
+var a=[1,2,3,4]; var b=a.map(x=>x*2);  b:[2,4,6,8]
+var a=[1,2,3,4]; var b=a.forEach(x=>x*2);  b:undefined
+var a=[1,2,3,4]; var b=arr.every(e=>e<5);  b:true
+var a=[1,2,3,4]; var b=a.filter(e=>e%2===0);  b:[2,4]
+var a=[1,2,3,4]; var b=a.find(e=>e>2);  b:3
+```
+String
+字符：   charAt(位置) charCodeAt(位置)  String. fromCharCode(多个字符编码)
+空格：   trim()
+比较：   localeCompare(字符串) 
+转换：   toUpperCase()  toLowerCase()  toLocaleUpperCase()   toLocaleLowerCase()  split([连接符])  
+操作：   substring(起点[,终点])   substr(起点[,个数])      replace(RegExp/字符串,字符串/函数)  concat([多个项])    slice(起点[,终点])
+位置：   indexOf(项[,起点])  lastIndexOf(项[,起点]) 
+
+typeof instanceof toString.call()
+
+true => 1       false => 0        '' => 0        '4S' => NaN            null => 0        undefined => NaN        {valueOf:()=>1} => 1
+false、""、0、NaN、null、undefined   =>  false         " " => true
+
+
+控制流程
+for 可return breake
+for in    {} []  i为key
+for of    [] Map Set i为value
+forEach 遍历装饰元素 
+map       遍历返回新元素 原数组不变
+filter
+
+call&apply
+
 
 Javascript
 ECMAScript规范 (为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript)
@@ -189,49 +250,7 @@ dns域名解析：搜索【浏览器DNS缓存>操作系统DNS缓存】    hosts�
 请求应答过程：
 客户端数据包流动过程：
 
-### JavaScript
-原型与原型链
-执行上下文与执行上下文栈
-作用域与作用域链
-闭包
-高阶函数
 
-数据类型
-基本类型：String  Number  Boolean   null  undefined  Symbol
-对象类型：
-类对象：Object Array  Function Map  Set  Date  RegExp  Error
-实例对象：{} [] fn
-
-Array
-栈：   pop()   push
-队列：shift()  unshift(多个项)
-排序：sort([函数])  reverse()
-转换：toString()  toLocateString()   join([分隔符])
-操作：concat([多个项])    slice(起点[,终点])    splice(起点,个数[,多各项])
-位置：indexOf(项[,起点])  lastIndexOf(项[,起点])
-String
-字符：   charAt(位置) charCodeAt(位置)  String. fromCharCode(多个字符编码)
-空格：   trim()
-比较：   localeCompare(字符串) 
-转换：   toUpperCase()  toLowerCase()  toLocaleUpperCase()   toLocaleLowerCase()  split([连接符])  
-操作：   substring(起点[,终点])   substr(起点[,个数])      replace(RegExp/字符串,字符串/函数)  concat([多个项])    slice(起点[,终点])
-位置：   indexOf(项[,起点])  lastIndexOf(项[,起点]) 
-
-typeof instanceof toString.call()
-
-true => 1       false => 0        '' => 0        '4S' => NaN            null => 0        undefined => NaN        {valueOf:()=>1} => 1
-false、""、0、NaN、null、undefined   =>  false         " " => true
-
-
-控制流程
-for 可return breake
-for in    {} []  i为key
-for of    [] Map Set i为value
-forEach 遍历装饰元素 
-map       遍历返回新元素 原数组不变
-filter
-
-call&apply
 
 
 命名空间
