@@ -1,7 +1,7 @@
 
 [全局&工具](common/global.md)
 [网络&资源](common/net.md)
-
+参考2：admin.cdn888.com:82  账号：jishu888  密码：jishu888    菜单增加‘证书管理’
 ## JavaScript
 ### ECMAScript规范 
 为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript
