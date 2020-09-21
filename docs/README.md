@@ -2,7 +2,110 @@
 [全局&工具](common/global.md)
 [网络&资源](common/net.md)
 
-### JavaScript
+## JavaScript
+### ECMAScript规范 
+为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript
+
+语法、类型、语句、关键字、保留字、运算符、对象
+JavaScript中的类型转换
+作用域、作用域链和闭包
+函数与函数表达式
+arguments对象
+call与apply的应用
+callee与caller的应用
+原型和原型链
+面向对象与继承
+this的理解
+引用/深浅拷贝/JavaScript中的参数传递规则
+Object原型中的函数及应用
+Object静态方法的应用
+Array相关API的应用
+Date相关API的应用
+异步编程
+
+#### BOM(Browser Object Model)
+```
+Window{
+  document
+  frames
+  navigator
+  history
+  location
+    href: "http://localhost:9527/#/minioninfo/minion"   href = origin+hash = protocol+hostname+port+hash
+    origin: "http://localhost:9527"
+    protocol: "http:"
+    host: "localhost:9527"
+    hostname: "localhost"
+    port: "9527"
+    hash: "#/minioninfo/minion"
+    pathname: "/"
+  screen
+}
+```
+
+
+
+弹出新的浏览器窗口；
+移动、关闭浏览器窗口以及调整窗口大小；
+提供 Web 浏览器详细信息的定位对象；　
+提供用户屏幕分辨率详细信息的屏幕对象；
+跳转到另一个页面、前进、后退
+
+DOM(W3C标准)
+HTMLDocument
+HTMLElement
+鼠标事件：click、dbclick、mousedown、mouseup、mouseover、mouseout、mousemove
+键盘事件：keydown、keypress、keyup
+HTML事件：load、unload、abort、error、select、change、submit、reset、resize、scroll、focus、blur
+
+1、DOMReady
+2、DOM操作。增删改查遍历
+3、DOM继承层级
+5、DOM类型与相应的API
+6、事件与事件流
+7、浏览器兼容性
+
+
+window
+
+
+
+
+navigator
+
+appCodeName    //浏览器代码名
+appName             //浏览器步伐名
+appMinorVersion //浏览器补钉版本
+cpuClass              //cpu类型x86
+platform               //操作体系类型win32
+plugins
+opsProfile
+userProfile
+systemLanguage //客户体系语言zh-cn简体中文
+userLanguage      //用户语言,同上
+appVersion           //浏览器版本(包括 体系版本)
+userAgent .          //用户代理头的字符串表示
+onLine                  //用户否在线
+cookieEnabled    //浏览器是否撑持cookie
+mimeTypes
+screen
+width          //屏幕宽度
+height         //屏幕高度
+colorDepth //屏幕颜色深度
+availWidth  //可用宽度(除去任务栏的高度)
+availHeight //可用高度(除去任务栏的高度)
+history
+frames
+external
+AddFavorite("地址","标题" ) //把网站新增到保藏夹
+
+
+
+Document{
+
+}
+通过window.document 属性访问
+
 原型与原型链
 执行上下文与执行上下文栈
 作用域与作用域链
@@ -64,88 +167,8 @@ filter
 call&apply
 
 
-Javascript
-ECMAScript规范 (为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript)
-语法、类型、语句、关键字、保留字、运算符、对象
-JavaScript中的类型转换
-、作用域、作用域链和闭包
-、函数与函数表达式
-、arguments对象
-、call与apply的应用
-、callee与caller的应用
-、原型和原型链
-、面向对象与继承
-、this的理解
-、引用/深浅拷贝/JavaScript中的参数传递规则
-、Object原型中的函数及应用
-、Object静态方法的应用
-、Array相关API的应用
-、Date相关API的应用
-、异步编程
-
-BOM(Document Object Model)
-window 
-location
-弹出新的浏览器窗口；
-移动、关闭浏览器窗口以及调整窗口大小；
-提供 Web 浏览器详细信息的定位对象；　
-提供用户屏幕分辨率详细信息的屏幕对象；
-跳转到另一个页面、前进、后退
-
-DOM(W3C标准)
-HTMLDocument
-HTMLElement
-鼠标事件：click、dbclick、mousedown、mouseup、mouseover、mouseout、mousemove
-键盘事件：keydown、keypress、keyup
-HTML事件：load、unload、abort、error、select、change、submit、reset、resize、scroll、focus、blur
-
-1、DOMReady
-2、DOM操作。增删改查遍历
-3、DOM继承层级
-5、DOM类型与相应的API
-6、事件与事件流
-7、浏览器兼容性
 
 
-window
-document
-
-
-
-location
-navigator
-appCodeName    //浏览器代码名
-appName             //浏览器步伐名
-appMinorVersion //浏览器补钉版本
-cpuClass              //cpu类型x86
-platform               //操作体系类型win32
-plugins
-opsProfile
-userProfile
-systemLanguage //客户体系语言zh-cn简体中文
-userLanguage      //用户语言,同上
-appVersion           //浏览器版本(包括 体系版本)
-userAgent .          //用户代理头的字符串表示
-onLine                  //用户否在线
-cookieEnabled    //浏览器是否撑持cookie
-mimeTypes
-screen
-width          //屏幕宽度
-height         //屏幕高度
-colorDepth //屏幕颜色深度
-availWidth  //可用宽度(除去任务栏的高度)
-availHeight //可用高度(除去任务栏的高度)
-history
-frames
-external
-AddFavorite("地址","标题" ) //把网站新增到保藏夹
-
-
-
-Document{
-
-}
-通过window.document 属性访问
 
 
 
