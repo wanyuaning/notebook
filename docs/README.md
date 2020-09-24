@@ -294,7 +294,37 @@ Webpack rollup
 
 
 
-**VUE**
+### VUE
+```
+引入less编译：
+  src/main.js import less from 'less' 
+  Vue.use(less)
+  <style lang="less">
+延伸API对接：
+  import { getToken } from 'api/qiniu'
+  const token = this.$store.getters.token;
+  getToken(token).then(response => { })
+
+引入全局状态管理：
+  store/modules/demomodule.js state{demo: 1}
+  store/getters.js  {demo: state => state.demo}
+
+  import { mapGetters } from 'vuex'
+  computed: {
+    ...mapGetters([
+      'demo'
+    ])
+  }
+
+  <img :src="demo+'?imageView2/1/w/80/h/80'"
+
+动态加载图片资源
+  <img :src="profileData.icon" />
+  data{ icon: require('../assets/images/108.png')}
+```
+
+
+
 【cli route vuex】
 
 init(events/lifecycle) > beforeCreate > init(injections/reactivety) > created > beforeMount > mounted > beforeUpdate > updated > beforeDestroy > destroyed
