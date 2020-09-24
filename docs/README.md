@@ -1,7 +1,8 @@
 
-[全局&工具](common/global.md)
-[网络&资源](common/net.md)
-参考2：admin.cdn888.com:82  账号：jishu888  密码：jishu888    菜单增加‘证书管理’
+[全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)
+
+
+　　　　
 ## JavaScript
 ### ECMAScript规范 
 为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript
@@ -30,14 +31,18 @@ Window{
   frames
   navigator
   history
-  location
-    href: "http://localhost:9527/#/minioninfo/minion"   href = origin+hash = protocol+hostname+port+hash
-    origin: "http://localhost:9527"
-    protocol: "http:"
-    host: "localhost:9527"
-    hostname: "localhost"
-    port: "9527"
-    hash: "#/minioninfo/minion"
+    length
+    back() 
+    forward() 
+    go(-2)
+  location 
+    href:     "http://localhost:9527/#/minioninfo/minion"   
+    origin:   "http://localhost:9527"    
+    hash:     "#/minioninfo/minion"
+    host:     "localhost:9527"   
+    protocol: "http:"    
+    hostname: "localhost"    
+    port:     "9527"    
     pathname: "/"
   screen
 }
@@ -520,7 +525,11 @@ Node
 npm yarn
 
 
-
+**空格**
+|&thinsp;|&#8201;|&#x2009;
+|&nbsp;|&#160;|&#xA0;
+|&ensp;|&#8194;|&#x2002;
+|&emsp;|&#8195;|&#x2003;
 
 
 
@@ -539,25 +548,12 @@ HTTP&TCP/IP  三/四次握手
 
 
 
-自我介绍
-本人2012年开始前端工作
-做过web站点，H5交互应，移动端web开发，框架维护（VUI/Aurora）
-MySQL+PHP, JavaScript+Zepto+Fis, 面向对象编程，H5移动端开发，框架开发与维护，Node开发服务
-感觉前端技术栈覆盖得还是比较全面的，
-最近工作，开发一个六合彩相关的web应用，没来得及上线，遇上疫情
 
 
-本人2012年由平面设计转前端工作
-江西吉安人
-场景：web站点，H5交互应用，移动／web混合开发，框架维护（VUI/Aurora）
-服务：平安银行／华为
-最近工作，开发一个六合彩相关的web应用，没来得及上线，遇上疫情
-感觉前端技术栈覆盖得还是比较全面的，
-技术部解散，面临求职就业或回国
-职业生涯延伸得更长
+
 
 
 香港六合彩 时时彩 11选5 北京赛车 快三 快乐10分
 
-
+参考2：admin.cdn888.com:82  账号：jishu888  密码：jishu888    菜单增加‘证书管理’
 
