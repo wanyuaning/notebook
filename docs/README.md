@@ -294,7 +294,7 @@ Webpack rollup
 
 
 
-### VUE
+# VUE
 ```
 引入less编译：
   src/main.js import less from 'less' 
@@ -306,17 +306,25 @@ Webpack rollup
   getToken(token).then(response => { })
 
 引入全局状态管理：
-  store/modules/demomodule.js state{demo: 1}
-  store/getters.js  {demo: state => state.demo}
+  store/modules/test.js 
+    const state = { demo: '123' }
+    const mutations = { M_DEMO: (state, value) => { state.demo = value } }
+    const actions = { modifyDemo({ commit }, value) { commit('M_DEMO', value) } }
+    export default { namespaced: true, state, mutations, actions }
+  store/getters.js getters{ testDemo: state => state.test.demo }
 
+  向下
   import { mapGetters } from 'vuex'
   computed: {
     ...mapGetters([
-      'demo'
+      'testDemo'
     ])
   }
+  <img :src="testDemo+'?imageView2/1/w/80/h/80'" />
+  向上
+  this.$store.dispatch('records/addDomain', '456')
 
-  <img :src="demo+'?imageView2/1/w/80/h/80'"
+
 
 动态加载图片资源
   <img :src="profileData.icon" />
