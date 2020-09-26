@@ -26,16 +26,14 @@ Date相关API的应用
 
 #### BOM(Browser Object Model)
 ```
-Window{
-  document
-  frames
-  navigator
-  history
-    length
-    back() 
-    forward() 
-    go(-2)
-  location 
+-Window{
+  -document
+  -frames
+  -navigator
+  -history
+    *length
+    +back  +forward  +go(-2)
+  -location 
     href:     "http://localhost:9527/#/minioninfo/minion"   
     origin:   "http://localhost:9527"    
     hash:     "#/minioninfo/minion"
@@ -44,7 +42,7 @@ Window{
     hostname: "localhost"    
     port:     "9527"    
     pathname: "/"
-  screen
+  -screen
 }
 ```
 
@@ -326,8 +324,9 @@ Webpack rollup
     ])
   }
   <img :src="testDemo+'?imageView2/1/w/80/h/80'" />
+  v-model="$store.state.test.demo"
   向上
-  this.$store.dispatch('records/addDomain', '456')
+  this.$store.dispatch('test/modifyDemo', '456')
 
 
 

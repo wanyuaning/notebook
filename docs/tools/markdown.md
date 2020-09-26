@@ -77,12 +77,35 @@
   - 列表内容
   - 列表内容
 
+```
+  - 列表内容
+  + 列表内容
+  * 列表内容
+
+  1. 列表内容
+  2. 列表内容
+  3. 列表内容
+
+  - 列表内容
+    - 列表内容
+    - 列表内容
+    - 列表内容
+  + 列表内容
+    - 列表内容
+    - 列表内容
+    - 列表内容
+```
 
 表头表头|表头|表头表头
 :-----:|--|---:
 内容|内容|内容
 内容|内容|内容
-
+```
+表头表头|表头|表头表头
+:-----:|--|---:
+内容|内容|内容
+内容|内容|内容
+```
 第二行分割表头和内容。<br>
 - 有一个就行，为了对齐，多加了几个<br>
 文字默认居左<br>
@@ -94,7 +117,7 @@
 代码块
 `let i = 0`
 
-```
+```js
 function fun(){
     echo "这是一句非常牛逼的代码";
 }
@@ -107,7 +130,7 @@ console.log(age)
 ```
 
 流程图
-```flow
+```
 st=>start: 开始
 op=>operation: My Operation
 cond=>condition: Yes or No?
@@ -124,7 +147,7 @@ cond(no)->op
 
 <p align="center">
   <a href="https://docsify.js.org">
-    <img alt="docsify" src="./docs/_media/icon.svg">
+    <img alt="docsify" src="./images/icon.svg">
   </a>
 </p>
 
@@ -205,30 +228,53 @@ npm run bootstrap && npm run dev
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/docsify#backers)]
 
-<a href="https://opencollective.com/docsify#backers" target="_blank"><img src="https://opencollective.com/docsify/backers.svg?width=890"></a>
+<a href="https://opencollective.com/docsify#backers" target="_blank"><img src="./images/backers.svg?width=890"></a>
 
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/docsify#silver-sponsors)]
 
-<a href="https://opencollective.com/docsify/silver-sponsors/0/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/0/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/1/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/1/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/2/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/2/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/3/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/3/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/4/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/4/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/5/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/5/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/6/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/6/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/7/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/7/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/8/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/8/avatar.svg"></a>
-<a href="https://opencollective.com/docsify/silver-sponsors/9/website" target="_blank"><img src="https://opencollective.com/docsify/silver-sponsors/9/avatar.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/0/website" target="_blank"><img src="./images/avatar1.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/1/website" target="_blank"><img src="./images/avatar2.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/2/website" target="_blank"><img src="./images/avatar3.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/3/website" target="_blank"><img src="./images/avatar4.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/4/website" target="_blank"><img src="./images/avatar5.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/5/website" target="_blank"><img src="./images/avatar6.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/6/website" target="_blank"><img src="./images/avatar7.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/7/website" target="_blank"><img src="./images/avatar8.svg"></a>
+<a href="https://opencollective.com/docsify/silver-sponsors/8/website" target="_blank"><img src="./images/avatar9.svg"></a>
 
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/docsifyjs/docsify/graphs/contributors"><img src="https://opencollective.com/docsify/contributors.svg?width=890" /></a>
+<a href="https://github.com/docsifyjs/docsify/graphs/contributors"><img src="./images/contributors.svg?width=890" /></a>
 
 ## License
 
 [MIT](LICENSE)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdocsifyjs%2Fdocsify.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdocsifyjs%2Fdocsify?ref=badge_large)
+
+
+### 绘制流程图 Flowchart
+
+```flow
+st=>start: 用户登陆
+op=>operation: 登陆操作
+cond=>condition: 登陆成功 Yes or No?
+e=>end: 进入后台
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+[========]
+
+### 绘制序列图 Sequence Diagram
+
+```seq
+Andrew->China: Says Hello
+Note right of China: China thinks\nabout it
+China-->Andrew: How are you?
+Andrew->>China: I am good thanks!
+```
