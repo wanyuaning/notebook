@@ -1,5 +1,5 @@
 
-[全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)
+[全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
 
 　　　　
