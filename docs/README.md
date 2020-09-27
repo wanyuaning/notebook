@@ -328,14 +328,20 @@ Webpack rollup
   向上
   this.$store.dispatch('test/modifyDemo', '456')
 
-
+API对接
+import { fetchList } from '@/api/article'
 
 动态加载图片资源
   <img :src="profileData.icon" />
   data{ icon: require('../assets/images/108.png')}
 ```
 
-
+rootGetters 用于获取其他模块getter；
+rootState 用于获取其它模块state；
+getters 用于获取当前模块getter；
+state 用于获取当前模块state；
+dispatch 用于调用action，当前模块和其他模块；
+commit 用于调用mutation，当前模块和其他模块；
 
 【cli route vuex】
 
