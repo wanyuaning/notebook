@@ -222,11 +222,18 @@ git push --set-upstream origin ewan_dev
 
 
 在签出前,请清理存储库工作树
+1 先暂存改动
 git stash 【查看 git stash  show】  //将修改存储到暂存区，工作区会删除这些修改
 --------------------------------------------------------
-git checkout <feture_branch>
-
+可以切换分支 git checkout <feture_branch>
+可以拉取操作 git pull
+--------------------------------------------------------
 git stash pop //取出修改
+git add .
+
+2 放弃本地修改，直接覆盖
+git reset --hard
+git pull
 
 
 
