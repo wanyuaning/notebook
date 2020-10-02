@@ -298,50 +298,9 @@ Webpack rollup
 
 
 # VUE
-```
-引入less编译：
-  src/main.js import less from 'less' 
-  Vue.use(less)
-  <style lang="less">
-延伸API对接：
-  import { getToken } from 'api/qiniu'
-  const token = this.$store.getters.token;
-  getToken(token).then(response => { })
+[详情](frame/vue/index.md)  
 
-引入全局状态管理：
-  store/modules/test.js 
-    const state = { demo: '123' }
-    const mutations = { M_DEMO: (state, value) => { state.demo = value } }
-    const actions = { modifyDemo({ commit }, value) { commit('M_DEMO', value) } }
-    export default { namespaced: true, state, mutations, actions }
-  store/getters.js getters{ testDemo: state => state.test.demo }
 
-  向下
-  import { mapGetters } from 'vuex'
-  computed: {
-    ...mapGetters([
-      'testDemo'
-    ])
-  }
-  <img :src="testDemo+'?imageView2/1/w/80/h/80'" />
-  v-model="$store.state.test.demo"
-  向上
-  this.$store.dispatch('test/modifyDemo', '456')
-
-API对接
-import { fetchList } from '@/api/article'
-
-动态加载图片资源
-  <img :src="profileData.icon" />
-  data{ icon: require('../assets/images/108.png')}
-```
-
-rootGetters 用于获取其他模块getter；
-rootState 用于获取其它模块state；
-getters 用于获取当前模块getter；
-state 用于获取当前模块state；
-dispatch 用于调用action，当前模块和其他模块；
-commit 用于调用mutation，当前模块和其他模块；
 
 【cli route vuex】
 
@@ -357,21 +316,7 @@ routes: [ {path: '/demo', component: Demo} ]
 <router-view></router-view>
 ```
 
-父触发子类里的方法 
-`<Keyboard ref="keyboard"> <button @click="$refs.keyboard.close()">关闭</button>`
 
-**Vue.use(Vuex)**
-```
-let store = new Vuex.Store({
-state: { city: '城市名' },
-getters: { getCityFn (state) { return state.city } },
-mutations: { setCity (state, name) { state.city = name } },
-actions: { setCityName ({commit, state}, name) { commit('setCity', name) } }
-})
-
-export default store
-this.$store.dispatch("setCityName", this.cityArr[index]) 
-```
 
 Object.defineProperty 访问器数据劫持
 ①通过添加访问器实现数据劫持
