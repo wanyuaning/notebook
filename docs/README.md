@@ -1,4 +1,6 @@
 
+<link href="css/main.css" rel="stylesheet"></link>
+
 [全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
 
@@ -35,12 +37,12 @@ Date相关API的应用
     +back  +forward  +go(-2)
   -location 
     href:     "http://localhost:9527/#/minioninfo/minion"   
-    origin:   "http://localhost:9527"    
     hash:     "#/minioninfo/minion"
+    origin:   "http://localhost:9527"   
+    protocol: "http:"
     host:     "localhost:9527"   
-    protocol: "http:"    
-    hostname: "localhost"    
-    port:     "9527"    
+    hostname: "localhost"  
+    port:     "9527"
     pathname: "/"
   -screen
 }
@@ -123,42 +125,73 @@ Document{
 
 #### Array
 ```
-增删改：shift [unshift push] pop   -+splice(s,l,增,增,增...]) sort([函数])  reverse()  
-信息：内容 slice(s,e)   位置 indexOf(项,s) lastIndexOf(项,s)   字符 toString() join('*') 拷贝 slice() concat([],arr)
+shift [unshift push] pop             增删
+splice(s,l,N,N,N...])                增删改
+sort([fn])  reverse()                改
+slice(s,e)                           信息 内容
+indexOf(item,s) lastIndexOf(item,s)  信息 位置 
+toString() join('*')                 信息 字符
+slice() concat([],arr)               拷贝
  
-遍历数组：arr.forEach((e,i,arr)=>{ })
-        arr.map(x=>x*2)
-最大验证：[1,2].every(e=>e<3)   true
-最小验证：[1,2].some(e=>e==2)   true
-过滤：[1,2,3,4].filter(e=>e%2===0)  [2,4]
-第一个验证值：[1,2,3,4].find(e=>e>2);  3
-第一个验证索引：findIndex
+[1,2,3].forEach((e,i,a)=>{a[i]=e*2}) [2,4,6]           子值重写
+[1,2,3].map(e=>e*e)                  [1,2,3] > [1,4,9] 映射
+[1,2,3].filter(e=>e%2===0)           [1,2,3] > [2]     过滤筛选
+[1,2,3].every(e=>e<3)                false             最大验证
+[1,2,3].some(e=>e>2)                 true              最小验证
+[1,2,7].find(e=>e>2)                 7                 第一个验证值
+[1,2,7].findIndex(e=>e>2)            2                 第一个验证索引
 
-var a=[]; var b=a.unshift(1,2);  a: [1, 2]  b: 2
-var a=[1,2,3,4]; a.splice(1,2,22,33);  a:[1,22,33,4]
-var a=[1,3,2]; var b = a.sort(); b.pop();  a:[1,2,3] b:[1,2]
-var a=new Array(2);  a:[,]
-var a=new Array(2,3);  a:[2,3]
-var a=[1,2,3,4]; var b=a.map(x=>x*2);  b:[2,4,6,8]
-var a=[1,2,3,4]; var b=a.forEach(x=>x*2);  b:undefined
-var a=[1,2,3,4]; var b=arr.every(e=>e<5);  b:true
-var a=[1,2,3,4]; var b=a.filter(e=>e%2===0);  b:[2,4]
-var a=[1,2,3,4]; var b=a.find(e=>e>2);  b:3
+new Array(2);                        [,]
+new Array(2,3);                      [2,3]
+
 ```
-String
-字符：   charAt(位置) charCodeAt(位置)  String. fromCharCode(多个字符编码)
-空格：   trim()
-比较：   localeCompare(字符串) 
-转换：   toUpperCase()  toLowerCase()  toLocaleUpperCase()   toLocaleLowerCase()  split([连接符])  
-操作：   substring(起点[,终点])   substr(起点[,个数])      replace(RegExp/字符串,字符串/函数)  concat([多个项])    slice(起点[,终点])
-位置：   indexOf(项[,起点])  lastIndexOf(项[,起点]) 
+#### String
+```
+  
+
+
+
++ 截取   
+  -'Hello'.slice(1,2))      "e"   
+'Hello'.substring(1,2)   "e"
+'Hello'.substr(2,3))     "llo"
+位置 
+'Hello'.indexOf('l',1)   2     
+'Hello'.indexOf('l',3)   3
+'Hello'.lastIndexOf('l') 3
+'Hello'.charAt(2)        "l"  子字符
+'Hello'.charCodeAt(2)    108  Unicode编码
+去空格
+'He l lo'.trim()  "He l lo"
+' Hello '.trim()  "Hello"
+大小写   
+'Hello'.toUpperCase() "HELLO"  
+'Hello'.toLowerCase() "hello"
+'Türkç'.toLocaleUpperCase()) "TÜRKÇ"
+'Türkç'.toLocaleLowerCase()) "türkç" 
+比较
+'a'.localeCompare('b')  -1     
+'a'.localeCompare('a')  0
+'b'.localeCompare('a')  1
+['猫','狗',"鸡"].sort((a, b)=>a.localeCompare(b)) ['猫','狗',"鸡"] > ["狗", "鸡", "猫"]
 
 typeof instanceof toString.call()
 
+
+split([连接符])  
+match(),search(),
+replace(),split()
+replace(RegExp/字符串,字符串/函数)
+
+String.fromCharCode(65)       "A"
+String.fromCharCode(65,66,67) "ABC"
+```
+
+类型转换
+```
 true => 1       false => 0        '' => 0        '4S' => NaN            null => 0        undefined => NaN        {valueOf:()=>1} => 1
 false、""、0、NaN、null、undefined   =>  false         " " => true
-
-
+```
 控制流程
 for 可return breake
 for in    {} []  i为key
