@@ -9,6 +9,7 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+    <script src="https://cdn.bootcss.com/viz.js/2.0.0/viz.js"></script>
 </head>
 
 <body>
@@ -41,11 +42,29 @@
                 },
                 // 搜索标题的最大程级, 1 - 6
                 depth: 2
+            },
+
+            markdown: {
+                renderer: {
+                    code: function (code, lang) {
+                        if (lang === "mermaid") {
+                            return (
+                                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+                            );
+                        }
+                        if (lang === "dot") {
+                            return (
+                                '<div class="viz">' + Viz(code, "SVG") + '</div>'
+                            );
+                        }
+                        return this.origin.code.apply(this, arguments);
+                    }
+                }
             }
         }
     </script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script> -->
 </body>
 
 </html>
