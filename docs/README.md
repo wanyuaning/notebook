@@ -1,5 +1,5 @@
 
-<link href="css/main.css" rel="stylesheet"></link>
+
 
 [全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
@@ -26,27 +26,15 @@ Array相关API的应用
 Date相关API的应用
 异步编程
 
-#### BOM(Browser Object Model)
-```
--Window{
-  -document
-  -frames
-  -navigator
-  -history
-    *length
-    +back  +forward  +go(-2)
-  -location 
-    href:     "http://localhost:9527/#/minioninfo/minion"   
-    hash:     "#/minioninfo/minion"
-    origin:   "http://localhost:9527"   
-    protocol: "http:"
-    host:     "localhost:9527"   
-    hostname: "localhost"  
-    port:     "9527"
-    pathname: "/"
-  -screen
-}
-```
+
+
+[Window](javascript/bom?id=Window) [BOM规范](javascript/bom?id=浏览器对象模型)<br>
+　　document: [Document](javascript/bom?id=document) [DOM规范](javascript/bom?id=文档对象模型)<br>
+　　location<br>
+　　navigator: [Navigator](javascript/bom?id=navigator) <br>
+　　screen<br>
+　　history<br>
+　　frames
 
 
 
@@ -71,45 +59,16 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 7、浏览器兼容性
 
 
-window
 
 
 
 
-navigator
-
-appCodeName    //浏览器代码名
-appName             //浏览器步伐名
-appMinorVersion //浏览器补钉版本
-cpuClass              //cpu类型x86
-platform               //操作体系类型win32
-plugins
-opsProfile
-userProfile
-systemLanguage //客户体系语言zh-cn简体中文
-userLanguage      //用户语言,同上
-appVersion           //浏览器版本(包括 体系版本)
-userAgent .          //用户代理头的字符串表示
-onLine                  //用户否在线
-cookieEnabled    //浏览器是否撑持cookie
-mimeTypes
-screen
-width          //屏幕宽度
-height         //屏幕高度
-colorDepth //屏幕颜色深度
-availWidth  //可用宽度(除去任务栏的高度)
-availHeight //可用高度(除去任务栏的高度)
-history
-frames
-external
-AddFavorite("地址","标题" ) //把网站新增到保藏夹
 
 
 
-Document{
 
-}
-通过window.document 属性访问
+
+
 
 原型与原型链
 执行上下文与执行上下文栈
@@ -118,80 +77,15 @@ Document{
 高阶函数
 
 数据类型
-基本类型：String  Number  Boolean   null  undefined  Symbol
+基本类型：[String](javascript/data-type?id=string)  Number  Boolean   null  undefined  Symbol
 对象类型：
-类对象：Object Array  Function Map  Set  Date  RegExp  Error
+类对象：Object [Array](javascript/data-type?id=array)  Function Map  Set  Date  RegExp  Error
 实例对象：{} [] fn
 
-#### Array
-```
-shift [unshift push] pop             增删
-splice(s,l,N,N,N...])                增删改
-sort([fn])  reverse()                改
-slice(s,e)                           信息 内容
-indexOf(item,s) lastIndexOf(item,s)  信息 位置 
-toString() join('*')                 信息 字符
-slice() concat([],arr)               拷贝
- 
-[1,2,3].forEach((e,i,a)=>{a[i]=e*2}) [2,4,6]           子值重写
-[1,2,3].map(e=>e*e)                  [1,2,3] > [1,4,9] 映射
-[1,2,3].filter(e=>e%2===0)           [1,2,3] > [2]     过滤筛选
-[1,2,3].every(e=>e<3)                false             最大验证
-[1,2,3].some(e=>e>2)                 true              最小验证
-[1,2,7].find(e=>e>2)                 7                 第一个验证值
-[1,2,7].findIndex(e=>e>2)            2                 第一个验证索引
-
-new Array(2);                        [,]
-new Array(2,3);                      [2,3]
-
-```
-#### String
-```
-  
 
 
+[类型转换](javascript/data-type?id=类型转换)
 
-+ 截取   
-  -'Hello'.slice(1,2))      "e"   
-'Hello'.substring(1,2)   "e"
-'Hello'.substr(2,3))     "llo"
-位置 
-'Hello'.indexOf('l',1)   2     
-'Hello'.indexOf('l',3)   3
-'Hello'.lastIndexOf('l') 3
-'Hello'.charAt(2)        "l"  子字符
-'Hello'.charCodeAt(2)    108  Unicode编码
-去空格
-'He l lo'.trim()  "He l lo"
-' Hello '.trim()  "Hello"
-大小写   
-'Hello'.toUpperCase() "HELLO"  
-'Hello'.toLowerCase() "hello"
-'Türkç'.toLocaleUpperCase()) "TÜRKÇ"
-'Türkç'.toLocaleLowerCase()) "türkç" 
-比较
-'a'.localeCompare('b')  -1     
-'a'.localeCompare('a')  0
-'b'.localeCompare('a')  1
-['猫','狗',"鸡"].sort((a, b)=>a.localeCompare(b)) ['猫','狗',"鸡"] > ["狗", "鸡", "猫"]
-
-typeof instanceof toString.call()
-
-
-split([连接符])  
-match(),search(),
-replace(),split()
-replace(RegExp/字符串,字符串/函数)
-
-String.fromCharCode(65)       "A"
-String.fromCharCode(65,66,67) "ABC"
-```
-
-类型转换
-```
-true => 1       false => 0        '' => 0        '4S' => NaN            null => 0        undefined => NaN        {valueOf:()=>1} => 1
-false、""、0、NaN、null、undefined   =>  false         " " => true
-```
 控制流程
 for 可return breake
 for in    {} []  i为key
@@ -229,9 +123,9 @@ git remote add github https://github.com/wmgcuan/express.git
 
 项目
 skin: 1 利用class 命名空间；2 利用CSS预处理生成多套样式；3 利用CSS 变量换肤
-# 工具
+## 工具
 ### GIT&NPM
-[GIT仓库&NPM包](tools/git-npm.md) [GIT命令](tools/git-npm.md#git命令)
+[GIT仓库&NPM包](tools/git-npm.md) &emsp; [GIT命令](tools/git-npm.md#git命令) &emsp; [Markdown](tools/markdown) &emsp; [Docsify](tools/docsify)
 ```
 1. git init 
 2. curl -u 'wanyuaning' https://api.github.com/user/repos -d '{"name":"demo"}'    Wanyuaning... ...   user/repos  orgs/wmgcuan/repos
@@ -265,9 +159,9 @@ setTimeout、Promise、Async/Await 的区别
 Async/Await 如何通过同步的方式实现异步
 如何实现一个 new
 
-文档对象模型DOM
 
 **盒子模型**【w=c 怪异模式w=c+p+b+m】【边界塌陷和边界重叠】<br>
+
 **弹性盒子** 
 ```css
 .flex{
@@ -508,11 +402,7 @@ Node
 npm yarn
 
 
-**空格**
-|&thinsp;|&#8201;|&#x2009;
-|&nbsp;|&#160;|&#xA0;
-|&ensp;|&#8194;|&#x2002;
-|&emsp;|&#8195;|&#x2003;
+
 
 
 
@@ -530,181 +420,7 @@ HTTP&TCP/IP  三/四次握手
 
 
 
-// window.
-var Window = {
-    document: {}, // Document
-    location: {},
-    navigator: {},
-    screen: {},
-    history: {}, // History
-    frames: {},
-    external: {},
 
-
-    // 状态栏
-    defaultStatus: '', // 窗口状态栏中的默认文本。
-    status: '', // 临时设置窗口状态栏的文本。
-    // 窗口位置
-    pageXOffset: '', // 设置或返回当前页面相对于窗口显示区左上角的 X 位置。
-    pageYOffset: '', // 设置或返回当前页面相对于窗口显示区左上角的 Y 位置。
-
-    innerheight: '', // 返回窗口的文档显示区的高度。
-    innerwidth: '', // 返回窗口的文档显示区的宽度。
-    outerheight: '', // 返回窗口的外部高度。
-    outerwidth: '', // 返回窗口的外部宽度。
-    screenLeft: 0,
-    screenTop: 23,
-    screenX: 0,
-    screenY: 23,
-    // 其它属性
-
-    name: '', // 设置或返回窗口的名称。
-    parent: '', // 返回父窗口。
-    top: '', // 返回最顶层的先辈窗口。
-
-
-    setInterval: function () { },
-    setTimeout: function () { },
-}
-
-var Location = {
-    hash: "",
-    host: "www.guancha.cn",
-    hostname: "www.guancha.cn",
-    href: "https://www.guancha.cn/gongye%C2%B7keji?s=dhgongye%C2%B7keji",
-    origin: "https://www.guancha.cn",
-    pathname: "/gongye%C2%B7keji",
-    port: "",
-    protocol: "https:"
-}
-
-// window.document.
-var Document = {
-    body: {
-        bgColor: '', //设置或获取对象后面的背景颜色
-        link: '', //未点击过的链接颜色
-        alink: '', //激活链接(焦点在此链接上)的颜色
-        vlink: '', //已点击过的链接颜色
-        text: '', //文本色
-        innerText: '', //设置body>…/body>之间的文本
-        innerHTML: '', //设置body>…/body>之间的HTML代码
-        topMargin: '', //页面上边距
-        leftMargin: '', //页面左边距
-        rightMargin: '', //页面右边距
-        bottomMargin: '', //页面下边距
-        background: '', //背景图片
-        appendChild: () => { },//(oTag) //动态生成一个HTML对象
-        onclick: () => { },//=”func()”//鼠标指针单击对象是触发
-        onmouseover: () => { },//=”func()”//鼠标指针移到对象时触发
-        onmouseout: () => { },//=”func()”//鼠标指针移出对象时触发
-    },         //提供对 <body>元素的直接访问。对于定义了框架集的文档，该属性引用最外层的<frameset>。
-    cookie: '',      //返回与当前文档有关的所有 cookie。
-    title: '',           //返回文档标题等价于HTML的title标签
-    domain: '',     //返回当前文档的域名。
-    bgColor: '',    //返回页面背景色
-    fgColor: '',     //返回前景色(文本颜色)
-    linkColor: '',   //未点击过的链接颜色
-    alinkColor: '', //激活链接(焦点在此链接上)的颜色
-    vlinkColor: '', //已点击过的链接颜色
-    URL: '', //设置URL属性从而在同一窗口打开另一网页
-    URL: '', //返回当前文档的 URL。
-    fileCreatedDate: '', //文件建立日期，只读属性
-    fileModifiedDate: '', //文件修改日期，只读属性
-    lastModified: '', //返回文档被最后修改的日期和时间。
-    fileSize: '', //文件大小，只读属性
-    cookie: '', //设置和读出cookie
-    charset: '', //返回字符集 简体中文:gb2312
-
-    referrer: '', //返回载入当前文档的文档的 URL。
-    styleSheets: '', //返回样式表的集合,返回值CSSStyleSheet[]
-    //styleSheets[0].cssRules.style.paddingTop=”10px”//设置样式,样式名去掉连字符,
-    //--------------------------------------------------------
-    write: () => { }, //动态向页面写入内容
-    writeln: () => { }, //等同于 write() 方法，不同的是在每个表达式之后写一个换行符。
-    createElement: () => { },//(<Tag>) //用指定标签类型创建一个新的element对象)
-    getElementById: () => { },//(ID) //获得指定ID值的对象
-    getElementsByName: () => { },//(Name) //获得指定Name值的对象
-    getElementsByTagName: () => { }, //返回带有指定标签名的对象集合。
-
-}
-var Element = {
-    accessKey: '', //设置或返回元素的快捷键。
-    attributes: '', // 返回元素属性的集合。
-    childNodes: {
-        item: () => { },//() 返回 NodeList 中位于指定下标的节点。
-        length: '', // 返回 NodeList 中的节点数。
-    }, // 返回元素子节点的 NodeList。
-    className: '', // 设置或返回元素的 class 属性。
-    clientHeight: '', // 返回元素的可见高度。
-    clientWidth: '', // 返回元素的可见宽度。
-    contentEditable: '', // 设置或返回元素的文本方向。
-    dir: '', // 设置或返回元素的文本方向。
-    firstChild: '', // 返回元素的首个子。
-    hidden: '', //获取或设置hidden属性的存在状态
-    id: '', // 设置或返回元素的 id。
-    innerHTML: '', // 设置或返回元素的内容。
-    isContentEditable: '', // 设置或返回元素的内容。
-    lang: '', // 设置或返回元素的语言代码。
-    lastChild: '', // 返回元素的最后一个子元素。
-    namespaceURI: '', // 返回元素的 namespace URI。
-    nextSibling: '', // 返回当前元素之后的兄弟元素
-    nodeName: '', // 返回元素的名称。
-    nodeType: '', // 返回元素的节点类型。
-    nodeValue: '', // 设置或返回元素值。
-    offsetHeight: '', // 返回元素的高度。
-    offsetWidth: '', // 返回元素的宽度。
-    offsetLeft: '', // 返回元素的水平偏移位置。
-    offsetParent: '', // 返回元素的偏移容器。
-    offsetTop: '', // 返回元素的垂直偏移位置。
-    ownerDocument: '', // 返回元素的根元素（文档对象）。
-    parentNode: '', // 返回元素的父节点。
-    previousSibling: '', // 返回当前元素之前的兄弟元素
-    scrollHeight: '', // 返回元素的整体高度。
-    scrollLeft: '', // 返回元素左边缘与视图之间的距离。
-    scrollTop: '', // 返回元素上边缘与视图之间的距离。
-    scrollWidth: '', // 返回元素的整体宽度。
-    style: '', // 设置或返回元素的 style 属性。
-    tabIndex: '', // 设置或返回元素的 tab 键控制次序。
-    tagName: '', // 返回元素的标签名。
-    textContent: '', // 设置或返回节点及其后代的文本内容。
-    title: '', // 设置或返回元素的 title 属性。
-    add: () => { },//(<class>)给元素添加指定的类
-    appendChild: () => { },//() 向元素添加新的子节点，作为最后一个子节点。
-    cloneNode: () => { },//() 克隆元素。
-    compareDocumentPosition: () => { },//() 比较两个元素的文档位置。
-    getAttribute: () => { },//() 返回元素节点的指定属性值。
-    getAttributeNode: () => { },//() 返回指定的属性节点。
-    getElementsByTagName: () => { },//() 返回拥有指定标签名的所有子元素的集合。
-    getFeature: () => { },//() 返回实现了指定特性的 API 的某个对象。
-    getUserData: () => { },//() 返回关联元素上键的对象。
-    hasAttribute: () => { },//() 如果元素拥有指定属性，则返回true，否则返回false。
-    hasAttributes: () => { },//() 如果元素拥有属性，则返回 true，否则返回false。
-    hasChildNodes: () => { },//() 如果元素拥有子节点，则返回 true，否则false。
-    insertBefore: () => { },//(<a>,<b>) 在指定的已有的子节点之前插入新节点。A插到b前
-    isDefaultNamespace: () => { },//() 如果指定的 namespaceURI是默认的，则返回true，否则返回false。
-    isEqualNode: () => { },//(<a>) 检查a元素是否与当前元素相等。
-    isSameNode: () => { },//(a) 检查指定元素是否就是当前元素.
-    isSupported: () => { },//() 如果元素支持指定特性，则返回 true。
-    normalize: () => { },//() 合并元素中相邻的文本节点，并移除空的文本节点。
-    remove: () => { },//(<class>) 从元素移除指定的类
-    removeAttribute: () => { },//() 从元素中移除指定属性。
-    removeAttributeNode: () => { },//() 移除指定的属性节点，并返回被移除的节点。
-    removeChild: () => { },//(a) 从元素中移除子节点。
-    replaceChild: () => { },//(a,b) 替换元素中的子节点。
-    setAttribute: () => { },//() 把指定属性设置或更改为指定值。
-    setAttributeNode: () => { },//() 设置或更改指定属性节点。
-    setIdAttribute: () => { },//()
-    setIdAttributeNode: () => { },//()
-    setUserData: () => { },//() 把对象关联到元素上的键。
-    toggle: () => { },//(<class>)如果类不存在就添加它存在就移除它
-    toString: () => { },//() 把元素转换为字符串。
-}
-
-
-var Event = {
-    type: '', //事件的名称如mouseover 字符串
-    target: {} // Element
-}
 
 
 

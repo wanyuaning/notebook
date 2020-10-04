@@ -1,3 +1,118 @@
+
+
+
+
+### docsify-plantuml
+[PlantUML](../tools/plantuml) 
+[数学](../tools/plantuml?id=数学) 
+[工作分解结构](../tools/plantuml?id=工作分解结构) 
+[思维导图](../tools/plantuml?id=思维导图) 
+[甘特图](../tools/plantuml?id=甘特图) 
+[流程图](../tools/plantuml?id=流程图) 
+[时序图](../tools/plantuml?id=时序图) 
+[用例图](../tools/plantuml?id=用例图) 
+[组件图](../tools/plantuml?id=组件图) 
+[状态图](../tools/plantuml?id=状态图) 
+```plantuml
+@startgantt
+[Prototype design] lasts 14 days
+[Build prototype] lasts 4 days
+[Prepare test] lasts 6 days
+[Prototype design] -> [Build prototype]
+[Prototype design] -> [Prepare test]
+[Build prototype] is colored in Fuchsia/FireBrick
+@endgantt
+```
+
+
+### docsify-tabs
+<!-- tabs:start -->
+#### ** 第一步 **
+index.html `<script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>`
+#### ** 第二步 **
+```javascript
+window.$docsify = {
+  // ...
+  tabs: {
+    persist    : true,      // default
+    sync       : true,      // default
+    theme      : 'classic', // default
+    tabComments: true,      // default
+    tabHeadings: true       // default
+  }
+}
+```
+#### ** 第三步 **
+添加css变量
+```html
+<style>
+  :root {
+    --docsifytabs-border-color: #ededed;
+    --docsifytabs-tab-highlight-color: purple;
+  }
+  .docsify-tabs__tab~.docsify-tabs__tab{outline:none;} /* 去除蓝框 */
+  .docsify-tabs--classic .docsify-tabs__tab:first-of-type {outline:none;}
+</style>
+```
+#### ** 使用 **
+```
+<!-- tabs:start -->
+#### ** English **
+Hello!
+#### ** French **
+Bonjour!
+#### ** Italian **
+Ciao!
+<!-- tabs:end -->
+```
+<!-- tabs:end -->
+
+
+
+### docsify-plugin-flexible-alerts
+1 https://github.com/fzankl/docsify-plugin-flexible-alerts
+`<script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>`
+2
+window.$docsify = {
+    'flexible-alerts': {
+      style: 'flat'
+    }
+  };
+3
+> [!NOTE]
+> An alert of type 'note' using global style 'callout'.
+
+> [!NOTE|style:flat]
+> An alert of type 'note' using alert specific style 'flat' which overrides global style 'callout'.
+
+> [!TIP]
+> An alert of type 'tip' using global style 'callout'.
+
+> [!WARNING]
+> An alert of type 'warning' using global style 'callout'.
+
+> [!ATTENTION]
+> An alert of type 'attention' using global style 'callout'.
+
+> [!COMMENT]
+> An alert of type 'comment' using style 'callout' with default settings.
+
+
+
+
+
+
+　　缩进(全角空格"　")<br>
+空格
+|&thinsp;|&#8201;|&#x2009;
+|&nbsp;|&#160;|&#xA0;
+|&ensp;|&#8194;|&#x2002;
+|&emsp;|&#8195;|&#x2003;
+<font face=“微软雅黑”>字体</font><font font size=5>字号</font><font color=red>颜色</font>**加粗** *斜体* 　　
+
+
+
+
 # 这是一级标题
 ## 这是二级标题
 ### 这是三级标题
