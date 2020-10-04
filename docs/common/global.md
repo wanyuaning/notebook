@@ -69,6 +69,7 @@ $ npm run dev
 
 ### nvm 
 nodejs的版本管理工具
+windows: https://github.com/coreybutler/nvm-windows/releases (nvm-setup.zip)下载安装。nvm install v8.16.0  nvm use v8.16.0  nvm list    
 
 ### nrm
 + sudo npm i nrm -g
