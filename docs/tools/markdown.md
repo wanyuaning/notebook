@@ -1,30 +1,19 @@
 
+
 ### ewan-layout
 <!-- layout:start -->
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24  
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
-<!-- col:2 -->
-  2/24
+<!-- col:4 -->
+  4/24
+<!-- col:4 -->
+  4/24
+<!-- col:4 -->
+  4/24
+<!-- col:4 -->
+  4/24
+<!-- col:4 -->
+  4/24
+<!-- col:4 -->
+  4/24  
 <!-- layout:end -->
 
 <!-- layout:start -->
@@ -39,7 +28,7 @@
 ```
 <!-- layout:start -->
 <!-- col:8 -->
-  24/24
+  spans 8 / total 24
 <!-- layout:end -->
 ```
 
@@ -149,21 +138,19 @@ https://github.com/fzankl/docsify-plugin-flexible-alerts
 
 <!-- layout:start -->
 <!-- col:12 -->
-
   > [!NOTE]
   > An alert of type 'note' using global style 'callout'.
 
   > [!NOTE|style:flat]
-  > An alert of type 'note' using alert specific style 'flat' which overrides global style 'callout'.
+  > An alert of type 'tip' using global style 'callout'.
 
   > [!TIP]
   > An alert of type 'tip' using global style 'callout'.
 <!-- col:12 -->
-
   > [!WARNING]
   > An alert of type 'warning' using global style 'callout'.
 
-  > [!ATTENTION]
+  > [!ATTENTION|style:flat]
   > An alert of type 'attention' using global style 'callout'.
 
   > [!COMMENT]
@@ -173,48 +160,107 @@ https://github.com/fzankl/docsify-plugin-flexible-alerts
 
 
 
+　
+<!-- layout:start:class2 -->
+<!-- col:24 -->
+|　　缩进(全角空格"　")
+<!-- layout:end -->
+
+<!-- layout:start:class2 -->
+<!-- col:6 -->
+  |&thinsp;|&#8201;|&#x2009;
+<!-- col:6 -->
+  |&nbsp;|&#160;|&#xA0;
+<!-- col:6 -->
+  |&ensp;|&#8194;|&#x2002;
+<!-- col:6 -->
+  |&emsp;|&#8195;|&#x2003;
+<!-- layout:end -->
+
+<!-- layout:start -->
+<!-- col:6 -->
+  |&amp;thinsp;|&amp;#8201;|&amp;#x2009;
+<!-- col:6 -->
+  |&amp;nbsp;|&amp;#160;|&amp;#xA0;
+<!-- col:6 -->
+  |&amp;ensp;|&amp;#8194;|&amp;#x2002;
+<!-- col:6 -->
+  |&amp;emsp;|&amp;#8195;|&amp;#x2003;
+<!-- layout:end -->
+
+<!-- layout:start:class1 -->
+<!-- col:4 -->
+  <h1>一级标</h1>
+<!-- col:4 -->
+  <h2>二级标</h2>
+<!-- col:4 -->
+  <h3>三级标</h3>
+<!-- col:4 -->
+  <h4>四级标</h4>
+<!-- col:4 -->
+  <h5>五级标</h5>
+<!-- col:4 -->
+  <h6>六级标</h6>
+<!-- layout:end -->
+
+<!-- layout:start -->
+<!-- col:4 -->
+  # 一级标
+<!-- col:4 -->
+  ## 二级标
+<!-- col:4 -->
+  ### 三级标
+<!-- col:4 -->
+  #### 四级标
+<!-- col:4 -->
+  ##### 五级标
+<!-- col:4 -->
+  ###### 六级标 
+<!-- layout:end -->
+
+<!-- layout:start:class2 -->
+<!-- col:6 -->
+  <strong>这是加粗的文字</strong>
+<!-- col:6 -->
+  <em>这是倾斜的文字</em>
+<!-- col:6 -->
+  <strong><em>这是斜体加粗的文字</em></strong>
+<!-- col:6 -->
+  <del>这是加删除线的文字</del>
+<!-- layout:end -->
+
+<!-- layout:start -->
+<!-- col:6 -->
+  **这是加粗的文字**
+<!-- col:6 -->
+  *这是倾斜的文字*
+<!-- col:6 -->
+  ***这是斜体加粗的文字***
+<!-- col:6 -->
+  ~~这是加删除线的文字~~
+<!-- layout:end -->
+
+<!-- layout:start:class3 -->
+<!-- col:8 -->
+  <font face=“微软雅黑”>字体</font>
+<!-- col:8 -->
+  <font font size=5>字号</font>
+<!-- col:8 -->
+  <font color=red>颜色</font>
+<!-- layout:end -->
+
+<!-- layout:start -->
+<!-- col:8 -->
+  &lt;font face=“微软雅黑”&gt;字体&lt;/font&gt;
+<!-- col:8 -->
+  &lt;font font size=5&gt;字号&lt;/font&gt;
+<!-- col:8 -->
+  &lt;font color=red&gt;颜色&lt;/font&gt;
+<!-- layout:end -->
 
 
 
 
-
-
-　　缩进(全角空格"　")<br>
-空格
-|&thinsp;|&#8201;|&#x2009;
-|&nbsp;|&#160;|&#xA0;
-|&ensp;|&#8194;|&#x2002;
-|&emsp;|&#8195;|&#x2003;
-<font face=“微软雅黑”>字体</font><font font size=5>字号</font><font color=red>颜色</font>**加粗** *斜体* 　　
-
-
-
-
-# 这是一级标题
-## 这是二级标题
-### 这是三级标题
-#### 这是四级标题
-##### 这是五级标题
-###### 这是六级标题
-```markdown
-# 这是一级标题
-## 这是二级标题
-### 这是三级标题
-#### 这是四级标题
-##### 这是五级标题
-###### 这是六级标题
-```
-
-**这是加粗的文字**<br>
-*这是倾斜的文字*<br>
-***这是斜体加粗的文字***<br>
-~~这是加删除线的文字~~<br>
-```
-**这是加粗的文字**
-*这是倾斜的文字*
-***这是斜体加粗的文字***
-~~这是加删除线的文字~~
-```
 
 >这是引用的内容
 >>这是引用的内容
@@ -247,63 +293,65 @@ https://github.com/fzankl/docsify-plugin-flexible-alerts
 [百度](http://baidu.com)<br>
 <a href="http://baidu.com" target="_blank">新窗口百度</a>
 
+<!-- layout:start:class4 -->
+<!-- col:8 -->
+  <ul><li>列表内容</li><li>列表内容</li><li>列表内容</li><li>列表内容</li></ul>
+<!-- col:8 -->
+  <ol><li>列表内容</li><li>列表内容</li><li>列表内容</li></ol>
+<!-- col:8 -->
+  <ul><li>列表内容<ul><li>列表内容</li></ul></li><li>列表内容<ul><li>列表内容</li></ul></li></ul>
+<!-- layout:end -->
 
-- 列表内容
-+ 列表内容
-* 列表内容
+<!-- layout:start:class5 -->
+<!-- col:8 -->
+  - 列表内容<br>
+  + 列表内容<br>
+  * 列表内容<br>
+  * 列表内容<br>
+<!-- col:8 -->
+  1. 列表内容<br>
+  2. 列表内容<br>
+  3. 列表内容<br>
+<!-- col:8 -->
+- 列表内容<br>
+　- 列表内容<br>
++ 列表内容<br>
+　- 列表内容<br>
+<!-- layout:end -->
 
-注意：- + * 跟内容之间都要有一个空格
-
-1. 列表内容
-2. 列表内容
-3. 列表内容
-
-注意：序号跟内容之间要有空格
-
-- 列表内容
-  - 列表内容
-  - 列表内容
-  - 列表内容
-+ 列表内容
-  - 列表内容
-  - 列表内容
-  - 列表内容
-
-```
-  - 列表内容
-  + 列表内容
-  * 列表内容
-
-  1. 列表内容
-  2. 列表内容
-  3. 列表内容
-
-  - 列表内容
-    - 列表内容
-    - 列表内容
-    - 列表内容
-  + 列表内容
-    - 列表内容
-    - 列表内容
-    - 列表内容
-```
-
-表头表头|表头|表头表头
-:-----:|--|---:
-内容|内容|内容
-内容|内容|内容
-```
-表头表头|表头|表头表头
-:-----:|--|---:
-内容|内容|内容
-内容|内容|内容
-```
+---
+### 表格
 第二行分割表头和内容。<br>
 - 有一个就行，为了对齐，多加了几个<br>
 文字默认居左<br>
 -两边加：表示文字居中<br>
 -右边加：表示文字居右<br>
 注：原生的语法两边都要用 | 包起来。此处省略
+
+<!-- layout:start:class6 -->
+<!-- col:12 -->
+  <table>
+    <tr>
+      <td>表头表头</td><td>表头</td><td>表头表头</td>
+    </tr>
+    <tr>
+      <td>内容</td><td>内容</td><td>内容</td>
+    </tr>
+    <tr>
+      <td>内容</td><td>内容</td><td>内容</td>
+    </tr>
+  </table>
+<!-- col:12 -->
+  表头表头|表头|表头表头<br>
+  :-----:|--|---:<br>
+  内容|内容|内容<br>
+  内容|内容|内容<br>
+<!-- layout:end -->
+
+
+
+
+
 
 
 代码块
@@ -448,32 +496,4 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdocsifyjs%2Fdocsify.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdocsifyjs%2Fdocsify?ref=badge_large)
 
 
-### 绘制流程图 Flowchart
-st=>start: 用户登陆
-op=>operation: 登陆操作
-cond=>condition: 登陆成功 Yes or No?
-e=>end: 进入后台
 
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```flow
-st=>start: 用户登陆
-op=>operation: 登陆操作
-cond=>condition: 登陆成功 Yes or No?
-e=>end: 进入后台
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-[========]
-
-### 绘制序列图 Sequence Diagram
-
-```seq
-Andrew->China: Says Hello
-Note right of China: China thinks\nabout it
-China-->Andrew: How are you?
-Andrew->>China: I am good thanks!
-```

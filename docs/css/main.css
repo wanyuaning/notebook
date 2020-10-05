@@ -1,7 +1,7 @@
 @charset "utf-8";
 body{ font-size: 14px;}
 .markdown-section pre { line-height: 1rem; }
-.markdown-section pre>code { padding: 0 5px; }
+.markdown-section pre>code { padding: 5px 5px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
 
@@ -13,5 +13,35 @@ body{ font-size: 14px;}
 /* docsify-tabs */
 .docsify-tabs__tab~.docsify-tabs__tab{outline:none;} /* 去除蓝框 */
 .docsify-tabs--classic .docsify-tabs__tab:first-of-type {outline:none;}
+
+.col{ background: #f6f6f6; padding: 5px; border: #fff 1px solid; text-align: center}
+
+
+.class1 .col,
+.class1 .col,
+.class1 .col,
+.class1 .col,
+.class1 .col,
+.class1 .col,
+.class2 .col,
+.class3 .col{ margin: 0; line-height:30px; border:1px solid #f6f6f6; background-color:#cec}
+.class1 .col h1,
+.class1 .col h2,
+.class1 .col h3,
+.class1 .col h4,
+.class1 .col h5,
+.class1 .col h6{ margin: 0; line-height:30px; color:#2c3e50}
+.class3 .col font{ display:block}
+
+.class2 strong,
+.class2 del,
+.class2 em{ color:#2c3e50}
+
+.class4 .col{height:110px; background-color:#cec}
+.class4 ul,.class4 ol{text-align: left;}
+
+.class5 .col{height:95px; text-align: left; padding-left:15px}
+
+.class6 .col{height:120px; background: transparent; border:#f6f6f6 1px solid;text-align: left;}
 
 

@@ -1,7 +1,7 @@
-.row{ position: relative; box-sizing: border-box; }
+.row{ position: relative; box-sizing: border-box; padding: 5px 0; }
 .row:after, .row:before { display: table; content: "";}
 .row:after { clear: both; }
-[class*=col-] { float: left; box-sizing: border-box; }
+[class*=col-] { float: left; box-sizing: border-box; padding: 0 5px; }
 .col-1{ width: 4.166666%;}
 .col-2{ width: 8.333333%;}
 .col-3{ width: 12.5%;}
