@@ -1,3 +1,6 @@
+
+> **Windows全局目录：C:\Users\new\AppData\Roaming\npm**
+
 ### nginx
 windows: 
 安装：http://nginx.org/en/download.html  
@@ -66,10 +69,20 @@ $ npm install --save-dev nodemon
 }
 $ npm run dev
 ```
+### npm
+npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
+npm view vue            更丰富 npm info vue        https://www.npmjs.com/
+npm view vue version    服务器上包的最新的版本信息   https://www.npmjs.com/
+npm view vue versions   服务器上包的所有的版本信息   https://www.npmjs.com/
+npm ls vue              本地安装包版本信息          project/
+npm ls vue -g           本地全局安装的pkg版本       全局
 
 ### nvm 
 nodejs的版本管理工具
-windows: https://github.com/coreybutler/nvm-windows/releases (nvm-setup.zip)下载安装。nvm install v8.16.0  nvm use v8.16.0  nvm list    
+windows: https://github.com/coreybutler/nvm-windows/releases (nvm-setup.zip)下载安装
+nvm install v8.16.0  
+nvm use v8.16.0  
+nvm list    
 
 ### nrm
 + sudo npm i nrm -g
@@ -103,7 +116,7 @@ windows: https://github.com/coreybutler/nvm-windows/releases (nvm-setup.zip)下�
 + auto close tag
 + auto rename tag
 + path-alias
-+ 首选项／用户片断
++ 首选项／用户片断 
 + koroFileHeader
 + code snippets
 + node readme

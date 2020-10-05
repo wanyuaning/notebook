@@ -4,41 +4,14 @@ body{ font-size: 14px;}
 .markdown-section pre>code { padding: 0 5px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
-/* docsify-tabs */
+
 :root {
+    /* docsify-tabs */
     --docsifytabs-border-color: #ededed;
     --docsifytabs-tab-highlight-color: purple;
-
-
-
-    
-    /* Document */
-    --docsify-example-panels-document-width: 90%;
-
-    /* Wrapper */
-    --docsify-example-panels-wrapper-width: 100%;
-
-    /* Standards */
-    --docsify-example-panels-padding-inner : 8px 16px;
-    --docsify-example-panels-padding-surroundings : 0px;
-
-    /* Panel Left */
-    --docsify-example-panels-left-panel-background : transparent;
-    --docsify-example-panels-left-panel-width : 60%;
-
-    /* Panel Right */
-    --docsify-example-panels-right-panel-background : transparent;
-    --docsify-example-panels-right-panel-width : 40%;
-
-    /* Titles */
-    --docsify-example-panels-title-background: transparent;
-    
 }
+/* docsify-tabs */
 .docsify-tabs__tab~.docsify-tabs__tab{outline:none;} /* 去除蓝框 */
 .docsify-tabs--classic .docsify-tabs__tab:first-of-type {outline:none;}
 
 
-
-.title-panel{ border:#00f 1px solid; }
-.left-panel{ border:#f00 1px solid; }
-.right-panel{ border:#0f0 1px solid; }

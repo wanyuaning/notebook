@@ -1,6 +1,47 @@
 
+### ewan-layout
+<!-- layout:start -->
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24  
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- col:2 -->
+  2/24
+<!-- layout:end -->
 
+<!-- layout:start -->
+<!-- col:8 -->
+  8/24
+<!-- col:8 -->
+  8/24
+<!-- col:8 -->
+  8/24
+<!-- layout:end -->
 
+```
+<!-- layout:start -->
+<!-- col:8 -->
+  24/24
+<!-- layout:end -->
+```
 
 ### docsify-plantuml
 [PlantUML](../tools/plantuml) 
@@ -13,6 +54,7 @@
 [用例图](../tools/plantuml?id=用例图) 
 [组件图](../tools/plantuml?id=组件图) 
 [状态图](../tools/plantuml?id=状态图) 
+
 ```plantuml
 @startgantt
 [Prototype design] lasts 14 days
@@ -23,7 +65,6 @@
 [Build prototype] is colored in Fuchsia/FireBrick
 @endgantt
 ```
-
 
 ### docsify-tabs
 <!-- tabs:start -->
@@ -70,15 +111,20 @@ Ciao!
 
 
 ### docsify-plugin-flexible-alerts
-1 https://github.com/fzankl/docsify-plugin-flexible-alerts
-`<script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>`
-2
-window.$docsify = {
+<!-- tabs:start -->
+#### ** 第一步a **
+index.html `<script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>`
+#### ** 第二步a **
+```javascript
+  window.$docsify = {
+    // ...
     'flexible-alerts': {
       style: 'flat'
     }
   };
-3
+```
+#### ** 使用a **
+```html
 > [!NOTE]
 > An alert of type 'note' using global style 'callout'.
 
@@ -96,6 +142,37 @@ window.$docsify = {
 
 > [!COMMENT]
 > An alert of type 'comment' using style 'callout' with default settings.
+```
+#### ** 官网a **
+https://github.com/fzankl/docsify-plugin-flexible-alerts
+<!-- tabs:end -->
+
+<!-- layout:start -->
+<!-- col:12 -->
+
+  > [!NOTE]
+  > An alert of type 'note' using global style 'callout'.
+
+  > [!NOTE|style:flat]
+  > An alert of type 'note' using alert specific style 'flat' which overrides global style 'callout'.
+
+  > [!TIP]
+  > An alert of type 'tip' using global style 'callout'.
+<!-- col:12 -->
+
+  > [!WARNING]
+  > An alert of type 'warning' using global style 'callout'.
+
+  > [!ATTENTION]
+  > An alert of type 'attention' using global style 'callout'.
+
+  > [!COMMENT]
+  > An alert of type 'comment' using style 'callout' with default settings.
+<!-- layout:end -->
+
+
+
+
 
 
 
