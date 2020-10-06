@@ -44,16 +44,7 @@
 [组件图](../tools/plantuml?id=组件图) 
 [状态图](../tools/plantuml?id=状态图) 
 
-```plantuml
-@startgantt
-[Prototype design] lasts 14 days
-[Build prototype] lasts 4 days
-[Prepare test] lasts 6 days
-[Prototype design] -> [Build prototype]
-[Prototype design] -> [Prepare test]
-[Build prototype] is colored in Fuchsia/FireBrick
-@endgantt
-```
+
 
 ### docsify-tabs
 <!-- tabs:start -->
@@ -321,36 +312,39 @@ https://github.com/fzankl/docsify-plugin-flexible-alerts
 
 ---
 ### 表格
-第二行分割表头和内容。<br>
-- 有一个就行，为了对齐，多加了几个<br>
-文字默认居左<br>
--两边加：表示文字居中<br>
--右边加：表示文字居右<br>
-注：原生的语法两边都要用 | 包起来。此处省略
 
 <!-- layout:start:class6 -->
-<!-- col:12 -->
+<!-- col:8 -->
   <table>
     <tr>
-      <td>表头表头</td><td>表头</td><td>表头表头</td>
+      <th align="right">表头表头</th>
+      <th>表头</th>
+      <th align="left">表头表头</th>
     </tr>
     <tr>
-      <td>内容</td><td>内容</td><td>内容</td>
+      <td align="right">内容</td>
+      <td>内容</td>
+      <td align="left">内容</td>
     </tr>
     <tr>
-      <td>内容</td><td>内容</td><td>内容</td>
+      <td align="right">内容</td>
+      <td>内容</td>
+      <td align="left">内容</td>
     </tr>
-  </table>
-<!-- col:12 -->
+</table>
+<!-- col:6 -->
   表头表头|表头|表头表头<br>
-  :-----:|--|---:<br>
+  -----:|--|:---<br>
   内容|内容|内容<br>
   内容|内容|内容<br>
+<!-- col:10 -->
+  <strong>第二行分割表头和内容。</strong><br>
+  "-" 有一个就行，为了对齐，多加了几个<br>
+  文字默认居左<br>
+  两边加":"表示文字居中<br>
+  右边加":"表示文字居右<br>
+  注：原生的语法两边都要用 | 包起来。此处省略
 <!-- layout:end -->
-
-
-
-
 
 
 
@@ -367,18 +361,6 @@ const name = 'ewan'
 const age = 20
 console.log(name)
 console.log(age)
-```
-
-流程图
-```
-st=>start: 开始
-op=>operation: My Operation
-cond=>condition: Yes or No?
-e=>end
-st->op->cond
-cond(yes)->e
-cond(no)->op
-&
 ```
 
 

@@ -1,8 +1,14 @@
+
+
+文档<br>
 [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/rendering-tools)<br>
 [MDN web docs](https://developer.mozilla.org/zh-CN/)<br>
-[HTML/JS/CSS在线运行](https://jsrun.net/new)<br>
 
-[在线IDE](https://codesandbox.io/s/xv36w4695o?file=/index.html)
+代码在线编辑/运行<br>
+[CodeSandBox](https://codesandbox.io/s/xv36w4695o?file=/index.html)
+[JSRun](https://jsrun.net/new)
+<br>
+[正则表达式在线测试](http://tool.chinaz.com/regex)
 
 在线har文件解析：http://ericduran.github.io/chromeHAR/
 《使用 HTML5 和 Node 构建超媒体 API》

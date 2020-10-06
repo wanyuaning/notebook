@@ -226,7 +226,9 @@ Webpack rollup
 
 # VUE
 [详情](frame/vue/index.md)  
-
+## vue-element-admin
+扩展图标：下载SVG图标(home.svg)放入 src/icons/svg
+  路由里使用 meta: { title: '综合信息', icon: 'home' }
 
 
 【cli route vuex】
@@ -421,11 +423,54 @@ HTTP&TCP/IP  三/四次握手
 
 
 # 正则表达式
-/g 表示该表达式将用来在输入字符串中查找所有可能的匹配，返回的结果可以是多个。如果不加/g最多只会匹配一个
 
-2，/i  表示匹配的时候不区分大小写
+<!-- layout:start:regclass -->
+<!-- col:6 -->
+  <strong>/i</strong>　不区分大小写
+<!-- col:12 -->
+  <strong>/g</strong>　全局匹配
+<!-- col:6 -->
+  <strong>/m</strong>　多行匹配
+<!-- layout:end -->
 
-3，/m 表示多行匹配，什么是多行匹配呢？就是匹配换行符两端的潜在匹配。影响正则中的^$符号
+<!-- layout:start:regclass -->
+<!-- col:8 -->
+  <strong>?</strong>　{0,1}
+<!-- col:8 -->
+  <strong>+</strong>　{1,}
+<!-- col:8 -->
+  <strong>*</strong>　{0,}
+<!-- layout:end -->
+<!-- layout:start:regclass -->
+<!-- col:4 -->
+  <strong>\d</strong>　[0-9]
+<!-- col:4 -->
+  <strong>\D</strong>　[^0-9]
+<!-- col:4 -->
+  <strong>\w</strong>　[0-9a-zA-Z_]
+<!-- col:4 -->
+  <strong>\W</strong>　[^0-9a-zA-Z_]
+<!-- col:4 -->
+  <strong>\s</strong>　[ \t\v\n\r\f]
+<!-- col:4 -->
+  <strong>\S</strong>　[^ \t\v\n\r\f]
+<!-- layout:end -->
+<!-- layout:start:regclass -->
+<!-- col:24 -->
+  <strong>.</strong>　通配符[^\n\r\u2028\u2029]，换行符、回车符、行分隔符和段分隔符除外
+<!-- layout:end -->
+
+<!-- layout:start -->
+<!-- col:4 -->
+  惰性匹配
+<!-- col:8 -->
+  <strong>量词</strong> 后面加个 <strong>?</strong> 实现惰性匹配
+<!-- col:12 -->
+  {m,n}?　　{m,}?　　??　　+?　　*?
+<!-- layout:end -->
+
+
+
 
 
 
