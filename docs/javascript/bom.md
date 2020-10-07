@@ -7,19 +7,10 @@
 ```js
 {
   document: Document
-  location 
-    href:     "http://localhost:9527/#/minioninfo/minion"   
-    hash:     "#/minioninfo/minion"
-    origin:   "http://localhost:9527"   
-    protocol: "http:"
-    host:     "localhost:9527"   
-    hostname: "localhost"  
-    port:     "9527"
-    pathname: "/"
-  
-  navigator
-  screen
-  history
+  location: Location
+  navigator: Navigator
+  screen: Screen
+  history: 
     length
     back()  
     forward()
@@ -40,18 +31,22 @@
   screenX: 0,
   screenY: 23,
   // 其它属性
-  name: '',                  // 设置或返回窗口的名称。
-  parent: '',                // 返回父窗口。
-  top: '',                   // 返回最顶层的先辈窗口。
+  name: '',                  // 设置或返回窗口的名称
+  parent: '',                // 返回父窗口
+  top: '',                   // 返回最顶层的先辈窗口
   external: {},
   // 状态栏
-  defaultStatus: '',         // 窗口状态栏中的默认文本。
-  status: '',                // 临时设置窗口状态栏的文本。
+  defaultStatus: '',         // 窗口状态栏中的默认文本
+  status: '',                // 临时设置窗口状态栏的文本
 }
 ```
 #### Document
 ```js
 {
+  title: '',                 //返回文档标题等价于HTML的title标签
+  cookie: '',                //返回与当前文档有关的所有 cookie
+  charset: '',               //返回字符集 简体中文:gb2312
+  referrer: '',              //访问源URL，可作为返回上一页的依据
   body: {
     bgColor: '',             //设置或获取对象后面的背景颜色
     link: '',                //未点击过的链接颜色
@@ -70,8 +65,8 @@
     onmouseover(),           //=”func()”//鼠标指针移到对象时触发
     onmouseout(),            //=”func()”//鼠标指针移出对象时触发
   },                         //提供对 <body>元素的直接访问。对于定义了框架集的文档，该属性引用最外层的<frameset>。
-  cookie: '',                //返回与当前文档有关的所有 cookie。
-  title: '',                 //返回文档标题等价于HTML的title标签
+  
+
   domain: '',                //返回当前文档的域名。
   bgColor: '',               //返回页面背景色
   fgColor: '',               //返回前景色(文本颜色)
@@ -84,10 +79,6 @@
   fileModifiedDate: '',      //文件修改日期，只读属性
   lastModified: '',          //返回文档被最后修改的日期和时间。
   fileSize: '',              //文件大小，只读属性
-  cookie: '',                //设置和读出cookie
-  charset: '',               //返回字符集 简体中文:gb2312
-
-  referrer: '',              //返回载入当前文档的文档的 URL。
   styleSheets: '',           //返回样式表的集合,返回值CSSStyleSheet[] //styleSheets[0].cssRules.style.paddingTop=”10px”//设置样式,样式名去掉连字符,
  
   write(),                   //动态向页面写入内容
@@ -99,19 +90,33 @@
 }
 ```
 #### Location
+![Location](../images/location.jpg "Location")
 ```js
 {
-  hash: "",
-  host: "www.guancha.cn",
-  hostname: "www.guancha.cn",
-  href: "https://www.guancha.cn/gongye%C2%B7keji?s=dhgongye%C2%B7keji",
-  origin: "https://www.guancha.cn",
-  pathname: "/gongye%C2%B7keji",
-  port: "",
   protocol: "https:"
+  hostname: "www.guancha.cn",
+  port:     "",
+  pathname: "/gongye%C2%B7keji",
+  hash:     "",
+  search:   "?s=dhgongye%C2%B7keji"
+  host:     "www.guancha.cn",
+  origin:   "https://www.guancha.cn",  
+  href:     "https://www.guancha.cn/gongye%C2%B7keji?s=dhgongye%C2%B7keji",
+
+  protocol: "http:"
+  hostname: "localhost" 
+  port:     "9527"
+  pathname: "/"
+  hash:     "#/minioninfo/minion"
+  search:   ""
+  host:     "localhost:9527"
+  origin:   "http://localhost:9527"
+  href:     "http://localhost:9527/#/minioninfo/minion"  
+    
 }
 ```
-#### Navigator
+
+#### Navigator 浏览器信息
 ```js
 {
   appCodeName                //浏览器代码名
@@ -119,7 +124,7 @@
   appMinorVersion            //浏览器补钉版本
   cpuClass                   //cpu类型x86
   platform                   //操作体系类型win32
-  plugins
+  plugins                    //浏览器已经安装的插件集
   opsProfile
   userProfile
   systemLanguage             //客户体系语言zh-cn简体中文
@@ -142,7 +147,22 @@
 }
 ```
 
+#### Screen
+![Screen](../images/screen.png "Screen")
+```
+{
+  width: 1680
+  height: 1050
+  availWidth: 1680
+  availHeight: 977
+  availLeft: 0
+  availTop: 23
 
+  colorDepth: 24
+  pixelDepth: 24
+  orientation: ScreenOrientation {angle: 0, type: "landscape-primary", onchange: null}
+}
+```
 
 #### Element
 ```js

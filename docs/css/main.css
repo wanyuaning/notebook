@@ -50,3 +50,5 @@ body{ font-size: 14px;}
 
 .regclass{ font-size: 12px; color: #bcc;}
 .regclass strong{ font-size: 16px; color: #000;}
+
+code{border:#f00 0px solid}

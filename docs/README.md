@@ -26,15 +26,37 @@ Array相关API的应用
 Date相关API的应用
 异步编程
 
+窗口管理<br>
+　　方档规范<br>
+　　当前URL信息<br>
+　　浏览器信息<br>
+　　显示屏信息<br>
+　　用户访问信息<br><br>
+　　窗口集
 
 
 [Window](javascript/bom?id=Window) [BOM规范](javascript/bom?id=浏览器对象模型)<br>
 　　document: [Document](javascript/bom?id=document) [DOM规范](javascript/bom?id=文档对象模型)<br>
-　　location<br>
+　　　　element:[Element](javascript/bom?id=element)<br>
+　　　　title<br>
+　　　　cookie<br>
+　　　　charset<br>
+　　　　referrer<br>
+　　　　...<br>
+　　location: [Location](javascript/bom?id=location)<br>
+　　　　href:     "http://localhost:9527/#/minioninfo/minion"<br>
+　　　　protocol: "http:"<br>
+　　　　hostname: "localhost" <br>
+　　　　port:     "9527"<br>
+　　　　pathname: "/"<br>
+　　　　hash:     "#/minioninfo/minion"<br>
+　　　　...<br>
 　　navigator: [Navigator](javascript/bom?id=navigator) <br>
-　　screen<br>
-　　history<br>
+　　screen: [Screen](javascript/bom?id=screen)<br>
+　　history: [History](javascript/bom?id=history)<br>
 　　frames
+
+　　open    
 
 
 
