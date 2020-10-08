@@ -44,15 +44,32 @@ Date相关API的应用
 　　　　referrer<br>
 　　　　...<br>
 　　location: [Location](javascript/bom?id=location)<br>
-　　　　href:     "http://localhost:9527/#/minioninfo/minion"<br>
-　　　　protocol: "http:"<br>
-　　　　hostname: "localhost" <br>
-　　　　port:     "9527"<br>
-　　　　pathname: "/"<br>
-　　　　hash:     "#/minioninfo/minion"<br>
+　　　　protocol<br>
+　　　　hostname<br>
+　　　　port<br>
+　　　　pathname<br>
+　　　　hash<br>
+　　　　search<br>
+　　　　host<br>
+　　　　origin<br>
+　　　　href<br>
 　　　　...<br>
-　　navigator: [Navigator](javascript/bom?id=navigator) <br>
+　　navigator: [Navigator](javascript/bom?id=navigator)<br>
+　　　　appCodeName<br>
+　　　　appName<br>
+　　　　appVersion<br> 
+　　　　appMinorVersion<br>
+　　　　cookieEnabled<br>
+　　　　platform<br>
+　　　　...<br>
 　　screen: [Screen](javascript/bom?id=screen)<br>
+　　　　width: 1680<br>
+　　　　height: 1050<br>
+　　　　availWidth: 1680<br>
+　　　　availHeight: 977<br>
+　　　　availLeft: 0<br>
+　　　　availTop: 23<br>
+　　　　...<br>
 　　history: [History](javascript/bom?id=history)<br>
 　　frames
 

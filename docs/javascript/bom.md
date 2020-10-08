@@ -93,37 +93,29 @@
 ![Location](../images/location.jpg "Location")
 ```js
 {
-  protocol: "https:"
-  hostname: "www.guancha.cn",
-  port:     "",
-  pathname: "/gongye%C2%B7keji",
-  hash:     "",
-  search:   "?s=dhgongye%C2%B7keji"
-  host:     "www.guancha.cn",
-  origin:   "https://www.guancha.cn",  
-  href:     "https://www.guancha.cn/gongye%C2%B7keji?s=dhgongye%C2%B7keji",
-
   protocol: "http:"
   hostname: "localhost" 
   port:     "9527"
-  pathname: "/"
+  pathname: "/main"
   hash:     "#/minioninfo/minion"
-  search:   ""
+  search:   "?v=1"
   host:     "localhost:9527"
   origin:   "http://localhost:9527"
-  href:     "http://localhost:9527/#/minioninfo/minion"  
-    
+  href:     "http://localhost:9527/main#/minioninfo/minion?v=1"  
 }
 ```
 
 #### Navigator 浏览器信息
 ```js
 {
-  appCodeName                //浏览器代码名
-  appName                    //浏览器步伐名
-  appMinorVersion            //浏览器补钉版本
+  appCodeName                //浏览器代码名 "Mozilla"
+  appName                    //浏览器步伐名 "Netscape"
+  appVersion                 "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+  appMinorVersion            //浏览器补钉版本 
+  cookieEnabled              //浏览器是否撑持cookie true
+  platform                   //操作体系类型 "Win32"
+
   cpuClass                   //cpu类型x86
-  platform                   //操作体系类型win32
   plugins                    //浏览器已经安装的插件集
   opsProfile
   userProfile
@@ -131,8 +123,8 @@
   userLanguage               //用户语言,同上
   appVersion                 //浏览器版本(包括 体系版本)
   userAgent .                //用户代理头的字符串表示
-  onLine                     //用户否在线
-  cookieEnabled              //浏览器是否撑持cookie
+  onLine                     //用户否在线 true
+  
   mimeTypes
   screen
   width                      //屏幕宽度
@@ -144,6 +136,25 @@
   frames
   external
   AddFavorite("地址","标题" ) //把网站新增到保藏夹
+
+  
+
+deviceMemory: 8
+
+language: "zh-CN"
+languages: (2) ["zh-CN", "zh"]
+
+
+
+presentation: Presentation {receiver: null, defaultRequest: null}
+product: "Gecko"
+productSub: "20030107"
+serviceWorker: ServiceWorkerContainer {ready: Promise, controller: null, oncontrollerchange: null, onmessage: null}
+
+
+userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+vendor: "Google Inc."
+vendorSub: ""
 }
 ```
 
