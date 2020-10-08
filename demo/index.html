@@ -47,6 +47,11 @@
             bottom: 0;
             background-color: rgba(0, 0, 0, .4);
             line-height: 325px;
+            opacity: 1;
+        }
+        .video-view .mask.close{
+            opacity: 0;
+            transition:all 2s ease;
         }
         .video-view .mask img{
             vertical-align: middle;
@@ -126,10 +131,33 @@
         <div class="block-video">
             <div class="video-wrapper">
                 <div class="video-view">
-                    <img src="images/banner.png"/>
-                    <div class="mask">
-                        <img src="images/icon-play.png"/>
-                    </div>
+                  <!-- 
+                  webkit-playsinline="true"         IOS10中设置可以让视频在小窗内播放，也就是不是全屏播放
+                  playsinline="true"                IOS微信浏览器支持小窗内播放
+                  x-webkit-airplay="allow" 
+                  x5-video-player-type="h5"         启用H5播放器,是wechat安卓版特性
+                  x5-video-player-fullscreen="true" 全屏设置，设置为true是防止横屏
+                  x5-video-orientation="portraint"  播放器的方向，landscape横屏，portraint竖屏，默认值为竖屏 
+                  -->
+                  <video
+                    id="video" 
+                    width="700"
+                    height="325"
+                    controls = "true"
+                    poster="images/banner.png"  
+                    preload="auto" 
+                    webkit-playsinline="true"        
+                    playsinline="true"              
+                    x-webkit-airplay="allow" 
+                    x5-video-player-type="h5"      
+                    x5-video-player-fullscreen="true" 
+                    x5-video-orientation="portraint" 
+                    style="object-fit:fill"
+                    >
+                  </video>
+                  <div class="mask" id="video-mask">
+                      <img src="images/icon-play.png" id="btn-play"/>
+                  </div>
                 </div>
             </div>
         </div>
@@ -154,10 +182,6 @@
                 <li>美女导师微信:<span id="wx-placeholder-2"></span></li>
                 <li>首存即送18-58888彩金</li>
             </ul>
-            
-            
-            
-             
         </div>
         <div class="common-line"></div>
         <div class="block-last">
@@ -168,15 +192,58 @@
 </body>
 </html>
 <script>
-    ;(function(){
-        const wxCodeArr = ['55883345', '55883346', '55883347']
-        const account_url = 'www.baidu.com'
 
-        const dom_account_url = document.querySelector('#account-url')
-        const dom_wx_1 = document.querySelector('#wx-placeholder-1')
-        const dom_wx_2 = document.querySelector('#wx-placeholder-2')
-        dom_account_url.innerText = account_url
-        dom_wx_1.innerText = '55883311'
-        dom_wx_2.innerText = '55883347'
-    }())
+  
+  ;(function(){
+    const CONF = {
+      URL_Video: 'videos/demo.mp4',                   // 视频源
+      WX_GeneralAgent: '12345678',                    // 总代理微信
+      WX_Mentor: ['55883345', '55883346', '55883347'],// 导师微信集
+      URL_Account: 'www.baidu.com'                    // 开户网址
+    }
+
+    const dom_account_url = document.querySelector('#account-url')
+    const dom_wx_1 = document.querySelector('#wx-placeholder-1')
+    const dom_wx_2 = document.querySelector('#wx-placeholder-2')
+    const dom_mask = document.querySelector('#video-mask')
+    const btn_play = document.querySelector('#btn-play')
+
+    const video = document.querySelector('video');
+    const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+    
+    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+      var mediaSource = new MediaSource();
+      video.src = URL.createObjectURL(mediaSource); // 把mediaSource作为objectURL附加到video标签上
+      mediaSource.addEventListener('sourceopen', sourceOpen);
+    } else {
+      //video.src = CONF.URL_Video
+    }
+
+    function sourceOpen () {
+      const mediaSource = this; 
+      let sourceBuffer = mediaSource.addSourceBuffer(mimeCodec); 
+      //发起网络请求
+      fetch(CONF.URL_Video)
+      .then(res => res.arrayBuffer())
+      .then((buf) => {console.log(buf)
+        sourceBuffer.addEventListener('updateend', function (_) {
+          console.log(_)
+          console.log(mediaSource)
+          mediaSource.endOfStream();
+          //video.play();
+        });
+        sourceBuffer.appendBuffer(buf);
+      })
+      .catch(e => console.log(e))
+    }
+
+    btn_play.addEventListener('click', () =>{
+      dom_mask.className = 'mask close'
+      video.play()
+    })
+
+    dom_account_url.innerText = CONF.URL_Account
+    dom_wx_1.innerText = CONF.WX_GeneralAgent
+    dom_wx_2.innerText = CONF.WX_Mentor[1]
+  }())
 </script>
