@@ -4,6 +4,13 @@ https://segmentfault.com/a/1190000010377156
 [全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
 
+VSCode
+settings{
+  // 缩进
+  "editor.detectIndentation": false, // 默认启用了根据文件类型自动设置tabSize
+  "editor.tabSize": 2, // 设置缩进不生效时关闭editor.detectIndentation
+}
+
 　　　　
 ## JavaScript
 ### ECMAScript规范 
