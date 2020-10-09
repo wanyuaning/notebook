@@ -3,14 +3,34 @@ https://segmentfault.com/a/1190000010377156
 
 [全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
+# CSS
+```
+elem: 表示任意元素   attr: 任意属性名称   value: 值
+elem[attr~=value]  匹配附带attr属性的elem元素，其中attr属性的值是以空格隔开的值列表，value是值列表中的一个独立值
+elem[attr^=value]  匹配附带attr属性的elem元素，并且该属性值是以value作为开始的
+elem[attr$=value]  匹配附带attr属性的elem元素，并且该属性值是以value作为结束的
+elem[attr*=value]  匹配附带attr属性的elem元素，并且该属性值包含value字符
 
-VSCode
-settings{
+[id]               附带 id 属性的元素
+div[class]         附带 class 属性的 div 元素
+span[class][title] 即带 class 属性也带 title 属性的 span 元素
+p[class=hidden]    附带 class 属性同时值为 hidden 的 p 元素
+
+[class*=col-] {含 row 类名的多类名组合}
+[class*=col-] {含 col- 字符}
+[class^=col-] {以 col- 开头的类名}
+[class$=col-] {以 col- 结尾的类名}
+```
+
+# VSCode
+settings
+```
+{
   // 缩进
   "editor.detectIndentation": false, // 默认启用了根据文件类型自动设置tabSize
   "editor.tabSize": 2, // 设置缩进不生效时关闭editor.detectIndentation
 }
-
+```
 　　　　
 ## JavaScript
 ### ECMAScript规范 

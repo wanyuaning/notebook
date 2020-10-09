@@ -51,4 +51,31 @@ body{ font-size: 14px;}
 .regclass{ font-size: 12px; color: #bcc;}
 .regclass strong{ font-size: 16px; color: #000;}
 
-code{border:#f00 0px solid}
+pre[data-lang]{
+  height: 20px;
+  overflow: hidden;
+  padding-top: 20px;
+  position: relative;
+}
+pre[data-lang]:before,pre[data-lang]:after{
+  position: absolute;
+  top: 0;
+  content: '' !important;
+  width: 15px;
+  height: 10px; 
+  padding: 0;
+  border-bottom: #ddd 3px solid;
+  cursor: pointer;
+}
+pre[data-lang]:before{
+  left: 50%;
+  transform-origin: left bottom;
+  transform: rotate(-30deg) translate(-1px, 2px);
+  
+}
+pre[data-lang]:after{
+  right: 50%;
+  transform-origin: right bottom;
+  transform: rotate(30deg) translate(1px, 2px);
+}
+pre[data-lang] code{border:#0f0 1px solid}
