@@ -12,6 +12,9 @@ const CONFIG = {
   const dom_wx_2 = document.querySelector('#wx-placeholder-2')
   const dom_mask = document.querySelector('#video-mask')
   const dom_video = document.querySelector('video')
+  const dom_message = document.querySelector('#message')
+  const btn_copy1 = document.querySelector('#copy1')
+  const btn_copy2 = document.querySelector('#copy2')
 
   /** 偿试使用 mediaSource 源 */
   const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
@@ -57,28 +60,31 @@ const CONFIG = {
       dom_video.pause()
     }
   })
-  // document.querySelector('#copy1').addEventListener(clickEvent, (e) => {
     
-  //   console.log(dom_wx_1.innerText)
-  // })
-  // document.querySelector('#copy2').addEventListener(clickEvent, (e) => {
-  //   console.log(dom_wx_2.innerText)
-  // })
-  
-  const clipboard = new ClipboardJS('#copy1');
+  function handleMessage(content){
+    dom_message.className = 'message active'
+    dom_message.innerText = content
+    setTimeout(function(){
+      dom_message.className = 'message'
+    }, 2500)
+  }
+  const clipboard = new ClipboardJS('#copy1')
   clipboard.on('success', function(e) {
-    console.info('Action:', e.action);
-    console.info('Text:', e.text);
-    console.info('Trigger:', e.trigger);
-    document.querySelector('#message').className = 'message active'
-
+    handleMessage('总代理微信已复制到剪贴板！')
     e.clearSelection();
-  });
-
+  })
   clipboard.on('error', function(e) {
-    console.error('Action:', e.action);
-    console.error('Trigger:', e.trigger);
-  });
+    handleMessage('复制失败！')
+  })
+
+  const clipboard2 = new ClipboardJS('#copy2')
+  clipboard2.on('success', function(e) {
+    handleMessage('导师微信已复制到剪贴板！')
+    e.clearSelection();
+  })
+  clipboard2.on('error', function(e) {
+    handleMessage('复制失败！')
+  })
 
   dom_account_url.innerText = C.URL_Account
 

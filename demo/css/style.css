@@ -39,6 +39,7 @@ body{
   border-radius: 10px; 
   overflow: hidden;
   position: relative;
+  z-index: 3;
 }
 .video-view .mask{
   position: absolute;
@@ -46,6 +47,7 @@ body{
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 3;
   background-color: rgba(0, 0, 0, .4);
   line-height: 325px;
   opacity: 1;
@@ -164,3 +166,18 @@ z-index: 1;
   background: url(../images/copy2.png) transparent; outline: none;
   transition:all 0.3s ease
 }
+
+.message{
+  position: fixed;
+  top: 15PX;
+  z-index: 5;
+  background-color: #d8a2a9; font-size: 22px; text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  width: 720px;
+  transform: translate(15px, -80px);
+  transition:all 0.5s ease
+}
+.message.active{transform: translate(15px, 0px);}
