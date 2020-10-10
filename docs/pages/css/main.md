@@ -60,15 +60,19 @@ order: 0;
 }
 
 flex-grow和width同时设置则 flex-grow 优先
-
-变换
+```
+## 变换
+```
 transform: translate3d(200px, 0, 0);    /*3D*/
 transform: scale3d(1, 1, 1);
 transform: rotate3d(0, 0, 1, 360deg);
 transform: translate(0px, 0px) scaleX(1.00) scaleY(1.00);   /*2D*/
 transform-origin: center bottom
+```
 
-动画(scale(1, 1) / translate(x,y) / rotate(180deg) )
+## 动画
+```
+(scale(1, 1) / translate(x,y) / rotate(180deg) )
 transition:
 transition-property[none/ all /indent] 无属性／全部属性／枚举属性：transition:width 1s ease,background 5s ease
 transition-duration[1s] 持续时间 
@@ -86,29 +90,52 @@ div:hover{ background: #fff }
       div:hover{ transform: rotate(180deg) scale(.5, .5) }
   </style>
   <div></div>
+```
+<div class="color-group collapse c-atv-0">
+  <i>animation-name</i> 动画的名<br>
+  <i>animation-duration</i> 播放时长<br>
+  <i>animation-delay</i> 延时时间<br>
+  <i>animation-timing-function</i> 动画效果 <c i='1'></c><br>
+    <div class="c-item-1">
+      和transition中的transition-timing-function 中的值一样<br>
+      linear	动画从头到尾的速度是相同的<br>
+  　　ease	默认。动画以低速开始，然后加快，在结束前变慢<br>
+  　　ease-in	动画以低速开始<br>
+  　　ease-out	动画以低速结束<br>
+  　　ease-in-out	动画以低速开始和结束<br>
+  　　cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
+    </div>
+  <i>animation-iteration-count[ 1 /2/infinite]</i> 播放次数，infinite无限次的播放<br>
+  <i>animation-direction[ normal /alternate]</i> 播放方向 <c i='2'></c><br>
+    <div class="c-item-2">
+      normal向前播放,alternate轮流，向前 > 反方 > 向前...（animation-iteration-count>1时有效）
+    </div>
+  <i>animation-play-state[ running /paused]</i> 播放状态 属性规定动画正在运行还是暂停<br>
+  <i>animation-fill-mode[ none /forwards/backwords/both]</i> 停止状态 <c i='3'></c><br>
+    <div class="c-item-3">
+  　　none（默认，回到动画没开始时的状态）<br>
+  　　forwards（动画结束后动画停留在结束状态）<br>
+  　　backwords（动画回到第一帧的状态）<br>
+  　　both（根据animation-direction轮流应用forwards和backwards规则<br>
+    </div>
+</div>
+@keyframes<br>
+简写 <br>
+<div class="color-group">
+animation: 
+<i>fn</i> 
+<i>3s</i> 
+<i>2s</i> 
+<i>linear</i> 
+<i>infinite</i> 
+<i>alternate</i> 
+<i>running</i>
+<i>both</i>; 
+</div>
 
-animate:
-animation-name @keyframes
-animation-duration 持续的时间
-animation-delay 延时
-animation-timing-function 和transition中的transition-timing-function 中的值一样
-linear	动画从头到尾的速度是相同的
-ease	默认。动画以低速开始，然后加快，在结束前变慢
-ease-in	动画以低速开始
-ease-out	动画以低速结束
-ease-in-out	动画以低速开始和结束
-cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
-animation-iteration-count[ 1 /2/infinite] 播放次数，infinite无限次的播放
-animation-direction[ normal /alternate] 播放方向，normal向前播放,alternate轮流，向前 > 反方 > 向前...（animation-iteration-count>1时有效）
-animation-play-state[ running /paused] 播放状态
-animation-fill-mode[ none /forwards/backwords/both]
-none（默认，回到动画没开始时的状态）
-forwards（动画结束后动画停留在结束状态）
-backwords（动画回到第一帧的状态）
-both（根据animation-direction轮流应用forwards和backwards规则
-简写：animation: fn 3s 2s linear infinite alternate both; 动画的名字，播放时间，延时时间，动画效果，播放次数，播放方向，停止状态
             
 可以暂停的动画
+```
 <style>
 div{ width:100px; height:100px; background:red; position:absolute; top: 100px; animation:fn 15s linear }
 .pause{ animation-play-state: paused }

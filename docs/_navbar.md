@@ -1,7 +1,7 @@
 - [HOME](/)
 * 工具
-  - [Git&NPM](tools/git-npm.md)
-  - [Markdown](tools/markdown.md)
-  - [Chrome Tools](tools/chrome-tools.md)
+  - [Git&NPM](pages/tools/git-npm.md)
+  - [Markdown](pages/tools/markdown.md)
+  - [Chrome Tools](pages/tools/chrome-tools.md)
 * 框架
-  - [VUE](frame/vue/index.md)
+  - [VUE](pages/frame/vue/index.md)

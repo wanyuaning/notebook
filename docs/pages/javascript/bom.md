@@ -90,7 +90,7 @@
 }
 ```
 #### Location
-![Location](../images/location.jpg "Location")
+![Location](../../assets/images/location.jpg "Location")
 ```js
 {
   protocol: "http:"
@@ -159,7 +159,7 @@ vendorSub: ""
 ```
 
 #### Screen
-![Screen](../images/screen.png "Screen")
+![Screen](../../assets/images/screen.png "Screen")
 ```
 {
   width: 1680

@@ -1,10 +1,10 @@
 
 https://segmentfault.com/a/1190000010377156
 
-[全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
+[全局&工具](pages/common/global.md)  &emsp; [网络&资源](pages/common/net.md)  &emsp; [MySQL](pages/common/mysql.md)
 
 # CSS
-[动画](css/main.md?id=animate)
+[动画](pages/css/main.md?id=动画)
 ```
 elem: 表示任意元素   attr: 任意属性名称   value: 值
 elem[attr~=value]  匹配附带attr属性的elem元素，其中attr属性的值是以空格隔开的值列表，value是值列表中的一个独立值
@@ -21,6 +21,9 @@ p[class=hidden]    附带 class 属性同时值为 hidden 的 p 元素
 [class*=col-] {含 col- 字符}
 [class^=col-] {以 col- 开头的类名}
 [class$=col-] {以 col- 结尾的类名}
+
+.color-group i:nth-child(1){color: #318ed8;}   序号优先 第1个元素 匹配<i>
+.color-group i:nth-of-type(1){color: #318ed8;} 类型优先 元素<i> 匹配第1个
 ```
 
 # VSCode
@@ -63,20 +66,20 @@ Date相关API的应用
 　　窗口集
 
 
-[Window](javascript/bom?id=Window) [BOM规范](javascript/bom?id=浏览器对象模型)<br>
-　　document: [Document](javascript/bom?id=document) [DOM规范](javascript/bom?id=文档对象模型)<br>
-　　　　element:[Element](javascript/bom?id=element)<br>
+[Window](pages/javascript/bom?id=Window) [BOM规范](pages/javascript/bom?id=浏览器对象模型)<br>
+　　document: [Document](pages/javascript/bom?id=document) [DOM规范](pages/javascript/bom?id=文档对象模型)<br>
+　　　　element:[Element](pages/javascript/bom?id=element)<br>
 　　　　title<br>
 　　　　cookie<br>
 　　　　charset<br>
 　　　　referrer<br>
-　　　　querySelector [深度优先和先序遍历](common/algorithm.md?id=Depth-First-Search) [querySelectorAll]()<br>
+　　　　querySelector [深度优先和先序遍历](pages/common/algorithm.md?id=Depth-First-Search) [querySelectorAll]()<br>
 　　　　　'#container'    返回id为container的dom<br>
 　　　　　'div#container' 返回id为container的首个div<br>
 　　　　　'.foo,.bar'     返回带有foo或者bar样式类的首个元素<br>
 　　　　　'a[target]'     查找文档中共包含 "target" 属性的 <a> 标签
 　　　　...<br>
-　　location: [Location](javascript/bom?id=location)<br>
+　　location: [Location](pages/javascript/bom?id=location)<br>
 　　　　protocol<br>
 　　　　hostname<br>
 　　　　port<br>
@@ -87,7 +90,7 @@ Date相关API的应用
 　　　　origin<br>
 　　　　href<br>
 　　　　...<br>
-　　navigator: [Navigator](javascript/bom?id=navigator)<br>
+　　navigator: [Navigator](pages/javascript/bom?id=navigator)<br>
 　　　　appCodeName<br>
 　　　　appName<br>
 　　　　appVersion<br> 
@@ -95,7 +98,7 @@ Date相关API的应用
 　　　　cookieEnabled<br>
 　　　　platform<br>
 　　　　...<br>
-　　screen: [Screen](javascript/bom?id=screen)<br>
+　　screen: [Screen](pages/javascript/bom?id=screen)<br>
 　　　　width: 1680<br>
 　　　　height: 1050<br>
 　　　　availWidth: 1680<br>
@@ -103,7 +106,7 @@ Date相关API的应用
 　　　　availLeft: 0<br>
 　　　　availTop: 23<br>
 　　　　...<br>
-　　history: [History](javascript/bom?id=history)<br>
+　　history: [History](pages/javascript/bom?id=history)<br>
 　　frames
 
 　　open    
@@ -149,14 +152,14 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 高阶函数
 
 数据类型
-基本类型：[String](javascript/data-type?id=string)  Number  Boolean   null  undefined  Symbol
+基本类型：[String](pages/javascript/data-type?id=string)  Number  Boolean   null  undefined  Symbol
 对象类型：
-类对象：Object [Array](javascript/data-type?id=array)  Function Map  Set  Date  RegExp  Error
+类对象：Object [Array](pages/javascript/data-type?id=array)  Function Map  Set  Date  RegExp  Error
 实例对象：{} [] fn
 
 
 
-[类型转换](javascript/data-type?id=类型转换)
+[类型转换](pages/javascript/data-type?id=类型转换)
 
 控制流程
 for 可return breake
