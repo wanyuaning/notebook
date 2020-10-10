@@ -67,71 +67,97 @@ transform: translate3d(200px, 0, 0);    /*3D*/
 transform: scale3d(1, 1, 1);
 transform: rotate3d(0, 0, 1, 360deg);
 transform: translate(0px, 0px) scaleX(1.00) scaleY(1.00);   /*2D*/
-transform-origin: center bottom
+transform-origin: center bottom 基点
 ```
 
 ## 动画
-```
-(scale(1, 1) / translate(x,y) / rotate(180deg) )
-transition:
-transition-property[none/ all /indent] 无属性／全部属性／枚举属性：transition:width 1s ease,background 5s ease
-transition-duration[1s] 持续时间 
-transition-timing-function[ease/linear/ease-in/ease-out/ease-in-out/cubic-bezier]  逐渐变慢 / 匀速 / 加速 / 减速 / 加速然后减速 / 自定义
-transition-delay[1s] 延时
+
+```html
 <style>
-div{ width: 600px; height: 230px }
-div{ background: #f00; transition:all 1s ease }
-div:hover{ background: #fff }
+  div{ width: 600px; height: 230px }
+  div{ background: #f00; transition:all 1s ease }
+  div:hover{ background: #fff }
 </style>
 <div></div>
+
 <style>
-      div{ width: 200px; height: 130px; background: #f00 }
-      div{ transform: rotate(0deg) scale(1, 1); transition:all 1s linear }
-      div:hover{ transform: rotate(180deg) scale(.5, .5) }
-  </style>
-  <div></div>
+  div{ width: 200px; height: 130px; background: #f00 }
+  div{ transform: rotate(0deg) scale(1, 1); transition:all 1s linear }
+  div:hover{ transform: rotate(180deg) scale(.5, .5) }
+</style>
+<div></div>  
 ```
-<div class="color-group collapse c-atv-0">
+
+<div class="color-group color-card collapse c-atv-0">
+  <i>transition-property</i> 属性枚举 <c i='1'></c><br> 
+  <div class="c-item-1">
+  　none: 无属性<br>
+  　all: 全部属性<br>
+  　indent: 枚举属性 transition:width 1s ease, background 5s ease<br>
+  </div>
+  <i>transition-duration</i> 持续时间 <br>
+  <i>transition-timing-function</i> 动画效果 <c i='2'></c><br>
+  <div class="c-item-2">
+  　ease: 逐渐变慢<br>
+  　linear: 匀速<br>
+  　ease-in: 加速<br>
+  　ease-out: 减速<br>
+  　ease-in-out: 加速然后减速<br>
+  　cubic-bezier: 自定义<br>
+  </div>
+  <i>transition-delay</i>[1s] 延时<br>
+</div><br>
+<div class="color-group sz22 quote card">
+  transition:
+  <i>all</i> 
+  <i>1s</i> 
+  <i>linear</i>
+  <i>2s</i> 
+</div>
+
+
+<br><br>
+<div class="color-group color-card collapse c-atv-0">
   <i>animation-name</i> 动画的名<br>
   <i>animation-duration</i> 播放时长<br>
   <i>animation-delay</i> 延时时间<br>
-  <i>animation-timing-function</i> 动画效果 <c i='1'></c><br>
-    <div class="c-item-1">
-      和transition中的transition-timing-function 中的值一样<br>
-      linear	动画从头到尾的速度是相同的<br>
-  　　ease	默认。动画以低速开始，然后加快，在结束前变慢<br>
-  　　ease-in	动画以低速开始<br>
-  　　ease-out	动画以低速结束<br>
-  　　ease-in-out	动画以低速开始和结束<br>
-  　　cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
-    </div>
+  <i>animation-timing-function</i> 动画效果 <c i="1"></c><br>
+  <div class="c-item-1">
+    和transition中的transition-timing-function 中的值一样<br>
+    linear	动画从头到尾的速度是相同的<br>
+　　ease	默认。动画以低速开始，然后加快，在结束前变慢<br>
+　　ease-in	动画以低速开始<br>
+　　ease-out	动画以低速结束<br>
+　　ease-in-out	动画以低速开始和结束<br>
+　　cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
+  </div>
   <i>animation-iteration-count[ 1 /2/infinite]</i> 播放次数，infinite无限次的播放<br>
   <i>animation-direction[ normal /alternate]</i> 播放方向 <c i='2'></c><br>
-    <div class="c-item-2">
-      normal向前播放,alternate轮流，向前 > 反方 > 向前...（animation-iteration-count>1时有效）
-    </div>
+  <div class="c-item-2">
+    normal向前播放,alternate轮流，向前 > 反方 > 向前...（animation-iteration-count>1时有效）
+  </div>
   <i>animation-play-state[ running /paused]</i> 播放状态 属性规定动画正在运行还是暂停<br>
   <i>animation-fill-mode[ none /forwards/backwords/both]</i> 停止状态 <c i='3'></c><br>
-    <div class="c-item-3">
-  　　none（默认，回到动画没开始时的状态）<br>
-  　　forwards（动画结束后动画停留在结束状态）<br>
-  　　backwords（动画回到第一帧的状态）<br>
-  　　both（根据animation-direction轮流应用forwards和backwards规则<br>
-    </div>
+  <div class="c-item-3">
+　　none（默认，回到动画没开始时的状态）<br>
+　　forwards（动画结束后动画停留在结束状态）<br>
+　　backwords（动画回到第一帧的状态）<br>
+　　both（根据animation-direction轮流应用forwards和backwards规则<br>
+  </div>
 </div>
+<br>
+<div class="color-group sz22 quote card">
+  animation: 
+  <i>fn</i> 
+  <i>3s</i> 
+  <i>2s</i> 
+  <i>linear</i> 
+  <i>infinite</i> 
+  <i>alternate</i> 
+  <i>running</i>
+  <i>both</i>; 
+</div><br>
 @keyframes<br>
-简写 <br>
-<div class="color-group">
-animation: 
-<i>fn</i> 
-<i>3s</i> 
-<i>2s</i> 
-<i>linear</i> 
-<i>infinite</i> 
-<i>alternate</i> 
-<i>running</i>
-<i>both</i>; 
-</div>
 
             
 可以暂停的动画
