@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css?v=5">
+  <style>
+.message{
+  position: fixed;
+  top: 10PX;
+  background-color: #d8a2a9;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  border: #0f0 1px solid;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  width: 720px;
+  transform: translate(15px 0);
+  transition:all 0.5s ease
+}
+.message.active{transform: translate(15px 30px);}
+
+  </style>
+</head>
+<body>
+  
+  <div class="app-wrapper">
+    <div id="message" class="message">message</div>
+    <div class="title"><img src="./images/title.png"/></div>
+    <div class="block-video">
+      <div class="video-wrapper">
+        <div class="video-view">
+          <!-- 
+          webkit-playsinline="true"         IOS10中设置可以让视频在小窗内播放，也就是不是全屏播放
+          playsinline="true"                IOS微信浏览器支持小窗内播放
+          x-webkit-airplay="allow" 
+          x5-video-player-type="h5"         启用H5播放器,是wechat安卓版特性
+          x5-video-player-fullscreen="true" 全屏设置，设置为true是防止横屏
+          x5-video-orientation="portraint"  播放器的方向，landscape横屏，portraint竖屏，默认值为竖屏 
+          style="object-fit:fill"
+          -->
+          <video
+            id="video" 
+            width="700"
+            height="325"
+            preload="auto" 
+            webkit-playsinline="true"        
+            playsinline="true"              
+            x-webkit-airplay="allow" 
+            x5-video-player-type="h5"      
+            x5-video-player-fullscreen="true" 
+            x5-video-orientation="portraint" 
+            style="object-fit:fill"
+            >
+          </video>
+          <div class="mask" id="video-mask">
+            <img src="./images/icon-play.png"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block-ad-slogan">
+      <img src="./images/ad-text.png?v=1"/>
+    </div>
+    <div class="common-line"></div>
+    <div class="block-ad-content">
+      <!-- <img src="./images/text-jiameng.png"/> -->
+      <div style="font-size: 43px; color: #ffeec0; text-align: center; font-weight: bold; line-height: 50px;">
+        加盟<br>
+        总代理微信(稳赚不赔)
+      </div>
+      <div style="position: relative;">
+        <button src="./images/copy.png" id="copy1" data-clipboard-action="copy" data-clipboard-target="#wx-placeholder-1"></button>
+      </div>
+      <span id="wx-placeholder-1" ></span>
+      
+      <p><strong>添加微信，送下线1名（0投资0操作）</strong></p>
+    </div>
+    <div class="common-line"></div>
+    <div class="block-types">
+      <img src="./images/types.png"/>
+    </div>
+    <div class="block-list">
+      <ul class="list-ul">
+        <li>北京赛车.时时彩.精准计划</li>
+        <li>开户网址:<span id="account-url"></span></li>
+        <li>美女导师微信:<span id="wx-placeholder-2"></span> <button id="copy2"></button></li>
+        <li>首存即送18-58888彩金</li>
+      </ul>
+    </div>
+    <div class="common-line"></div>
+    <div class="block-last">
+      <img src="./images/ad-text2.png"/>
+    </div>
+  </div>
+  <script src="./js/clipboard.min.js"></script>
+  <script src="./js/main.js?v=21"></script>
+</body>
+</html>
