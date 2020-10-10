@@ -4,6 +4,7 @@ https://segmentfault.com/a/1190000010377156
 [全局&工具](common/global.md)  &emsp; [网络&资源](common/net.md)  &emsp; [MySQL](common/mysql.md)
 
 # CSS
+[动画](css/main.md?id=animate)
 ```
 elem: 表示任意元素   attr: 任意属性名称   value: 值
 elem[attr~=value]  匹配附带attr属性的elem元素，其中attr属性的值是以空格隔开的值列表，value是值列表中的一个独立值
@@ -69,6 +70,11 @@ Date相关API的应用
 　　　　cookie<br>
 　　　　charset<br>
 　　　　referrer<br>
+　　　　querySelector [深度优先和先序遍历](common/algorithm.md?id=Depth-First-Search) [querySelectorAll]()<br>
+　　　　　'#container'    返回id为container的dom<br>
+　　　　　'div#container' 返回id为container的首个div<br>
+　　　　　'.foo,.bar'     返回带有foo或者bar样式类的首个元素<br>
+　　　　　'a[target]'     查找文档中共包含 "target" 属性的 <a> 标签
 　　　　...<br>
 　　location: [Location](javascript/bom?id=location)<br>
 　　　　protocol<br>

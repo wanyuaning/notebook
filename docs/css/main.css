@@ -51,13 +51,13 @@ body{ font-size: 14px;}
 .regclass{ font-size: 12px; color: #bcc;}
 .regclass strong{ font-size: 16px; color: #000;}
 
-pre[data-lang]{
+pre[data-lang].close{
   height: 20px;
   overflow: hidden;
   padding-top: 20px;
   position: relative;
 }
-pre[data-lang]:before,pre[data-lang]:after{
+pre[data-lang].close:before,pre[data-lang].close:after{
   position: absolute;
   top: 0;
   content: '' !important;
@@ -67,15 +67,14 @@ pre[data-lang]:before,pre[data-lang]:after{
   border-bottom: #ddd 3px solid;
   cursor: pointer;
 }
-pre[data-lang]:before{
+pre[data-lang].close:before{
   left: 50%;
   transform-origin: left bottom;
   transform: rotate(-30deg) translate(-1px, 2px);
   
 }
-pre[data-lang]:after{
+pre[data-lang].close:after{
   right: 50%;
   transform-origin: right bottom;
   transform: rotate(30deg) translate(1px, 2px);
 }
-pre[data-lang] code{border:#0f0 1px solid}

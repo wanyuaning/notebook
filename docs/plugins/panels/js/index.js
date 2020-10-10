@@ -52,6 +52,11 @@ function docsifyPanels(hook, vm) {
 
         return content;
     });
+  hook.afterEach(function (html, next) {
+    
+      console.log(333)
+      next(html);
+    });
 }
 
 

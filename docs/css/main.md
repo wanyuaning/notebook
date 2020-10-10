@@ -13,7 +13,7 @@ live template css(老笔记)
 
 
 
-
+```
 元素
 行内：a、b、span、img、input、strong、select、label、em、button、textarea
 块级：div、ul、li、dl、dt、dd、p、h1-h6、blockquote
@@ -786,7 +786,7 @@ common.css
 $('body').css("overflow","hidden");
 
 
-
+```
 
 
 
