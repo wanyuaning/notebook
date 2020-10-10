@@ -105,9 +105,9 @@ transform-origin: center bottom 基点
   　ease-in-out: 加速然后减速<br>
   　cubic-bezier: 自定义<br>
   </div>
-  <i>transition-delay</i>[1s] 延时<br>
+  <i>transition-delay</i> 延时<br>
 </div><br>
-<div class="color-group sz22 quote card">
+<div class="color-group sz22 quote-arrow card">
   transition:
   <i>all</i> 
   <i>1s</i> 
@@ -146,7 +146,7 @@ transform-origin: center bottom 基点
   </div>
 </div>
 <br>
-<div class="color-group sz22 quote card">
+<div class="color-group sz22 quote-arrow card">
   animation: 
   <i>fn</i> 
   <i>3s</i> 
