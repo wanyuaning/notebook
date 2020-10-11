@@ -91,19 +91,19 @@ transform-origin: center bottom 基点
 <div class="color-group color-card collapse c-atv-0">
   <i>transition-property</i> 属性枚举 <c i='1'></c><br> 
   <div class="c-item-1">
-  　none: 无属性<br>
-  　all: 全部属性<br>
-  　indent: 枚举属性 transition:width 1s ease, background 5s ease<br>
+    none: 无属性<br>
+    all: 全部属性<br>
+    indent: 枚举属性 transition:width 1s ease, background 5s ease<br>
   </div>
   <i>transition-duration</i> 持续时间 <br>
   <i>transition-timing-function</i> 动画效果 <c i='2'></c><br>
   <div class="c-item-2">
-  　ease: 逐渐变慢<br>
-  　linear: 匀速<br>
-  　ease-in: 加速<br>
-  　ease-out: 减速<br>
-  　ease-in-out: 加速然后减速<br>
-  　cubic-bezier: 自定义<br>
+    ease: 逐渐变慢<br>
+    linear: 匀速<br>
+    ease-in: 加速<br>
+    ease-out: 减速<br>
+    ease-in-out: 加速然后减速<br>
+    cubic-bezier: 自定义<br>
   </div>
   <i>transition-delay</i> 延时<br>
 </div><br>
@@ -118,18 +118,18 @@ transform-origin: center bottom 基点
 
 <br><br>
 <div class="color-group color-card collapse c-atv-0">
-  <i>animation-name</i> 动画的名<br>
+  <i>animation-name</i> 动画名称<br>
   <i>animation-duration</i> 播放时长<br>
   <i>animation-delay</i> 延时时间<br>
   <i>animation-timing-function</i> 动画效果 <c i="1"></c><br>
   <div class="c-item-1">
     和transition中的transition-timing-function 中的值一样<br>
     linear	动画从头到尾的速度是相同的<br>
-　　ease	默认。动画以低速开始，然后加快，在结束前变慢<br>
-　　ease-in	动画以低速开始<br>
-　　ease-out	动画以低速结束<br>
-　　ease-in-out	动画以低速开始和结束<br>
-　　cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
+    ease	默认。动画以低速开始，然后加快，在结束前变慢<br>
+    ease-in	动画以低速开始<br>
+    ease-out	动画以低速结束<br>
+    ease-in-out	动画以低速开始和结束<br>
+    cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值
   </div>
   <i>animation-iteration-count[ 1 /2/infinite]</i> 播放次数，infinite无限次的播放<br>
   <i>animation-direction[ normal /alternate]</i> 播放方向 <c i='2'></c><br>
@@ -139,10 +139,10 @@ transform-origin: center bottom 基点
   <i>animation-play-state[ running /paused]</i> 播放状态 属性规定动画正在运行还是暂停<br>
   <i>animation-fill-mode[ none /forwards/backwords/both]</i> 停止状态 <c i='3'></c><br>
   <div class="c-item-3">
-　　none（默认，回到动画没开始时的状态）<br>
-　　forwards（动画结束后动画停留在结束状态）<br>
-　　backwords（动画回到第一帧的状态）<br>
-　　both（根据animation-direction轮流应用forwards和backwards规则<br>
+    none（默认，回到动画没开始时的状态）<br>
+    forwards（动画结束后动画停留在结束状态）<br>
+    backwords（动画回到第一帧的状态）<br>
+    both（根据animation-direction轮流应用forwards和backwards规则<br>
   </div>
 </div>
 <br>
@@ -424,12 +424,92 @@ text-indent: -9999px;  /*向左缩进,隐藏文本*/
 /* DEMO: p{ text-indent: 2em; padding:0px; margin:0px; } */
 css-效果
 -webkit-border-radius: 5px;    /*倒角*/
+```
+#### 渐变
+<!-- layout:start -->
+  <strong>background: -webkit-linear-gradient</strong>(参数1, 参数2, 参数3);<br>
+  参数1 渐变开始方向[ left | top | right | bottom | 50deg | -50deg ]<br>
+  参数2 可以设置两个值，一个代表渐变的起始颜色；一个为渐变的起始位置，可以填 像素或者百分比（正负数都可以） 代表从此位置开始渐变<br>
+  参数3 可以设置两个值，一个代表渐的终止颜色；一个为渐变的结束位置，可以填 像素或者百分比（正负数都可以） 代表从此位置结束渐变<br>
+<!-- col:8 -->
+  <div style="background: linear-gradient(#6960ff, #d060ff); color:#fff">
+    <br><br>
+    <strong style="color:#fff">线性上下</strong><br><br>
+    linear-gradient(#6960ff, #d060ff) 
+    <br><br><br>
+  </div>
+<!-- col:8 -->
+  <div style="background: -webkit-linear-gradient(left, #6960ff, #d060ff); color:#fff">
+    <br><br>
+    <strong style="color:#fff">线性左右</strong><br><br>
+    -webkit-linear-gradient(left, #6960ff, #d060ff)
+    <br><br><br>
+  </div>
+<!-- col:8 -->
+  <div style="background: -webkit-linear-gradient(60deg, #6960ff, #d060ff); color:#fff">
+    <br><br>
+    <strong style="color:#fff">线性角度</strong><br><br>
+    -webkit-linear-gradient(60deg, #6960ff, #d060ff)
+    <br><br><br>
+  </div>
+<!-- layout:end -->
 
--webkit-linear-gradient(top, #f4f4f4, #ededed);    /*过渡*/
--webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)) /*[type, start point, end point, start color, end color]*/
 
-background: radial-gradient(#ffffff,#a5dffd,#5ed6fd);    /*锥形过渡*/
+<!-- layout:start -->
+<!-- col:24 -->
+  <div style="background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, cyan, purple); color:#fff">
+    <strong style="color:#fff">颜色枚举</strong><br>
+    -webkit-linear-gradient(left, red, orange, yellow, green, blue, cyan, purple)
+    <br>
+  </div>
+<!-- layout:end -->
 
+<!-- layout:start -->
+<!-- col:24 -->
+  <div style="background: -webkit-linear-gradient(left, rgba(2,150,100,0.3), rgba(160,32,240,0.8)),url(../../assets/images/timg.jpg); color:#fff">
+    <br><br><br><br><br>
+    <strong style="color:#fff">背景图片的渐变</strong><br>
+    -webkit-linear-gradient(left, rgba(2,150,100,0.3), rgba(160,32,240,0.8)),url(../../assets/images/timg.jpg)
+    <br><br><br>
+  </div>
+<!-- layout:end -->
+
+
+<!-- layout:start -->
+<!-- col:8 -->
+  
+<!-- col:8 -->
+  
+<!-- col:8 -->
+  <div style="background: radial-gradient(#ffffff,#a5dffd,#5ed6fd);">
+    <br><br>
+    <strong>锥形过渡</strong><br><br>
+    background: radial-gradient(#ffffff,#a5dffd,#5ed6fd); 
+    <br><br><br>
+  </div>
+<!-- layout:end -->
+
+##### 综合
+<div class="color-group sz20 quote-arrow card">
+  -webkit-gradient(
+  <i>linear, </i> 
+  <i>left top, </i> 
+  <i>left bottom, </i>
+  <i>from(#ccc), </i> 
+  <i>to(#000)</i>)
+</div>
+<div class="color-group sz20 inline card">
+  [
+  <i>类型, </i> 
+  <i>定位开始, </i> 
+  <i>定位结束, </i>
+  <i>开始颜色,</i> 
+  <i>结束颜色</i>]
+</div>
+
+
+
+```
 text-shadow: 0 1px  0  #eee ;  /*文本阴影[x, y, radius, color] */
 -webkit-text-stroke: 6px #ff0000;  /*文本描边*/
 

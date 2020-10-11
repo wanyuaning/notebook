@@ -254,6 +254,8 @@ vendorSub: ""
 #### Event
 ```js
 {
+  screenX pageX layerX clientX
+  
   type: '',                  //事件的名称如mouseover 字符串
   target: {}                 // Element
 }
