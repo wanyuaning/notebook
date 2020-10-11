@@ -56,23 +56,21 @@ body{
   position: relative;
 }
 
-.block-ad-content span{
+#wx-placeholder-1{
+  display: inline-block;
   color: #ffeec0; 
   font-size: 64px; 
   font-weight: bold;
   line-height: 64px;
   height: 64px;
-  display: block; padding-left: 150px; padding-top: 9px;
-}
-#wx-placeholder-1{
--webkit-animation-name: test;        
--webkit-animation-duration: 6s;     
--webkit-animation-fill-mode: both;  
--webkit-animation-iteration-count: infinite;  
--webkit-transform-origin: center;    
--webkit-transform-origin:50% 50%;
--webkit-animation-timing-function:linear;    
-z-index: 1;
+  -webkit-animation-name: test;        
+  -webkit-animation-duration: 6s;     
+  -webkit-animation-fill-mode: both;  
+  -webkit-animation-iteration-count: infinite;  
+  -webkit-transform-origin: center;    
+  -webkit-transform-origin:50% 50%;
+  -webkit-animation-timing-function:linear;    
+  z-index: 1;
 }
 @-webkit-keyframes test {
 0%  { -webkit-transform: translate(0px, 0px) scaleX(1.00); transform: translate(0px, 0px) scaleX(1.00);  transform-origin: center bottom; }

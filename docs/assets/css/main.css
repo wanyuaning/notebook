@@ -154,3 +154,5 @@ pre[data-lang].close:after{
 .card{ padding-left:10px; padding-right:20px; box-shadow:1px 1px 5px rgba(100,100,100,.1); display:inline-block;}
 
 .inline{display: inline-block;}
+
+.css{ display:block; border:#f00 1px solid}

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
   <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="./css/style.css?v=11">
+  <link rel="stylesheet" type="text/css" href="./css/style.css?v=14">
   <style>
     .controls{
       height: 50px;
@@ -138,7 +138,7 @@
       <div style="position: relative;">
         <button src="./images/copy.png" id="copy1" data-clipboard-action="copy" data-clipboard-target="#wx-placeholder-1"></button>
       </div>
-      <span id="wx-placeholder-1" ></span>
+      <div style="padding-left: 150px; padding-top: 9px;"><span id="wx-placeholder-1"></span></div>
       
       <p><strong>添加微信，送下线1名（0投资0操作）</strong></p>
     </div>
@@ -167,6 +167,25 @@
   URL_Account: 'www.baidu.com',                         // 开户网址
   WX_GeneralAgent: ['12383345', '33883346', '7777747'], // 总代理微信
   WX_Mentor: ['55883345', '55883346', '55883347'],      // 导师微信集
+}
+
+const clickEvent = 'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click'
+Element.prototype.addClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) > -1) return this
+  className = (className + ' ' + cn).replace(/\s+/, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.delClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) < 0) return this
+  className = className.replace(cn, '')
+  this.className = className
+  return this
+}
+Element.prototype.hasClass = function (cn) {
+  return this.className.indexOf(cn) > -1
 }
 
 
@@ -291,28 +310,13 @@ function PlayerControl(options){
   this.player = {}
   this.config = CONFIG
 }
-Element.prototype.addClass = function (cn) {
-  let className = this.className
-  if (className.indexOf(cn) > -1) return this
-  className = (className + ' ' + cn).replace(/\s+/, ' ')
-  this.className = className
-  return this
-}
-Element.prototype.delClass = function (cn) {
-  let className = this.className
-  if (className.indexOf(cn) < 0) return this
-  className = className.replace(cn, '')
-  this.className = className
-  return this
-}
 PlayerControl.prototype = {
   constructor: PlayerControl,
   hasBindPlayer: false, // 是否绑定过播放器
   bindPlayer: function (player) {
     if (player.hasBindControls) return // 播放器已绑定了控制面板
 
-    const {btn_play, btn_fullscreen, btn_forward, btn_back, progress_outer, progress_inner, current_time} = this.config
-    const clickEvent = 'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click'
+    const {btn_play, btn_fullscreen, btn_forward, btn_back, progress_outer, progress_inner, current_time} = this.config    
     const root = this
 
     function formatTime(seconds){
@@ -405,7 +409,7 @@ PlayerControl.prototype = {
   /**
    * 控制面板实例
    */
-  const controls = new PlayerControl({
+  const controlOptions = {
     btn_play: document.querySelector('#play'),
     btn_fullscreen: document.querySelector('#fullscreen'),
     btn_forward: document.querySelector('#forward'),
@@ -413,14 +417,22 @@ PlayerControl.prototype = {
     progress_outer: document.querySelector('#progress-outer'),
     progress_inner: document.querySelector('#progress-inner'),
     current_time: document.querySelector('#current-time')
-  })
+  }
+  const controls = new PlayerControl(controlOptions)
   controls.bindPlayer(player)
   controls.playerPlay = () => {
-    //dom_mask.className = 'mask close'
+    controlOptions.btn_play.style.display = 'none'
+    dom_mask.className = 'mask close'
   }
   controls.playerPause = () => {
-    //dom_mask.className = 'mask'
+    controlOptions.btn_play.style.display = 'inline-block'
+    dom_mask.className = 'mask'
   }
+
+  dom_mask.addEventListener(clickEvent, (e)=>{
+    if (!dom_mask.hasClass('close')) return
+    player.play()
+  })
  
 
   /**

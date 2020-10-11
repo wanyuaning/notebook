@@ -29,38 +29,45 @@ overflow: hidden;
 color: #999;
 text-align: right;
 vertical-align: middle;
-
-
-弹性盒子
-.flex{
-display: flex;
-
-----------------------
-flex-direction: row row-reverse column column-reverse;  子元素流动方向默认start > end
-flex-wrap: nowrap wrap wrap-reverse;  子元素溢出时是否换行默认否，wrap时行start > end排列，wrap-reverse时行end>start排列
-----------------------
-flex-flow: row nowrap; 
-----------------------
-
-justify-content: flex-start flex-end center space-between space-around; 子元素在不参与扩张时的主轴上靠齐容器的方式 
-align-content: stretch; 子元素在主轴上开始/结束之间对齐方式
-align-items: stretch flex-start flex-end center baseline; 子元素在垂轴上开始/结束之间对齐方式
-}
-.flex .item{
-----------------------
-flex-grow: 0;  默认不参与扩张,必须设为1以上才能生效并按比例分配
-flex-shrink: 1; 默认参与压缩,0时不压缩，1以上按比例压缩
-flex-basis: auto; 和width同时设置时，flex-basis优先
-----------------------
-flex: 0 1 auto;
-----------------------
-
-align-self: auto; 对齐auto/flex-start/flex-end/center/baseline/stretchwidth
-order: 0;
-}
-
-flex-grow和width同时设置则 flex-grow 优先
 ```
+
+## 弹性盒子
+![flex](../../assets/images/flex.png "flex")<br>
+```css
+.flex{
+　display: flex;
+
+　/*子元素流动方向默认start > end*/
+　flex-direction: row row-reverse column column-reverse;  
+　/*子元素溢出时是否换行默认否，wrap时行start > end排列，wrap-reverse时行end>start排列*/
+　flex-wrap: nowrap wrap wrap-reverse;  
+　
+　flex-flow: row nowrap; 
+　
+　/*子元素在不参与扩张时的主轴上靠齐容器的方式 */
+　justify-content: flex-start flex-end center space-between space-around; 
+　/*子元素在主轴上开始/结束之间对齐方式*/
+　align-content: stretch; 
+　/*子元素在垂轴上开始/结束之间对齐方式*/
+　align-items: stretch flex-start flex-end center baseline; 
+}
+```
+
+```css
+.flex .item{
+　
+　flex-grow: 0;  /*默认不参与扩张,必须设为1以上才能生效并按比例分配*/
+　flex-shrink: 1; /*默认参与压缩,0时不压缩，1以上按比例压缩*/
+　flex-basis: auto; /*和width同时设置时，flex-basis优先*/
+　
+　flex: 0 1 auto;
+
+　align-self: auto; /*对齐auto/flex-start/flex-end/center/baseline/stretchwidth*/
+　order: 0;
+}
+```
+flex-grow和width同时设置则 flex-grow 优先
+
 ## 变换
 ```
 transform: translate3d(200px, 0, 0);    /*3D*/
