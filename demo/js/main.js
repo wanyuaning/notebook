@@ -10,13 +10,28 @@ const CONFIG = {
   const dom_account_url = document.querySelector('#account-url')
   const dom_wx_1 = document.querySelector('#wx-placeholder-1')
   const dom_wx_2 = document.querySelector('#wx-placeholder-2')
-  const dom_mask = document.querySelector('#video-mask')
   const dom_video = document.querySelector('video')
   const dom_message = document.querySelector('#message')
   const btn_copy1 = document.querySelector('#copy1')
   const btn_copy2 = document.querySelector('#copy2')
+  const dom_mask = document.querySelector('#video-mask')
+  const ctl_btn_fullscreen = document.querySelector('#fullscreen')
+  const ctl_btn_forward = document.querySelector('#forward')
+  const ctl_btn_back = document.querySelector('#back')
 
-  /** 偿试使用 mediaSource 源 */
+  const clickEvent = 'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click' 
+  function handleMessage(content){
+    dom_message.className = 'message active'
+    dom_message.innerText = content
+    setTimeout(function(){
+      dom_message.className = 'message'
+    }, 2500)
+  }
+
+  /** 
+   * 视频初始
+   * 偿试使用 mediaSource 源
+   */
   const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
   if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
     const mediaSource = new MediaSource()
@@ -26,12 +41,9 @@ const CONFIG = {
     dom_video.src = C.URL_Video
     dom_video.load();
   }
-
   dom_video.controls = false
   dom_video.volume = 0.5
-  dom_video.poster = "./images/banner.png"
-  
-  dom_video.addEventListener('ended', (e) => { dom_mask.className = 'mask' })
+  // dom_video.poster = "./images/banner.png" // 海报取消
 
   function sourceOpen () {
     const mediaSource = this 
@@ -47,9 +59,18 @@ const CONFIG = {
       sourceBuffer.appendBuffer(buf)
     })
     .catch(e => console.log(e))
-  }
+  }  
 
-  const clickEvent = 'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click'   
+  const duration = dom_video.duration
+
+  dom_video.addEventListener('timeupdate', (e) => { 
+    console.log(duration, e.timeStamp)
+  })
+  dom_video.addEventListener('ended', (e) => { dom_mask.className = 'mask' })
+
+  /**
+   * 播放控制
+   */
   dom_mask.addEventListener(clickEvent, (e) => {
     if (dom_video.paused) { 
       if (e.target.tagName !== 'IMG') return 
@@ -60,14 +81,19 @@ const CONFIG = {
       dom_video.pause()
     }
   })
-    
-  function handleMessage(content){
-    dom_message.className = 'message active'
-    dom_message.innerText = content
-    setTimeout(function(){
-      dom_message.className = 'message'
-    }, 2500)
-  }
+  ctl_btn_fullscreen.addEventListener(clickEvent, (e) => {
+    console.log('全屏播放')
+  })
+  ctl_btn_forward.addEventListener(clickEvent, (e) => {
+    console.log('快进')
+  })
+  ctl_btn_back.addEventListener(clickEvent, (e) => {
+    console.log('快退')
+  })
+
+  /**
+   * 拷贝
+   */
   const clipboard = new ClipboardJS('#copy1')
   clipboard.on('success', function(e) {
     handleMessage('总代理微信已复制到剪贴板！')
@@ -76,7 +102,6 @@ const CONFIG = {
   clipboard.on('error', function(e) {
     handleMessage('复制失败！')
   })
-
   const clipboard2 = new ClipboardJS('#copy2')
   clipboard2.on('success', function(e) {
     handleMessage('导师微信已复制到剪贴板！')
@@ -86,6 +111,9 @@ const CONFIG = {
     handleMessage('复制失败！')
   })
 
+  /**
+   * 动态文本
+   */
   dom_account_url.innerText = C.URL_Account
 
   const index2 = parseInt(Math.random() * C.WX_GeneralAgent.length)

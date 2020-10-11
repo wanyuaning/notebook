@@ -4,7 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
   <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="./css/style.css?v=8">
+  <link rel="stylesheet" type="text/css" href="./css/style.css?v=11">
+  <style>
+    .controls{
+      height: 50px;
+      box-sizing: border-box;
+      padding: 5px 20px;
+      background-color: rgba(0,0,0,0);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .controls .btn{
+      cursor: pointer;
+      display: inline-block; width: 40px; height: 40px; border: 0; outline: none;
+      transition:all 0.3s ease; vertical-align:middle
+    }
+    .controls .current-time{ color: #fff; font-size: 22px; vertical-align: middle; display: inline-block; width: 100px;}
+    .controls .back{ background: url(../images/icon-fast-forward.png) 0 0/100% 100% transparent; transform: rotate(180deg); }
+    .controls .back:hover{ transform: rotate(180deg) scale(1.1); }
+    .controls .forward{ background: url(../images/icon-fast-forward.png) 0 0/100% 100% transparent; }
+    .controls .forward:hover, .fullscreen:hover{ transform: scale(1.1); }
+    .controls .fullscreen{ background: url(../images/icon-fullscreen.png) 0 0/100% 100% transparent; margin-left: 20px; }
+    
+
+    .controls .progress-outer{ 
+      display: inline-block; width: 400px; height: 5px; vertical-align:middle; 
+      background-color: rgba(255, 255, 255, 0.2); border-radius: 3px;
+      position: relative; overflow: hidden;
+    }
+    .controls .progress-outer span{ 
+      display: inline-block; width: 0; height: 5px; background-color: #1eeb50; margin: 0; padding: 0; 
+      position: absolute; left: 0; top: 0; 
+    }
+    
+
+    .video-view .mask{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, .4);
+      line-height: 325px;
+      opacity: 1;
+    }
+    .video-view .mask.close{
+      opacity: 0;
+      transition:all 2s ease;
+    }
+
+    .btn-play{
+      cursor: pointer;
+      display: inline-block; width: 66px; height: 66px; border: 0; outline: none;
+      transition:all 0.5s ease; 
+      background-color: transparent;
+      background-image: url(./images/icon-play.png);
+    }
+    .btn-play.start{
+      background-image: url(./images/icon-pause.png);
+    }
+    .btn-play.pause{
+      background-image: url(./images/icon-play.png);
+    }
+    .video-view .mask img{
+      vertical-align: middle;
+      opacity: 0.5;
+    }
+    .video-view .mask:hover img{
+      opacity: 1;
+      transition:all 0.5s ease;
+    }
+
+    .controls, .controls .progress-outer, .controls .progress-outer span{ z-index: 4;}
+    .video-view .mask{ z-index: 3; }
+  </style>
 </head>
 <body>
   
@@ -38,13 +113,20 @@
             >
           </video>
           <div class="mask" id="video-mask">
-            <img src="./images/icon-play.png"/>
+            <button id="play" class="btn-play"></button>
+          </div>
+          <div class="controls">
+            <span id="current-time" class="current-time">00:00:00</span>
+            <button id="back" class="btn back"></button>
+            <div class="progress-outer" id="progress-outer"><span id="progress-inner"></span></div>
+            <button id="forward" class="btn forward"></button>
+            <button id="fullscreen" class="btn fullscreen"></button>
           </div>
         </div>
       </div>
     </div>
     <div class="block-ad-slogan">
-      <img src="./images/ad-text.png?v=1"/>
+      <img src="./images/ad-text.png"/>
     </div>
     <div class="common-line"></div>
     <div class="block-ad-content">
@@ -78,6 +160,301 @@
     </div>
   </div>
   <script src="./js/clipboard.min.js"></script>
-  <script src="./js/main.js?v=27"></script>
+  <!-- <script src="./js/main.js?v=31"></script> -->
+  <script>
+    const CONFIG = {
+  URL_Video: 'videos/demo.mp4',                         // 视频源
+  URL_Account: 'www.baidu.com',                         // 开户网址
+  WX_GeneralAgent: ['12383345', '33883346', '7777747'], // 总代理微信
+  WX_Mentor: ['55883345', '55883346', '55883347'],      // 导师微信集
+}
+
+
+function Player(selector, options){
+  const CONFIG = {
+    poster: '',
+    volume: 0.5,
+    skipStepLength: 5 // 快进快退步长(单位秒)
+  }
+  Object.assign(CONFIG, options || {})
+
+  const VIDEO = document.querySelector(selector)
+  VIDEO.controls = false
+  VIDEO.volume = CONFIG.volume
+  CONFIG.poster && (VIDEO.poster = CONFIG.poster)
+
+  this.video = VIDEO
+  this.config = CONFIG
+}
+Player.prototype = {
+  constructor: Player,
+  hasBindControls: false, // 是否绑定过控制面板
+  install: function (src) {
+
+    const video = this.video
+    const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    
+    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+      const mediaSource = new MediaSource()
+      video.src = URL.createObjectURL(mediaSource) 
+      mediaSource.addEventListener('sourceopen', sourceOpen)
+    } else {
+      video.src = src
+      video.load();
+    }
+    
+    function sourceOpen () {
+      const mediaSource = this 
+      let sourceBuffer = mediaSource.addSourceBuffer(mimeCodec) 
+      //发起网络请求
+      fetch(src)
+      .then(res => res.arrayBuffer())
+      .then((buf) => {
+        sourceBuffer.addEventListener('updateend', function (_) {
+          mediaSource.endOfStream()
+          //video.play()
+        })
+        sourceBuffer.appendBuffer(buf)
+      })
+      .catch(e => console.log(e))
+    } 
+
+    video.addEventListener('play', (e) => {this.handlePlay()})
+    video.addEventListener('pause', (e) => {this.handlePause()})
+    video.addEventListener('progress', (e) => {console.log('progress')})
+    video.addEventListener('error', (e) => {console.log('error')})
+    video.addEventListener('ended', (e) => {console.log('ended')})
+    video.addEventListener('abort', (e) => {console.log('abort')})
+    video.addEventListener('empty', (e) => {console.log('empty')})
+    video.addEventListener('emptied', (e) => {console.log('emptied')})
+    video.addEventListener('waiting', (e) => {console.log('waiting')})
+    video.addEventListener('timeupdate', (e) => { 
+      let percentage = video.currentTime / video.duration
+      percentage = percentage * 100 + '%'
+      this.handlePlaying(video.currentTime, video.duration, percentage)
+    })
+    video.addEventListener('ended', (e) => { 
+      this.video.currentTime = 0
+      this.handlePlayend() 
+    })
+  },
+  init: function () { /**实例重写**/ },
+  play: function () { 
+    this.video.paused ? this.video.play() : this.pause()
+  },
+  pause: function () { this.video.pause() },
+  apace: function (direction) {
+    const step = this.config.skipStepLength
+    this.video.currentTime += step * direction
+  },
+  toPlay: function (percentage) { 
+    const video = this.video
+    video.currentTime = percentage * video.duration 
+    this.play()
+  },
+  fullscreen: function () { 
+    const video = this.video
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else {
+      // iOS进入全屏
+      video.webkitEnterFullscreen();
+      // 针对iOS监听不到webkitfullscreenchange事件做的兼容，感知退出全屏
+      let timer = setInterval(() => {
+        if (!video.webkitDisplayingFullscreen) {
+          // 退出了全屏
+          clearInterval(timer);
+        }
+      }, 1000);
+    }
+  },
+  handlePlay: function () { /**实例重写**/ },
+  handlePause: function () { /**实例重写**/ },
+  handlePlaying: function () { /**实例重写**/ },
+  handlePlayend: function () { /**实例重写**/ }
+}
+
+function PlayerControl(options){
+  const CONFIG = {
+    btn_play: null,
+    btn_fullscreen: null,
+    btn_forward: null,
+    btn_back: null,
+    progress_outer: null,
+    progress_inner: null,
+    current_time: null
+  }
+  Object.assign(CONFIG, options || {})
+
+  this.player = {}
+  this.config = CONFIG
+}
+Element.prototype.addClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) > -1) return this
+  className = (className + ' ' + cn).replace(/\s+/, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.delClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) < 0) return this
+  className = className.replace(cn, '')
+  this.className = className
+  return this
+}
+PlayerControl.prototype = {
+  constructor: PlayerControl,
+  hasBindPlayer: false, // 是否绑定过播放器
+  bindPlayer: function (player) {
+    if (player.hasBindControls) return // 播放器已绑定了控制面板
+
+    const {btn_play, btn_fullscreen, btn_forward, btn_back, progress_outer, progress_inner, current_time} = this.config
+    const clickEvent = 'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click'
+    const root = this
+
+    function formatTime(seconds){
+      let s = parseInt(seconds % 60)
+      s < 10 && (s = '0' + s)
+      let m = parseInt(seconds/60)
+      let h = parseInt(m/60)
+      h < 10 && (h = '0' + h)
+      m = m%60
+      m < 10 && (m = '0' + m)
+      return h + ':' + m + ':' + s
+    }
+    
+    player.handlePlay = function () { 
+      const btn_play = root.config.btn_play
+      btn_play && btn_play.addClass('start').delClass('pause')
+      root.playerPlay() 
+    }
+    player.handlePause = function () { 
+      const btn_play = root.config.btn_play
+      btn_play && btn_play.addClass('pause').delClass('start')
+      root.playerPause() 
+    }
+    player.handlePlaying = function (currentTime, duration, percentageStr) { 
+      progress_inner.style.width = percentageStr 
+      console.log(duration)
+      current_time && (current_time.innerText = formatTime(currentTime))
+    }
+    player.handlePlayend = function () { root.playerPlayend() }
+  
+    btn_play.addEventListener(clickEvent, (e) => { player.play() })
+    btn_fullscreen.addEventListener(clickEvent, (e) => {console.log('fullscreen')
+      player.fullscreen()
+    })
+    btn_forward.addEventListener(clickEvent, (e) => {
+      player.apace(1)
+    })
+    btn_back.addEventListener(clickEvent, (e) => {
+      player.apace(-1)
+    })
+    console.log(1111)
+    progress_outer.addEventListener(clickEvent, (e) => {
+      const dom_width = parseInt(getComputedStyle(e.currentTarget).width)
+      player.toPlay(e.layerX/dom_width)
+      
+    })
+
+    this.player = player
+  },
+  playerPlay: function () { /**实例重写**/ },
+  playerPause: function () { /**实例重写**/ },
+  playerPlayend: function () { /**实例重写**/ }
+}
+
+
+;(function(C){
+
+  const dom_account_url = document.querySelector('#account-url')
+  const dom_wx_1 = document.querySelector('#wx-placeholder-1')
+  const dom_wx_2 = document.querySelector('#wx-placeholder-2')
+  
+  const btn_copy1 = document.querySelector('#copy1')
+  const btn_copy2 = document.querySelector('#copy2')
+
+  const dom_mask = document.querySelector('#video-mask')
+
+  const dom_message = document.querySelector('#message')
+  
+
+  
+
+  
+  function handleMessage(content){
+    dom_message.className = 'message active'
+    dom_message.innerText = content
+    setTimeout(function(){
+      dom_message.className = 'message'
+    }, 2500)
+  }
+
+  /**
+   * 播放器实例
+   */
+  const player = new Player('video', {
+    //poster: './images/banner.png', // 海报取消
+    skipStepLength: 5
+  })
+  player.install(C.URL_Video)
+  
+  /**
+   * 控制面板实例
+   */
+  const controls = new PlayerControl({
+    btn_play: document.querySelector('#play'),
+    btn_fullscreen: document.querySelector('#fullscreen'),
+    btn_forward: document.querySelector('#forward'),
+    btn_back: document.querySelector('#back'),
+    progress_outer: document.querySelector('#progress-outer'),
+    progress_inner: document.querySelector('#progress-inner'),
+    current_time: document.querySelector('#current-time')
+  })
+  controls.bindPlayer(player)
+  controls.playerPlay = () => {
+    //dom_mask.className = 'mask close'
+  }
+  controls.playerPause = () => {
+    //dom_mask.className = 'mask'
+  }
+ 
+
+  /**
+   * 拷贝
+   */
+  const clipboard = new ClipboardJS('#copy1')
+  clipboard.on('success', function(e) {
+    handleMessage('总代理微信已复制到剪贴板！')
+    e.clearSelection();
+  })
+  clipboard.on('error', function(e) {
+    handleMessage('复制失败！')
+  })
+  const clipboard2 = new ClipboardJS('#copy2')
+  clipboard2.on('success', function(e) {
+    handleMessage('导师微信已复制到剪贴板！')
+    e.clearSelection();
+  })
+  clipboard2.on('error', function(e) {
+    handleMessage('复制失败！')
+  })
+
+  /**
+   * 动态文本
+   */
+  dom_account_url.innerText = C.URL_Account
+
+  const index2 = parseInt(Math.random() * C.WX_GeneralAgent.length)
+  dom_wx_1.innerText = C.WX_GeneralAgent[index2]
+  
+  const index = parseInt(Math.random() * C.WX_Mentor.length)
+  dom_wx_2.innerText = C.WX_Mentor[index]
+
+}(CONFIG))
+  </script>
 </body>
 </html>
