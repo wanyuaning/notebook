@@ -87,12 +87,12 @@
     <script src="src/plugins/panels/js/index.js"></script>
     <script>
       setTimeout(()=>{
-        Array.prototype.forEach.call(document.querySelectorAll('pre[data-lang]'), (e) => {
-          e.addEventListener('click', function(el){
-            this.className = this.className === '' ? 'close' : ''
-          });
+        // Array.prototype.forEach.call(document.querySelectorAll('pre[data-lang]'), (e) => {
+        //   e.addEventListener('click', function(el){
+        //     this.className = this.className === '' ? 'close' : ''
+        //   });
           
-        })
+        // })
         Array.prototype.forEach.call(document.querySelectorAll('img'), (e) => {
           const parent = e.parentElement
           if (parent.tagName === 'A') return

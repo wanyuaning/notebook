@@ -48,6 +48,7 @@ body{
   height: 166px;
   padding-top: 0px;
   box-sizing: border-box; 
+  text-align: center;
 }
 .block-ad-content{
   height: 275px;
@@ -134,10 +135,16 @@ body{
   background: url(../images/copy.png) transparent; outline: none;
   transition:all 0.3s ease
 }
-#copy1:hover, #copy2:hover{ transform: scale(1.2); }
-#copy1:visited, #copy2:visited{ transform: scale(1); }
+#copy1:hover, #copy2:hover, #copy3:hover{ transform: scale(1.2); }
+#copy1:visited, #copy2:visited, #copy3:visited{ transform: scale(1); }
 #copy2{
-  position: absolute; top: 13px; right: 50px; cursor: pointer;
+  position: absolute; top: 13px; right: 60px; cursor: pointer;
+  display: inline-block; width: 90px; height: 40px; border: 0;
+  background: url(../images/copy2.png) transparent; outline: none;
+  transition:all 0.3s ease
+}
+#copy3{
+  position: absolute; top: 13px; right: 60px; cursor: pointer;
   display: inline-block; width: 90px; height: 40px; border: 0;
   background: url(../images/copy2.png) transparent; outline: none;
   transition:all 0.3s ease
@@ -157,3 +164,78 @@ body{
   transition:all 0.5s ease
 }
 .message.active{transform: translate(15px, 0px);}
+
+
+.controls{
+  height: 50px;
+  box-sizing: border-box;
+  padding: 5px 20px;
+  background-color: rgba(0,0,0,0);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.controls .btn{
+  cursor: pointer;
+  display: inline-block; width: 40px; height: 40px; border: 0; outline: none;
+  transition:all 0.3s ease; vertical-align:middle
+}
+.controls .current-time{ color: #fff; font-size: 22px; vertical-align: middle; display: inline-block; width: 100px;}
+.controls .back{ background: url(../images/icon-fast-forward.png) 0 0/100% 100% transparent; transform: rotate(180deg); }
+.controls .back:hover{ transform: rotate(180deg) scale(1.1); }
+.controls .forward{ background: url(../images/icon-fast-forward.png) 0 0/100% 100% transparent; }
+.controls .forward:hover, .fullscreen:hover{ transform: scale(1.1); }
+.controls .fullscreen{ background: url(../images/icon-fullscreen.png) 0 0/100% 100% transparent; margin-left: 20px; }
+
+
+.controls .progress-outer{ 
+  display: inline-block; width: 400px; height: 5px; vertical-align:middle; 
+  background-color: rgba(255, 255, 255, 0.2); border-radius: 3px;
+  position: relative; overflow: hidden;
+}
+.controls .progress-outer span{ 
+  display: inline-block; width: 0; height: 5px; background-color: #1eeb50; margin: 0; padding: 0; 
+  position: absolute; left: 0; top: 0; 
+}
+
+
+.video-view .mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .4);
+  line-height: 325px;
+  opacity: 1;
+}
+.video-view .mask.close{
+  opacity: 0;
+  transition:all 2s ease;
+}
+
+.btn-play{
+  cursor: pointer;
+  display: inline-block; width: 66px; height: 66px; border: 0; outline: none;
+  transition:all 0.5s ease; 
+  background-color: transparent;
+  background-image: url(../images/icon-play.png?v=1);
+}
+.btn-play.start{
+  background-image: url(../images/icon-pause.png?v=1);
+}
+.btn-play.pause{
+  background-image: url(../images/icon-play.png?v=1);
+}
+.video-view .mask img{
+  vertical-align: middle;
+  opacity: 0.5;
+}
+.video-view .mask:hover img{
+  opacity: 1;
+  transition:all 0.5s ease;
+}
+
+.controls, .controls .progress-outer, .controls .progress-outer span{ z-index: 4;}
+.video-view .mask{ z-index: 3; }
