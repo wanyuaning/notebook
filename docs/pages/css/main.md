@@ -32,7 +32,7 @@ vertical-align: middle;
 ```
 
 ## 弹性盒子
-![flex](../../assets/images/flex.png "flex")<br>
+![flex](../../assets/images/flex.jpg "flex")<br>
 ```css
 .flex{
 　display: flex;

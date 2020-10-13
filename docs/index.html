@@ -93,15 +93,15 @@
         //   });
           
         // })
-        Array.prototype.forEach.call(document.querySelectorAll('img'), (e) => {
-          const parent = e.parentElement
-          if (parent.tagName === 'A') return
-          parent.className = 'image-item'
-          parent.addEventListener('click', function(){
-            this.className = this.className === 'image-item' ? 'image-item active' : 'image-item'
-          })
+        // Array.prototype.forEach.call(document.querySelectorAll('img'), (e) => {
+        //   const parent = e.parentElement
+        //   if (parent.tagName === 'A') return
+        //   parent.className = 'image-item'
+        //   parent.addEventListener('click', function(){
+        //     this.className = this.className === 'image-item' ? 'image-item active' : 'image-item'
+        //   })
           
-        })
+        // })
 
         Array.prototype.forEach.call(document.querySelectorAll('.collapse'), (e) => {
           e.addEventListener('click', function(el){
