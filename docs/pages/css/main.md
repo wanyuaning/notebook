@@ -1,25 +1,27 @@
-目录：
-元素
-盒子模型
-Display布局(弹性盒子／网格)
-动画
+## 目录：
+- 元素
+- 盒子模型
+- Display布局(弹性盒子／网格)
+- 动画
 
-Less
-Sass
-媒体查询@media
-live template css(老笔记)
-初始化样式 init.css
-通用样式 common.css
+- Less
+- Sass
+- 媒体查询@media
+- live template css(老笔记)
+- 初始化样式 init.css
+- 通用样式 common.css
 
 
 
+
+#### 元素
+
+- 行内：a、b、span、img、input、strong、select、label、em、button、textarea
+- 块级：div、ul、li、dl、dt、dd、p、h1-h6、blockquote
+- 空：br、meta、hr、link、input、img
+
+##### 盒子模型
 ```
-元素
-行内：a、b、span、img、input、strong、select、label、em、button、textarea
-块级：div、ul、li、dl、dt、dd、p、h1-h6、blockquote
-空：br、meta、hr、link、input、img
-
-盒子模型
 网页元素的内容(content)、内边距(padding)、边框(border)、外边距(margin)四个部分一起构成了css中元素的盒模型
 边界塌陷和边界重叠
 1上div的margin-bottom和下div的margin-top不会叠加，而是取值其一大者
@@ -174,7 +176,7 @@ transform-origin: center bottom 基点
 @keyframes<br>
 
             
-可以暂停的动画
+###### 可以暂停的动画
 ```
 <style>
 div{ width:100px; height:100px; background:red; position:absolute; top: 100px; animation:fn 15s linear }
@@ -185,13 +187,17 @@ div{ width:100px; height:100px; background:red; position:absolute; top: 100px; a
 <div id="demo"></div>
 <button onclick="document.getElementById('demo').className='pause'">暂停</button>
 <button onclick="document.getElementById('demo').className='play'">播放</button>
-往复运动的动画
+```
+###### 往复运动的动画
+```
 <style>
   div{ width:100px; height:100px; background:red; position:absolute; top: 100px; animation:fn 3s 5s linear 3 alternate both }
   @keyframes fn{ from {left:0px} to {left:500px} }
 </style>
 <div id="demo"></div>
-css-动画框架
+```
+###### css-动画框架
+```
 .test{
 -webkit-animation-name: test;        /*动画名*/
 -webkit-animation-duration: 1s;      /*历时*/
@@ -212,31 +218,38 @@ steps(2, start/end)
 transform-origin: center bottom
 }
 }
-简写 
-animation: radar 2s infinite linear;
-逐帧动画
--webkit-animation:name 2s steps(1,start) infinite;
+```
+###### 简写 
+`animation: radar 2s infinite linear;`
+###### 逐帧动画
+`-webkit-animation:name 2s steps(1,start) infinite;`
 
-文本溢出：单行
+###### 文本溢出：单行
+```
 text{ width: 40px; white-space:nowrap;/*不换行*/ text-overflow: ellipsis; overflow: hidden;/*必须设置*/ }
-文本溢出：多行省略
+```
+###### 文本溢出：多行省略
+```
 .text {
   width: 40px; overflow: hidden; text-overflow: ellipsis;
   display: -webkit-box; /*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 */
   -webkit-line-clamp: 2; /*用来限制在一个块元素显示的文本的行数。*/
   -webkit-box-orient: vertical; /*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。*/
 }
+```
 
-文本不可选
+###### 文本不可选
+```
 unselectable="on"  标签属性
 user-select: none   样式属性
+```
 
 
 
 
 
-
-Less
+#### Less
+```
 预编译：npm install less -g && cd 目录  &&  lessc login.less > login.css
 也可使用解释器直接识别less文件：
 <link rel="stylesheet/less" type="text/css" href="style.less">
@@ -304,8 +317,9 @@ top: 0;
 }
 #main-table TBODY{ @include matrix(40) }
 #view-table TBODY{ @include matrix(20) }
-
-字符串拼接
+```
+###### 字符串拼接
+```
 &:nth-child(1){ background-position: 0 0; left: 0; top: 0; background-color: #f27734}
 &:nth-child(2){ background-position: -$puzzle-w/3+px 0; left: $puzzle-w/3+px; top: 0; background-color: #ef552f}
 &:nth-child(3){ background-position: -$puzzle-w/3*2+px 0; left: $puzzle-w/3*2+px; top: 0; background-color: #f27734}
@@ -325,14 +339,17 @@ background-origin
 background-clip
 background-attachment
 background-image
-
-简写：background: [background-color] [background-image] [background-repeat] [background-attachment] [background-position] / [ background-size] [background-origin] [background-clip];
+```
+简写：
+```
+background: [background-color] [background-image] [background-repeat] [background-attachment] [background-position] / [ background-size] [background-origin] [background-clip];
 background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-box content-box;
-
+```
 
 
 
 媒体查询@media
+```
 @media screen and (min-width:1023px) { }
 @media screen and (orientation:landscape) { }
 /* 超小屏幕（手机，小于 768px） */
@@ -343,13 +360,14 @@ background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-
 @media (min-width: @screen-md-min) { ... }
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: @screen-lg-min) { ... }
-
+```
 
 
 live template css
 
 
 3d旋转 
+```
 <style>
         #test { perspective: 1200px } /* 透视视图 */
         #test div{
@@ -370,7 +388,9 @@ live template css
         <img class="text" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3549114380,1630735482&fm=27&gp=0.jpg"/>
     </div>
 </div>
+```
 改进
+```
 <style>
   #test { perspective: 1200px; width: 350px; border:#f00 1px solid } /* 透视视图 */
   #test div{
@@ -388,7 +408,9 @@ live template css
     <img class="text" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3549114380,1630735482&fm=27&gp=0.jpg"/>
   </div>
 </div>
+```
 滑入滑出动画
+```
 <style>
 	div img{ position:absolute; left:0px; top:0px;}
 	div .img2{ left:-230px; transition:all 0.2s ease}	
@@ -398,7 +420,7 @@ live template css
 	<img class="img1" src="images/1383541695.jpg" height="270" width="230">
 	<img class="img2" src="images/1383536964.jpg" height="270" width="230">	
 </div>
-
+```
 
 
 
