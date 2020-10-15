@@ -11,8 +11,125 @@
 - 初始化样式 init.css
 - 通用样式 common.css
 
+# 功能
+
+**文本溢出：单行**
+```css
+.text{ 
+  width: 40px; 
+  white-space:nowrap;      /* 不换行 */ 
+  overflow: hidden;        /* 必须设置 */ 
+  text-overflow: ellipsis; /* 文本溢出时处理方式：修剪文本clip/省略号替被剪文本ellipsis/给定字符替被剪文本string */
+}
+```
+
+**文本溢出：多行省略**
+```css
+.text {
+  width: 40px; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  display: -webkit-box;    /*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 */
+  -webkit-line-clamp: 2;   /*用来限制在一个块元素显示的文本的行数。*/
+  -webkit-box-orient: vertical; /*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。*/
+}
+```
+
+**文本不可选**
+```
+unselectable="on"  标签属性
+user-select: none   样式属性 -webkit- -moz- -ms-
+```
+- none——不可选择
+- auto——默认值，用户可以选中元素中的内容
+- text——用户可以选择元素中的文本
+- element——文本可选，但仅限元素的边界内(只有IE和FF支持)
+- all——在编辑器内，如果双击或上下文点击发生在子元素上，该值的最高级祖先元素将被选中
+
+**三角箭头三角形**
+```
+/*下拉箭头*/
+.select:after{ 
+  content: ''; display: block; width: 0; height: 0; 
+  border-width:7px 5px 0px 5px;
+  border-style: solid solid solid solid;
+  border-color: #000 transparent transparent transparent;
+}
+```
+**图片置灰**
+```
+img {
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: grayscale(100%);
+filter: gray;
+}
+```
+
+**清除浮动**
+```
+选择符:after{
+            content:".";
+            clear:both;
+            display:block;
+            height:0;
+            overflow:hidden;
+            visibility:hidden;
+              }
+```
 
 
+
+# 排版
+
+<div class="color-group color-card inline collapse c-atv-0">
+  <i>font-weight</i> 字体粗细    
+  <i>font-size</i> 字号大小  
+  <i>line-height</i> 行高  
+  <i>font-family</i> 字体 
+</div><br><br>
+<div class="color-group sz22 quote-arrow card">
+  font:
+  <i>bold</i> 
+  <i>12px</i>/ 
+  <i>18px</i>
+  <i>Arial, Helvetica, sans-serif</i>;
+</div>
+
+**去除超链接背景** `-webkit-tap-highlight-color:rgba(0,0,0,0);`
+
+**字与字间距_字符间距离** `letter-spacing: 10px;`
+
+**首行自动空两格** `text-indent: 2em;`
+
+**向左缩进,隐藏文本** `text-indent: -9999px;`
+
+DEMO: 
+```css
+p{ 
+  text-indent: 2em; 
+  padding:0px; 
+  margin:0px; 
+}
+```
+
+**去除图片底部空隙**
+```css
+div{ font-size:0px }
+div img{ margin:0;padding:0;}
+```
+
+**去除触摸高亮** `-webkit-tap-highlight-color:rgba(0,0,0,0);`
+
+**去掉 button 点击 蓝框 去掉按钮阴影 蓝边** `outline:none;`
+
+
+**清除 input 阴影** `-webkit-appearance: none;`
+
+
+**table** `border-collapse:collapse;`
 
 #### 元素
 
@@ -191,25 +308,7 @@ transform-origin: center bottom
 ###### 逐帧动画
 `-webkit-animation:name 2s steps(1,start) infinite;`
 
-###### 文本溢出：单行
-```
-text{ width: 40px; white-space:nowrap;/*不换行*/ text-overflow: ellipsis; overflow: hidden;/*必须设置*/ }
-```
-###### 文本溢出：多行省略
-```
-.text {
-  width: 40px; overflow: hidden; text-overflow: ellipsis;
-  display: -webkit-box; /*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 */
-  -webkit-line-clamp: 2; /*用来限制在一个块元素显示的文本的行数。*/
-  -webkit-box-orient: vertical; /*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。*/
-}
-```
 
-###### 文本不可选
-```
-unselectable="on"  标签属性
-user-select: none   样式属性
-```
 
 
 
@@ -388,42 +487,9 @@ live template css
 </div>
 ```
 
-#### css-元素的可选择性(防止用户复制和保存图片)
-```
--webkit-user-select: none;  /* Chrome all / Safari all /opera15+*/
--moz-user-select: none;     /* Firefox all */
--ms-user-select: none;      /* IE 10+ */
-user-select: none;
-/*
-none——不可选择
-auto——默认值，用户可以选中元素中的内容
-text——用户可以选择元素中的文本
-element——文本可选，但仅限元素的边界内(只有IE和FF支持)
-all——在编辑器内，如果双击或上下文点击发生在子元素上，该值的最高级祖先元素将被选中。
-*/ 
-```
 
-#### css-排版
-```
-/*--不换行剪切文本-----------------------------------------*/
-text-overflow: ellipsis;    /*文本溢出:省略号*/
-white-space: nowrap;    /*书写格式:禁止文字自动换行*/
-overflow: hidden;
-/*-------------------------------------------------------*/
 
-/*--字体简写----------------------------------------------------------------------------*/
-font: bold 12px/18px Arial, Helvetica, sans-serif ; /* font:字体粗细 字体大小/行高 字体样式*/
-/*-------------------------------------------------------------------------------------*/
 
-overflow-y:scroll;  /*纵向滚动*/
-
--webkit-tap-highlight-color:rgba(0,0,0,0);  /*去除超链接背景*/
-
-letter-spacing: 10px;   /*字与字间距_字符间距离*/
-text-indent: 2em;    /*首行自动空两格*/
-text-indent: -9999px;  /*向左缩进,隐藏文本*/
-/* DEMO: p{ text-indent: 2em; padding:0px; margin:0px; } */
-```
 
 
 #### 渐变
@@ -530,27 +596,7 @@ div{
 }
 ```
 
-#### css-去除图片底部空隙
-```
-div{ font-size:0px }
-div img{ margin:0;padding:0;}
-```
 
-#### 去除触摸高亮
-`-webkit-tap-highlight-color:rgba(0,0,0,0);`
-
-#### 去掉 button 点击 蓝框 去掉按钮阴影 蓝边
-`outline:none;`
-
-
-清除 input 阴影
-
-`-webkit-appearance: none;`
-
-
-table
-
-`border-collapse:collapse;`
 
 #### 验证 
 ```
@@ -582,16 +628,6 @@ input:required:valid{ color: #03a81e }
 
 
 
-#### css三角箭头三角形：
-```
-/*下拉箭头*/
-.select:after{ 
-  content: ''; display: block; width: 0; height: 0; 
-  border-width:7px 5px 0px 5px;
-  border-style: solid solid solid solid;
-  border-color: #000 transparent transparent transparent;
-}
-```
 
 #### 弹出层
 ```
@@ -623,30 +659,10 @@ filter:alpha(opacity=50);
 filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50); 
 ```
 
-#### 图片置灰
-```
-img {
--webkit-filter: grayscale(100%);
--moz-filter: grayscale(100%);
--ms-filter: grayscale(100%);
--o-filter: grayscale(100%);
-filter: grayscale(100%);
-filter: gray;
-}
-```
 
-#### 清除浮动
-```
-选择符:after{
-            content:".";
-            clear:both;
-            display:block;
-            height:0;
-            overflow:hidden;
-            visibility:hidden;
-              }
 
 /*滚动条样式*/
+```
     .tabs-content::-webkit-scrollbar {/*滚动条整体样式*/
       width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
       height: 4px;

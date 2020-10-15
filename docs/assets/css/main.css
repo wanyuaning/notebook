@@ -6,10 +6,18 @@ body{ font-size: 14px;}
 .sz22{font-size: 22px;}
 
 /* 代码块重写 */
-.markdown-section pre { line-height: 1rem; }
-.markdown-section pre>code { padding: 5px 5px; }
+.markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.8em 0; }
+.markdown-section pre>code { padding: 0px 5px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
+.markdown-section p{ margin: 0.8em 0 0.2em 0;}
+
+.markdown-section h1 { font-size: 2rem; margin: 45px 0 0.5rem }
+.markdown-section h2 { font-size: 1.75rem; margin: 40px 0 .4rem }
+.markdown-section h3 { font-size: 1.5rem; margin: 35px 0 .3rem }
+.markdown-section h4 { font-size: 1.25rem; margin: 30px 0 .2rem }
+.markdown-section h5 { font-size: 1rem; margin: 25px 0 .1rem }
+.markdown-section h6 { color: #777; margin: 20px 0 .1rem; font-size: 1rem }
 
 :root {
     /* docsify-tabs */
@@ -155,4 +163,4 @@ pre[data-lang].close:after{
 
 .inline{display: inline-block;}
 
-.css{ display:block; border:#f00 1px solid}
+.css{ display:block; border:#f00 1px solid;}
