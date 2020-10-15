@@ -285,7 +285,9 @@ top: 0;
 #main-table TBODY{ @include matrix(40) }
 #view-table TBODY{ @include matrix(20) }
 ```
-###### 字符串拼接
+
+#### 字符串拼接
+
 ```
 &:nth-child(1){ background-position: 0 0; left: 0; top: 0; background-color: #f27734}
 &:nth-child(2){ background-position: -$puzzle-w/3+px 0; left: $puzzle-w/3+px; top: 0; background-color: #ef552f}
@@ -307,15 +309,14 @@ background-clip
 background-attachment
 background-image
 ```
+
 简写：
 ```
 background: [background-color] [background-image] [background-repeat] [background-attachment] [background-position] / [ background-size] [background-origin] [background-clip];
 background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-box content-box;
 ```
 
-
-
-媒体查询@media
+#### 媒体查询@media
 ```
 @media screen and (min-width:1023px) { }
 @media screen and (orientation:landscape) { }
@@ -328,12 +329,10 @@ background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: @screen-lg-min) { ... }
 ```
-
-
 live template css
 
 
-3d旋转 
+#### 3d旋转 
 ```
 <style>
         #test { perspective: 1200px } /* 透视视图 */
@@ -389,9 +388,8 @@ live template css
 </div>
 ```
 
-
-
-css-元素的可选择性(防止用户复制和保存图片)
+#### css-元素的可选择性(防止用户复制和保存图片)
+```
 -webkit-user-select: none;  /* Chrome all / Safari all /opera15+*/
 -moz-user-select: none;     /* Firefox all */
 -ms-user-select: none;      /* IE 10+ */
@@ -402,11 +400,11 @@ auto——默认值，用户可以选中元素中的内容
 text——用户可以选择元素中的文本
 element——文本可选，但仅限元素的边界内(只有IE和FF支持)
 all——在编辑器内，如果双击或上下文点击发生在子元素上，该值的最高级祖先元素将被选中。
-*/   
+*/ 
+```
 
-
-
-css-排版
+#### css-排版
+```
 /*--不换行剪切文本-----------------------------------------*/
 text-overflow: ellipsis;    /*文本溢出:省略号*/
 white-space: nowrap;    /*书写格式:禁止文字自动换行*/
@@ -425,9 +423,9 @@ letter-spacing: 10px;   /*字与字间距_字符间距离*/
 text-indent: 2em;    /*首行自动空两格*/
 text-indent: -9999px;  /*向左缩进,隐藏文本*/
 /* DEMO: p{ text-indent: 2em; padding:0px; margin:0px; } */
-css-效果
--webkit-border-radius: 5px;    /*倒角*/
 ```
+
+
 #### 渐变
 <!-- layout:start -->
   <strong>background: -webkit-linear-gradient</strong>(参数1, 参数2, 参数3);<br>
@@ -511,41 +509,51 @@ css-效果
 </div>
 
 
-
 ```
 text-shadow: 0 1px  0  #eee ;  /*文本阴影[x, y, radius, color] */
 -webkit-text-stroke: 6px #ff0000;  /*文本描边*/
 
 box-shadow: 0 0 5px rgba(0,0,0,1);    /*Box阴影*/
 box-shadow: 0 2px 1px rgba(100,100,100,.1), inset 0 1px 0 rgba(255,255,255,.75);
+```
 
-有序列表序列号  计数器
+#### 有序列表序列号  计数器
+```
 div{
-counter-reset: span;    /* 创建一个计数器 */
-span{
-position: relative;
-&::before{
-content: counter(span); counter-increment: span;    /*计数累加*/
+  counter-reset: span;    /* 创建一个计数器 */
+  span{
+    position: relative;
+    &::before{
+      content: counter(span); counter-increment: span;    /*计数累加*/
+    }
+  }
 }
-}
-}
+```
 
-css-去除图片底部空隙
-/*div{ font-size:0px }
-div img{ margin:0;padding:0;}*/
+#### css-去除图片底部空隙
+```
+div{ font-size:0px }
+div img{ margin:0;padding:0;}
+```
 
-去除触摸高亮
--webkit-tap-highlight-color:rgba(0,0,0,0);
-去掉 button 点击 蓝框 去掉按钮阴影 蓝边
-outline:none;
+#### 去除触摸高亮
+`-webkit-tap-highlight-color:rgba(0,0,0,0);`
+
+#### 去掉 button 点击 蓝框 去掉按钮阴影 蓝边
+`outline:none;`
+
 
 清除 input 阴影
--webkit-appearance: none;
+
+`-webkit-appearance: none;`
+
 
 table
-border-collapse:collapse;
 
-验证 
+`border-collapse:collapse;`
+
+#### 验证 
+```
 <input class="phone" placeholder="请输入您广金所绑定的手机号" pattern="^1[3-9]\d{9}$" required>
 <style>
 /*===包含required的表单===*/
@@ -554,12 +562,14 @@ input:required:invalid{ color: #f60 }
 /* 有效 */
 input:required:valid{ color: #03a81e }
 </style>
+```
 
-IOS下可输入文本框：
-<div contenteditable="true" style="-webkit-user-select:text">
+#### IOS下可输入文本框：
 
+`<div contenteditable="true" style="-webkit-user-select:text">`
 
-reset
+#### reset
+```
 ＊ {
       -webkit-touch-callout: none;    // 阻止长按图片之后呼出菜单提示复制的行为
       -webkit-text-size-adjust: none;   //禁用Webkit内核浏览器的文字大小调整功能
@@ -568,11 +578,12 @@ reset
       }
 
 -webkit-overflow-scrolling:touch    //实现弹性滚动
+```
 
 
 
-
-css三角箭头三角形：
+#### css三角箭头三角形：
+```
 /*下拉箭头*/
 .select:after{ 
   content: ''; display: block; width: 0; height: 0; 
@@ -580,11 +591,10 @@ css三角箭头三角形：
   border-style: solid solid solid solid;
   border-color: #000 transparent transparent transparent;
 }
+```
 
-
-
-
-弹出层
+#### 弹出层
+```
 <div class="pop-up">
     <div class="pu-bg"></div>
     <div class="pu-content"></div>
@@ -593,9 +603,10 @@ css三角箭头三角形：
 .pop-up, .pop-up .pu-bg, .pop-up .pu-content{position: absolute; top: 0; left: 0; right: 0; bottom: 0}
 .pop-up .pu-bg{ background: #000; opacity: 0.35; width: 100%; height: 100%; z-index: 101}
 .pop-up .pu-content{ width: 100%; height: 100%; z-index: 102}
+```
 
-
-透明
+#### 透明
+```
 /* older safari/Chrome browsers */  
 -webkit-opacity: 0.5;  
 /* Netscape and Older than Firefox 0.9 */  
@@ -610,9 +621,10 @@ filter:alpha(opacity=50);
 -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";  
 /*IE4-IE9*/  
 filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50); 
+```
 
-
-图片置灰
+#### 图片置灰
+```
 img {
 -webkit-filter: grayscale(100%);
 -moz-filter: grayscale(100%);
@@ -621,10 +633,10 @@ img {
 filter: grayscale(100%);
 filter: gray;
 }
+```
 
-
-
-清除浮动
+#### 清除浮动
+```
 选择符:after{
             content:".";
             clear:both;
@@ -649,8 +661,10 @@ filter: gray;
       border-radius: 0;
       background: rgba(0,0,0,0.5);
     }
+```
 
-媒体查询
+#### 媒体查询
+```
 @media (max-width: 1280px) {
     .container { width: 960px }
 }
@@ -672,8 +686,10 @@ only screen and (max-width:735px) and (min-resolution: 144dpi){ }
         -webkit-text-fill-color: transparent
     }
 }
+```
 
-背景过渡
+#### 背景过渡
+```
 .linear{ 
 width:100%; 
 height:600px; 
@@ -709,17 +725,12 @@ background-image:linear-gradient(-45deg, red 100px, yellow 200px)
   background: -moz-radial-gradient(red, green, blue); /* Firefox 3.6 - 15 */
   background: radial-gradient(red, green, blue); /* 标准的语法 */
 }
+```
 
+#### 初始化样式 init.css
 
-
-
-
-
-
-
-
-初始化样式 init.css
 淘宝
+```
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; } 
 body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; } 
 h1, h2, h3, h4, h5, h6{ font-size:100%; } 
@@ -735,7 +746,10 @@ legend { color:#000; }
 fieldset, img { border:0; } 
 button, input, select, textarea { font-size:100%; } 
 table { border-collapse:collapse; border-spacing:0; }
+```
+
 新浪官网
+```
 body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;} 
 body{background:#fff;color:#333;font-size:12px; margin-top:5px;font-family:"SimSun","宋体","Arial Narrow";} 
  
@@ -746,7 +760,10 @@ a{text-decoration:none;}
 a:link{color:#009;} 
 a:visited{color:#800080;} 
 a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
+```
+
 网易官网
+```
 html {overflow-y:scroll;} 
 body {margin:0; padding:29px00; font:12px"\5B8B\4F53",sans-serif;background:#ffffff;} 
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0;} 
@@ -756,7 +773,10 @@ img{vertical-align:top;border:0;}
 ol,ul {list-style:none;} 
 h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;} 
 address,cite,code,em,th {font-weight:normal; font-style:normal;}
+```
+
 腾讯QQ官网
+```
 body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0} 
 body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;} 
 a{color:#2d374b;text-decoration:none} 
@@ -766,7 +786,10 @@ li{list-style:none}
 img{border:0;vertical-align:middle} 
 table{border-collapse:collapse;border-spacing:0} 
 p{word-wrap:break-word}
+```
+
 样式初始化代码总结
+```
 html, body, div, span, object, iframe,h1, h2, 
 h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn, 
 em, img, ins,kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd, 
@@ -825,13 +848,14 @@ input, select {
 .clearfix{ 
     *zoom:1;/*IE/7/6*/
 }
+```
 
-
-通用样式 
+#### 通用样式 
 规范原则：越简单越好
 
 common.css
 
+```
 .bd, .jc { font-weight: bold }                            /* 加粗 */
 .ob, .xt { font-style:oblique; font-style:italic }  /* 斜体 */
 .uline   { text-decoration: overline }                /* 上划线 */
@@ -915,25 +939,4 @@ common.css
 /*使用百分数表示元素底部相对于父元素基线（baseline）移动相对于父元素高（height）的百分比*/
 .vap10{ vertical-align: 10% } .vap20{ vertical-align: 20% } .vap30{ vertical-align: 30% } .vap40{ vertical-align: 40% }
 .vap50{ vertical-align: 50% } .vap60{ vertical-align: 60% } .vap70{ vertical-align: 70% } .vap80{ vertical-align: 80% }
-
-
-
-遮罩层
-$('body').css("overflow","hidden");
-
-
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
