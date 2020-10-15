@@ -20,62 +20,29 @@
 - 块级：div、ul、li、dl、dt、dd、p、h1-h6、blockquote
 - 空：br、meta、hr、link、input、img
 
-##### 盒子模型
-```
-网页元素的内容(content)、内边距(padding)、边框(border)、外边距(margin)四个部分一起构成了css中元素的盒模型
-边界塌陷和边界重叠
-1上div的margin-bottom和下div的margin-top不会叠加，而是取值其一大者
-2父级div无border，padding，inlinecontent，则子div的margin会一直向上找参考元素
+##### 盒子模型(Box Model) 
+![Box Model](../../assets/images/box-model.jpg "Box Model")<br>
+- 边界重叠:上div的margin-bottom和下div的margin-top不会叠加，而是取值其一大者
+- 边界塌陷:父级div无border，padding，inline content，则子div的margin会一直向上找参考元素
 
-overflow: hidden;
-color: #999;
-text-align: right;
-vertical-align: middle;
-```
 
 ## 弹性盒子
 ![flex](../../assets/images/flex.jpg "flex")<br>
 ```css
 .flex{
-　display: flex;
-
-　/*子元素流动方向默认start > end*/
-　flex-direction: row row-reverse column column-reverse;  
-　/*子元素溢出时是否换行默认否，wrap时行start > end排列，wrap-reverse时行end>start排列*/
-　flex-wrap: nowrap wrap wrap-reverse;  
-　
-　flex-flow: row nowrap; 
-　
-　/*子元素在不参与扩张时的主轴上靠齐容器的方式 */
-　justify-content: flex-start flex-end center space-between space-around; 
-　/*子元素在主轴上开始/结束之间对齐方式*/
+　display: flex;　
+　flex-flow: row nowrap; 　
+　justify-content: flex-start; 
 　align-content: stretch; 
-　/*子元素在垂轴上开始/结束之间对齐方式*/
-　align-items: stretch flex-start flex-end center baseline; 
+　align-items: stretch; 
 }
-```
-
-一、了、不、。如果统计最常用的30个汉字，则需要加上：有、人、在、上、这、大、、来、们、国、、说、个、全、小、中、合、子、到、可、就、下、以、
-你 我 他
-是 的
-了呢吧吗
-
-
-
-```css
 .flex .item{
-　
-　flex-grow: 0;  /*默认不参与扩张,必须设为1以上才能生效并按比例分配*/
-　flex-shrink: 1; /*默认参与压缩,0时不压缩，1以上按比例压缩*/
-　flex-basis: auto; /*和width同时设置时，flex-basis优先*/
-　
 　flex: 0 1 auto;
-
-　align-self: auto; /*对齐auto/flex-start/flex-end/center/baseline/stretchwidth*/
+　align-self: auto;
 　order: 0;
 }
 ```
-flex-grow和width同时设置则 flex-grow 优先
+
 
 ## 变换
 ```
