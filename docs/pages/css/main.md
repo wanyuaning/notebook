@@ -31,6 +31,7 @@ a {
 }
 ```
 **JavaScript检测支持**
+```js
 const isSupported =
   window.CSS &&
   window.CSS.supports &&
@@ -41,23 +42,23 @@ if (isSupported) {
 } else {
   /* not supported */
 }
-
-**JavaScript 操作 CSS 变量**
-// 设置变量
-document.body.style.setProperty('--primary', '#7F583F');
-// 读取变量
-document.body.style.getPropertyValue('--primary').trim();
-// '#7F583F'
-// 删除变量
-document.body.style.removeProperty('--primary');
-**JavaScript 可以将值存入样式表**
+```
+**JavaScript 操作 CSS 变量**<br>
+```js
+document.body.style.setProperty('--primary', '#7F583F');  // 设置变量
+document.body.style.getPropertyValue('--primary').trim(); // 读取变量
+document.body.style.removeProperty('--primary');          // 删除变量
+```
+**JavaScript 可以将值存入样式表**<br>
+```js
 const docStyle = document.documentElement.style;
 document.addEventListener('mousemove', (e) => {
   docStyle.setProperty('--mouse-x', e.clientX);
   docStyle.setProperty('--mouse-y', e.clientY);
 });
+```
 **JavaScript 与 CSS 通信**
---foo: if(x > 5) this.width = 10;
+`--foo: if(x > 5) this.width = 10;`
 
 
 # 功能
@@ -129,6 +130,26 @@ filter: gray;
               }
 ```
 
+**IOS下可输入文本框**
+`<div contenteditable="true" style="-webkit-user-select:text">`
+
+/*滚动条样式*/
+```
+    .tabs-content::-webkit-scrollbar {/*滚动条整体样式*/
+      width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+      height: 4px;
+    }
+    .tabs-content::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+      border-radius: 5px;
+      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+      background: rgba(90,90,90,1);
+    }
+    .tabs-content::-webkit-scrollbar-track {/*滚动条里面轨道*/
+      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+      border-radius: 0;
+      background: rgba(0,0,0,0.5);
+    }
+```
 
 
 # 排版
@@ -465,7 +486,7 @@ background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-
 ```
 
 #### 媒体查询@media
-```
+```js
 @media screen and (min-width:1023px) { }
 @media screen and (orientation:landscape) { }
 /* 超小屏幕（手机，小于 768px） */
@@ -477,7 +498,29 @@ background: #f00  url(img.png)  no-repeat  scroll  center center / 50%  content-
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: @screen-lg-min) { ... }
 ```
-live template css
+```js
+@media (max-width: 1280px) {
+    .container { width: 960px }
+}
+@media (min-width: 1280px) {
+    .container { width: 1200px }
+}
+@media only screen and (max-width: 1068px){ } //仅电脑设备中的页面最大可见区域宽度为 1068px 时显示其定义的样式
+@media only screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:735px),
+only screen and (max-width:735px) and (min-resolution:1.5dppx),
+only screen and (max-width:735px) and (min-resolution: 144dpi){ }
+
+@supports (-webkit-text-fill-color:transparent) and ((background-clip:text) or (-webkit-background-clip:text)) {
+    #main-header > .container .right #language-selector .current-language p {
+        background-image: -webkit-gradient(left top, right top, color-stop(0, #4f29fe), color-stop(100%, #a93aff));
+        background-image: -webkit-gradient(linear, left top, right top, from(#4f29fe), to(#a93aff));
+        background-image: linear-gradient(90deg, #4f29fe 0, #a93aff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent
+    }
+}
+```
 
 
 #### 3d旋转 
@@ -549,23 +592,23 @@ live template css
   参数3 可以设置两个值，一个代表渐的终止颜色；一个为渐变的结束位置，可以填 像素或者百分比（正负数都可以） 代表从此位置结束渐变<br>
 <!-- col:8 -->
   <div style="background: linear-gradient(#6960ff, #d060ff); color:#fff">
-    <br><br>
-    <strong style="color:#fff">线性上下</strong><br><br>
+    <br>
+    <strong style="color:#fff">线性上下</strong><br>
     linear-gradient(#6960ff, #d060ff) 
     <br><br><br>
   </div>
 <!-- col:8 -->
   <div style="background: -webkit-linear-gradient(left, #6960ff, #d060ff); color:#fff">
-    <br><br>
-    <strong style="color:#fff">线性左右</strong><br><br>
-    -webkit-linear-gradient(left, #6960ff, #d060ff)
+    <br>
+    <strong style="color:#fff">线性左右</strong><br>
+    linear-gradient(left, #6960ff, #d060ff)
     <br><br><br>
   </div>
 <!-- col:8 -->
   <div style="background: -webkit-linear-gradient(60deg, #6960ff, #d060ff); color:#fff">
-    <br><br>
-    <strong style="color:#fff">线性角度</strong><br><br>
-    -webkit-linear-gradient(60deg, #6960ff, #d060ff)
+    <br>
+    <strong style="color:#fff">线性角度</strong><br>
+    linear-gradient(60deg, #6960ff, #d060ff)
     <br><br><br>
   </div>
 <!-- layout:end -->
@@ -583,10 +626,10 @@ live template css
 <!-- layout:start -->
 <!-- col:24 -->
   <div style="background: -webkit-linear-gradient(left, rgba(2,150,100,0.3), rgba(160,32,240,0.8)),url(../../assets/images/timg.jpg); color:#fff">
-    <br><br><br><br><br>
-    <strong style="color:#fff">背景图片的渐变</strong><br>
-    -webkit-linear-gradient(left, rgba(2,150,100,0.3), rgba(160,32,240,0.8)),url(../../assets/images/timg.jpg)
     <br><br><br>
+    <strong style="color:#fff">背景图片的渐变</strong><br>
+    linear-gradient(left, rgba(2,150,100,0.3), rgba(160,32,240,0.8)),url(../../assets/images/timg.jpg)
+    <br><br>
   </div>
 <!-- layout:end -->
 
@@ -598,9 +641,9 @@ live template css
   
 <!-- col:8 -->
   <div style="background: radial-gradient(#ffffff,#a5dffd,#5ed6fd);">
-    <br><br>
-    <strong>锥形过渡</strong><br><br>
-    background: radial-gradient(#ffffff,#a5dffd,#5ed6fd); 
+    <br>
+    <strong>锥形过渡</strong><br>
+    radial-gradient(#ffffff,#a5dffd,#5ed6fd); 
     <br><br><br>
   </div>
 <!-- layout:end -->
@@ -659,9 +702,7 @@ input:required:valid{ color: #03a81e }
 </style>
 ```
 
-#### IOS下可输入文本框：
 
-`<div contenteditable="true" style="-webkit-user-select:text">`
 
 #### reset
 ```
@@ -710,48 +751,9 @@ filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
 
 
 
-/*滚动条样式*/
-```
-    .tabs-content::-webkit-scrollbar {/*滚动条整体样式*/
-      width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-      height: 4px;
-    }
-    .tabs-content::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-      border-radius: 5px;
-      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-      background: rgba(90,90,90,1);
-    }
-    .tabs-content::-webkit-scrollbar-track {/*滚动条里面轨道*/
-      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-      border-radius: 0;
-      background: rgba(0,0,0,0.5);
-    }
-```
 
-#### 媒体查询
-```
-@media (max-width: 1280px) {
-    .container { width: 960px }
-}
-@media (min-width: 1280px) {
-    .container { width: 1200px }
-}
-@media only screen and (max-width: 1068px){ } 仅电脑设备中的页面最大可见区域宽度为 1068px 时显示其定义的样式
-@media only screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:735px),
-only screen and (max-width:735px) and (min-resolution:1.5dppx),
-only screen and (max-width:735px) and (min-resolution: 144dpi){ }
 
-@supports (-webkit-text-fill-color:transparent) and ((background-clip:text) or (-webkit-background-clip:text)) {
-    #main-header > .container .right #language-selector .current-language p {
-        background-image: -webkit-gradient(left top, right top, color-stop(0, #4f29fe), color-stop(100%, #a93aff));
-        background-image: -webkit-gradient(linear, left top, right top, from(#4f29fe), to(#a93aff));
-        background-image: linear-gradient(90deg, #4f29fe 0, #a93aff);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent
-    }
-}
-```
+
 
 #### 背景过渡
 ```

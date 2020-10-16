@@ -6,11 +6,12 @@ body{ font-size: 14px;}
 .sz22{font-size: 22px;}
 
 /* 代码块重写 */
-.markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.8em 0; }
-.markdown-section pre>code { padding: 0px 5px; }
+.markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
+.markdown-section pre>code { padding: 0px 0px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
-.markdown-section p{ margin: 0.8em 0 0.2em 0;}
+.markdown-section p{ margin: 1em 0 0.4em 0; }
+.markdown-section p strong{ margin: 1em 0 0.4em 0; background-color:#333; color: #fff}
 
 .markdown-section h1 { font-size: 2rem; margin: 45px 0 0.5rem }
 .markdown-section h2 { font-size: 1.75rem; margin: 40px 0 .4rem }
@@ -22,6 +23,8 @@ body{ font-size: 14px;}
 .markdown-section ol, .markdown-section p, .markdown-section ul{line-height: 1rem;}
 .markdown-section ol, .markdown-section ul{margin: 8px 0;}
 .markdown-section ol li, .markdown-section ul li{padding-bottom: 8px;}
+
+.token.cdata, .token.comment, .token.doctype, .token.prolog{ color: #ccc;}
 
 :root {
     /* docsify-tabs */
