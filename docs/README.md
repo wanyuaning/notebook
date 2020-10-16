@@ -1,6 +1,13 @@
 
 
 SVN分支开发
+为了便于创建分支和标记，通常习惯于将Repository版本库的结构布置为:/branches,/tags,/trunk
+branches－分支
+tags－标记
+合并到主干
+
+创建分支（标记）
+将主干trunk签出（checkout）到本地，在本地checkout的trunk目录上单击鼠标右键，在弹出菜单中选择“TortoiseSVN” →“Branch/tag…”
 
 
 
