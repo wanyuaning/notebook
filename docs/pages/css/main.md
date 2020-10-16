@@ -1,15 +1,64 @@
-## 目录：
-- 元素
-- 盒子模型
-- Display布局(弹性盒子／网格)
-- 动画
 
-- Less
-- Sass
-- 媒体查询@media
-- live template css(老笔记)
-- 初始化样式 init.css
-- 通用样式 common.css
+
+# CSS变量
+**var()函数声明**
+```css
+
+**根作用域 全局调用**
+:root{
+  --bar: 'hello'; 
+  --foo: var(--bar)' world';
+
+  --color: #4d4e53; /* 与font-size等正式属性一样，只是没有默认含义 */
+  --size: 68px; /*如果变量值带有单位，就不能写成字符串*/
+  --padding: 10px 20px;
+  --margin-top: calc(2vh + 20px);     /*不同单位数值计算*/
+  margin-top: calc(var(--gap) * 1px); /* 数值与字符连接时要使用calc函数 */
+}
+```
+```css
+body {
+  --bar: 'hello'; 
+  --foo: var(--bar)' world';
+}
+.demo {
+  color: var(--foo, #f00); /* 变量值/默认值 */
+}
+/*兼容写法*/
+a {
+  color: #7F583F;
+  color: var(--primary);
+}
+```
+**JavaScript检测支持**
+const isSupported =
+  window.CSS &&
+  window.CSS.supports &&
+  window.CSS.supports('--a', 0);
+
+if (isSupported) {
+  /* supported */
+} else {
+  /* not supported */
+}
+
+**JavaScript 操作 CSS 变量**
+// 设置变量
+document.body.style.setProperty('--primary', '#7F583F');
+// 读取变量
+document.body.style.getPropertyValue('--primary').trim();
+// '#7F583F'
+// 删除变量
+document.body.style.removeProperty('--primary');
+**JavaScript 可以将值存入样式表**
+const docStyle = document.documentElement.style;
+document.addEventListener('mousemove', (e) => {
+  docStyle.setProperty('--mouse-x', e.clientX);
+  docStyle.setProperty('--mouse-y', e.clientY);
+});
+**JavaScript 与 CSS 通信**
+--foo: if(x > 5) this.width = 10;
+
 
 # 功能
 

@@ -19,6 +19,10 @@ body{ font-size: 14px;}
 .markdown-section h5 { font-size: 1rem; margin: 25px 0 .1rem }
 .markdown-section h6 { color: #777; margin: 20px 0 .1rem; font-size: 1rem }
 
+.markdown-section ol, .markdown-section p, .markdown-section ul{line-height: 1rem;}
+.markdown-section ol, .markdown-section ul{margin: 8px 0;}
+.markdown-section ol li, .markdown-section ul li{padding-bottom: 8px;}
+
 :root {
     /* docsify-tabs */
     --docsifytabs-border-color: #ededed;
@@ -138,7 +142,7 @@ pre[data-lang].close:after{
 .c-item-5, .c-item-6, .c-item-7, .c-item-8, .c-item-9,
 .c-item-10, .c-item-11, .c-item-12, .c-item-13, .c-item-14, 
 .c-item-15, .c-item-16, .c-item-17, .c-item-18, .c-item-19, .c-item-20{ 
-  display: none; border:#eee 1px solid; box-sizing: border-box; padding: 5px 20px; color: #333; font-size: 12px;
+  display: none; border:#eee 1px solid; box-sizing: border-box; padding: 5px 20px; color: #555; 
 }
 
 .c-atv-1 c[i='1'], .c-atv-2 c[i='2'], .c-atv-3 c[i='3'], .c-atv-4 c[i='4'], 
