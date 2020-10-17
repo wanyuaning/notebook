@@ -572,6 +572,35 @@ Webpack rollup
 
 # VUE
 [详情](frame/vue/index.md)  
+
+## 路由
+```js
+{ 
+  path: '/settings', 
+  // You could also have named views at the top 
+  component: UserSettings, 
+  children: [{ 
+    path: 'emails', 
+    component: UserEmailsSubscriptions 
+  }, { 
+    path: 'profile', 
+    components: { 
+      default: UserProfile, 
+      helper: UserProfilePreview 
+    } 
+  }] 
+}
+```
+```html
+<!-- UserSettings.vue -->
+<div> 
+  <h1>User Settings</h1> 
+  <NavBar/> 
+  <router-view/> 
+  <router-view name="helper"/> 
+</div>
+```
+
 ## vue-element-admin
 扩展图标：下载SVG图标(home.svg)放入 src/icons/svg
   路由里使用 meta: { title: '综合信息', icon: 'home' }
