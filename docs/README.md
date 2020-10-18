@@ -347,9 +347,9 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 高阶函数
 
 数据类型
-基本类型：[String](pages/javascript/data-type?id=string)  Number  Boolean   null  undefined  Symbol
+基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
 对象类型：
-类对象：Object [Array](pages/javascript/data-type?id=array)  Function Map  Set  Date  RegExp  Error
+类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error
 实例对象：{} [] fn
 
 
@@ -493,6 +493,7 @@ ES6  export default login   import login from '...'
 Webpack rollup
 
 
+# 框架
 
 # VUE
 [详情](frame/vue/index.md)  

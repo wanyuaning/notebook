@@ -1,4 +1,4 @@
-var handleOrnament = function (codeStr) { 
+function handleOrnament(codeStr) { 
     const tagStartMatch = codeStr.match(/\(l\d+\)?/g)
     tagStartMatch.map((e, i) => {
         const level = e.replace('(l', '').replace(')', '')
@@ -11,9 +11,20 @@ var handleOrnament = function (codeStr) {
     })
     return codeStr
 }
+function handleTable(data){
+  const rows = data.split('\n') || []
+  rows.forEach((e, i) => { 
+    const cols = e.split(/\s{2,}/) || []
+    for (let j = 0; j < cols.length; j++) {
+      data = data.replace(cols[j], `<span class="r${i} c${j}">${cols[j]}</span>`)
+    }
+  })
+  return data
+}
 
 var HANDLER_MAP = {
-    'ornament': handleOrnament
+    'ornament': handleOrnament,
+    'table': handleTable
 }
 
 /**
@@ -29,13 +40,13 @@ function codeDistributeEntry(hook, vm) {
     });
     hook.afterEach(function (html, next) {
         // <code class="lang-">   </code>
-        const codeBlockMatch = html.match(/<code class="lang-[\w]+">[\s\S]*?<\/code>?/gm)
+        const codeBlockMatch = html.match(/<code class="lang-[\w]+">[\s\S]*?<\/code>?/gm) || []
         codeBlockMatch.map((e, i) => {
             const type = e.match(/^<code class="lang-[\w]+">?/)[0].replace('<code class="lang-', '').replace('">', '')
-            console.log(type);
+            var dataStr = e.replace(/<code class="lang-[\w]+">?/, '').replace(/<\/code>/, '')
             if (HANDLER_MAP[type]) {
-                var matchStr = HANDLER_MAP[type](e)
-                html = html.replace(e, matchStr);
+                var matchStr = HANDLER_MAP[type](dataStr)
+                html = html.replace(dataStr, matchStr);
             }            
         })
         

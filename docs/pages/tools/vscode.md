@@ -47,7 +47,7 @@
     "body": [
       "/**",
       " * ",
-      " * Ewan $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+      " * Ewan $(l3)CURRENT_YEAR(/l3)-$CURRENT_MONTH-$(l4)CURRENT_DATE(/l4) $CURRENT_HOUR:$(l5)CURRENT_MINUTE(/l5)",
       " */"
     ],
     "description": "添加注释"
@@ -58,7 +58,7 @@
 **body** 代码片段主体<br><br>
 ### 变量
 调用: $变量名 
-```
+```table
 TM_FILENAME               当前文件名
 TM_FILENAME_BASE          当前文件名，不带扩展名
 CURRENT_YEAR              当前年份

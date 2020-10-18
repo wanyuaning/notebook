@@ -171,12 +171,16 @@ pre[data-lang].close:after{
 
 .css{ display:block; border:#f00 1px solid;}
 
-.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:#f00}
-.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:#0f0}
-.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:#00f}
-.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:#f00}
-.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament]{ color: #999; line-height:15px}
+.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:#ce5b68}
+.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:#9b65aa}
+.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:#5b72aa}
+.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:#498c95}
+.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:#64a152}
 .markdown-section pre>code[class~=lang-ornament] .level-6{font-weight: bold; color:#f00}
 .markdown-section pre>code[class~=lang-ornament] .level-7{font-weight: bold; color:#f00}
 .markdown-section pre>code[class~=lang-ornament] .level-8{font-weight: bold; color:#f00}
 .markdown-section pre>code[class~=lang-ornament] .level-9{font-weight: bold; color:#f00}
+
+.markdown-section pre>code[class~=lang-table]{ line-height:15px}
+.markdown-section pre>code[class~=lang-table] .c1{ color: #999;}
