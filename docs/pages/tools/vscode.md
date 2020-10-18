@@ -8,6 +8,7 @@
 
   // koroFileHeader 插件
   "fileheader.customMade": { // 头部注释
+    "autoAdd": false,        // 关闭自动添加头部注释
     "Description":"file content",
     "Version": "2.0"
     "Author":"Ewan",
