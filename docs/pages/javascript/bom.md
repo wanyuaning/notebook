@@ -104,13 +104,25 @@
   href:     "http://localhost:9527/main#/minioninfo/minion?v=1"  
 }
 ```
+**编码&解码**:en/decodeURI 不能编码和解码URI特殊字符（如#，/，￥等）
+<table>
+    <tr style="background:#eee"><td>编码</td><td>目标字符</td><td>结果字符</td> <td rowspan="3">></td> <td>解码</td><td>目标字符</td><td>结果字符</td></tr>
+    <tr><td><strong>encodeURIComponent</strong>('#')</td><td>'#'</td><td>"%23"</td> <td><strong>decodeURIComponent</strong>('%23')</td><td>'%23'</td><td>"#"</td></tr>
+    <tr><td><strong>encodeURI('#')</strong></td><td>'#'</td><td>"#"</td> <td><strong>decodeURI</strong>('%23')</td><td>'%23'</td><td>"%23"</td></tr>
+</table>
+
+**解析search**: JSON.parse(`{"${location.search.replace(/^\?/g, '').replace(/&/g, '","').replace(/=/g, '":"')}"}`)
+
+
+
+
 
 #### Navigator 浏览器信息
 ```js
 {
   appCodeName                //浏览器代码名 "Mozilla"
   appName                    //浏览器步伐名 "Netscape"
-  appVersion                 "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+  appVersion                 //"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
   appMinorVersion            //浏览器补钉版本 
   cookieEnabled              //浏览器是否撑持cookie true
   platform                   //操作体系类型 "Win32"

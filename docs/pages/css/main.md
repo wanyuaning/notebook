@@ -201,7 +201,49 @@ div img{ margin:0;padding:0;}
 
 **table** `border-collapse:collapse;`
 
-#### 元素
+#### 选择器
+<div class="color-group color-card inline collapse c-atv-0">
+  <i>elem</i> 表示任意元素    
+  <i>attr</i> 任意属性名称  
+  <i>value</i> 值 
+</div><br>
+<div class="color-group">
+  <i>elem</i>[ 
+  <i>attr</i>~=
+  <i>value</i>]　匹配附带attr属性的elem元素，其中attr属性的值是以空格隔开的值列表，value是值列表中的一个独立值
+</div>
+<div class="color-group">
+  <i>elem</i>[ 
+  <i>attr</i>^=
+  <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值是以value作为开始的
+</div>
+<div class="color-group">
+  <i>elem</i>[ 
+  <i>attr</i>$=
+  <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值是以value作为结束的
+</div>
+<div class="color-group">
+  <i>elem</i>[ 
+  <i>attr</i>*=
+  <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值包含value字符
+</div>
+
+```
+[id]               附带 id 属性的元素
+div[class]         附带 class 属性的 div 元素
+span[class][title] 附带 class 和 title 属性的 span 元素
+p[class=hidden]    附带 class 属性值为 hidden 的 p 元素
+
+[class~=cont] {有 cont 类名的多类名组合}
+[class^=col-] {以 col- 开头的类名}
+[class$=-fix] {以 -fix 结尾的类名}
+[class*=-ex-] {含 -ex- 字符的类名}
+
+.color-group i:nth-child(1){color: #318ed8;}   序号优先 第1个元素 匹配<i>
+.color-group i:nth-of-type(1){color: #318ed8;} 类型优先 元素<i> 匹配第1个
+```
+
+#### 元素 
 
 - 行内：a、b、span、img、input、strong、select、label、em、button、textarea
 - 块级：div、ul、li、dl、dt、dd、p、h1-h6、blockquote

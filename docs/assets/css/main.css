@@ -170,3 +170,13 @@ pre[data-lang].close:after{
 .inline{display: inline-block;}
 
 .css{ display:block; border:#f00 1px solid;}
+
+.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:#0f0}
+.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:#00f}
+.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-6{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-7{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-8{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-9{font-weight: bold; color:#f00}
