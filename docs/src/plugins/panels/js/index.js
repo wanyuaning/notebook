@@ -20,7 +20,7 @@ function renderLayoutRow(content) {
     //console.log(content)
     let wrapperMatch
     while ((wrapperMatch = regex.layoutWrapperMarkup.exec(content)) !== null) {
-        console.log('-----')
+        
         let blockStr = wrapperMatch[0]
         let tagMatch
         while ((tagMatch = regex.layoutTagMarkup.exec(blockStr)) !== null) {
@@ -54,7 +54,6 @@ function docsifyPanels(hook, vm) {
     });
   hook.afterEach(function (html, next) {
     
-      console.log(333)
       next(html);
     });
 }
