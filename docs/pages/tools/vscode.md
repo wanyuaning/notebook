@@ -25,8 +25,12 @@
 }
 ```
 # 插件
-
-### koroFileHeader
+####|JSON Tools|
+```table
+Ctrl(Cmd)+Alt+M  格式化代码
+Alt+M            紧凑化代码
+```
+####|koroFileHeader| 
 `ctrl + Alt + i`  文件头部注释 [fileheader.customMade](?id=settings)<br>
 `ctrl + Alt + t`  在鼠标位置插入相应的注释 [fileheader.cursorMode](?id=settings)<br>
 

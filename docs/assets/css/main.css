@@ -10,14 +10,14 @@ body{ font-size: 14px;}
 .markdown-section pre>code { padding: 0px 0px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
-.markdown-section p{ margin: 1em 0 0.4em 0;}
+.markdown-section p{ margin: 5px 0 5px 0;}
 
-.markdown-section h1 { font-size: 2rem; margin: 45px 0 0.5rem }
-.markdown-section h2 { font-size: 1.75rem; margin: 40px 0 .4rem }
-.markdown-section h3 { font-size: 1.5rem; margin: 35px 0 .3rem }
-.markdown-section h4 { font-size: 1.25rem; margin: 30px 0 .2rem }
-.markdown-section h5 { font-size: 1rem; margin: 25px 0 .1rem }
-.markdown-section h6 { color: #777; margin: 20px 0 .1rem; font-size: 1rem }
+.markdown-section h1 { font-size: 2rem; margin: 30px 0 5px }
+.markdown-section h2 { font-size: 1.75rem; margin: 25px 0 5px }
+.markdown-section h3 { font-size: 1.5rem; margin: 20px 0 5px }
+.markdown-section h4 { font-size: 1.25rem; margin: 15px 0 5px }
+.markdown-section h5 { font-size: 1rem; margin: 10px 0 5px }
+.markdown-section h6 { color: #777; margin: 20px 0 5px; font-size: 1rem }
 
 .markdown-section ol, .markdown-section p, .markdown-section ul{line-height: 1rem;}
 .markdown-section ol, .markdown-section ul{margin: 8px 0;}
@@ -184,3 +184,7 @@ pre[data-lang].close:after{
 
 .markdown-section pre>code[class~=lang-table]{ line-height:15px}
 .markdown-section pre>code[class~=lang-table] .c1{ color: #999;}
+
+#json-tools span, #korofileheader span{
+    background-color: #333; color: #fff; line-height: 14px;
+}

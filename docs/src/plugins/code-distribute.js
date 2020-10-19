@@ -49,6 +49,12 @@ function codeDistributeEntry(hook, vm) {
                 html = html.replace(dataStr, matchStr);
             }            
         })
+        // 自定义标题
+        const titleMatch = html.match(/#{1,3}.+\n/) || []
+        titleMatch.map((e, i) => {
+            console.log(e);
+                      
+        })
         
         next(html);
     });
