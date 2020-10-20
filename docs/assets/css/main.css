@@ -1,4 +1,17 @@
 @charset "utf-8";
+:root{
+    --color0 :#569fda;
+    --color1: #976adb;
+    --color2: #c168b2;
+    --color3: #c89967;
+    --color4: #9cb163;
+    --color5: #5eb271;
+    --color6: #4eacc8;
+    --color7: #7a88de;
+    --color8: #b97fdd;
+    --color9: #569fda;
+}
+
 body{ font-size: 14px;}
 
 /* 字号 */
@@ -172,15 +185,16 @@ pre[data-lang].close:after{
 .css{ display:block; border:#f00 1px solid;}
 
 .markdown-section pre>code[class~=lang-ornament]{ color: #999; line-height:15px}
-.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:#ce5b68}
-.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:#9b65aa}
-.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:#5b72aa}
-.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:#498c95}
-.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:#64a152}
-.markdown-section pre>code[class~=lang-ornament] .level-6{font-weight: bold; color:#f00}
-.markdown-section pre>code[class~=lang-ornament] .level-7{font-weight: bold; color:#f00}
-.markdown-section pre>code[class~=lang-ornament] .level-8{font-weight: bold; color:#f00}
-.markdown-section pre>code[class~=lang-ornament] .level-9{font-weight: bold; color:#f00}
+.markdown-section pre>code[class~=lang-ornament] .level-0{font-weight: bold; color:var(--color0)}
+.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:var(--color1)}
+.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:var(--color2)}
+.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:var(--color3)}
+.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:var(--color4)}
+.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:var(--color5)}
+.markdown-section pre>code[class~=lang-ornament] .level-6{font-weight: bold; color:var(--color6)}
+.markdown-section pre>code[class~=lang-ornament] .level-7{font-weight: bold; color:var(--color7)}
+.markdown-section pre>code[class~=lang-ornament] .level-8{font-weight: bold; color:var(--color8)}
+.markdown-section pre>code[class~=lang-ornament] .level-9{font-weight: bold; color:var(--color9)}
 
 .markdown-section pre>code[class~=lang-table]{ line-height:15px}
 .markdown-section pre>code[class~=lang-table] .c1{ color: #999;}
@@ -188,3 +202,51 @@ pre[data-lang].close:after{
 #json-tools span, #korofileheader span{
     background-color: #333; color: #fff; line-height: 14px;
 }
+
+.pop{position: relative; z-index: 1;}
+.pop:before{
+    content:attr(text); position: absolute; top: 0; left: 200px; z-index: 1;
+    background-color: #525252; color: #fff; font-weight: normal; font-size: 10px; line-height: 14px;
+    padding: 0 5px 0 5px;
+}
+.pop.r:before{top: 0; left: 100%;}
+
+.markdown-section code h1{font-size: 22px; line-height: 22px;}
+.markdown-section code h2{font-size: 20px; line-height: 20px;}
+.markdown-section code h3{font-size: 18px; line-height: 18px;}
+.markdown-section code h4{font-size: 16px; line-height: 16px;}
+.markdown-section code h5{font-size: 14px; line-height: 14px;}
+.markdown-section code h6{font-size: 12px; line-height: 12px;}
+.markdown-section code h1,
+.markdown-section code h2,
+.markdown-section code h3,
+.markdown-section code h4,
+.markdown-section code h5,
+.markdown-section code h6{ margin: 0; display: inline-block; padding: 1px 5px;}
+code h1.bg,code h2.bg,code h3.bg,code h4.bg,code h5.bg,code h6.bg{ background-color: #333; }
+code h1.bg0,code h2.bg0,code h3.bg0,code h4.bg0,code h5.bg0,code h6.bg0{ background-color: #000; }
+code h1.bg1,code h2.bg1,code h3.bg1,code h4.bg1,code h5.bg1,code h6.bg1{ background-color: #111; }
+code h1.bg2,code h2.bg2,code h3.bg2,code h4.bg2,code h5.bg2,code h6.bg2{ background-color: #222; }
+code h1.bg3,code h2.bg3,code h3.bg3,code h4.bg3,code h5.bg3,code h6.bg3{ background-color: #444; }
+code h1.bg4,code h2.bg4,code h3.bg4,code h4.bg4,code h5.bg4,code h6.bg4{ background-color: #666; }
+code h1.bg5,code h2.bg5,code h3.bg5,code h4.bg5,code h5.bg5,code h6.bg5{ background-color: #888; }
+code h1.bg6,code h2.bg6,code h3.bg6,code h4.bg6,code h5.bg6,code h6.bg6{ background-color: #aaa; }
+code h1.bg7,code h2.bg7,code h3.bg7,code h4.bg7,code h5.bg7,code h6.bg7{ background-color: #ccc; }
+code h1.bg8,code h2.bg8,code h3.bg8,code h4.bg8,code h5.bg8,code h6.bg8{ background-color: #eee; }
+code h1.bg9,code h2.bg9,code h3.bg9,code h4.bg9,code h5.bg9,code h6.bg9{ background-color: #fff; }
+code h1.cl,code h2.cl,code h3.cl,code h4.cl,code h5.cl,code h6.cl{ color: #fff; }
+code h1.cl0,code h2.cl0,code h3.cl0,code h4.cl0,code h5.cl0,code h6.cl0{ color: #fff; }
+code h1.cl1,code h2.cl1,code h3.cl1,code h4.cl1,code h5.cl1,code h6.cl1{ color: #eee; }
+code h1.cl2,code h2.cl2,code h3.cl2,code h4.cl2,code h5.cl2,code h6.cl2{ color: #ccc; }
+code h1.cl3,code h2.cl3,code h3.cl3,code h4.cl3,code h5.cl3,code h6.cl3{ color: #aaa; }
+code h1.cl4,code h2.cl4,code h3.cl4,code h4.cl4,code h5.cl4,code h6.cl4{ color: #888; }
+code h1.cl5,code h2.cl5,code h3.cl5,code h4.cl5,code h5.cl5,code h6.cl5{ color: #666; }
+code h1.cl6,code h2.cl6,code h3.cl6,code h4.cl6,code h5.cl6,code h6.cl6{ color: #444; }
+code h1.cl7,code h2.cl7,code h3.cl7,code h4.cl7,code h5.cl7,code h6.cl7{ color: #222; }
+code h1.cl8,code h2.cl8,code h3.cl8,code h4.cl8,code h5.cl8,code h6.cl8{ color: #111; }
+code h1.cl9,code h2.cl9,code h3.cl9,code h4.cl9,code h5.cl9,code h6.cl9{ color: #000; }
+
+
+
+
+

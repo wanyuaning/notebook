@@ -1,10 +1,10 @@
 function handleOrnament(codeStr) {
-    const tagStartMatch = codeStr.match(/\(l\d+\)?/g)
+    const tagStartMatch = codeStr.match(/\(l\d+\)?/g) || []
     tagStartMatch.map((e, i) => {
         const level = e.replace('(l', '').replace(')', '')
         codeStr = codeStr.replace(e, `<span class="level-${level}">`);
     })
-    const tagEndMatch = codeStr.match(/\(\/l\d+\)?/g)
+    const tagEndMatch = codeStr.match(/\(\/l\d+\)?/g) || []
     tagEndMatch.map((e, i) => {
         codeStr = codeStr.replace(e, `</span>`);
     })
@@ -30,11 +30,67 @@ function handleLink(data){
     })
     return data
 }
+function handlePop(data) {
+    const reg = /\(.+?\)\(.+?\)/g
+    const Match_POP_ARR = data.match(reg) || []
+    Match_POP_ARR.forEach(e => {
+        const arr = e.split(')(')
+        const content = arr[0].replace('(', '')
+        const comment = arr[1].replace(')', '')
+        data = data.replace(e, `<span class="pop" text="${comment}">${content}</span>`)
+    })    
+    return data
+}
+function handleTitle(data) {
+    const reg = /#{1,6}\|?\d?\d?(\s[\w-]+)+\s*?[\n<]/g
+    const Match_TITLE_ARR = data.match(reg) || []
+    Match_TITLE_ARR.forEach(e => {
+        e = e.replace('<', '') 
+        const count = e.match(/#{1,6}/)[0].length
+        const content = e.replace(/#{1,6}\|?\d?\d? /, '')
+        const fst = e.charAt(count)
+
+        if (fst === ' ') {
+            data = data.replace(e, `<h${count}>${content}</h${count}>`)
+        } else {
+            const scd = e.charAt(count + 1)
+            let classStr = '', bg = '', color = ''
+            if (fst === '|') {
+                if (scd.match(/\d/)) {
+                    bg = scd
+                    const thr = e.charAt(count + 2)
+                    thr.match(/\d/) && (color = thr)
+                }
+                classStr = `class="bg${bg} cl${color}"`                
+            } else {
+                fst.match(/\d/) && (color = fst)
+                classStr = `class="cl${color}"`                
+            }
+            data = data.replace(e, `<h${count} ${classStr}>${content}</h${count}>`)
+            
+            
+            
+            
+            
+            
+            // // 背景策略
+            // fst === '|' && (classStr = ' class="bg"') 
+            // // 灰度策略 0 1 2 4 6 8 a c e f 九等级
+            // let gray_bg = e.charAt(count + 1).match(/\d/)         
+            // gray_bg = gray_bg ? gray_bg[0] : '3' 
+            // const content = e.replace(/#{1,6}\|? /, '')
+        }
+                
+    })    
+    return data
+}
 
 var HANDLER_MAP = {
     ornament: handleOrnament,
     table: handleTable,
-    link: handleLink
+    link: handleLink,
+    pop: handlePop,
+    title: handleTitle
 }
 
 /**
@@ -61,7 +117,7 @@ function codeDistributeEntry(hook, vm) {
             const langArr = pre.match(REG_LANG)[0].replace('<pre v-pre data-lang="', '').replace('">', '').split(' ') || []
             const Match_CODE_ARR = pre.match(REG_CODE) || []
             const Match_CODE = Match_CODE_ARR.length > 0 ? Match_CODE_ARR[0] : ''
-            const Match_CODE_TEXT = Match_CODE.replace(/<code class="lang-[\w]+">?/, '').replace(/<\/code>/, '')
+            const Match_CODE_TEXT = Match_CODE.replace(/<code class="lang-[\w]+[ \w-]{0,}?">/, '').replace(/<\/code>/, '')
             let NEW_CODE_TEXT = Match_CODE_TEXT
             langArr.forEach(lang => {
                 if (HANDLER_MAP[lang]) {

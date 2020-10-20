@@ -1,5 +1,5 @@
 
-# settings
+### settings
 ```js
 {
   // 缩进
@@ -24,23 +24,28 @@
   }
 }
 ```
-# 插件
-####|JSON Tools|
-```table
-Ctrl(Cmd)+Alt+M  格式化代码
-Alt+M            紧凑化代码
-```
-####|koroFileHeader| 
-`ctrl + Alt + i`  文件头部注释 [fileheader.customMade](?id=settings)<br>
-`ctrl + Alt + t`  在鼠标位置插入相应的注释 [fileheader.cursorMode](?id=settings)<br>
+### 功能
+对比<br>
+![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")
 
-# 用户片段
+### 插件
+```table title link
+######| JSON Tools
+Ctrl(Cmd)+Alt+M    格式化代码
+Alt+M              紧凑化代码
+
+######| koroFileHeader
+ctrl + Alt + i     文件头部注释 [fileheader.customMade](pages/tools/vscode.md?id=settings)
+ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](pages/tools/vscode.md?id=settings)
+```
+
+### 用户片段
 文件 > 首选项 > 用户片段
-```ornament
+```ornament pop
 {
   "(l1)Print to console(/l1)": {
-    "prefix": "(l2)log(/l2)",
-    "body": [
+    "(prefix)(触发快捷提示的字符串前缀)": "(l2)log(/l2)",
+    "(body)(代码片段主体)": [
       "console.log('$1');",
       "$2"
     ],
@@ -58,8 +63,7 @@ Alt+M            紧凑化代码
   }
 }
 ```
-**prefix** 触发快捷提示的字符串前缀<br>
-**body** 代码片段主体<br><br>
+
 ### 变量
 调用: $变量名 
 ```table

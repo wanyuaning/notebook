@@ -228,8 +228,8 @@ div img{ margin:0;padding:0;}
   <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值包含value字符
 </div>
 
-```
-[id]               附带 id 属性的元素
+```ornament
+[(l2)id(/l2)]               附带 id 属性的元素
 div[class]         附带 class 属性的 div 元素
 span[class][title] 附带 class 和 title 属性的 span 元素
 p[class=hidden]    附带 class 属性值为 hidden 的 p 元素
