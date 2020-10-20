@@ -558,7 +558,11 @@ HTTP&TCP/IP  三/四次握手
 <!-- col:12 -->
   {m,n}?　　{m,}?　　??　　+?　　*?
 <!-- layout:end -->
-
+反义
+<a[^>]+>
+var str = "if else no else but if";
+var reg = /\b(?:(?!(else|\s))[\w\W])+\b/gi;
+str.match(reg);
 
 
 
