@@ -1,4 +1,4 @@
-
+ CAWD-119
 ### settings
 ```js
 {
@@ -30,29 +30,29 @@
 
 ### 插件
 ```table title link
-######| JSON Tools
+#####| JSON Tools
 Ctrl(Cmd)+Alt+M    格式化代码
 Alt+M              紧凑化代码
 
-######| koroFileHeader
+#####| koroFileHeader
 ctrl + Alt + i     文件头部注释 [fileheader.customMade](pages/tools/vscode.md?id=settings)
 ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](pages/tools/vscode.md?id=settings)
 ```
 
 ### 用户片段
 文件 > 首选项 > 用户片段
-```ornament pop
+```dianzhui popover
 {
-  "(l1)Print to console(/l1)": {
-    "(prefix)(触发快捷提示的字符串前缀)": "(l2)log(/l2)",
+  "[0 Print to console]": {
+    "(prefix)(触发快捷提示的字符串前缀)": "[1 log]",
     "(body)(代码片段主体)": [
       "console.log('$1');",
       "$2"
     ],
     "description": "打印到控制台"
   },
-  "(l1)Add format comment(/l1)": {
-    "prefix": "(l2)comment(/l2)",
+  "[0 Add format comment]": {
+    "prefix": "[1 comment]",
     "body": [
       "/**",
       " * ",

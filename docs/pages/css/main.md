@@ -1,4 +1,19 @@
+引入字体
+```css
+@font-face {
+ font-family: 'datefont';
+ src: url('YourWebFontName.eot'); /* IE9 Compat Modes */
+ src: url('YourWebFontName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+   url('YourWebFontName.woff') format('woff'), /* Modern Browsers */
+   url('batmfo_.ttf') format('truetype'), /* Safari, Android, iOS */
+   url('YourWebFontName.svg#YourWebFontName') format('svg'); /* Legacy iOS */
+}
+#id{font-family:datefont}
+```
 
+SVG字体方案
+```
+```
 
 # CSS变量
 **var()函数声明**
@@ -228,16 +243,16 @@ div img{ margin:0;padding:0;}
   <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值包含value字符
 </div>
 
-```ornament
-[(l2)id(/l2)]               附带 id 属性的元素
-div[class]         附带 class 属性的 div 元素
-span[class][title] 附带 class 和 title 属性的 span 元素
-p[class=hidden]    附带 class 属性值为 hidden 的 p 元素
+```dianzhui c9
+[[1 id]]               附带 id 属性的元素
+[0 div][[1 class]]         附带 class 属性的 div 元素
+[0 span][[1 class]][[1 title]] 附带 class 和 title 属性的 span 元素
+[0 p][[1 class]=[2 hidden]]    附带 class 属性值为 hidden 的 p 元素
 
-[class~=cont] {有 cont 类名的多类名组合}
-[class^=col-] {以 col- 开头的类名}
-[class$=-fix] {以 -fix 结尾的类名}
-[class*=-ex-] {含 -ex- 字符的类名}
+[[1 class]~=[2 cont]] {有 cont 类名的多类名组合}
+[[1 class]^=[2 col-]] {以 col- 开头的类名}
+[[1 class]$=[2 -fix]] {以 -fix 结尾的类名}
+[[1 class]*=[2 -ex-]] {含 -ex- 字符的类名}
 
 .color-group i:nth-child(1){color: #318ed8;}   序号优先 第1个元素 匹配<i>
 .color-group i:nth-of-type(1){color: #318ed8;} 类型优先 元素<i> 匹配第1个

@@ -43,6 +43,7 @@ favicon.ico在线制作： http://www.bitbug.net/
 图片转Base64：http://imgbase64.duoshitong.com/
 UI: http://www.biaonimeia.com/project
 图标库：ant.design/components/icon-cn
+阿里巴巴企业智能-通用基础图标库：https://www.iconfont.cn/plus/collections/detail?cid=3991
 ICON: http://www.iconfont.cn/search/index?searchType=icon&q=user
 自助建站
 https://www.wix.com    国际

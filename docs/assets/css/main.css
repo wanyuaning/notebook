@@ -18,6 +18,38 @@ body{ font-size: 14px;}
 .sz20{font-size: 20px;}
 .sz22{font-size: 22px;}
 
+/* 粗体 */
+.b{font-weight: bold}
+
+/* 颜色 */
+.c0{ color:#000 !important}
+.c1{ color:#111 !important}
+.c2{ color:#222 !important}
+.c3{ color:#333 !important}
+.c4{ color:#444 !important}
+.c5{ color:#555 !important}
+.c6{ color:#666 !important}
+.c7{ color:#777 !important}
+.c8{ color:#888 !important}
+.c9{ color:#999 !important}
+.ca{ color:#aaa !important}
+.cb{ color:#bbb !important}
+.cc{ color:#ccc !important}
+.cd{ color:#ddd !important}
+.ce{ color:#eee !important}
+.cf{ color:#fff !important}
+
+.cl0{ color: var(--color0)}
+.cl1{ color: var(--color1)}
+.cl2{ color: var(--color2)}
+.cl3{ color: var(--color3)}
+.cl4{ color: var(--color4)}
+.cl5{ color: var(--color5)}
+.cl6{ color: var(--color6)}
+.cl7{ color: var(--color7)}
+.cl8{ color: var(--color8)}
+.cl9{ color: var(--color9)}
+
 /* 代码块重写 */
 .markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
 .markdown-section pre>code { padding: 0px 0px; }
@@ -37,6 +69,8 @@ body{ font-size: 14px;}
 .markdown-section ol li, .markdown-section ul li{padding-bottom: 8px;}
 
 .token.cdata, .token.comment, .token.doctype, .token.prolog{ color: #ccc;}
+
+input[type=search]{border:#f00 1px solid}
 
 :root {
     /* docsify-tabs */
@@ -136,16 +170,16 @@ pre[data-lang].close:after{
 .color-group i:nth-of-type(9){color: #7f29b4;}
 
 .color-group.color-card i{font-weight: bold; font-style: normal; color: #fff; padding:0 2px}
-.color-group.color-card i:nth-of-type(1){background-color: #569fda;}
-.color-group.color-card i:nth-of-type(2){background-color: #976adb;}
-.color-group.color-card i:nth-of-type(3){background-color: #c168b2;}
-.color-group.color-card i:nth-of-type(4){background-color: #c89967;}
-.color-group.color-card i:nth-of-type(5){background-color: #9cb163;}
-.color-group.color-card i:nth-of-type(6){background-color: #5eb271;}
-.color-group.color-card i:nth-of-type(7){background-color: #4eacc8;}
-.color-group.color-card i:nth-of-type(8){background-color: #7a88de;}
-.color-group.color-card i:nth-of-type(9){background-color: #b97fdd;}
-
+.color-group.color-card i:nth-of-type(1){background-color: var(--color0)}
+.color-group.color-card i:nth-of-type(2){background-color: var(--color1)}
+.color-group.color-card i:nth-of-type(3){background-color: var(--color2)}
+.color-group.color-card i:nth-of-type(4){background-color: var(--color3)}
+.color-group.color-card i:nth-of-type(5){background-color: var(--color4)}
+.color-group.color-card i:nth-of-type(6){background-color: var(--color5)}
+.color-group.color-card i:nth-of-type(7){background-color: var(--color6)}
+.color-group.color-card i:nth-of-type(8){background-color: var(--color7)}
+.color-group.color-card i:nth-of-type(9){background-color: var(--color8)}
+.color-group.color-card i:nth-of-type(10){background-color: var(--color9)}
 
 .collapse{}
 /* background: linear-gradient(#3db3ef, #0fa2ec); */
@@ -184,20 +218,10 @@ pre[data-lang].close:after{
 
 .css{ display:block; border:#f00 1px solid;}
 
-.markdown-section pre>code[class~=lang-ornament]{ color: #999; line-height:15px}
-.markdown-section pre>code[class~=lang-ornament] .level-0{font-weight: bold; color:var(--color0)}
-.markdown-section pre>code[class~=lang-ornament] .level-1{font-weight: bold; color:var(--color1)}
-.markdown-section pre>code[class~=lang-ornament] .level-2{font-weight: bold; color:var(--color2)}
-.markdown-section pre>code[class~=lang-ornament] .level-3{font-weight: bold; color:var(--color3)}
-.markdown-section pre>code[class~=lang-ornament] .level-4{font-weight: bold; color:var(--color4)}
-.markdown-section pre>code[class~=lang-ornament] .level-5{font-weight: bold; color:var(--color5)}
-.markdown-section pre>code[class~=lang-ornament] .level-6{font-weight: bold; color:var(--color6)}
-.markdown-section pre>code[class~=lang-ornament] .level-7{font-weight: bold; color:var(--color7)}
-.markdown-section pre>code[class~=lang-ornament] .level-8{font-weight: bold; color:var(--color8)}
-.markdown-section pre>code[class~=lang-ornament] .level-9{font-weight: bold; color:var(--color9)}
+
 
 .markdown-section pre>code[class~=lang-table]{ line-height:15px}
-.markdown-section pre>code[class~=lang-table] .c1{ color: #999;}
+.markdown-section pre>code[class~=lang-table] .col1{ color: #999;}
 
 #json-tools span, #korofileheader span{
     background-color: #333; color: #fff; line-height: 14px;
@@ -246,7 +270,8 @@ code h1.cl7,code h2.cl7,code h3.cl7,code h4.cl7,code h5.cl7,code h6.cl7{ color: 
 code h1.cl8,code h2.cl8,code h3.cl8,code h4.cl8,code h5.cl8,code h6.cl8{ color: #111; }
 code h1.cl9,code h2.cl9,code h3.cl9,code h4.cl9,code h5.cl9,code h6.cl9{ color: #000; }
 
-
+.ui-detail { }
+.ui-detail img{height: 24px; vertical-align: -4px; }
 
 
 

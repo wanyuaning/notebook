@@ -93,16 +93,19 @@ li input[type=checkbox] {
     vertical-align: middle
 }
 
-.app-nav {
-    margin: 25px 60px 0 0;
-    position: absolute;
+.app-nav {    
+    position: fixed;
     right: 0;
+    left:300px;
     text-align: right;
-    z-index: 10
+    z-index: 10;
+    background-color: #fff;
+    border-bottom:#eee 1px solid;
+    padding: 19px 60px 0 0;
 }
 
 .app-nav.no-badge {
-    margin-right: 25px
+    /* margin-right: 25px */
 }
 
 .app-nav p {

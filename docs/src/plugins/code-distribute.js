@@ -1,21 +1,20 @@
-function handleOrnament(codeStr) {
-    const tagStartMatch = codeStr.match(/\(l\d+\)?/g) || []
-    tagStartMatch.map((e, i) => {
-        const level = e.replace('(l', '').replace(')', '')
-        codeStr = codeStr.replace(e, `<span class="level-${level}">`);
+
+function handleDianzhui(data){
+    const REG_DZ = /\[\d\s[^\]]+\]/g
+    const Match_DZ_ARR = data.match(REG_DZ) || []
+    Match_DZ_ARR.forEach(e => {
+        const color = e.charAt(1)
+        const content = e.slice(3, e.length-1)
+        data = data.replace(e, `<span class="b cl${color}">${content}</span>`)
     })
-    const tagEndMatch = codeStr.match(/\(\/l\d+\)?/g) || []
-    tagEndMatch.map((e, i) => {
-        codeStr = codeStr.replace(e, `</span>`);
-    })
-    return codeStr
+    return data
 }
 function handleTable(data) {
     const rows = data.split('\n') || []
     rows.forEach((e, i) => {
         const cols = e.split(/\s{2,}/) || []
         for (let j = 0; j < cols.length; j++) {
-            data = data.replace(cols[j], `<span class="r${i} c${j}">${cols[j]}</span>`)
+            data = data.replace(cols[j], `<span class="row${i} col${j}">${cols[j]}</span>`)
         }
     })
     return data
@@ -86,10 +85,10 @@ function handleTitle(data) {
 }
 
 var HANDLER_MAP = {
-    ornament: handleOrnament,
+    dianzhui: handleDianzhui, // 点缀
     table: handleTable,
     link: handleLink,
-    pop: handlePop,
+    popover: handlePop,
     title: handleTitle
 }
 
@@ -127,11 +126,16 @@ function codeDistributeEntry(hook, vm) {
             html = html.replace(Match_CODE_TEXT, NEW_CODE_TEXT);
         })
         
-        // 自定义标题
-        const titleMatch = html.match(/#{1,3}.+\n/) || []
-        titleMatch.map((e, i) => {
-            //console.log(e);
-
+        /**
+         * 详情 <a href="#/pages/javascript/ecma">detail</a>
+         */
+        const REG_Detail = /<a href="[^"]+"\s?>detail<\/a>/
+        const Match_Detail_Arr = html.match(REG_Detail) || []
+        Match_Detail_Arr.forEach(e => {
+            console.log(e)
+            const tag = e.replace('>detail', ' class="ui-detail"><img src="../../../assets/icon/more.svg" />')
+            console.log(tag)
+            html = html.replace(e, tag)
         })
 
         next(html);
