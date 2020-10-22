@@ -1,11 +1,19 @@
 
 function handleDianzhui(data){
-    const REG_DZ = /\[\d\s[^\]]+\]/g
+    const REG_DZ = /\[\d\|?\s[^\]]+\]/g
     const Match_DZ_ARR = data.match(REG_DZ) || []
     Match_DZ_ARR.forEach(e => {
         const color = e.charAt(1)
-        const content = e.slice(3, e.length-1)
-        data = data.replace(e, `<span class="b cl${color}">${content}</span>`)
+        let content
+        let tagStr
+        if (e.charAt(2) === '|') {
+            content = e.slice(4, e.length - 1)
+            tagStr = `<span class="b cf bg${color}">${content}</span>`
+        } else {
+            content = e.slice(3, e.length - 1)
+            tagStr = `<span class="b cl${color}">${content}</span>`
+        }
+        data = data.replace(e, tagStr)
     })
     return data
 }

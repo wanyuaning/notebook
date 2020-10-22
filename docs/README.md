@@ -85,7 +85,7 @@ filter
 call&apply
 
 
-
+[ES6](pages/javascript/ecma.md?id=ES6)
 
 
 
@@ -301,123 +301,8 @@ https://segmentfault.com/a/1190000013956945
 
 
 
-ES6
-const 和 let  {}块级作用域
-模板字符串：`hello ${name}`
-class
-class Human extends Animal{
-constructor(age){
-super()
-this._age = age
-}
-get age (){ return this._age }
-set name (value){this._name = value}
-static 静态方法
-}
-promise & async&await
 
-常量    作用域    箭头函数   默认参数    对象代理
-解构赋值   模板文本  多行字符串   正则扩展   
-数字扩展   Iterator    Set和Map   Generator
-函数扩展   Class   Module   Symbol
-对象扩展
-增强对象文本
-Promises对象
 
-Symbol
-
-Object.assign
-Array.from
-
-class, extends, super, 
-arrow functions, 
-template string, destructuring, default, rest arguments
-
-let, const, var
-
- class, extends, super
-
-async/await
-
-非数组转数组／参数剩余整理
-[a,b] = [b,a] 数组顺序交换
-解构{x:{b}} = {x:{b:1}}
-
- (...m) => {}                      rest参数
-:let [x, y, z] = [1, 2, 3]      数组解构 x: 1 .  y: 2 .  z:3
-let [x, ...y] = [1,2,3,4,5]    x: 1 .  y:[2,3,4,5]
-:[...[1,2,3], ...[4,5,6]]        数组的扩展 [1,2,3,4,5,6]
- ...[1,2,3]                           函数的扩展
-
-Symbol: 用相同的字符串对对象属性名或方法进行命名时会发生命名冲突,而使用symbol产生的名字是不同的
-应用场景1：使用Symbol来作为对象属性名(key),不怕被覆盖
-const NAME = Symbol(), AGE = Symbol()
-let obj = {[NAME]: "ewan"}
-obj[AGE] = 18
-obj.AGE = 20
-obj[NAME] // 'ewan'
-obj[AGE] // 18
-应用场景2：使用Symbol来替代常量
-const TYPE_AUDIO = 'AUDIO'     const TYPE_AUDIO = Symbol()
-const TYPE_VIDEO = 'VIDEO'     const TYPE_VIDEO = Symbol()
-const TYPE_IMAGE = 'IMAGE'     const TYPE_IMAGE = Symbol()
-应用场景3：使用Symbol定义类的私有属性/方法
-const PASSWORD = Symbol()
-class Login {
-  constructor(username, password) { this.username = username; this[PASSWORD] = password }
-  checkPassword(pwd) { return this[PASSWORD] === pwd }
-}
-export default Login
-
-import Login from './a'
-const login = new Login('admin', '123456')
-login.checkPassword('123456')  // true
-login.PASSWORD  // oh!no!
-login[PASSWORD] // oh!no!
-login["PASSWORD"] // oh!no!
-注册和获取全局Symbol
-const TYPE_AUDIO = 'AUDIO'     const TYPE_AUDIO = Symbol()
-const TYPE_VIDEO = 'VIDEO'     const TYPE_VIDEO = Symbol()
-const TYPE_IMAGE = 'IMAGE'     const TYPE_IMAGE = Symbol()
-
-Map: 类似于对象。
-由于普通对象的key只能是字符串，如果用对象作为键值会被toString转化为字符串"[object Object]，
-let obj1={key:1}, obj2={key:2}, obj={}
-obj[obj1]='a'    // 将对象obj1作为obj的键值
-obj[obj2]='b'    // 由于转化为相同的键值字符串，obj2会覆盖obj1
-console.log(obj) // {[object Object]: "b"}
-因而新增Map数据类型，它的key可以是任何数据类型  
-var m0 = new Map() // 空Map
-var obj = {a: 1}
-var m = new Map([['a', 100], [obj, 50]]) // 二维数组作为参数
-属性 
-m.size // 2
-方法
-m.set('b', 2)    // Map(3) {"a" => 100, {a: 1} => 50, "b" => 2}                              添加新的key-value
-m.set({},"obj1") // Map(4) {"a" => 100, {a: 1} => 50, "b" => 2, {} => "obj1"}
-m.set({},"obj2") // Map(5) {"a" => 100, {a: 1} => 50, "b" => 2, {} => "obj1", {} => "obj2"}
-m.has('b')       // true 
-m.get('a')       // 100
-m.get(obj)       // 50
-m.delete('a')    // true                
-m.get('a')       // undefined
-m.clear()        // undefined 清除map中所有键值
-
-Set: 类似于数组。数组允许元素重复，Set不允许
-var s0 = new Set(); // 空Set
-var s = new Set([1, 2, 3, 3]) // Array作为参数，会自动去重
-属性  
-s.size      // 3
-方法
-s.add(4)    // Set(4) {1, 2, 3, 4}          添加元素
-s.keys()    // SetIterator {1, 2, 3, 4}     返回集合所有的键值
-s.values()  // SetIterator {1, 2, 3, 4}     返回集合所有值
-s.delete(4) // true                         删除元素
-s.values()  // SetIterator {1, 2, 3}
-s.clear()   // undefined                    清除集合所有元素
-s.values()  // SetIterator {}
-
-Service Worker
 Node
 npm yarn
 
@@ -487,20 +372,18 @@ HTTP&TCP/IP  三/四次握手
   {m,n}?　　{m,}?　　??　　+?　　*?
 <!-- layout:end -->
 反义
-<a[^>]+>
+
 var str = "if else no else but if";
 var reg = /\b(?:(?!(else|\s))[\w\W])+\b/gi;
 str.match(reg);
 
-\b 是正则表达式规定的一个特殊代码（好吧，某些人叫它元字符，metacharacter），代表着单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是 \b 并不匹配这些单词分隔字符中的任何一个，它只匹配一个位置。
-
-如果需要更精确的说法，\b 匹配这样的位置：它的前一个字符和后一个字符不全是(一个是,一个不是或不存在) \w。
-
-
-
+```dianzhui table
+^      <a[^>]+>                                     反义
+\b     a\b \bnice     It's [1| a nice] day today.   代表着单词的分界处(开头或结尾)(隐式位置)
+```
 
 
-香港六合彩 时时彩 11选5 北京赛车 快三 快乐10分
 
-参考2：admin.cdn888.com:82  账号：jishu888  密码：jishu888    菜单增加‘证书管理’
+
+
 

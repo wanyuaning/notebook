@@ -50,6 +50,17 @@ body{ font-size: 14px;}
 .cl8{ color: var(--color8)}
 .cl9{ color: var(--color9)}
 
+.bg0{ background-color: var(--color0)}
+.bg1{ background-color: var(--color1)}
+.bg2{ background-color: var(--color2)}
+.bg3{ background-color: var(--color3)}
+.bg4{ background-color: var(--color4)}
+.bg5{ background-color: var(--color5)}
+.bg6{ background-color: var(--color6)}
+.bg7{ background-color: var(--color7)}
+.bg8{ background-color: var(--color8)}
+.bg9{ background-color: var(--color9)}
+
 /* 代码块重写 */
 .markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
 .markdown-section pre>code { padding: 0px 0px; }
