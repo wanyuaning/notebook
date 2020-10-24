@@ -137,12 +137,13 @@ function codeDistributeEntry(hook, vm) {
         /**
          * 详情 <a href="#/pages/javascript/ecma">detail</a>
          */
-        const REG_Detail = /<a href="[^"]+"\s?>detail<\/a>/
+        const REG_Detail = /<a href="[^"]+"\s?>detail\d?<\/a>/g
         const Match_Detail_Arr = html.match(REG_Detail) || []
         Match_Detail_Arr.forEach(e => {
-            console.log(e)
-            const tag = e.replace('>detail', ' class="ui-detail"><img src="../../../assets/icon/more.svg" />')
-            console.log(tag)
+            const level = e.match(/detail\d?/)[0].charAt(6)
+            const className = 'ui-detail-' + (level || 6);
+            
+            const tag = e.replace(/>detail\d?/, ' class="'+className+'"><img src="../../../assets/icon/more.svg" />')            
             html = html.replace(e, tag)
         })
 

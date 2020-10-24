@@ -281,8 +281,14 @@ code h1.cl7,code h2.cl7,code h3.cl7,code h4.cl7,code h5.cl7,code h6.cl7{ color: 
 code h1.cl8,code h2.cl8,code h3.cl8,code h4.cl8,code h5.cl8,code h6.cl8{ color: #111; }
 code h1.cl9,code h2.cl9,code h3.cl9,code h4.cl9,code h5.cl9,code h6.cl9{ color: #000; }
 
-.ui-detail { }
-.ui-detail img{height: 24px; vertical-align: -4px; }
+/* a span{background-color: #Ecc;}
+.ui-detail-1,.ui-detail-2,.ui-detail-3,.ui-detail-4,.ui-detail-5,.ui-detail-6{background-color: #EEE;} */
+.ui-detail-1 img{height: 24px; vertical-align: -1px; }
+.ui-detail-2 img{height: 22px; vertical-align: -1px; }
+.ui-detail-3 img{height: 20px; vertical-align: -1px; }
+.ui-detail-4 img{height: 18px; vertical-align: -2px; }
+.ui-detail-5 img{height: 16px; vertical-align: -2px; }
+.ui-detail-6 img{height: 14px; vertical-align: -1px; }
 
 
 

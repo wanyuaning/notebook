@@ -1,21 +1,21 @@
 为宿主环境提供编程实现，Flash-ActionScript、浏览器-Javascript
 
-语法、类型、语句、关键字、保留字、运算符、对象
-JavaScript中的类型转换
-作用域、作用域链和闭包
-函数与函数表达式
-arguments对象
-call与apply的应用
-callee与caller的应用
-原型和原型链
-面向对象与继承
-this的理解
-引用/深浅拷贝/JavaScript中的参数传递规则
-Object原型中的函数及应用
-Object静态方法的应用
-Array相关API的应用
-Date相关API的应用
-异步编程
+- 语法、类型、语句、关键字、保留字、运算符、对象
+- JavaScript中的类型转换
+- 作用域、作用域链和闭包
+- 函数与函数表达式
+- arguments对象
+- call与apply的应用
+- callee与caller的应用
+- 原型和原型链
+- 面向对象与继承
+- this的理解
+- 引用/深浅拷贝/JavaScript中的参数传递规则
+- Object原型中的函数及应用
+- Object静态方法的应用
+- Array相关API的应用
+- Date相关API的应用
+- 异步编程
 
 #### 窗口管理
 　　方档规范 | 当前URL信息 | 浏览器信息 | 显示屏信息 | 用户访问信息 | 窗口集

@@ -1,9 +1,22 @@
 
+Snipaste
 
+MUI
+IOS证书
+HBuilderX  for mac
 
+https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android
+h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 
+### 系统  [detail3](pages/system/index)
+[Windows](pages/system/windows/index) 
+[MAC](pages/system/mac/index) 
+[Linux](pages/system/linux/index)
 
+### 环境  [detail3](pages/system/index)
 [Node](pages/frame/node.md)
+[Adroid](pages/frame/node.md)
+[IOS](pages/frame/node.md)
 
 [全局&工具](pages/common/global.md)  &emsp; [网络&资源](pages/common/net.md)  &emsp; [MySQL](pages/common/mysql.md)
 
@@ -326,64 +339,28 @@ HTTP&TCP/IP  三/四次握手
 
 
 # 正则表达式
+```table
+.  通配符[^\n\r\u2028\u2029]，换行符、回车符、行分隔符和段分隔符除外
 
-<!-- layout:start:regclass -->
-<!-- col:6 -->
-  <strong>/i</strong>　不区分大小写
-<!-- col:12 -->
-  <strong>/g</strong>　全局匹配
-<!-- col:6 -->
-  <strong>/m</strong>　多行匹配
-<!-- layout:end -->
+\d  [0-9]              \D  [^0-9]             匹配任意非数字的字符
+\w  [0-9a-zA-Z_]       \W  [^0-9a-zA-Z_]      匹配任意不是字母，数字，下划线，汉字的字符
+\s  [ \t\v\n\r\f]      \S  [^ \t\v\n\r\f]     匹配任意不是空白符的字符
+\b  a\b \bnice         \B                     匹配不是单词开头或结束的位置(隐式位置) 
 
-<!-- layout:start:regclass -->
-<!-- col:8 -->
-  <strong>?</strong>　{0,1}
-<!-- col:8 -->
-  <strong>+</strong>　{1,}
-<!-- col:8 -->
-  <strong>*</strong>　{0,}
-<!-- layout:end -->
-<!-- layout:start:regclass -->
-<!-- col:4 -->
-  <strong>\d</strong>　[0-9]
-<!-- col:4 -->
-  <strong>\D</strong>　[^0-9]
-<!-- col:4 -->
-  <strong>\w</strong>　[0-9a-zA-Z_]
-<!-- col:4 -->
-  <strong>\W</strong>　[^0-9a-zA-Z_]
-<!-- col:4 -->
-  <strong>\s</strong>　[ \t\v\n\r\f]
-<!-- col:4 -->
-  <strong>\S</strong>　[^ \t\v\n\r\f]
-<!-- layout:end -->
-<!-- layout:start:regclass -->
-<!-- col:24 -->
-  <strong>.</strong>　通配符[^\n\r\u2028\u2029]，换行符、回车符、行分隔符和段分隔符除外
-<!-- layout:end -->
+?  {0,1}            +  {1,}           *  {0,}
 
-<!-- layout:start -->
-<!-- col:4 -->
-  惰性匹配
-<!-- col:8 -->
-  <strong>量词</strong> 后面加个 <strong>?</strong> 实现惰性匹配
-<!-- col:12 -->
-  {m,n}?　　{m,}?　　??　　+?　　*?
-<!-- layout:end -->
-反义
+/i  不区分大小写     /g  全局匹配       /m  多行匹配  
 
-var str = "if else no else but if";
-var reg = /\b(?:(?!(else|\s))[\w\W])+\b/gi;
-str.match(reg);
+取反      \W \S \D [^x]匹配除了x以外的任意字符 !(else|\s) [^aeiou]匹配除了aeiou这几个字母以外的任意字符 
+惰性匹配  量词 + ?  实现惰性匹配  {m,n}?　　{m,}?　　??　　+?　　*?
 
-```dianzhui table
-^      <a[^>]+>                                     反义
-\b     a\b \bnice     It's [1| a nice] day today.   代表着单词的分界处(开头或结尾)(隐式位置)
+
 ```
-
-
-
-
+例子：
+```table dianzhui
+/\b(?:(?!(else|\s))[\w\W])+\b/gi  "[1| if] else [1| no] else [1| but] [1| if]" 
+/<span[^>]+>/                     "[1| <span title="#">]"
+a\b \bnice                        "It's [1| a nice] day today."   
+```
 
 
