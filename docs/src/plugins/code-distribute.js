@@ -112,6 +112,10 @@ function codeDistributeEntry(hook, vm) {
         return content;
     });
     hook.afterEach(function (html, next) {
+        html = html.replace(/h-t-t-p/g, 'http')
+        html = html.replace(/h-ttp/g, 'http')
+        html = html.replace(/w-w-w/g, 'www')
+        html = html.replace(/w-ww/g, 'www')
         /**
          * 识别 <pre v-pre data-lang="tree link"></pre>
          * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
@@ -145,6 +149,18 @@ function codeDistributeEntry(hook, vm) {
             
             const tag = e.replace(/>detail\d?/, ' class="'+className+'"><img src="../../../assets/icon/more.svg" />')            
             html = html.replace(e, tag)
+        })
+
+        /**
+         * 信息 (info http://www.androiddevtools.cn/)
+         */
+        const REG_Info = /\(info\d?\s{1,2}[^)]+\)/g
+        const Match_Info_Arr = html.match(REG_Info) || []
+        Match_Info_Arr.forEach(e => {
+            const level = e.match(/\(info\d?/)[0].charAt(5)
+            const content = e.replace(/\(info\d?\s{1,2}/, '').replace(')', '')
+            const className = 'ui-info-' + (level || 6);
+            html = html.replace(e, `<span class="${className}" info="${content}"><img src="../../../assets/icon/info.svg" /></span>`)
         })
 
         next(html);

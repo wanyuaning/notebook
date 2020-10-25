@@ -8,16 +8,23 @@ HBuilderX  for mac
 https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android
 h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 
+
+    
+
+
+
+
 ### 系统  [detail3](pages/system/index)
 [Windows](pages/system/windows/index) 
 [MAC](pages/system/mac/index) 
 [Linux](pages/system/linux/index)
 
-### 环境  [detail3](pages/system/index)
-[Node](pages/frame/node.md)
-[Adroid](pages/frame/node.md)
-[IOS](pages/frame/node.md)
+### 平台  [detail3](pages/platform/index)
+[Node](pages/platform/node.md)
+[Adroid](pages/platform/android.md) 
+[IOS](pages/platform/ios.md)
 
+### 其它
 [全局&工具](pages/common/global.md)  &emsp; [网络&资源](pages/common/net.md)  &emsp; [MySQL](pages/common/mysql.md)
 
 # CSS

@@ -290,5 +290,16 @@ code h1.cl9,code h2.cl9,code h3.cl9,code h4.cl9,code h5.cl9,code h6.cl9{ color: 
 .ui-detail-5 img{height: 16px; vertical-align: -2px; }
 .ui-detail-6 img{height: 14px; vertical-align: -1px; }
 
+.ui-info-1 img{height: 24px; vertical-align: -1px;}
+.ui-info-2 img{height: 22px; vertical-align: -1px;}
+.ui-info-3 img{height: 20px; vertical-align: -1px;}
+.ui-info-4 img{height: 18px; vertical-align: -2px;}
+.ui-info-5 img{height: 16px; vertical-align: -2px;}
+.ui-info-6 img{height: 14px; vertical-align: -2px;}
+.ui-info-6{position: relative;}
+.ui-info-6:before{content:attr(info); position: absolute; bottom: 100%; left: -10px; display: none; background-color: #333; color: #fff; border-radius: 3px; padding: 2px 5px; transform: translateY(-6px);}
+.ui-info-6:after{content:''; position: absolute; bottom: 100%; left: 3px; display: none; border-style: solid; transform: rotate(90deg); border-color:transparent transparent transparent  #333; border-width: 3px 0 3px 6px;}
+.ui-info-6:hover:before, .ui-info-6:hover:after{ display: inline-block;}
+
 
 
