@@ -5,7 +5,7 @@ Eclipse 或 Android Studio
 
 
 
-1. 下载安装JDK包:jdk-15.0.1_windows-x64_bin.exe  (info h-ttp://w-ww.oracle.com/technetwork/java/javase/downloads/index.html)
+1. 下载安装JDK包 (info h-ttp://w-ww.oracle.com/technetwork/java/javase/downloads/index.html) jdk-15.0.1_windows-x64_bin.exe  
 2. 系统环境变量 
 ```
     JAVA_HOME:  C:\Program Files\Java\jdk-15.0.1                    可以 %JAVA_HOME% 作为JDK安装目录的统一引用路径
@@ -14,6 +14,7 @@ Eclipse 或 Android Studio
 ```
 3. 下载安装Eclipse (info h-ttp://w-ww.eclipse.org/downloads/)
 4. Android SDK  
+```
     下载 (info h-ttp://w-ww.androiddevtools.cn/)  [Android SDK 工具 > SDK Tools] installer_r24.4.1-windows.exe
     安装 会自动关联JDK安装 安装地址: D:\sdk\ (新建了sdk文件夹)
     启动 SDK Manager 下载安装可选工具
@@ -21,7 +22,7 @@ Eclipse 或 Android Studio
         ANDROID_SDK_HOME: D:\sdk\
         Path: 追加 ;% ANDROID_SDK_HOME%\platform-tools;% ANDROID_SDK_HOME%\tools
     命令检测Android SDK是否安装成功：adb version
-        
+```       
     
 5. 为Eclipse安装ADT插件（Android Development Tools）以支持Android开发
     打开Eclipse软件

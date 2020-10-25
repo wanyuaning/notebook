@@ -3,7 +3,15 @@ Snipaste
 
 MUI
 IOS证书
-HBuilderX  for mac
+
+IOS开发环境
+    OS X 10.14.0+、Xcode 11.0+
+    版本一致:HBuilderX / IOS离线SDK
+    配置工程
+
+
+
+
 
 https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android
 h ttps://blog.csdn.net/lilang_9920/article/details/81005345
@@ -133,7 +141,7 @@ git remote add github https://github.com/wmgcuan/express.git
 skin: 1 利用class 命名空间；2 利用CSS预处理生成多套样式；3 利用CSS 变量换肤
 ## 工具
 ### GIT&NPM
-[GIT仓库&NPM包](tools/git-npm.md) &emsp; [GIT命令](tools/git-npm.md#git命令) &emsp; [Markdown](tools/markdown) &emsp; [Docsify](tools/docsify)
+[GIT仓库&NPM包](pages/tools/git-npm.md) &emsp; [GIT命令](pages/tools/git-npm.md#git命令) &emsp; [Markdown](pages/tools/markdown) &emsp; [Docsify](pages/tools/docsify)
 ```
 1. git init 
 2. curl -u 'wanyuaning' https://api.github.com/user/repos -d '{"name":"demo"}'    Wanyuaning... ...   user/repos  orgs/wmgcuan/repos

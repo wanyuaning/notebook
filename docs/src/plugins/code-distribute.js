@@ -160,7 +160,7 @@ function codeDistributeEntry(hook, vm) {
             const level = e.match(/\(info\d?/)[0].charAt(5)
             const content = e.replace(/\(info\d?\s{1,2}/, '').replace(')', '')
             const className = 'ui-info-' + (level || 6);
-            html = html.replace(e, `<span class="${className}" info="${content}"><img src="../../../assets/icon/info.svg" /></span>`)
+            html = html.replace(e, `<span class="${className}" info="${content}"><img src="../../../assets/icon/info.svg?v=1" /></span>`)
         })
 
         next(html);
