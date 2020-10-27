@@ -147,7 +147,7 @@ function codeDistributeEntry(hook, vm) {
             const level = e.match(/detail\d?/)[0].charAt(6)
             const className = 'ui-detail-' + (level || 6);
             
-            const tag = e.replace(/>detail\d?/, ' class="'+className+'"><img src="../../../assets/icon/more.svg" />')            
+            const tag = e.replace(/>detail\d?/, ' class="'+className+'"><img src="../../../assets/icon/more2.svg" />')            
             html = html.replace(e, tag)
         })
 
@@ -161,6 +161,18 @@ function codeDistributeEntry(hook, vm) {
             const content = e.replace(/\(info\d?\s{1,2}/, '').replace(')', '')
             const className = 'ui-info-' + (level || 6);
             html = html.replace(e, `<span class="${className}" info="${content}"><img src="../../../assets/icon/info.svg?v=1" /></span>`)
+        })
+
+        /**
+         * 补充 [!“adb”不是内部或外部命令](platform-tools/复制adb.exe，AdbWinApi.dll，AdbWinUsbApi.dll 到 C:\用户\new 目录下.)
+         */
+        const REG_Supplement = /\[[!?][^\]]+\]\([^\)]+\)/g
+        const Match_Supplement_Arr = html.match(REG_Supplement) || []
+        Match_Supplement_Arr.forEach(e => {
+            const type = e.charAt(1)
+            const title = e.match(/\[[!?][^\]]+\]/)[0].substr(2,).replace(']', '')
+            const content = e.match(/\([^\)]+\)/)[0].replace('(', '').replace(')', '')
+            html = html.replace(e, `<div class="ui-supplement"><h6>${title}</h6><p>${content}</p></div>`)
         })
 
         next(html);

@@ -27,11 +27,11 @@ Eclipse 或 Android Studio
 5. 为Eclipse安装ADT插件（Android Development Tools）以支持Android开发
     打开Eclipse软件
     Help > Install New Sofeware...
-    [Add]  Name: ADT  Location: http://dl-ssl.google.com/android/eclipse/  [OK]
+    [Add]  Name: ADT  Location: h-ttp://dl-ssl.google.com/android/eclipse/  [OK]
     勾选要安装的工具 [Next]
 
-“adb”不是内部或外部命令: 
-platform-tools/复制adb.exe，AdbWinApi.dll，AdbWinUsbApi.dll 到 C:\用户\new 目录下
+[!“adb”不是内部或外部命令](platform-tools/复制adb.exe，AdbWinApi.dll，AdbWinUsbApi.dll 到 C:\用户\new 目录下.)
+[!启动 Android Studio 时，每次都 Missing SDK](Android Studio安装目录/bin/idea.properties 末尾添加： disable.android.first.run=true 保存 重启Android Studio) 
 
-启动 Android Studio 时，每次都 Missing SDK    
-Android Studio安装目录/bin/idea.properties 末尾添加： disable.android.first.run=true 保存 重新Android Studio
+# 第一个应用
+创建AVG官方模拟器
