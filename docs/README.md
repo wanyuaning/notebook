@@ -1,4 +1,52 @@
 
+<style>
+
+
+
+
+
+
+.loading { 
+    --border-size: 5px;   
+    --border-color:0,180,220; 
+    --size: 50px;
+    --bg-color: #fff; 
+    
+    width: var(--size); height: var(--size);
+    border-width: var(--border-size);
+    display: inline-block; 
+    position: relative; z-index: 1;
+    border-style: solid; border-radius: 100%; border-color:transparent rgba(var(--border-color), .6) rgba(var(--border-color), .8) rgba(var(--border-color), 1);
+    animation: loading 1s linear infinite;
+}
+.loading::before, .loading::after { 
+    content: '';
+    width: calc(var(--size) - 2px); height: calc(var(--size) - 2px);
+    position: absolute; top: calc(var(--border-size) * -1 - 1px); left: calc(var(--border-size) * -1 - 1px);
+    border-width: calc(var(--border-size) + 2px); border-style: solid; border-radius: 100%; 
+    border-color: rgba(var(--bg-c), .6) rgba(var(--bg-c), .4) rgba(var(--bg-c), .2) transparent;
+} 
+.loading::before {border-color:rgba(255,255,255,.6) rgba(255,255,255,.4) rgba(255,255,255,.2) transparent;  transform: rotate(30deg);}
+
+.loading::after {  border-color:rgba(255,255,255,.6) rgba(255,255,255,.4) rgba(255,255,255,.2) transparent; transform: rotate(60deg); }
+
+@keyframes loading2{ 
+    from {transform: rotate(0deg);} 
+    to {transform: rotate(360deg);} 
+}
+</style>
+
+
+
+<p>1</p><p>1</p><p>1</p><p>1</p>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+  <span class="loading">qwwr</span>
+
+
+
+
+
 Snipaste
 
 MUI
@@ -23,7 +71,7 @@ return request({
         })
 
 
-        
+
 
 https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android
 h ttps://blog.csdn.net/lilang_9920/article/details/81005345
