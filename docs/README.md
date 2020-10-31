@@ -1,89 +1,5 @@
 
 
-<style>
-
-body{background:#fff}
-
-
-
-
-    .loading { 
-        --border-size: 80px;   
-        --border-color:0,180,220; 
-        --size: 200px;
-        --bg-color: 255,255,255; 
-        --bd-step: 0.1;
-        --mk-step: 0.2;
-        
-        width: var(--size); height: var(--size);
-        border-width: var(--border-size);
-        display: inline-block; 
-        position: relative; z-index: 1;
-        border-style: solid; border-radius: 100%; 
-        border-color:transparent rgba(var(--border-color), calc(1 - var(--bd-step) * 2)) rgba(var(--border-color), calc(1 - var(--bd-step))) rgba(var(--border-color), 1);
-        animation: loading 1s linear infinite;
-    }
-    .loading::before, .loading::after { 
-        content: '';
-        width: calc(var(--size) - 2px); height: calc(var(--size) - 2px);
-        position: absolute; top: calc(var(--border-size) * -1 - 1px); left: calc(var(--border-size) * -1 - 1px);
-        border-width: calc(var(--border-size) + 2px); border-style: solid; border-radius: 100%; 
-        border-color: rgba(var(--bg-color), calc(var(--mk-step) * 3)) rgba(var(--bg-color), calc(var(--mk-step) * 2)) rgba(var(--bg-color), var(--mk-step)) transparent;
-    } 
-    .loading::before {transform: rotate(30deg);}    
-    .loading::after {transform: rotate(60deg);}
-    
-    @keyframes loading2{ 
-        from {transform: rotate(0deg);} 
-        to {transform: rotate(360deg);} 
-    }
-
-    .mum{
-        --width: 60px; --height: 10px;
-        --long: 10px; --color: #333; --radius: 5px;
-        animation: loading2 2s linear infinite;
-    }
-    
-    .mum, .mum span{
-        display: inline-block;
-        width: var(--width); height: var(--height);
-        background-color:#fff;
-        box-sizing: border-box;
-        position: relative; z-index: 1;
-        transform-origin: center center;
-    }
-    .mum span{
-        transform: rotate(45deg);
-        
-    }
-    .mum:before, .mum:after, .mum span::before, .mum span:after{
-        content: ''; 
-        position: absolute; top: 0;
-        width: var(--long); height: var(--height);
-        background-color:var(--color);
-        border-radius: var(--radius);
-    }
-    .mum:before, .mum span::before{ left: 0;}
-    .mum:after, .mum span::after{ right: 0;}
-    .jb > span:before{opacity: 0;}
-    .jb > span > span:before{opacity: 0.05;}
-    .jb > span > span > span:before{opacity: 0.19;}
-    .jb > span > span > span > span:before{opacity: 0.32;}
-    .jb > span > span > span > span > span:before{opacity: 0.44;}
-    .jb:after{opacity: 0.55;}
-    .jb > span:after{opacity: 0.65;}
-    .jb > span > span:after{opacity: 0.74;}
-    .jb > span > span > span:after{opacity: 0.82;}
-    .jb > span > span > span > span:after{opacity: 0.89;}
-    .jb > span > span > span > span > span:after{opacity: 0.95;}
-    </style>
-    
-    
-    
-    <p>1</p><p>1</p><p>1</p><p>1</p>
-    &emsp;&emsp;&emsp;&emsp;&emsp;<span class="loading"></span>
-    
-    <span class="mum"><span><span><span></span></span></span></span>
 
 
 
@@ -145,7 +61,8 @@ mounted(){
 ```
 
     
-
+[场景&方案](pages/solution/scene.md)
+[设计模式](pages/solution/disign-pattern.md)
 
 
 

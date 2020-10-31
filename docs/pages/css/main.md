@@ -1,4 +1,119 @@
-引入字体
+
+v-integer
+
+Vue.directive('integer', {
+  inserted(el, binding, vnode) {
+    el.oninput = function (e) {
+      let value = e.target.value
+      if (value.indexOf('.') > -1) {
+        value = value.replace('.', '')
+        vnode.context.num = e.target.value = value
+        return
+      }
+      if (isNaN(value)) {
+        value = value.slice(0,value.length-1)
+        vnode.context.num = e.target.value = value
+        return
+      }
+    }
+  }
+})
+
+
+
+### Loading
+![loading](../../assets/images/loading.jpg "loading")<br>
+```css
+@keyframes loading{ 
+    from {transform: rotate(0deg);} 
+    to {transform: rotate(360deg);} 
+}
+```
+```
+.ring { 
+    --size: 40px; --border: 6px; --color: 0,180,220; vertical-align: middle;
+    border-color:transparent rgba(var(--color), 0.2) rgba(var(--color), 0.6) rgba(var(--color), 1);
+    display: inline-block; position: relative; 
+    /* animation: loading2 1s linear infinite; */
+}
+.ring, .ring::before, .ring::after{
+    width: var(--size); height: var(--size); border-width: var(--border); border-style: solid; border-radius: 100%; z-index: 1;
+}
+.ring::before, .ring::after { 
+    content: '';
+    position: absolute; top: calc(var(--border) * -1); left: calc(var(--border) * -1);
+    border-color:transparent rgba(var(--color), 0.05) rgba(var(--color), 0.4) rgba(var(--color), 0.8);
+} 
+.ring::before {transform: rotate(-30deg);}    
+.ring::after  {transform: rotate(-60deg);}
+```
+```
+.mum{
+    --size: 60px; 
+    --width: 15px; --height: 4px; --color: #333; --radius: 5px;
+    width: var(--size); height: var(--size); display:inline-flex; justify-content: center; align-items: center; vertical-align: middle;
+    /* animation: loading2 1.5s linear infinite; */
+}   
+.mum i{
+    display: inline-block; position: relative; z-index: 1; transform: rotate(30deg); 
+    width: var(--size); height: var(--height); line-height: 0; font-size: 0;
+}
+.mum i::before, .mum i:after{
+    content: ''; position: absolute; top: 0;
+    width: var(--width); height: var(--height);
+    background-color:var(--color); border-radius: var(--radius);
+}
+.mum:before, .mum i::before{ left: 0;}
+.mum:after, .mum i::after{ right: 0;}
+.mum.jb > i:before{opacity: 0;}
+.mum.jb > i > i:before{opacity: 0.05;}
+.mum.jb > i > i > i:before{opacity: 0.19;}
+.mum.jb > i > i > i > i:before{opacity: 0.32;}
+.mum.jb > i > i > i > i > i:before{opacity: 0.44;}
+.mum.jb > i > i > i > i > i > i:before{opacity: 0.55;}
+.mum.jb > i:after{opacity: 0.65;}
+.mum.jb > i > i:after{opacity: 0.74;}
+.mum.jb > i > i > i:after{opacity: 0.82;}
+.mum.jb > i > i > i > i:after{opacity: 0.89;}
+.mum.jb > i > i > i > i > i:after{opacity: 0.95;}
+```
+```
+.dian{
+    --size: 50px;
+    --dian: 8px; --color: #333; 
+    width: var(--size); height: var(--size); display:inline-flex; justify-content: center; align-items: center;
+    animation: loading 2s linear infinite;
+}        
+.dian i{
+    display: inline-block;
+    width: var(--size); height: var(--dian); transform: rotate(45deg);
+    position: relative; z-index: 1;
+}
+.dian i::before, .dian i:after{
+    content: ''; position: absolute; top: 0;
+    width: var(--dian); height: var(--dian);
+    background-color:var(--color); border-radius: 100%;
+}
+.dian i::before{ left: 0;}
+.dian i::after{ right: 0;}
+.dian.jb > i > i:before{opacity: 0.05;}
+.dian.jb > i > i > i:before{opacity: 0.10;}
+.dian.jb > i > i > i > i:before{opacity: 0.25;}
+.dian.jb > i:after{opacity: 0.40;}
+.dian.jb > i > i:after{opacity: 0.55;}
+.dian.jb > i > i > i:after{opacity: 0.70;}
+.dian.jb > i > i > i > i:after{opacity: 0.85;}
+```
+```html
+<span class="ring"></span>
+<span class="mum jb"><i><i><i><i><i><i></i></i></i></i></i></i></span>
+<span class="dian jb"><i><i><i><i></i></i></i></i></span>
+```
+
+
+
+
+### 引入字体
 ```css
 @font-face {
  font-family: 'datefont';
@@ -11,7 +126,7 @@
 #id{font-family:datefont}
 ```
 
-SVG字体方案
+### SVG字体方案
 ```
 ```
 
