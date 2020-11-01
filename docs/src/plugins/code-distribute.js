@@ -87,9 +87,8 @@ function handleCommon(data) {
   const REG = /(\/\/|#)\s*.+?(\n|$|\s{3,})/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
-    console.log(e);
-    
-    data = data.replace(e, `<span class="cc">${e}</span>`)
+    let e2 = e.replace(/\n/, `</span>\n`)
+    data = data.replace(e, `<span class="cc">${e}`)
   })
   return data
 }
