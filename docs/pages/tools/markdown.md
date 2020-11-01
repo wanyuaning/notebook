@@ -1,4 +1,4 @@
-
+[detail1](pages/system/index)
 
 ### ewan-layout
 <!-- layout:start -->

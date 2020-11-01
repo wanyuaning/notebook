@@ -4,10 +4,11 @@
 
 
 
+
 Snipaste
 
 MUI
-IOS证书
+
 
 IOS开发环境
     OS X 10.14.0+、Xcode 11.0+
@@ -286,7 +287,7 @@ Webpack rollup
 # 框架
 
 # VUE
-[详情](frame/vue/index.md)  
+[详情](pages/frame/index.md)  
 
 ## 路由
 ```js

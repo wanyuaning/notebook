@@ -1,0 +1,31 @@
+{
+    "vetur.validation.templateProps": true,
+    "editor.formatOnType": true,
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "editor.detectIndentation": false, //缩进
+    "editor.tabSize": 2,
+    "launch": {
+    
+
+
+
+        "configurations": [],
+        "compounds": []
+    },
+    "fileheader.customMade": {
+        "autoAdd": false, // 关闭自动添加头部注释
+      "Author":"Ewan",
+      "Date":"Do not edit",
+      "LastEditors":"Ewan",
+      "LastEditTime":"Do not edit",
+      "Description":"file content"
+    },
+    // 函数注释 
+    "fileheader.cursorMode": {
+      "description":"",
+      "param":"",
+      "return":""
+    }
+}
