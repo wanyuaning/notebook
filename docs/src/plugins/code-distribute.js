@@ -84,7 +84,7 @@ function handleTitle(data) {
  * @param {string} data 
  */
 function handleCommon(data) {
-  const REG = /(\/\/|#)\s*.+?(\n|$|\s{3,})/g
+  const REG = /\/\/\s*.+?(\n|$)/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
     data = data.replace(e, `<span class="cc">${e}</span>`)
@@ -119,17 +119,14 @@ function codeDistributeEntry(hook, vm) {
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
-     */
-    const REG_PRE = /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/gm
-    const REG_CODE = /<code class="lang-[\w ?\w?]+">[\s\S]*?<\/code>?/gm
-    const REG_LANG = /<pre v-pre data-lang="[\w| ?|\w?]+">/
-    const Match_PRE_ARR = html.match(REG_PRE) || []
+     */    
+    const Match_PRE_ARR = html.match(/<pre v-pre data-lang="([^"]+)?">[\s\S]*?<\/pre>/gm) || []    
     Match_PRE_ARR.map(pre => {
-      const langArr = pre.match(REG_LANG)[0].replace('<pre v-pre data-lang="', '').replace('">', '').split(' ') || []
-      const Match_CODE_ARR = pre.match(REG_CODE) || []
+      const langArr = pre.match(/<pre v-pre data-lang="([^"]+)?">/)[0].replace('<pre v-pre data-lang="', '').replace('">', '').split(' ') || []
+      const Match_CODE_ARR = pre.match(/<code class="lang-[^"]*">[\s\S]*?<\/code>/gm) || []
       const Match_CODE = Match_CODE_ARR.length > 0 ? Match_CODE_ARR[0] : ''
       const Match_CODE_TEXT = Match_CODE.replace(/<code class="lang-[\w]+[ \w-]{0,}?">/, '').replace(/<\/code>/, '')
-      console.log(Match_CODE_TEXT);
+      
       
       let NEW_CODE_TEXT = handleCommon(Match_CODE_TEXT)// Match_CODE_TEXT
       
