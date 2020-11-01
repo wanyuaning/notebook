@@ -87,8 +87,7 @@ function handleCommon(data) {
   const REG = /(\/\/|#)\s*.+?(\n|$|\s{3,})/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
-    let e2 = e.replace(/\n/, `</span>\n`)
-    data = data.replace(e, `<span class="cc">${e}`)
+    data = data.replace(e, `<span class="cc">${e}</span>`)
   })
   return data
 }
@@ -110,12 +109,6 @@ var HANDLER_MAP = {
 function codeDistributeEntry(hook, vm) {
   let hasPanels = false;
   hook.beforeEach(function (content) {
-    // const MATCH_CODE_ARR = content.match(/```[\r\n]*[\s\S]*?```/gm)
-    // MATCH_CODE_ARR.map((code, i) => {
-    //   content = content.replace(code, handleCommon(code));
-    // })
-    // return content;
-    content = handleCommon(content)
     return content;
   });
   hook.afterEach(function (html, next) {
@@ -136,7 +129,10 @@ function codeDistributeEntry(hook, vm) {
       const Match_CODE_ARR = pre.match(REG_CODE) || []
       const Match_CODE = Match_CODE_ARR.length > 0 ? Match_CODE_ARR[0] : ''
       const Match_CODE_TEXT = Match_CODE.replace(/<code class="lang-[\w]+[ \w-]{0,}?">/, '').replace(/<\/code>/, '')
-      let NEW_CODE_TEXT = Match_CODE_TEXT
+      console.log(Match_CODE_TEXT);
+      
+      let NEW_CODE_TEXT = handleCommon(Match_CODE_TEXT)// Match_CODE_TEXT
+      
       langArr.forEach(lang => {
         if (HANDLER_MAP[lang]) {
           NEW_CODE_TEXT = HANDLER_MAP[lang](NEW_CODE_TEXT)
