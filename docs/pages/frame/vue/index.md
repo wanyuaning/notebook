@@ -162,8 +162,8 @@ props: {
 
 https://blog.csdn.net/jjb520/article/details/79551943
 ```
-多页开发
-```html
+#### 多页开发
+```
 <!DOCTYPE html>
 <html>
 <head>
@@ -310,7 +310,8 @@ handler: function (status) { }
 </body>
 </html>
 ```
-单页应用
+
+#### 单页应用
 ```
 <template>
 <div>
@@ -378,7 +379,8 @@ body {
 }
 </style>
 ```
-VUE-CLI
+
+#### VUE-CLI
 ```
 1 sudo npm install -g vue-cli
 2 vue init webpack project-name

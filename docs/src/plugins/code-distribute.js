@@ -112,6 +112,8 @@ function codeDistributeEntry(hook, vm) {
     return content;
   });
   hook.afterEach(function (html, next) {
+    
+    
     html = html.replace(/h-t-t-p/g, 'http')
     html = html.replace(/h-ttp/g, 'http')
     html = html.replace(/w-w-w/g, 'www')

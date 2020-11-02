@@ -62,10 +62,10 @@ body{ font-size: 14px;}
 .bg9{ background-color: var(--color9)}
 
 /* 代码块重写 */
-.markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
+.markdown-section pre { line-height: 0.8rem; margin: 0.2em 0 0.6em 0; }
 .markdown-section pre[data-lang~=line-8] { line-height: 0.8rem; }
 .markdown-section pre[data-lang~=line1] { line-height: 1rem; }
-.markdown-section pre>code { padding: 0px 0px; }
+.markdown-section pre>code { padding: 0px 0px; font-size: 12px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
 .markdown-section p{ margin: 5px 0 5px 0;}

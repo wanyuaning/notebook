@@ -81,13 +81,13 @@
     </script>
     <script src="./assets/main/docsify.min.js"></script>
     <script src="./assets/main/search.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
-    <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
-    <script src="https://unpkg.com/docsify-plantuml@1.3.2/dist/docsify-plantuml.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script> -->
+    <!-- <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script> -->
+    <!-- <script src="https://unpkg.com/docsify-plantuml@1.3.2/dist/docsify-plantuml.min.js"></script> -->
     <script src="src/plugins/panels/js/index.js"></script>
     <script src="src/plugins/code-distribute.js"></script>
     <script>
-      setTimeout(()=>{
+      //setTimeout(()=>{
         // Array.prototype.forEach.call(document.querySelectorAll('pre[data-lang]'), (e) => {
         //   e.addEventListener('click', function(el){
         //     this.className = this.className === '' ? 'close' : ''
@@ -104,25 +104,25 @@
           
         // })
 
-        Array.prototype.forEach.call(document.querySelectorAll('.collapse'), (e) => {
-          e.addEventListener('click', function(el){
-            if (el.target.tagName === 'C') {
-              const value = el.target.getAttribute('i')
-              const className = el.currentTarget.className
-              const activeClassMatch = className.match(/c-atv-\d{1,2}/)[0]
-              let classStr
-              if (activeClassMatch === 'c-atv-0') {
-                classStr = className.replace(activeClassMatch, 'c-atv-'+value)
-              } else {
-                classStr = className.replace(activeClassMatch, 'c-atv-0')
-              }
-              el.currentTarget.className = classStr
-            }
-          })
+      //   Array.prototype.forEach.call(document.querySelectorAll('.collapse'), (e) => {
+      //     e.addEventListener('click', function(el){
+      //       if (el.target.tagName === 'C') {
+      //         const value = el.target.getAttribute('i')
+      //         const className = el.currentTarget.className
+      //         const activeClassMatch = className.match(/c-atv-\d{1,2}/)[0]
+      //         let classStr
+      //         if (activeClassMatch === 'c-atv-0') {
+      //           classStr = className.replace(activeClassMatch, 'c-atv-'+value)
+      //         } else {
+      //           classStr = className.replace(activeClassMatch, 'c-atv-0')
+      //         }
+      //         el.currentTarget.className = classStr
+      //       }
+      //     })
           
-        })
+      //   })
         
-      }, 0)
+      // }, 0)
       
       
      
