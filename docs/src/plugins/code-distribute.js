@@ -79,6 +79,18 @@ function handleTitle(data) {
   })
   return data
 }
+function handleBlock(data) {
+  // 水平线
+  (data.match(/-+\n/g) || []).forEach(e => {
+    data = data.replace(e, '<hr>')
+  });
+  // API
+  (data.match(/\[API\]\[[^\]]+\]\[[^\]]+\]/g) || []).forEach(e => {
+    let e2 = e.replace(/\[API\]/, '<i class="api"></i>').replace('[', '<i class="path">').replace(']', '</i>').replace('[', '<i>').replace(']', '</i>')
+    data = data.replace(e, e2)
+  })
+  return data
+}
 /**
  * 处理通用格式：注释
  * @param {string} data 
@@ -97,7 +109,8 @@ var HANDLER_MAP = {
   table: handleTable,
   link: handleLink,
   popover: handlePop,
-  title: handleTitle
+  title: handleTitle,
+  block: handleBlock
 }
 
 /**

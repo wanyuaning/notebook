@@ -62,10 +62,10 @@ body{ font-size: 14px;}
 .bg9{ background-color: var(--color9)}
 
 /* 代码块重写 */
-.markdown-section pre { line-height: 0.8rem; margin: 0.2em 0 0.6em 0; }
+.markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
 .markdown-section pre[data-lang~=line-8] { line-height: 0.8rem; }
 .markdown-section pre[data-lang~=line1] { line-height: 1rem; }
-.markdown-section pre>code { padding: 0px 0px; font-size: 12px; }
+.markdown-section pre>code { padding: 0px 0px; }
 .markdown-section p, .markdown-section ul{ line-height: 1rem; }
 
 .markdown-section p{ margin: 5px 0 5px 0;}
@@ -309,3 +309,31 @@ code h1.cl9,code h2.cl9,code h3.cl9,code h4.cl9,code h5.cl9,code h6.cl9{ color: 
     background: #f9f9f9;}
 .ui-supplement h6{color: #17a2b8; font-size: 12px; margin: 5px 0 0 0;}
 .ui-supplement p{margin: 5px 0 5px 0; color: #666; line-height: 12px;}
+
+pre[data-lang~=block], pre[data-lang~=block] code{
+  background:#fff;
+}
+pre[data-lang~=block]{
+  display:inline-block;
+  line-height: 1rem;
+  font-size:12px;
+  height: auto;
+  padding:2px 0; margin:3px;
+  border:#eee 0px solid;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+  
+}
+pre[data-lang~=block]:after{
+  display:none;
+}
+pre[data-lang~=block] code{
+  height: auto;
+  overflow: visible;
+  margin:0;
+  line-height: 0.8rem;
+  vertical-align:middle;
+}
+pre[data-lang~=block] code i{display:inline-block; vertical-align:middle; font-style: normal;}
+code hr{ height:4px; display:block; line-height:0; font-size:0;}
+i.api{ width:12px; height: 12px; background:#333 url(../images/api-fill.png) center center/100% 100%; margin: 0 2px}
+i.path{ width: 0; overflow-x: hidden;}

@@ -1,4 +1,4 @@
-```
+```block
 store{
   isCode: false,           // 是否开启了验证码
   verifyCodeTypeList: {
@@ -8,8 +8,10 @@ store{
     SceneUserRegister: 0   // 注册开启哪一种验证码
   }
 }
-
-/api/Api/GetVerifyCodeNew
+```
+```block
+[API][/api/Api/][GetVerifyCodeNew]
+----------------------------------
 {
   state: "success",
   message: "NB103367 开启验证码",
@@ -24,6 +26,9 @@ store{
   msg: "0图形 1行为 2短信 3图形+短信,",
 }
 ```
+SCENE[
+  {title:'验证策略', flow:[]}
+]
 
 ```plantuml
 @startuml
