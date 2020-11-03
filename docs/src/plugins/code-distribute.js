@@ -18,14 +18,17 @@ function handleDianzhui(data) {
   return data
 }
 function handleTable(data) {
-  const rows = data.split('\n') || []
+  const rows = data.split('\n') || []  
+  let tableStr = ``
   rows.forEach((e, i) => {
-    const cols = e.split(/\s{2,}/) || []
-    for (let j = 0; j < cols.length; j++) {
-      data = data.replace(cols[j], `<span class="row${i} col${j}">${cols[j]}</span>`)
-    }
+    let trStr = `<span class="row${i} col0">${e}</span>\n`
+    const spaceArr = trStr.match(/\s{2,}/) || [] 
+    spaceArr.forEach((space, j) => {
+      trStr = trStr.replace(space, `</span>${space}<span class="row${i} col${j+1}">`)
+    })
+    tableStr += trStr
   })
-  return data
+  return tableStr
 }
 function handleLink(data) {
   const reg = /\[.+?\]\(.+?\)/g
@@ -80,10 +83,6 @@ function handleTitle(data) {
   return data
 }
 function handleBlock(data) {
-  // 水平线
-  (data.match(/-+\n/g) || []).forEach(e => {
-    data = data.replace(e, '<div class="hr"></div>')
-  });
   // API
   (data.match(/\[API\]\[[^\]]+\]\[[^\]]+\]/g) || []).forEach(e => {
     let e2 = e.replace(/\[API\]/, '<i class="zhishi"></i>').replace('[', '<i class="path">').replace(']', '</i>').replace('[', '<i>').replace(']', '</i>')
@@ -115,12 +114,17 @@ function handleCommon(data) {
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
     data = data.replace(e, `<span class="comment">${e}</span>`)
-  })
+  });
+
+  // 水平线
+  (data.match(/-+\n/g) || []).forEach(e => {
+    data = data.replace(e, '<div class="hr"></div>')
+  });
   return data
 }
 
 var HANDLER_MAP = {
-  dianzhui: handleDianzhui, // 点缀
+  dianzhui: handleDianzhui, // 点缀 [1 log]
   table: handleTable,
   link: handleLink,
   popover: handlePop,
