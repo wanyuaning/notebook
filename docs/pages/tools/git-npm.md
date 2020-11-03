@@ -1,3 +1,29 @@
+
+配置用户名与邮箱
+用户名和邮箱地址是本地git客户端的一个变量,每次commit都会用用户名和邮箱纪录。github的contributions统计就是按邮箱来统计的
+查看
+git config user.name
+git config user.email
+修改
+用户级别                                    系统级别              库级别
+git config --global user.name "username"   git config --system   git config
+git config --global user.email "email"     git config --system   git config
+~/.gitconfig                               /etc/gitconfig        项目.git文件夹下
+
+
+修改git提交记录的邮箱(变基过程)
+1. 打开提交记录
+  git rebase -i                   // 最近一条
+  git rebase -i "your commit id"  // 指定某一条记录
+
+2. git commit --amend
+3. 退出变基
+git rebase --continue
+ 
+
+
+
+
 ❶ git init 
 ❷ curl -u 'wanyuaning' https://api.github.com/user/repos -d '{"name":"demo"}'    Wanyuaning... ...   user/repos  orgs/wmgcuan/repos
 ❸ git remote add github https://github.com/wanyuaning/demo.git   wanyuaning/demo.git   wmgcuan/demo.git
