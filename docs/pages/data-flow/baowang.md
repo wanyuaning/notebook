@@ -1,4 +1,6 @@
-```block
+```block store
+[API][/api/Api/][GetVerifyCodeNew]
+----------------------------------
 store{
   isCode: false,           // 是否开启了验证码
   verifyCodeTypeList: {
@@ -9,7 +11,7 @@ store{
   }
 }
 ```
-```block
+```block api
 [API][/api/Api/][GetVerifyCodeNew]
 ----------------------------------
 {
@@ -26,9 +28,15 @@ store{
   msg: "0图形 1行为 2短信 3图形+短信,",
 }
 ```
-SCENE[
-  {title:'验证策略', flow:[]}
-]
+
+```block
+SCENE(
+  {"title":"验证策略", "flow":[]},
+  {"title":"验证策略", "flow":[]},
+  {"title":"验证策略", "flow":[]},
+  {"title":"验证策略", "flow":[]}
+)
+```
 
 ```plantuml
 @startuml

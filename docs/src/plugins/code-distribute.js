@@ -82,13 +82,28 @@ function handleTitle(data) {
 function handleBlock(data) {
   // 水平线
   (data.match(/-+\n/g) || []).forEach(e => {
-    data = data.replace(e, '<hr>')
+    data = data.replace(e, '<div class="hr"></div>')
   });
   // API
   (data.match(/\[API\]\[[^\]]+\]\[[^\]]+\]/g) || []).forEach(e => {
-    let e2 = e.replace(/\[API\]/, '<i class="api"></i>').replace('[', '<i class="path">').replace(']', '</i>').replace('[', '<i>').replace(']', '</i>')
+    let e2 = e.replace(/\[API\]/, '<i class="zhishi"></i>').replace('[', '<i class="path">').replace(']', '</i>').replace('[', '<i>').replace(']', '</i>')
     data = data.replace(e, e2)
-  })
+  });
+  // 场景
+  // (data.match(/SCENE\(([^\)]+)\)/g) || []).forEach(e => {
+  //   console.log('场景',e);
+    
+  // });
+  let item
+  while ((item = /SCENE\(([^\)]+)\)/g.exec(data)) !== null) {
+    const lists = JSON.parse(`[${item[1]}]`)
+    let ulHTML = `<ul class="scene"><div>场景</div>`
+    lists.forEach(obj => {
+      ulHTML += `<li>${obj.title}</li>`
+    })
+    ulHTML += `</ul>`
+    data = data.replace(item[0], ulHTML)
+  }
   return data
 }
 /**
@@ -99,7 +114,7 @@ function handleCommon(data) {
   const REG = /\/\/\s*.+?(\n|$)/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
-    data = data.replace(e, `<span class="cc">${e}</span>`)
+    data = data.replace(e, `<span class="comment">${e}</span>`)
   })
   return data
 }
