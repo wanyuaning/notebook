@@ -322,18 +322,22 @@ pre[data-lang~=block]{
   display:inline-block;
   font-size:12px !important;
   line-height: 1rem;
-  height: auto;
+  
   padding:2px 0; margin:3px;
-  border:#eee 0px solid;
+  border-left:#fff 1px solid; border-top:#fff 1px solid;
   background:#fff;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
   letter-spacing: -1px;
+  max-width: 200px; 
+  max-height: 200px;
+  overflow: auto; 
   
 }
 pre[data-lang~=block]:after{
   display:none;
 }
 pre[data-lang~=block] code{
+  
   height: auto;
   overflow: visible;
   margin:0;

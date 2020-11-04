@@ -27,5 +27,6 @@
       "description":"",
       "param":"",
       "return":""
-    }
+    },
+    "editor.fontFamily": "Consolas"
 }

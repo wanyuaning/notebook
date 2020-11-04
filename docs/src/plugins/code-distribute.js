@@ -109,7 +109,8 @@ function handleBlock(data) {
  * 处理通用格式：注释
  * @param {string} data 
  */
-function handleCommon(data) {
+function handleCommon(data) {console.log('通用', data);
+
   const REG = /\/\/\s*.+?(\n|$)/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {

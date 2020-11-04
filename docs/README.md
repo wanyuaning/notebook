@@ -1,6 +1,6 @@
 
 
-
+[极验验证码](http://docs.geetest.com/2.0/sections/idx-client-sdk.html)
 
 vue performance devtool(谷歌/性能)
 
@@ -92,13 +92,7 @@ mounted(){
 　　　　
 ## JavaScript
 ### ECMAScript规范 [detail](pages/javascript/ecma.md)
-
-
-
-
-
-
-
+```
 弹出新的浏览器窗口；
 移动、关闭浏览器窗口以及调整窗口大小；
 提供 Web 浏览器详细信息的定位对象；　
@@ -119,33 +113,20 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 6、事件与事件流
 7、浏览器兼容性
 
-
-
-
-
-
-
-
-
-
-
-
-
 原型与原型链
 执行上下文与执行上下文栈
 作用域与作用域链
 闭包
 高阶函数
-
-数据类型
-基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
-对象类型：
-类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error
-实例对象：{} [] fn
-
-
+```
+#### 数据类型
++ 基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
++ 对象类型：
+> 类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error<br>
+> 实例对象：{} [] fn
 
 [类型转换](pages/javascript/data-type?id=类型转换)
+
 
 控制流程
 for 可return breake
