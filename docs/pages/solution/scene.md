@@ -1,15 +1,31 @@
 场景
 MPA
 SPA
+Portal
 
-# 微前端架构
+### 微前端架构
 微前端架构旨在解决单体应用在一个相对长的时间跨度下，由于参与的人员、团队的增多、变迁，从一个普通应用演变成一个巨石应用(Frontend Monolith)后，随之而来的应用不可维护的问题
+##### 使用场景
+- 项目很多，规模很大，都是每个项目独立使用git此类仓库维护的、技术栈为vue/react/angular的这类应用
+- 需要整合到统一平台上，你正在寻找可能比iframe更合适的替代方案
+- 项目A有功能A1、A2、A3,项目B有功能B1、B2、B3，产品经理要你把A2、B1、B3组合成一个包含这些功能的新项目
+[single-spa](https://zh-hans.single-spa.js.org/docs/getting-started-overview)
 [qiankun乾坤](https://github.com/umijs/qiankun)
 [文档](https://qiankun.umijs.org/zh)
+```
+$ vue create qiankun-demo   # 新建项目
+$ cd qiankun-demo
+$ npm run serve    # 项目启动
+$ npm run build    # 打包
+
+$ yarn add qiankun # 或者 npm i qiankun -S
+
+
+```
 
 
 ################
-## 运行时
+#### 运行时
 文件结构
 
 配置列表
@@ -19,8 +35,8 @@ CONF_BW = {
   TITLE:     '站点标题',
   COPYRIGHT: '备案信息',
 }
-RES_PUBLIC: 
-RES_PRIVATE: CONF_BW.THEME
+RES_PUBLIC: 'static/'
+RES_PRIVATE: CONF_BW.THEME + '/'
 
 
 场景：
@@ -28,7 +44,7 @@ RES_PRIVATE: CONF_BW.THEME
 新增一个主题皮肤
 主题皮肤变更指引：资源变迁 
 
-## 构建时
+#### 构建时
 CONF_THEME = {
   THEME: {
     SKIN:      '主题皮肤',

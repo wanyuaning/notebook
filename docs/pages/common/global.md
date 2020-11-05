@@ -36,6 +36,17 @@ http {
     }
 }
 ```
+http {
+    server {
+        listen 8080;
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Headers DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization;
+        add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
+    }
+}
+
+
+
 ### 文档
 >$ sudo npm i docsify-cli -g<br>
 >$ docsify init ./docs<br>
