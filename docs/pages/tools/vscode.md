@@ -18,7 +18,7 @@
 
 
 ### settings
-```js
+```O
 {
   // 缩进
   "editor.detectIndentation": false, // 默认启用了根据文件类型自动设置tabSize
@@ -47,22 +47,22 @@
 ![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")
 
 ### 插件
-```table title link
-#####| JSON Tools
+```table link
+[h2 reverse|JSON Tools]
 Ctrl(Cmd)+Alt+M    格式化代码
 Alt+M              紧凑化代码
 
-#####| koroFileHeader
+[h2 reverse|koroFileHeader]
 ctrl + Alt + i     文件头部注释 [fileheader.customMade](pages/tools/vscode.md?id=settings)
 ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](pages/tools/vscode.md?id=settings)
 ```
 
 ### 用户片段
 文件 > 首选项 > 用户片段
-```dianzhui popover
+```popover
 {
   "[0 Print to console]": {
-    "(prefix)(触发快捷提示的字符串前缀)": "[1 log]",
+    "(prefix)(触发快捷提示的字符串前缀)": "[cg b|log]",
     "(body)(代码片段主体)": [
       "console.log('$1');",
       "$2"
@@ -70,7 +70,7 @@ ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](
     "description": "打印到控制台"
   },
   "[0 Add format comment]": {
-    "prefix": "[1 comment]",
+    "prefix": "[cg b|comment]",
     "body": [
       "/**",
       " * ",

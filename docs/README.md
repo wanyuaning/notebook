@@ -1,6 +1,30 @@
 
+样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
+
+<br><br>
+
+详情：`[detail3](url)`<br>
+链接：`[name](url) ` <br>
+块列表：`<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul>`
+<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul>
+
 
 [极验验证码](http://docs.geetest.com/2.0/sections/idx-client-sdk.html)
+
+- v-for :key【作用】
+- 防抖和节流【区别】【实现】
+- Set、Map、WeakSet 和 WeakMap 的区别
+- 深度优先遍历和广度优先遍历【实现】
+- ES5/ES6 的继承除了写法以外还有什么区别
+- setTimeout、Promise、Async/Await 的区别
+- Async/Await 如何通过同步的方式实现异步
+- 如何实现一个 new
+
+- HTTP&TCP/IP  三/四次握手
+- 算法  二分法(折半查找法)  二叉树
+
+- 两次提交
+- 域名访问网页的过程
 
 vue performance devtool(谷歌/性能)
 
@@ -33,61 +57,55 @@ return request({
 
 https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android
 h ttps://blog.csdn.net/lilang_9920/article/details/81005345
-# vue
-使用clipboard.js
-`npm install clipboard --save`
-mian.js
-```
-import Clipboard from 'clipboard'
-// 注册到vue原型上
-Vue.prototype.Clipboard = Clipboard
-```
-使用
-```
-<span data-clipboard-action="copy" class="cobyOrderSn" :data-clipboard-text="orderData.orderSn" @click="copyLink">{{orderData.orderSn}}</span>
-copyLink() {
-    let clipboard = new this.Clipboard(".cobyOrderSn");
-    clipboard.on('success', function () {});
-    clipboard.on('error', function () {});
-}
 
-<input v-model="$store.state.user.cn_alias" id="cn-alias">
-<img src= "../assets/images/copy.png" title="复制" id="btn-cn-alias" data-clipboard-action="copy" data-clipboard-target="#cn-alias">
-mounted(){
-    const clipboard = new this.Clipboard('#btn-cn-alias')
-    clipboard.on('success', function(e) {})
-    clipboard.on('error', function(e) {})
-}
 
-```
 
     
 [场景&方案](pages/solution/scene.md)
 [设计模式](pages/solution/disign-pattern.md)
 
+[全局&工具](pages/common/global.md)  &emsp; 
+[网络&资源](pages/common/net.md)  &emsp; 
+[MySQL](pages/common/mysql.md)
+
+<ul class="no-list block-list">
+  <li><a href="#/pages/system/index">系统</a></li>
+  <li><a href="#/pages/system/windows/index">Windows</a></li>
+  <li><a href="#/pages/system/mac/index">MAC</a></li>
+  <li><a href="#/pages/system/linux/index">Linux</a></li>
+</ul>
+<ul class="no-list block-list">
+  <li><a href="#/pages/platform/index">平台</a></li>
+  <li><a href="#/pages/platform/node.md">Node</a></li>
+  <li><a href="#/pages/platform/android.md">Adroid</a></li>
+  <li><a href="#/pages/platform/ios.md">IOS</a></li>
+</ul>
+<ul class="no-list block-list">
+  <li>CSS</li>
+  <li><a href="#/pages/css/main.md?id=动画">动画</a></li>
+  <li><a href="#/pages/css/main.md?id=选择器">选择器</a></li>
+</ul>
+<br>
+<ul class="no-list block-list">
+  <li><a href="#/pages/frame/index.md">框架</a></li>
+  <li><a href="#/pages/frame/vue/index.md">VUE</a></li>
+</ul>
+<br>
+<ul class="no-list block-list">
+  <li><a href="#/pages/tools/index">工具</a></li>
+  <li><a href="#/pages/tools/git-npm">GIT&NPM</a></li>
+  <li><a href="#/pages/tools/regular-expression">正则表达式</a></li>
+</ul>
+<ul class="no-list block-list">
+  <li>VSCode</li>
+  <li><a href="#/pages/tools/vscode.md?id=settings">settings</a></li>
+  <li><a href="#/pages/tools/vscode.md?id=koroFileHeader">koroFileHeader</a></li>
+  <li><a href="#/pages/tools/vscode.md?id=用户片段">用户片段</a></li>
+</ul>
 
 
-### 系统  [detail3](pages/system/index)
-[Windows](pages/system/windows/index) 
-[MAC](pages/system/mac/index) 
-[Linux](pages/system/linux/index)
-
-### 平台  [detail3](pages/platform/index)
-[Node](pages/platform/node.md)
-[Adroid](pages/platform/android.md) 
-[IOS](pages/platform/ios.md)
-
-### 其它
-[全局&工具](pages/common/global.md)  &emsp; [网络&资源](pages/common/net.md)  &emsp; [MySQL](pages/common/mysql.md)
-
-# CSS
-[动画](pages/css/main.md?id=动画) [选择器](pages/css/main.md?id=选择器) 
 
 
-# VSCode
-[settings](pages/tools/vscode.md?id=settings)
-[koroFileHeader](pages/tools/vscode.md?id=koroFileHeader)
-[用户片段](pages/tools/vscode.md?id=用户片段)
 
 　　　　
 ## JavaScript
@@ -119,14 +137,13 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 闭包
 高阶函数
 ```
-#### 数据类型
-+ 基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
-+ 对象类型：
-> 类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error<br>
-> 实例对象：{} [] fn
+```link
+[h4] 数据类型 [类型转换](pages/javascript/data-type?id=类型转换)
+  [title5] 基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
+  [title5] 对象类型：类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
 
-[类型转换](pages/javascript/data-type?id=类型转换)
 
+```
 
 控制流程
 for 可return breake
@@ -165,20 +182,6 @@ git remote add github https://github.com/wmgcuan/express.git
 
 项目
 skin: 1 利用class 命名空间；2 利用CSS预处理生成多套样式；3 利用CSS 变量换肤
-## 工具
-### GIT&NPM
-[GIT仓库&NPM包](pages/tools/git-npm.md) &emsp; [GIT命令](pages/tools/git-npm.md#git命令) &emsp; [Markdown](pages/tools/markdown) &emsp; [Docsify](pages/tools/docsify)
-```
-1. git init 
-2. curl -u 'wanyuaning' https://api.github.com/user/repos -d '{"name":"demo"}'    Wanyuaning... ...   user/repos  orgs/wmgcuan/repos
-3. git remote add github https://github.com/wanyuaning/demo.git   wanyuaning/demo.git   wmgcuan/demo.git
-4. git push github master:master
-```
-```
-1. package.json  { "name": "@angg/demo" }
-2. npm adduser   wanyuaning  wanyuan...ew..  wanyuaning@163.com 
-3. npm publish --access public
-```
 
 
 
@@ -191,15 +194,9 @@ skin: 1 利用class 命名空间；2 利用CSS预处理生成多套样式；3 �
 
 
 
-v-for :key【作用】
 
-防抖和节流【区别】【实现】
-Set、Map、WeakSet 和 WeakMap 的区别
-深度优先遍历和广度优先遍历【实现】
-ES5/ES6 的继承除了写法以外还有什么区别
-setTimeout、Promise、Async/Await 的区别
-Async/Await 如何通过同步的方式实现异步
-如何实现一个 new
+
+
 
 
 **盒子模型**【w=c 怪异模式w=c+p+b+m】【边界塌陷和边界重叠】<br>
@@ -265,86 +262,9 @@ ES6  export default login   import login from '...'
 Webpack rollup
 
 
-# 框架
-
-# VUE
-[详情](pages/frame/index.md)  
-
-## 路由
-```js
-{ 
-  path: '/settings', 
-  // You could also have named views at the top 
-  component: UserSettings, 
-  children: [{ 
-    path: 'emails', 
-    component: UserEmailsSubscriptions 
-  }, { 
-    path: 'profile', 
-    components: { 
-      default: UserProfile, 
-      helper: UserProfilePreview 
-    } 
-  }] 
-}
-```
-```html
-<!-- UserSettings.vue -->
-<div> 
-  <h1>User Settings</h1> 
-  <NavBar/> 
-  <router-view/> 
-  <router-view name="helper"/> 
-</div>
-```
-
-## vue-element-admin
-扩展图标：下载SVG图标(home.svg)放入 src/icons/svg
-  路由里使用 meta: { title: '综合信息', icon: 'home' }
-
-
-【cli route vuex】
-
-init(events/lifecycle) > beforeCreate > init(injections/reactivety) > created > beforeMount > mounted > beforeUpdate > updated > beforeDestroy > destroyed
-```
-import Router from 'vue-router'
-Vue.use(Router)
-export default new Router({
-mode: 'history',  //路由模式[hash/history]
-routes: [ {path: '/demo', component: Demo} ]
-})
-<router-link :to="{ name: 'Lottery', params: { id: 1 }}">...</router-link> <router-link :to="{ path:'/lottery',query: {id: 3, name: 'ewan'}}">..</router-link>  this.$router.push({path:''}) 
-<router-view></router-view>
-```
 
 
 
-Object.defineProperty 访问器数据劫持
-①通过添加访问器实现数据劫持
-②把vm._data代理到vm
-③初始化计算属性
-④模板编译
-⑤单向绑定[M→V]-watcher
-⑤单向绑定[M→V]-订阅
-⑤单向绑定[M→V]-通知
-⑥双向绑定[M→V]
-⑥双向绑定[V→M]
-
-router.beforeEach((to, from, next)=>{})
-beforeRouteEnter(to, from, next){ next(vm=>{}) }
-router.beforeResolve
-router.aferEach
-beforeCreate
-created
-beforeMount
-mounted
-beforeRouteEnter的next回调
-
-beforeRouteUpdate(){}
-beforeRouteLeave(){}
-
-activated
-deactivated
 
 
 
@@ -366,43 +286,13 @@ npm yarn
 
 
 
-HTTP&TCP/IP  三/四次握手
-算法
-二分法(折半查找法)
-二叉树
-
-两次提交
-节流防抖
-域名访问网页的过程
 
 
 
 
 
-# 正则表达式
-```table
-.  通配符[^\n\r\u2028\u2029]，换行符、回车符、行分隔符和段分隔符除外
-
-\d  [0-9]              \D  [^0-9]             匹配任意非数字的字符
-\w  [0-9a-zA-Z_]       \W  [^0-9a-zA-Z_]      匹配任意不是字母，数字，下划线，汉字的字符
-\s  [ \t\v\n\r\f]      \S  [^ \t\v\n\r\f]     匹配任意不是空白符的字符
-\b  a\b \bnice         \B                     匹配不是单词开头或结束的位置(隐式位置) 
-
-?  {0,1}            +  {1,}           *  {0,}
-
-/i  不区分大小写     /g  全局匹配       /m  多行匹配  
-
-取反      \W \S \D [^x]匹配除了x以外的任意字符 !(else|\s) [^aeiou]匹配除了aeiou这几个字母以外的任意字符 
-惰性匹配  量词 + ?  实现惰性匹配  {m,n}?　　{m,}?　　??　　+?　　*?
 
 
-```
-例子：
-```table dianzhui
-/\b(?:(?!(else|\s))[\w\W])+\b/gi  "[1| if] else [1| no] else [1| but] [1| if]" 
-/<span[^>]+>/                     "[1| <span title="#">]"
-a\b \bnice                        "It's [1| a nice] day today."   
-```
 
 数据流
 [baowang](pages/data-flow/baowang.md)

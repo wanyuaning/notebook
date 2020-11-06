@@ -1,22 +1,5 @@
 
-function handleDianzhui(data) {
-  const REG_DZ = /\[\d\|?\s[^\]]+\]/g
-  const Match_DZ_ARR = data.match(REG_DZ) || []
-  Match_DZ_ARR.forEach(e => {
-    const color = e.charAt(1)
-    let content
-    let tagStr
-    if (e.charAt(2) === '|') {
-      content = e.slice(4, e.length - 1)
-      tagStr = `<span class="b cf bg${color}">${content}</span>`
-    } else {
-      content = e.slice(3, e.length - 1)
-      tagStr = `<span class="b cl${color}">${content}</span>`
-    }
-    data = data.replace(e, tagStr)
-  })
-  return data
-}
+
 function handleTable(data) {
   const rows = data.split('\n') || []  
   let tableStr = ``
@@ -51,37 +34,7 @@ function handlePop(data) {
   })
   return data
 }
-function handleTitle(data) {
-  const reg = /#{1,6}\|?\d?\d?(\s[\w-]+)+\s*?[\n<]/g
-  const Match_TITLE_ARR = data.match(reg) || []
-  Match_TITLE_ARR.forEach(e => {
-    e = e.replace('<', '')
-    const count = e.match(/#{1,6}/)[0].length
-    const content = e.replace(/#{1,6}\|?\d?\d? /, '')
-    const fst = e.charAt(count)
 
-    if (fst === ' ') {
-      data = data.replace(e, `<h${count}>${content}</h${count}>`)
-    } else {
-      const scd = e.charAt(count + 1)
-      let classStr = '', bg = '', color = ''
-      if (fst === '|') {
-        if (scd.match(/\d/)) {
-          bg = scd
-          const thr = e.charAt(count + 2)
-          thr.match(/\d/) && (color = thr)
-        }
-        classStr = `class="bg${bg} cl${color}"`
-      } else {
-        fst.match(/\d/) && (color = fst)
-        classStr = `class="cl${color}"`
-      }
-      data = data.replace(e, `<h${count} ${classStr}>${content}</h${count}>`)
-    }
-
-  })
-  return data
-}
 function handleBlock(data) {
   // API
   (data.match(/\[API\]\[[^\]]+\]\[[^\]]+\]/g) || []).forEach(e => {
@@ -109,8 +62,7 @@ function handleBlock(data) {
  * 处理通用格式：注释
  * @param {string} data 
  */
-function handleCommon(data) {console.log('通用', data);
-
+function handleCommon(data) {
   const REG = /\/\/\s*.+?(\n|$)/g
   const Match_ARR = data.match(REG) || []
   Match_ARR.forEach(e => {
@@ -121,15 +73,18 @@ function handleCommon(data) {console.log('通用', data);
   (data.match(/-+\n/g) || []).forEach(e => {
     data = data.replace(e, '<div class="hr"></div>')
   });
+
+  // 样式类：[s12 c0 b0 h1 b reverse inline|内容] 
+  let matchClass
+  while ((matchClass = /\[([^\|\[]+)\|([^\]]+)\]/.exec(data)) !== null) { data = data.replace(matchClass[0], `<span class="${matchClass[1]}">${matchClass[2]}</span>`)  }
+
   return data
 }
 
 var HANDLER_MAP = {
-  dianzhui: handleDianzhui, // 点缀 [1 log]
   table: handleTable,
   link: handleLink,
   popover: handlePop,
-  title: handleTitle,
   block: handleBlock
 }
 
@@ -144,9 +99,7 @@ function codeDistributeEntry(hook, vm) {
   hook.beforeEach(function (content) {
     return content;
   });
-  hook.afterEach(function (html, next) {
-    
-    
+  hook.afterEach(function (html, next) {    
     html = html.replace(/h-t-t-p/g, 'http')
     html = html.replace(/h-ttp/g, 'http')
     html = html.replace(/w-w-w/g, 'www')

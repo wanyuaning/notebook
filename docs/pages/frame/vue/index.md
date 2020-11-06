@@ -1,5 +1,94 @@
 [规范](pages/frame/vue/guifan.md)  &emsp; [实践方案](pages/frame/vue/plans.md)  &emsp; [全局状态](pages/frame/vue/store.md)  &emsp;
 
+<ul class="no-list block-list">
+  <li>概念</li>
+  <li><a href="#">v-for :key作用</a></li>
+  <li>子类二</li>
+</ul>
+<br>
+<ul class="no-list block-list">
+  <li>原理</li>
+  <li><a href="#">双向绑定</a></li>
+  <li>虚拟树</li>
+</ul>
+
+## 路由
+```js
+{ 
+  path: '/settings', 
+  // You could also have named views at the top 
+  component: UserSettings, 
+  children: [{ 
+    path: 'emails', 
+    component: UserEmailsSubscriptions 
+  }, { 
+    path: 'profile', 
+    components: { 
+      default: UserProfile, 
+      helper: UserProfilePreview 
+    } 
+  }] 
+}
+```
+```html
+<!-- UserSettings.vue -->
+<div> 
+  <h1>User Settings</h1> 
+  <NavBar/> 
+  <router-view/> 
+  <router-view name="helper"/> 
+</div>
+```
+
+## vue-element-admin
+扩展图标：下载SVG图标(home.svg)放入 src/icons/svg
+  路由里使用 meta: { title: '综合信息', icon: 'home' }
+
+
+【cli route vuex】
+
+init(events/lifecycle) > beforeCreate > init(injections/reactivety) > created > beforeMount > mounted > beforeUpdate > updated > beforeDestroy > destroyed
+```
+import Router from 'vue-router'
+Vue.use(Router)
+export default new Router({
+mode: 'history',  //路由模式[hash/history]
+routes: [ {path: '/demo', component: Demo} ]
+})
+<router-link :to="{ name: 'Lottery', params: { id: 1 }}">...</router-link> <router-link :to="{ path:'/lottery',query: {id: 3, name: 'ewan'}}">..</router-link>  this.$router.push({path:''}) 
+<router-view></router-view>
+```
+
+
+
+Object.defineProperty 访问器数据劫持
+①通过添加访问器实现数据劫持
+②把vm._data代理到vm
+③初始化计算属性
+④模板编译
+⑤单向绑定[M→V]-watcher
+⑤单向绑定[M→V]-订阅
+⑤单向绑定[M→V]-通知
+⑥双向绑定[M→V]
+⑥双向绑定[V→M]
+
+router.beforeEach((to, from, next)=>{})
+beforeRouteEnter(to, from, next){ next(vm=>{}) }
+router.beforeResolve
+router.aferEach
+beforeCreate
+created
+beforeMount
+mounted
+beforeRouteEnter的next回调
+
+beforeRouteUpdate(){}
+beforeRouteLeave(){}
+
+activated
+deactivated
+
+
 ```line-8
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
