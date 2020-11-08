@@ -3,7 +3,7 @@
 
 [规范](pages/frame/vue/guifan.md)  &emsp; [实践方案](pages/frame/vue/plans.md)  &emsp; [全局状态](pages/frame/vue/store.md)  &emsp;
 
-```s12
+```
 [h4|vue数组更新不渲染页面]
 原因： 由于 JavaScript 的限制，Vue 不能检测以下变动的数组：        解决：this.$set(this.arr,"key", 11) 或 this.$forceUpdate() //强制刷新
   1. 利用索引直接设置一个项时，如：vm.items[index] = newValue
