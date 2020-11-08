@@ -17,14 +17,14 @@
 
 ```
 例子：
-```table dianzhui
+```
 /\b(?:(?!(else|\s))[\w\W])+\b/gi  "[1| if] else [1| no] else [1| but] [1| if]" 
 /<span[^>]+>/                     "[1| <span title="#">]"
 a\b \bnice                        "It's [1| a nice] day today."   
 ```
 
-```dianzhui
-/SCENE\(([^\)]+)\)/.[2 exec](string) 
+```
+/SCENE\(([^\)]+)\)/.[ch|exec](string) 
 
 let item
 while ((item = /正则/.exec(data)) !== null) {

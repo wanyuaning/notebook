@@ -272,21 +272,11 @@ div img{ margin:0;padding:0;}
   <i>attr</i>*=
   <i>value</i>]　匹配附带attr属性的elem元素，并且该属性值包含value字符
 </div>
-
-```dianzhui c9
-[[1 id]]               附带 id 属性的元素
-[0 div][[1 class]]         附带 class 属性的 div 元素
-[0 span][[1 class]][[1 title]] 附带 class 和 title 属性的 span 元素
-[0 p][[1 class]=[2 hidden]]    附带 class 属性值为 hidden 的 p 元素
-
-[[1 class]~=[2 cont]] {有 cont 类名的多类名组合}
-[[1 class]^=[2 col-]] {以 col- 开头的类名}
-[[1 class]$=[2 -fix]] {以 -fix 结尾的类名}
-[[1 class]*=[2 -ex-]] {含 -ex- 字符的类名}
-
+```
 .color-group i:nth-child(1){color: #318ed8;}   序号优先 第1个元素 匹配<i>
 .color-group i:nth-of-type(1){color: #318ed8;} 类型优先 元素<i> 匹配第1个
 ```
+
 
 #### 元素 
 

@@ -1,5 +1,5 @@
 
-var highlightCodeCompiler = function (ref) {
+
 
 
 样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
@@ -146,9 +146,9 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 高阶函数
 ```
 ```link
-[h4] 数据类型 [类型转换](pages/javascript/data-type?id=类型转换)
-  [title5] 基本类型：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
-  [title5] 对象类型：类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
+[h3|数据类型] [类型转换](pages/javascript/data-type?id=类型转换)
+  [title2|基本类型]：[String](pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
+  [title2|对象类型]：类对象：Object [Array](pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
 
 
 ```
