@@ -1,4 +1,7 @@
 
+var highlightCodeCompiler = function (ref) {
+
+
 样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
 
 <br><br>
