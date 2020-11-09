@@ -1,7 +1,4 @@
-
-
-
-[规范](pages/frame/vue/guifan.md)  &emsp; [实践方案](pages/frame/vue/plans.md)  &emsp; [全局状态](pages/frame/vue/store.md)  &emsp;
+[规范](pages/frame/vue/guifan.md) &emsp; [实践方案](pages/frame/vue/plans.md) &emsp; [全局状态](pages/frame/vue/store.md) &emsp;
 
 ```
 [h4|vue数组更新不渲染页面]
@@ -9,8 +6,40 @@
   1. 利用索引直接设置一个项时，如：vm.items[index] = newValue
   2. 修改数组的长度时，例如：vm.items.length = newLength
 
+[h4|关闭eslint规范]
 
+[h4|集成一个自定义配置]
+//数据接口的ip和端口
+const ip = 'http://192.168.101.127:8080';
+const zymllist = ip+'/hg6000/dsjjm/zymllist.do';
+const wsqk = ip+'/hg6000/dsjjm/wssj.do';
+const fdcqk1 = ip+'/hg6000/dsjjm/fdcqkZ.do';
+const fdcqk2 = ip+'/hg6000/dsjjm/fdcqkB.do?sbno=2018-09&xzqhbm=420000&xzqhjb=2';
+const sq = ip+'/hg6000/dsjjm/hbssq.do'
+//一定要注册才可以使用
+export default {
+  zymllist: zymllist,
+  wsqk: wsqk,
+  fdcqk1:fdcqk1,
+  fdcqk2:fdcqk2,
+  sq:sq,
+}
 
+在其他 .vue 文件内引用：import api from "common/js/api";
+this.axios
+.get(api.sq, {   //api.sq  为 api.js 文件夹中，名称为 sq 的接口路径
+  params: {   //传入的参数
+    a:a
+  }
+})
+.then(res => {  //此处要使用箭头函数，this指向才正确
+    console.log(res)
+})
+.catch(function(error) {
+  alert(error);
+});
+
+要求：可关联开发和生产环境
 
 
 <ul class="no-list block-list">
@@ -25,42 +54,46 @@
   <li>虚拟树</li>
 </ul>
 ```
+
 ## 路由
+
 ```js
-{ 
-  path: '/settings', 
-  // You could also have named views at the top 
-  component: UserSettings, 
-  children: [{ 
-    path: 'emails', 
-    component: UserEmailsSubscriptions 
-  }, { 
-    path: 'profile', 
-    components: { 
-      default: UserProfile, 
-      helper: UserProfilePreview 
-    } 
-  }] 
+{
+  path: '/settings',
+  // You could also have named views at the top
+  component: UserSettings,
+  children: [{
+    path: 'emails',
+    component: UserEmailsSubscriptions
+  }, {
+    path: 'profile',
+    components: {
+      default: UserProfile,
+      helper: UserProfilePreview
+    }
+  }]
 }
 ```
+
 ```html
 <!-- UserSettings.vue -->
-<div> 
-  <h1>User Settings</h1> 
-  <NavBar/> 
-  <router-view/> 
-  <router-view name="helper"/> 
+<div>
+  <h1>User Settings</h1>
+  <NavBar />
+  <router-view />
+  <router-view name="helper" />
 </div>
 ```
 
 ## vue-element-admin
-扩展图标：下载SVG图标(home.svg)放入 src/icons/svg
-  路由里使用 meta: { title: '综合信息', icon: 'home' }
 
+扩展图标：下载 SVG 图标(home.svg)放入 src/icons/svg
+路由里使用 meta: { title: '综合信息', icon: 'home' }
 
 【cli route vuex】
 
 init(events/lifecycle) > beforeCreate > init(injections/reactivety) > created > beforeMount > mounted > beforeUpdate > updated > beforeDestroy > destroyed
+
 ```
 import Router from 'vue-router'
 Vue.use(Router)
@@ -68,22 +101,20 @@ export default new Router({
 mode: 'history',  //路由模式[hash/history]
 routes: [ {path: '/demo', component: Demo} ]
 })
-<router-link :to="{ name: 'Lottery', params: { id: 1 }}">...</router-link> <router-link :to="{ path:'/lottery',query: {id: 3, name: 'ewan'}}">..</router-link>  this.$router.push({path:''}) 
+<router-link :to="{ name: 'Lottery', params: { id: 1 }}">...</router-link> <router-link :to="{ path:'/lottery',query: {id: 3, name: 'ewan'}}">..</router-link>  this.$router.push({path:''})
 <router-view></router-view>
 ```
 
-
-
 Object.defineProperty 访问器数据劫持
-①通过添加访问器实现数据劫持
-②把vm._data代理到vm
-③初始化计算属性
-④模板编译
-⑤单向绑定[M→V]-watcher
-⑤单向绑定[M→V]-订阅
-⑤单向绑定[M→V]-通知
-⑥双向绑定[M→V]
-⑥双向绑定[V→M]
+① 通过添加访问器实现数据劫持
+② 把 vm.\_data 代理到 vm
+③ 初始化计算属性
+④ 模板编译
+⑤ 单向绑定[M→V]-watcher
+⑤ 单向绑定[M→V]-订阅
+⑤ 单向绑定[M→V]-通知
+⑥ 双向绑定[M→V]
+⑥ 双向绑定[V→M]
 
 router.beforeEach((to, from, next)=>{})
 beforeRouteEnter(to, from, next){ next(vm=>{}) }
@@ -93,14 +124,13 @@ beforeCreate
 created
 beforeMount
 mounted
-beforeRouteEnter的next回调
+beforeRouteEnter 的 next 回调
 
 beforeRouteUpdate(){}
 beforeRouteLeave(){}
 
 activated
 deactivated
-
 
 ```line-8
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -114,8 +144,11 @@ var app = new Vue({
   }
 })
 ```
+
 #### 安装
-Vue-Cli3.0 独立运行Vue文件 图形页面构建项目
+
+Vue-Cli3.0 独立运行 Vue 文件 图形页面构建项目
+
 ```
  $ npm install -g @vue/cli  # 全局安装       npm uninstall @vue/cli -g   # 卸载
  $ vue --version 或 vue -V   # 查看已安装版本
@@ -125,12 +158,16 @@ Vue-Cli3.0 独立运行Vue文件 图形页面构建项目
  $ npm run serve    # 项目启动
  $ npm run build   # 打包
 ```
-#### 架构dictionaries
+
+#### 架构 dictionaries
+
 ```
 1 vue init webpack dictionaries & cd dictionaries & npm run dev
 2 建立Git仓库
 ```
+
 #### 环境配置
+
 ```
 const path = require('path')
 module.exports = {
@@ -228,8 +265,8 @@ module.exports = {
 功能
 npm install vue-infinite-scroll --save  // 滚动分页
 
-概念&关键词 
-vuex   router .   axios   生命周期    客户端渲染    
+概念&关键词
+vuex   router .   axios   生命周期    客户端渲染
 weex               跨终端
 服务端渲染 .   客户端append性能／seo／传统js脚本执行慢
 keep-alive      解决路由转换重新请求数据的问题
@@ -237,11 +274,11 @@ keep-alive      解决路由转换重新请求数据的问题
 
 
 props: ['fooMessage']
-props: {    
+props: {
     fooA: Number, // 类型检测
     fooB: [String, Number], // String、Number、Boolean、Function、Object、Array、Symbol
     fooC: {
-        type: String,         
+        type: String,
         default: '' // 默认值
     },
     fooD: {
@@ -249,7 +286,7 @@ props: {
         required: true, // 是否必填
     },
     fooE: {
-        type: Object, // 当类型为Array或Object时default必须是函数返回             
+        type: Object, // 当类型为Array或Object时default必须是函数返回
         default: function(){
             return { message: 'Hello, world' }
         }
@@ -264,8 +301,10 @@ props: {
 
 https://blog.csdn.net/jjb520/article/details/79551943
 ```
+
 #### 多页开发
-````````
+
+```
 <!DOCTYPE html>
 <html>
   <head>
@@ -277,11 +316,11 @@ https://blog.csdn.net/jjb520/article/details/79551943
   </head>
 <body>
   <div id="container">
-    <div>{{title}}: 
-      <span v-text="firstName"></span> 
+    <div>{{title}}:
+      <span v-text="firstName"></span>
       <span v-html="lastName"></span>
     </div>
-    <div v-bind:title="fullName" 
+    <div v-bind:title="fullName"
       v-bind:class="{active: isActive, otherclass: isOtherclass}"
       :class="[isActiveClass, isOtherClass]"
       :class="`ball${item.id}`"
@@ -292,7 +331,7 @@ https://blog.csdn.net/jjb520/article/details/79551943
     <div>
       双向绑定：
       <input v-model.trim ="firstName" />
-      <input v-model="lastName" /> ／ 
+      <input v-model="lastName" /> ／
       计算属性：
       {{fullName}} ／
       帧听&过滤器：
@@ -302,7 +341,7 @@ https://blog.csdn.net/jjb520/article/details/79551943
       <input v-model="todoListAddValue" />
       <!-- 事件: @click="handleClick"
                 @click="handleClick($event, 1)"  带参
-                v-on:click="handleClick"  
+                v-on:click="handleClick"
                 v-on:click.stop       修饰：阻止冒泡
                 v-on:click.prevent    修饰：阻止默认事件
                 v-on:click.self       修饰：只对绑定标签有效
@@ -323,10 +362,10 @@ https://blog.csdn.net/jjb520/article/details/79551943
     <ul v-if="show">
       <!-- 父向子传参:content ／:index-->
       <!-- 子向父传参:this.$emit('del', this.index) @del="todoListDel"-->
-      <todo-item 
-        v-for="(item, index) of todoList" :key="index" 
-        :content="item" 
-        :index="index" 
+      <todo-item
+        v-for="(item, index) of todoList" :key="index"
+        :content="item"
+        :index="index"
         @del="todoListDel">
         <span solt="soltname"></span>
       </todo-item>
@@ -376,9 +415,9 @@ https://blog.csdn.net/jjb520/article/details/79551943
     // 计算属性
     computed: {
       fullName: function () { return this.firstName + ' ' + this.lastName },
-      ssl: { 
-        get: function(){ return {1: '禁用', 2: '启用', 3: '强制'}[this.sslIndex] }, 
-        set: function(val){ this.sslIndex = val } 
+      ssl: {
+        get: function(){ return {1: '禁用', 2: '启用', 3: '强制'}[this.sslIndex] },
+        set: function(val){ this.sslIndex = val }
       }
     },
     // 帧听器
@@ -397,9 +436,10 @@ https://blog.csdn.net/jjb520/article/details/79551943
   </script>
 </body>
 </html>
-````````
+```
 
 #### 单页应用
+
 ```
 <template>
 <div>
@@ -422,7 +462,7 @@ const store = new vuex.Store(参考Vuex)
 
 new Vue({
 el: '#app',
-store, 
+store,
 // 组件
 components: {
 Counter
@@ -469,6 +509,7 @@ body {
 ```
 
 #### VUE-CLI
+
 ```
 1 sudo npm install -g vue-cli
 2 vue init webpack project-name
@@ -495,7 +536,7 @@ Vue.use(less)
 2 vue init webpack goods-mall  (npm init )
 3 cd goods-mall
 4 curl -u 'wanyuaning' https://api.github.com/user/repos -d '{"name":"goods-mall"}'
-    git remote add origin https://github.com/wanyuaning/goods-mall.git 
+    git remote add origin https://github.com/wanyuaning/goods-mall.git
     git remote -v
 5 git add . /git commit -m "First Commit" / git push origin master
 
@@ -545,12 +586,12 @@ http://so.tv.sohu.com/mts?box=1&wd=Vue%E5%85%A8%E6%96%B9%E4%BD%8D%E8%A7%A3%E6%9E
 简单开发
 ① <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 ② var vm = new Vue({ el: '#demo', data: {}, methods: {} })
-或 new Vue({ 
-el: '#demo', 
+或 new Vue({
+el: '#demo',
 data: {
 a: 1,
 b: []
-}, 
+},
 methods: {
 doSomething: function(){
 this.a++
@@ -574,7 +615,7 @@ console.log(val, oldVal)
 beforecreated：      el 和 data 并未初始化            loading事件
 created:完成了        data 数据的初始化，el没有    结束loading，还做一些初始化，实现函数自执行
 beforeMount：        完成了 el 和 data 初始化        在这发起后端请求，拿回数据，配合路由钩子做一些事情
-mounted ：              完成挂载                                 你确认删除XX吗？ 
+mounted ：              完成挂载                                 你确认删除XX吗？
 destoryed ：当前组件已被删除，清空相关内容
 
 
@@ -609,7 +650,7 @@ el: '#app',
 <component :is='curremtView' keep-alive></component>
 
 
- keepAlive 
+ keepAlive
 使用一？
 
 1. 路由的meta标签中设置keepAlive属性为true
@@ -678,7 +719,7 @@ next()
 
 排除与包含
 注：Lottery为Lottey组件的name属性
-<keep-alive exclude="Lottery"> 
+<keep-alive exclude="Lottery">
 <router-view/>
 </keep-alive>
 

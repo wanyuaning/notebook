@@ -349,3 +349,6 @@ pre[data-lang~=store]{background-color: #f6f6f6;}
 .block-list li:nth-child(1) a:hover{ color: #0f0}
 .block-list li a:hover{ color: #090}
 
+/*网站地图*/
+pre[data-lang~=sitemap] code{color: #ccc; font-family: Arial, 'Yahei'}
+pre[data-lang~=sitemap] code .scene{color: #333; font-weight: bold;}
