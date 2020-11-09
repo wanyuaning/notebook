@@ -1,5 +1,17 @@
 
 
+function handleSitemap(data) {
+  let matchStrong
+  while ((matchStrong = /█(.+)?█/.exec(data)) !== null) {
+    data = data.replace(matchStrong[0], `<span class="c3 b">${matchStrong[1]}</span>`)
+  }
+  let matchGroup
+  while ((matchGroup = /【([^\s】]+)\s(.+)?】/.exec(data)) !== null) {
+    data = data.replace(matchGroup[0], `<span class="sitemap-gp"><span class="sitemap-gp-tit">${matchGroup[1]}</span>${matchGroup[2]}</span>`)
+  }
+  return data
+}
+
 function handleTable(data) {
   const rows = data.split('\n') || []  
   let tableStr = ``
@@ -85,7 +97,8 @@ var HANDLER_MAP = {
   table: handleTable,
   link: handleLink,
   popover: handlePop,
-  block: handleBlock
+  block: handleBlock,
+  sitemap: handleSitemap
 }
 
 /**

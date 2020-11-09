@@ -1,38 +1,29 @@
-# VSCode
 
-[h4|因为在此系统上禁止运行脚本]
+```
+[h4|禁止运行脚本]
 以管理员身份打开VScode，
 执行 Set-ExecutionPolicy RemoteSigned
 
-{
-    "editor.formatOnSave": true,
-    "vetur.format.defaultFormatter.html": "prettier",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "launch": {
-        "configurations": [],
-        "compounds": []
-    }
-}
+```
 
 
 ### settings
 ```O
 {
-  // 缩进
-  "editor.detectIndentation": false, // 默认启用了根据文件类型自动设置tabSize
-  "editor.tabSize": 2, // 设置缩进不生效时关闭editor.detectIndentation
+  "editor.detectIndentation": false,   // 默认启用了根据文件类型自动设置tabSize
+  "editor.tabSize": 2,                 // 设置缩进不生效时关闭editor.detectIndentation
+  "editor.fontFamily": "MONACO",       // 喜欢的字体
+  "editor.formatOnSave": true,         // 保存时格式化文档
+
+  // 格式化 依赖Prettier 可搜esbenp关键词
+  "vetur.format.defaultFormatter.html": "prettier",
+  "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[vue]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[html]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
 
   // koroFileHeader 插件
-  "fileheader.customMade": { // 头部注释
-    "autoAdd": false,        // 关闭自动添加头部注释
+  "fileheader.customMade": {           // 头部注释
+    "autoAdd": false,                  // 关闭自动添加头部注释
     "Description":"file content",
     "Version": "2.0"
     "Author":"Ewan",
@@ -40,11 +31,17 @@
     "LastEditors":"Ewan",
     "LastEditTime":"Do not edit"    
   },
-  "fileheader.cursorMode": { // 函数注释
+  "fileheader.cursorMode": {           // 函数注释
     "description":"",
     "param":"",
     "return":"",
     "author":"Ewan"
+  }
+
+  // 调试 通常以launch.json形式
+  "launch": {
+    "configurations": [],
+    "compounds": []
   }
 }
 ```
@@ -53,7 +50,7 @@
 ![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")
 
 ### 插件
-```table link
+```O table link
 [h2 reverse|JSON Tools]
 Ctrl(Cmd)+Alt+M    格式化代码
 Alt+M              紧凑化代码
@@ -64,8 +61,9 @@ ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](
 ```
 
 ### 用户片段
+```O popover
+---------------------
 文件 > 首选项 > 用户片段
-```popover
 {
   "[0 Print to console]": {
     "(prefix)(触发快捷提示的字符串前缀)": "[cg b|log]",
@@ -87,10 +85,9 @@ ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](
   }
 }
 ```
-
-### 变量
-调用: $变量名 
 ```table
+[h2|变量] 调用: $变量名 
+---------------------------------------------------
 TM_FILENAME               当前文件名
 TM_FILENAME_BASE          当前文件名，不带扩展名
 CURRENT_YEAR              当前年份

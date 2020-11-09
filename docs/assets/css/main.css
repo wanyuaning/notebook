@@ -352,3 +352,7 @@ pre[data-lang~=store]{background-color: #f6f6f6;}
 /*网站地图*/
 pre[data-lang~=sitemap] code{color: #ccc; font-family: Arial, 'Yahei'}
 pre[data-lang~=sitemap] code .scene{color: #333; font-weight: bold;}
+
+/*网站地图*/
+.sitemap-gp{border: 1px solid #ccc}
+.sitemap-gp-tit{background-color: #ccc; color: #fff}
