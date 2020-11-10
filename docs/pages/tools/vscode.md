@@ -1,4 +1,3 @@
-
 ```
 [h4|禁止运行脚本]
 以管理员身份打开VScode，
@@ -6,8 +5,8 @@
 
 ```
 
-
 ### settings
+
 ```O
 {
   "editor.detectIndentation": false,   // 默认启用了根据文件类型自动设置tabSize
@@ -29,7 +28,7 @@
     "Author":"Ewan",
     "Date":"Do not edit",
     "LastEditors":"Ewan",
-    "LastEditTime":"Do not edit"    
+    "LastEditTime":"Do not edit"
   },
   "fileheader.cursorMode": {           // 函数注释
     "description":"",
@@ -45,11 +44,14 @@
   }
 }
 ```
+
 ### 功能
+
 对比<br>
 ![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")
 
 ### 插件
+
 ```O table link
 [h2 reverse|JSON Tools]
 Ctrl(Cmd)+Alt+M    格式化代码
@@ -61,6 +63,7 @@ ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](
 ```
 
 ### 用户片段
+
 ```O popover
 ---------------------
 文件 > 首选项 > 用户片段
@@ -85,8 +88,9 @@ ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](
   }
 }
 ```
+
 ```table
-[h2|变量] 调用: $变量名 
+[h2|变量] 调用: $变量名
 ---------------------------------------------------
 TM_FILENAME               当前文件名
 TM_FILENAME_BASE          当前文件名，不带扩展名

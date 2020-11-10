@@ -4,7 +4,7 @@
     --color5: #5eb271; --color6: #4eacc8; --color7: #7a88de; --color8: #b97fdd; --color9: #569fda;
 }
 
-body{ font-size: 14px;}
+body, body code{ font-size: 14px; font-family: Arial, 'Yahei';}
 
 /* 字号 */
 .s12{font-size: 12px !important} .s14{font-size: 14px !important} .s16{font-size: 16px !important} .s18{font-size: 18px !important} .s20{font-size: 20px !important}  
@@ -354,5 +354,5 @@ pre[data-lang~=sitemap] code{color: #ccc; font-family: Arial, 'Yahei'}
 pre[data-lang~=sitemap] code .scene{color: #333; font-weight: bold;}
 
 /*网站地图*/
-.sitemap-gp{border: 1px solid #ccc}
+.sitemap-gp{border: 1px solid #ccc;}
 .sitemap-gp-tit{background-color: #ccc; color: #fff}

@@ -25,16 +25,15 @@ function handleTable(data) {
   })
   return tableStr
 }
+
 function handleLink(data) {
-  const reg = /\[.+?\]\(.+?\)/g
-  const linkMatchArr = data.match(reg) || []
-  linkMatchArr.forEach(e => {
-    const content = e.match(/\[.+?\]/)[0].replace('[', '').replace(']', '')
-    const link = e.match(/\(.+?\)/)[0].replace('(', '').replace(')', '')
-    data = data.replace(e, `<a href="#${link}">${content}</a>`)
-  })
-  return data
+    let matchLink
+    while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) { 
+        data = data.replace(matchLink[0], `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`)
+    }
+    return data
 }
+
 function handlePop(data) {
   const reg = /\(.+?\)\(.+?\)/g
   const Match_POP_ARR = data.match(reg) || []
@@ -75,12 +74,6 @@ function handleBlock(data) {
  * @param {string} data 
  */
 function handleCommon(data) {
-  const REG = /\/\/\s*.+?(\n|$)/g
-  const Match_ARR = data.match(REG) || []
-  Match_ARR.forEach(e => {
-    data = data.replace(e, `<span class="comment">${e}</span>`)
-  });
-
   // 水平线
   (data.match(/-+\n/g) || []).forEach(e => {
     data = data.replace(e, '<div class="hr"></div>')
@@ -90,6 +83,12 @@ function handleCommon(data) {
   let matchClass
   while ((matchClass = /\[([^\|\[]+)\|([^\]]+)\]/.exec(data)) !== null) { data = data.replace(matchClass[0], `<span class="${matchClass[1]}">${matchClass[2]}</span>`)  }
 
+  const REG = /\/\/\s.+?(\n|$)/g
+  const Match_ARR = data.match(REG) || []
+  Match_ARR.forEach(e => {
+    data = data.replace(e, `<span class="comment">${e}</span>`)
+  });
+    
   return data
 }
 
@@ -112,11 +111,7 @@ function codeDistributeEntry(hook, vm) {
   hook.beforeEach(function (content) {
     return content;
   });
-  hook.afterEach(function (html, next) {    
-    html = html.replace(/h-t-t-p/g, 'http')
-    html = html.replace(/h-ttp/g, 'http')
-    html = html.replace(/w-w-w/g, 'www')
-    html = html.replace(/w-ww/g, 'www')
+  hook.afterEach(function (html, next) {  
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
@@ -176,7 +171,11 @@ function codeDistributeEntry(hook, vm) {
       html = html.replace(e, `<div class="ui-supplement"><h6>${title}</h6><p>${content}</p></div>`)
     })
 
-    
+    html = html.replace(/h-t-t-p/g, 'http')
+    html = html.replace(/h-ttp/g, 'http')
+    html = html.replace(/w-w-w/g, 'www')
+    html = html.replace(/w-ww/g, 'www')
+    html = html.replace(/-\/-\//g, '//')
 
     next(html);
   });
