@@ -241,6 +241,13 @@ function codeDistributeEntry(hook, vm) {
     html = html.replace(/w-ww/g, "www");
     html = html.replace(/-\/-\//g, "//");
 
+    let title
+    if ((title = /<title>(.+?)<\/title>/.exec(html)) !== null) {
+        setTimeout(function() {
+            document.title = title[1]
+        },0)
+    }
+    
     next(html);
   });
 }

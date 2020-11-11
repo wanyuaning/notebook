@@ -1,3 +1,14 @@
+<title>数据类型</title>
+
+<ul class="no-list block-list">
+    <li>Lodash</li>
+    <li><a href="#">去重</a></li>
+    <li>排序</li>
+</ul>
+
+[链接](#)
+
+
 #### Array
 ```table
 [cg b|shift] [[cg b|unshift] [cg b|push]] [cg b|pop]               增删
