@@ -1,4 +1,21 @@
 
+#### 复制粘贴
+```
+1. 安装npm i clipboard --save
+
+2. 挂载到VUE原型
+    [b|src/main.js]
+    import [cc|Clipboard] from 'clipboard';
+    Vue.prototype.[b|Clipboard] = [cc|Clipboard];  // 注册到vue原型上
+3. 使用
+    <img src="" @click="[cg b|handleCopy]" id="[ch b|ID]" data-clipboard-target="#[ci b|TARGET]" data-clipboard-action="copy" title="复制">
+    <div id="[ci b|TARGET]">[cc|123456]</div>
+    [cg b|handleCopy](){
+        const clipboard = new this.[b|Clipboard]('#[ch b|ID]')
+        clipboard.on('success', function(e) { that.$message({message: '复制成功', type: 'success'}); e.clearSelection()})
+        clipboard.on('error', function(e) { that.$message({message: '复制失败', type: 'warning' })})
+    }    
+```
 #### 动态加载图片资源
 ```
   <img :src="icon" />

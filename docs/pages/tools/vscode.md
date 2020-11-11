@@ -11,7 +11,7 @@
 {
   "editor.detectIndentation": false,   // 默认启用了根据文件类型自动设置tabSize
   "editor.tabSize": 2,                 // 设置缩进不生效时关闭editor.detectIndentation
-  "editor.fontFamily": "MONACO",       // 喜欢的字体
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",  // 喜欢的字体"MONACO"
   "editor.formatOnSave": true,         // 保存时格式化文档
 
   // 格式化 依赖Prettier 可搜esbenp关键词

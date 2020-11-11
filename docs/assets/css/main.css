@@ -35,6 +35,66 @@ body, body code{ font-size: 14px; font-family: Arial, 'Yahei';}
 /*注释*/.comment{color: #ccc;}
 /*水平线*/code .hr{ height:0px; display:block; line-height:0; font-size:0;border-top: #fff 1px solid; border-bottom: #e9e9e9 1px solid; }
 
+
+
+
+
+
+
+.app-nav {    
+    position: fixed;
+    right: 0;
+    left:300px;
+    text-align: right;
+    z-index: 10;
+    background-color: #fff;
+    border-bottom:#eee 1px solid;
+    padding: 19px 60px 0 0;
+}
+
+.app-nav.no-badge {
+    /* margin-right: 25px */
+}
+
+
+.markdown-section h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem
+}
+
+.markdown-section h2 {
+    font-size: 1.75rem;
+    margin: 40px 0 .4rem
+}
+
+.markdown-section h3 {
+    font-size: 1.5rem;
+    margin: 35px 0 .3rem
+}
+
+.markdown-section h4 {
+    font-size: 1.25rem;
+    margin: 30px 0 .2rem
+}
+
+.markdown-section h5 {
+    font-size: 1rem;
+    margin: 25px 0 .1rem
+}
+
+.markdown-section h6 {
+    color: #777;
+    margin: 20px 0 .1rem;
+    font-size: 1rem
+}
+
+
+
+
+
+
+
+
 /* 代码块重写 */
 .markdown-section pre { line-height: 1rem; margin: 0.2em 0 0.6em 0; }
 .markdown-section pre[data-lang~=line-8] { line-height: 0.8rem; }
@@ -350,9 +410,13 @@ pre[data-lang~=store]{background-color: #f6f6f6;}
 .block-list li a:hover{ color: #090}
 
 /*网站地图*/
-pre[data-lang~=sitemap] code{color: #ccc; font-family: Arial, 'Yahei'}
+pre[data-lang~=sitemap] code{color: #ccc; font-family: Arial, 'Yahei'; font-size: 12px; line-height: 17px;}
 pre[data-lang~=sitemap] code .scene{color: #333; font-weight: bold;}
+pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#ccc, #bbb); padding: 1px 4px; border-radius: 3px; font-size: 12px;}
 
-/*网站地图*/
-.sitemap-gp{border: 1px solid #ccc;}
-.sitemap-gp-tit{background-color: #ccc; color: #fff}
+.sitemap-group{ background:linear-gradient(#ccc, #bbb); padding: 1px; line-height: 8px }
+.sitemap-group i{font-style: normal; padding: 0 4px; line-height: 8px}
+.sitemap-group .t{ color: #fff}
+.sitemap-group .l{background-color: #f8f8f8;}
+
+.sitemap-table .c{background-color: #ddd; margin-right:1px;color: #fff; padding: 1px 4px;}
