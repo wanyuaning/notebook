@@ -29,7 +29,7 @@ if(new RegExp("(" + k + ")").test(fmt))
 return fmt;
 };
 
-[h4|viewport固定下字号解决方案]
+[h4|viewport固定下字号无效解决方案]
 <div class="fontsize-adaptive">
     <span>
         text
