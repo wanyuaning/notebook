@@ -8,18 +8,25 @@ function handleSitemap(data) {
   }
   let matchGroup;
   while ((matchGroup = /【([^\s】]+)-([^】]+)】/.exec(data)) !== null) {
-    data = data.replace(matchGroup[0], `<span class="sitemap-group"><i class="t">${matchGroup[1]}</i><i class="l">${matchGroup[2]}</i></span>`);
+    data = data.replace(
+      matchGroup[0],
+      `<span class="sitemap-group"><i class="t">${matchGroup[1]}</i><i class="l">${matchGroup[2]}</i></span>`
+    );
   }
   let matchTable;
   while ((matchTable = /┣([^┫]+)┫/.exec(data)) !== null) {
-    let html = matchTable[1]
-    html = '<span class="sitemap-table"><span class="c">' + html + '</span></span>'
-    html = html.replace(/┃/g, '</span><span class="c">')
+    let html = matchTable[1];
+    html =
+      '<span class="sitemap-table"><span class="c">' + html + "</span></span>";
+    html = html.replace(/┃/g, '</span><span class="c">');
     data = data.replace(matchTable[0], html);
   }
   let matchButton;
   while ((matchButton = /►([^◄]+)◄/.exec(data)) !== null) {
-    data = data.replace(matchButton[0], `<span class="button">${matchButton[1]}</span>`);
+    data = data.replace(
+      matchButton[0],
+      `<span class="button">${matchButton[1]}</span>`
+    );
   }
   return data;
 }
@@ -122,11 +129,11 @@ function handleCommon(data) {
 
   return data;
 }
-function handleIcon(data){
-    data = data.replace(/[0-9a-z]{3,}/g, '');
-    console.log(data);
-    
-    return data
+function handleIcon(data) {
+  data = data.replace(/[0-9a-z]{3,}/g, "");
+  console.log(data);
+
+  return data;
 }
 
 var HANDLER_MAP = {
@@ -135,7 +142,7 @@ var HANDLER_MAP = {
   popover: handlePop,
   block: handleBlock,
   sitemap: handleSitemap,
-  icon:handleIcon
+  icon: handleIcon,
 };
 
 /**
@@ -241,13 +248,13 @@ function codeDistributeEntry(hook, vm) {
     html = html.replace(/w-ww/g, "www");
     html = html.replace(/-\/-\//g, "//");
 
-    let title
+    let title;
     if ((title = /<title>(.+?)<\/title>/.exec(html)) !== null) {
-        setTimeout(function() {
-            document.title = title[1]
-        },0)
+      setTimeout(function () {
+        document.title = title[1];
+      }, 0);
     }
-    
+
     next(html);
   });
 }

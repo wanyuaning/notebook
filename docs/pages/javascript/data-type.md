@@ -5,10 +5,37 @@
     <li><a href="#">去重</a></li>
     <li>排序</li>
 </ul>
+
+```
 1. npm i lodash --save
 2. 使用
     import _ from 'lodash'
 
+var l = console.log
+var arr = [
+    { a: "a1", b: [{c: "c1"}, {c: "c2"}] }, 
+    { a: "a2", b: [{c: "c3"}, {c: "c4"}] }
+]
+var objA = {"name": "戈德斯文", "car": "宝马"}
+var objB = {"name": "柴硕", "loveEat": true}
+
+[b|原生局限]                                                                     [b|Lodash解决]
+-----
+for(var i = 0; i < 5; i++){ l(i) }                                         _.[cg b|times](5,function(a){ l(a) })
+
+var a = arr.map(o => o.b[0].c })                                           var a  = _.[cg b|map](arr, 'b[0].c')
+[cc|在对象内部没有方法的时候才可行]
+var a2 = JSON.parse(JSON.stringify(arr))                                   var a2 = _.[cg b|cloneDeep](arr)
+[cc|获取 4-8 范围内随机数]                                                         [cc|可一个参数为最大值 也可以指定返回浮点数(4,8,true)]
+Math.floor(Math.random() * (8 - 4)) + 4                                    _.[cg b|random](4, 8)
+-----
+[cc|继承 ES5需扩展对象方法 ES6assign]
+objA.extend(objB)                                                          _.[ch b|assign](objA, objB)
+                                                                           _.[ch b|sample](arr)
+                                                                           _.[ch b|sampleSize](arr,n)
+                                                                           _.[ch b|includes](arr, '杨海月',2)
+
+```
 [链接](#)
 
 

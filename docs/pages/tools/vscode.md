@@ -10,10 +10,10 @@
 ```O
 {
     "editor.detectIndentation": false,     // 默认启用了根据文件类型自动设置tabSize
-    "editor.tabSize":               4,     // 设置缩进不生效时关闭editor.detectIndentation
-    "editor.fontFamily":   "consolas",     // 'consolas', monospace
-    "editor.formatOnSave":      false,     // 保存时格式化文档
-    "editor.formatOnPaste":     false,     // 粘贴时格式化
+    "editor.tabSize": 4,                   // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
+    "editor.fontFamily": "monospace",      // 'consolas', monospace
+    "editor.formatOnSave": false,          // 保存时格式化文档
+    "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
     
     "editor.minimap.enabled":   false,     // 迷你地图
     "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
