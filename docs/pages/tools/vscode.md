@@ -9,39 +9,44 @@
 
 ```O
 {
-  "editor.detectIndentation": false,   // 默认启用了根据文件类型自动设置tabSize
-  "editor.tabSize": 2,                 // 设置缩进不生效时关闭editor.detectIndentation
-  "editor.fontFamily": "Consolas, 'Courier New', monospace",  // 喜欢的字体"MONACO"
-  "editor.formatOnSave": true,         // 保存时格式化文档
+    "editor.detectIndentation": false,     // 默认启用了根据文件类型自动设置tabSize
+    "editor.tabSize":               4,     // 设置缩进不生效时关闭editor.detectIndentation
+    "editor.fontFamily":   "consolas",     // 'consolas', monospace
+    "editor.formatOnSave":      false,     // 保存时格式化文档
+    "editor.formatOnPaste":     false,     // 粘贴时格式化
+    
+    "editor.minimap.enabled":   false,     // 迷你地图
+    "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
+    "editor.rulers":       [100, 150],     // 在一定数量的等宽字符后显示垂直标尺
 
-  // 格式化 依赖Prettier 可搜esbenp关键词
-  "vetur.format.defaultFormatter.html": "prettier",
-  "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-  "[vue]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-  "[html]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+    // 格式 依赖Prettier 可搜esbenp关键词
+    "vetur.format.defaultFormatter.html": "prettier",
+    "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+    "[vue]":        {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+    "[html]":       {"editor.defaultFormatter": "esbenp.prettier-vscode"},
 
-  // koroFileHeader 插件
-  "fileheader.customMade": {           // 头部注释
-    "autoAdd": false,                  // 关闭自动添加头部注释
-    "Description":"file content",
-    "Version": "2.0"
-    "Author":"Ewan",
-    "Date":"Do not edit",
-    "LastEditors":"Ewan",
-    "LastEditTime":"Do not edit"
-  },
-  "fileheader.cursorMode": {           // 函数注释
-    "description":"",
-    "param":"",
-    "return":"",
-    "author":"Ewan"
-  }
+    // 插件 koroFileHeader 
+    "fileheader.customMade": {             // 头部注释
+        "autoAdd":              false,     // 关闭自动添加头部注释
+        "Description": "file content",
+        "Version":              "2.0",
+        "Author":              "Ewan",
+        "Date":         "Do not edit",
+        "LastEditors":         "Ewan",
+        "LastEditTime": "Do not edit"
+    },
+    "fileheader.cursorMode": {             // 函数注释
+        "description":             "",
+        "param":                   "",
+        "return":                  "",
+        "author":              "Ewan"
+    }
 
-  // 调试 通常以launch.json形式
-  "launch": {
-    "configurations": [],
-    "compounds": []
-  }
+    // 调试 通常以launch.json形式
+    "launch": {
+        "configurations":          [],
+        "compounds":               []
+    }
 }
 ```
 

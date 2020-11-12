@@ -5,6 +5,9 @@
     <li><a href="#">去重</a></li>
     <li>排序</li>
 </ul>
+1. npm i lodash --save
+2. 使用
+    import _ from 'lodash'
 
 [链接](#)
 

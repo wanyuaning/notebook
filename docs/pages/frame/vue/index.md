@@ -386,7 +386,9 @@ https://blog.csdn.net/jjb520/article/details/79551943
       'todo-item': TodoItem
     },
     // 初始化
-    mounted () {},
+    mounted () {
+      this.$nextTick(() => {})  // DOM更新是异步的，依赖DOM数据的操作应放在$nextTick发生后  
+    },
     // 方法集
     methods: {
       handleClick: function () { this.show = !this.show },
