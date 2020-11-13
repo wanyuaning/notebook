@@ -121,8 +121,7 @@ function handleCommon(data) {
     );
   }
 
-  const REG = /\/\/\s.+?(\n|$)/g;
-  const Match_ARR = data.match(REG) || [];
+  const Match_ARR = data.match(/\/\/\s.+?\n/g) || [];
   Match_ARR.forEach((e) => {
     data = data.replace(e, `<span class="comment">${e}</span>`);
   });

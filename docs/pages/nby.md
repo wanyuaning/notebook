@@ -12,6 +12,34 @@
 # 移动端
 ```
 
+
+Store{
+  loginState
+}
+LotteryGame 【/page/Center/LotteryGame】
+
+/LotIndex /page/Betting/LotIndex
+
+
+  /HK6 /page/Betting/HK6
+    检测登录信息 Store{loginState} Local{UserSession}
+    query{token,code,id,name}
+    异步 init
+    initOddsLottery
+      $router.push(TemaA) 
+
+    init ?
+      Active
+      navActive
+    mui.init
+    mui.ready
+      navActive
+        运行父页面LotIndex hk6Active 方法
+        $router.push
+  
+
+
+
 ```
 
 # 后台管理

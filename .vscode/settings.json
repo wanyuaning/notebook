@@ -1,15 +1,16 @@
 {
   "editor.detectIndentation": false,    // 默认启用了根据文件类型自动设置tabSize
-  "editor.tabSize": 4,                  // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
-  "editor.fontFamily": "monospace",      // 'consolas', monospace
+  "editor.tabSize": 2,                  // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
+  "editor.fontFamily": "consolas",      // 'consolas', monospace
   "editor.formatOnSave": false,         // 保存时格式化文档
+  
   "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
 
-  // 格式化 依赖Prettier 可搜esbenp关键词
+  // 格式 依赖Prettier 可搜esbenp关键词
   "vetur.format.defaultFormatter.html": "prettier",
   "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-  "[vue]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-  "[html]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[vue]":        {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[html]":       {"editor.defaultFormatter": "esbenp.prettier-vscode"},
 
   // koroFileHeader 插件
   "fileheader.customMade": {            // 头部注释
@@ -26,5 +27,10 @@
     "param":"",
     "return":"",
     "author":"Ewan"
-  }
+},
+"launch": {
+
+    "configurations": [],
+    "compounds": []
+}
 }
