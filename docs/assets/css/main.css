@@ -2,6 +2,9 @@
 :root{
     --color0 :#569fda; --color1: #976adb; --color2: #c168b2; --color3: #c89967; --color4: #9cb163; 
     --color5: #5eb271; --color6: #4eacc8; --color7: #7a88de; --color8: #b97fdd; --color9: #569fda;
+
+    --color-red: #e45; --color-green: #0b0; --color-blue: #26e; --color-yellow: #e90;
+    --color-blue9: #
 }
 
 body, body code{ font-size: 14px; font-family: 'Consolas';}
@@ -16,12 +19,18 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
 .cg{ color: var(--color0)} .ch{ color: var(--color1)} .ci{ color: var(--color2)} .cj{ color: var(--color3)} .ck{ color: var(--color4)}
 .cl{ color: var(--color5)} .cm{ color: var(--color6)} .cn{ color: var(--color7)} .co{ color: var(--color8)} .cp{ color: var(--color9)}
 
+.red{ color: var(--color-red)} .yellow{ color: var(--color-yellow)} .blue{ color: var(--color-blue)} .green{ color: var(--color-green)}
+
 .b0{ background-color: #000} .b1{ background-color: #111} .b2{ background-color: #222} .b3{ background-color: #333}
 .b4{ background-color: #444} .b5{ background-color: #555} .b6{ background-color: #666} .b7{ background-color: #777} 
 .b8{ background-color: #888} .b9{ background-color: #999} .ba{ background-color: #aaa} .bb{ background-color: #bbb} 
 .bc{ background-color: #ccc} .bd{ background-color: #ddd} .be{ background-color: #eee} .bf{ background-color: #fff} 
 .bg{ background-color: var(--color0)} .bh{ background-color: var(--color1)} .bi{ background-color: var(--color2)} .bj{ background-color: var(--color3)} .bk{ background-color: var(--color4)}
 .bl{ background-color: var(--color5)} .bm{ background-color: var(--color6)} .bn{ background-color: var(--color7)} .bo{ background-color: var(--color8)} .bp{ background-color: var(--color9)}
+.b-red{ background-color: var(--color-red)} .b-yellow{ background-color: var(--color-yellow)} .b-blue{ background-color: var(--color-blue)} .b-green{ background-color: var(--color-green)} 
+
+.alpha1{ opacity:0.1} .alpha2{ opacity:0.2} .alpha3{ opacity:0.3} .alpha4{ opacity:0.4}
+.alpha5{ opacity:0.5} .alpha6{ opacity:0.6} .alpha7{ opacity:0.7} .alpha8{ opacity:0.8} .alpha9{ opacity:0.9}
 
 /* 标题 */
 .h1, .h2, .h3, .h4, .h5, .h6, .h7, .h8, .h9{font-weight: bold;}

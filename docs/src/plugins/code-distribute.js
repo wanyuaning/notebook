@@ -48,17 +48,6 @@ function handleTable(data) {
   return tableStr;
 }
 
-function handleLink(data) {
-  let matchLink;
-  while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
-    data = data.replace(
-      matchLink[0],
-      `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
-    );
-  }
-  return data;
-}
-
 function handlePop(data) {
   const reg = /\(.+?\)\(.+?\)/g;
   const Match_POP_ARR = data.match(reg) || [];
@@ -121,7 +110,16 @@ function handleCommon(data) {
     );
   }
 
-  const REG = /\/\/\s.+?(\n|$)/g;
+  // [link](#)
+  let matchLink;
+  while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
+    data = data.replace(
+      matchLink[0],
+      `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
+    );
+  }
+
+  const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
   Match_ARR.forEach((e) => {
     data = data.replace(e, `<span class="comment">${e}</span>`);
@@ -138,7 +136,6 @@ function handleIcon(data) {
 
 var HANDLER_MAP = {
   table: handleTable,
-  link: handleLink,
   popover: handlePop,
   block: handleBlock,
   sitemap: handleSitemap,
