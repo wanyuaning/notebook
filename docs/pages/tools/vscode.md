@@ -9,44 +9,43 @@
 
 ```O
 {
-    "editor.detectIndentation": false,     // 默认启用了根据文件类型自动设置tabSize
-    "editor.tabSize": 4,                   // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
-    "editor.fontFamily": "monospace",      // 'consolas', monospace
-    "editor.formatOnSave": false,          // 保存时格式化文档
-    "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
-    
-    "editor.minimap.enabled":   false,     // 迷你地图
-    "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
-    "editor.rulers":       [100, 150],     // 在一定数量的等宽字符后显示垂直标尺
+  "editor.detectIndentation": false,     // 默认启用了根据文件类型自动设置tabSize
+  "editor.tabSize": 4,                   // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
+  "editor.fontFamily": "monospace",      // windows下IDE正常："consolas"
+  "editor.formatOnSave": false,          // 保存时格式化文档
 
-    // 格式 依赖Prettier 可搜esbenp关键词
-    "vetur.format.defaultFormatter.html": "prettier",
-    "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-    "[vue]":        {"editor.defaultFormatter": "esbenp.prettier-vscode"},
-    "[html]":       {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "editor.minimap.enabled":   false,     // 迷你地图
+  "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
+  "editor.rulers":       [100, 150],     // 在一定数量的等宽字符后显示垂直标尺
 
-    // 插件 koroFileHeader 
-    "fileheader.customMade": {             // 头部注释
-        "autoAdd":              false,     // 关闭自动添加头部注释
-        "Description": "file content",
-        "Version":              "2.0",
-        "Author":              "Ewan",
-        "Date":         "Do not edit",
-        "LastEditors":         "Ewan",
-        "LastEditTime": "Do not edit"
-    },
-    "fileheader.cursorMode": {             // 函数注释
-        "description":             "",
-        "param":                   "",
-        "return":                  "",
-        "author":              "Ewan"
-    }
+  // 格式 依赖Prettier 可搜esbenp关键词
+  "vetur.format.defaultFormatter.html": "prettier",
+  "[javascript]": {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[vue]":        {"editor.defaultFormatter": "esbenp.prettier-vscode"},
+  "[html]":       {"editor.defaultFormatter": "esbenp.prettier-vscode"},
 
-    // 调试 通常以launch.json形式
-    "launch": {
-        "configurations":          [],
-        "compounds":               []
-    }
+  // 插件 koroFileHeader
+  "fileheader.customMade": {             // 头部注释
+    "autoAdd":              false,       // 关闭自动添加头部注释
+    "Description": "file content",
+    "Version":              "2.0",
+    "Author":              "Ewan",
+    "Date":         "Do not edit",
+    "LastEditors":         "Ewan",
+    "LastEditTime": "Do not edit"
+  },
+  "fileheader.cursorMode": {             // 函数注释
+    "description":             "",
+    "param":                   "",
+    "return":                  "",
+    "author":              "Ewan"
+  }
+
+  // 调试 通常以launch.json形式
+  "launch": {
+    "configurations":          [],
+    "compounds":               []
+  }
 }
 ```
 

@@ -110,6 +110,7 @@ function handleCommon(data) {
     );
   }
 
+<<<<<<< HEAD
   // [link](#)
   let matchLink;
   while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
@@ -121,6 +122,9 @@ function handleCommon(data) {
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
+=======
+  const Match_ARR = data.match(/\/\/\s.+?\n/g) || [];
+>>>>>>> 98e08355303b0c1ddfa0d0d8dc352d152a030993
   Match_ARR.forEach((e) => {
     data = data.replace(e, `<span class="comment">${e}</span>`);
   });

@@ -122,33 +122,7 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 　　　　
 ## JavaScript
 ### ECMAScript规范 [detail](pages/javascript/ecma.md)
-```
-弹出新的浏览器窗口；
-移动、关闭浏览器窗口以及调整窗口大小；
-提供 Web 浏览器详细信息的定位对象；　
-提供用户屏幕分辨率详细信息的屏幕对象；
-跳转到另一个页面、前进、后退
 
-DOM(W3C标准)
-HTMLDocument
-HTMLElement
-鼠标事件：click、dbclick、mousedown、mouseup、mouseover、mouseout、mousemove
-键盘事件：keydown、keypress、keyup
-HTML事件：load、unload、abort、error、select、change、submit、reset、resize、scroll、focus、blur
-
-1、DOMReady
-2、DOM操作。增删改查遍历
-3、DOM继承层级
-5、DOM类型与相应的API
-6、事件与事件流
-7、浏览器兼容性
-
-原型与原型链
-执行上下文与执行上下文栈
-作用域与作用域链
-闭包
-高阶函数
-```
 ```link
 [h3|数据类型] [类型转换](#pages/javascript/data-type?id=类型转换)
   [title2|基本类型]：[String](#pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol

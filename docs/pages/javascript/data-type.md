@@ -19,7 +19,7 @@ var arr = [
 var objA = {"name": "戈德斯文", "car": "宝马"}
 var objB = {"name": "柴硕", "loveEat": true}
 
-[b|原生局限]                                                                     [b|Lodash解决]
+[b|原生局限]                                                                    [b|Lodash解决]
 -----
 for(var i = 0; i < 5; i++){ l(i) }                                         _.[cg b|times](5,function(a){ l(a) })
 
