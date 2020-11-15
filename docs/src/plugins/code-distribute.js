@@ -110,21 +110,18 @@ function handleCommon(data) {
     );
   }
 
-<<<<<<< HEAD
-  // [link](#)
+  // [content](#)
   let matchLink;
   while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
-    data = data.replace(
-      matchLink[0],
-      `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
-    );
+    let linkTag = `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
+    // 详情[DETAIL](#) 信息[INFO](#)
+    matchLink[1] === 'DETAIL' && (linkTag = `<a target="_blank" class="icon-detail" href="${matchLink[2]}"></a>`)
+    matchLink[1] === 'INFO'   && (linkTag = `<a target="_blank" class="icon-info" href="${matchLink[2]}"></a>`)
+    data = data.replace(matchLink[0], linkTag);
   }
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
-=======
-  const Match_ARR = data.match(/\/\/\s.+?\n/g) || [];
->>>>>>> 98e08355303b0c1ddfa0d0d8dc352d152a030993
   Match_ARR.forEach((e) => {
     data = data.replace(e, `<span class="comment">${e}</span>`);
   });

@@ -2,7 +2,8 @@
 > **Windows全局目录：C:\Users\new\AppData\Roaming\npm**
 ❷❸❹❺❻❼❽❾❿
 ### nginx
-```detail
+
+```
 windows: 
     安装：http://nginx.org/en/download.html   [b5 cf| 配置 ]
     [b-green cf| 启动 ] [green|c:\server\nginx-1.0.2 > nginx.exe]  [cc|或 c:\server\nginx-1.0.2 > start nginx]
@@ -13,8 +14,10 @@ mac:
     [b-green cf| 启动 ] [green|nginx]    
     [b-yellow cf| 重启 ] [yellow|nginx -s reload]  
     [b-red cf| 停止 ] [red|nginx -s stop]
-
-[b5 cf|Windows:c:\nginx\conf\nginx.conf] [b5 cf|Mac:/usr/local/etc/nginx/nginx.conf][detail](#)
+```
+```
+[CLASS s12 l12]
+[b5 cf|Windows c:\nginx\conf\nginx.conf] [b5 cf|Mac /usr/local/etc/nginx/nginx.conf][DETAIL](#/pages/common/nginx?id=nginx.conf)
 http {
     server {
         listen 8080;
@@ -30,16 +33,6 @@ http {
     }
 }
 ```
-http {
-    server {
-        listen 8080;
-        add_header Access-Control-Allow-Origin *;
-        add_header Access-Control-Allow-Headers DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization;
-        add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
-    }
-}
-
-
 
 ### 文档
 >$ sudo npm i docsify-cli -g<br>

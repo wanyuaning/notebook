@@ -13,6 +13,9 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
 .s12{font-size: 12px !important} .s14{font-size: 14px !important} .s16{font-size: 16px !important} .s18{font-size: 18px !important} .s20{font-size: 20px !important}  
 .s22{font-size: 22px !important} .s24{font-size: 24px !important} .s26{font-size: 26px !important} .s28{font-size: 28px !important} .s30{font-size: 30px !important} 
 
+.l12{ line-height: 12px;} .l14{ line-height: 14px;} .l16{ line-height: 16px;} .l18{ line-height: 18px;} .l20{ line-height: 20px;}
+.l22{ line-height: 22px;} .l24{ line-height: 24px;} .l26{ line-height: 26px;} .l28{ line-height: 28px;} .l30{ line-height: 30px;} 
+
 .c0{ color:#000 !important} .c1{ color:#111 !important  } .c2{ color:#222 !important} .c3{ color:#333 !important} .c4{ color:#444 !important} 
 .c5{ color:#555 !important} .c6{ color:#666 !important} .c7{ color:#777 !important} .c8{ color:#888 !important} .c9{ color:#999 !important} 
 .ca{ color:#aaa !important} .cb{ color:#bbb !important} .cc{ color:#ccc !important} .cd{ color:#ddd !important} .ce{ color:#eee !important} .cf{ color:#fff !important}
@@ -431,3 +434,11 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 .sitemap-group .l{background-color: #f8f8f8;}
 
 .sitemap-table .c{background-color: #ddd; margin-right:1px;color: #fff; padding: 1px 4px;}
+
+/*ICON*/
+.icon-detail{ text-decoration: none;}
+.icon-detail::after{ content: '┅'; display:inline-block; vertical-align: baseline; transform-origin: center; transform: scale(1.6) rotate(90deg) translateY(-3px)}
+.icon-info{ text-decoration: none;}
+.icon-info::after{ content: 'ⓘ'; display:inline-block; vertical-align: baseline;   }
+
+
