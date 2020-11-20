@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="main.css" rel="stylesheet"/>
+    <style>
+      .menu-box{position: relative; transition: all 0.3s ease 0s; background-position-x: 0px;}
+    </style>
+</head>
+
+<body>
+<br><br><br><br><br><br>
+
+<div class="navigation-item">
+  <div class="dropdown-panel" id="dropdown-panel">
+    <nav data-map="1">
+      <li><a><img src="images/list1_1.png"></a><p>AG国际馆</p></li>
+      <li><a><img src="images/list1_6.png"></a><p>BBIN馆</p></li>
+      <li><a><img src="images/list1_7.png"></a><p>DG视讯</p></li>
+      <li><a><img src="images/list1_3.png"></a><p>DS旗舰馆</p></li>
+      <li><a><img src="images/list1_9.png"></a><p>BG视讯</p></li>
+      <li><a><img src="images/list1_5.png"></a><p>欧博视讯</p></li>
+      <li><a><img src="images/HG.png"></a><p>HG名人馆</p></li>
+      <li><a><img src="images/list1_4.png"></a><p>OG视讯</p></li>
+      <li><a><img src="images/list1_8.png"></a><p>EBet视讯</p></li>
+      <li><a><img src="images/list1_2.png"></a><p>SA沙龙馆</p></li>
+    </nav>
+    <nav data-map="3">
+      <li><a><img src="images/ag.png"></a><p>大圣捕鱼</p></li>
+      <li><a><img src="images/qianpao.png"></a><p>金蟾捕鱼</p></li>
+      <li><a><img src="images/likui.png"></a><p>李逵劈鱼</p></li>
+      <li><a><img src="images/jincan.png"></a><p>千炮捕鱼</p></li>
+      <li><a><img src="images/dasheng.png"></a><p>捕鱼王</p></li>
+    </nav>
+  </div>
+  <div class="divNav">
+    <div class="ulMiddle">
+      <ul class="menu-box" id="menu-box">
+        <li data-index="0"><a>首页</a></li>
+        <li data-index="1"><a>真人娱乐</a></li>
+        <li data-index="2"><a>电子游艺</a></li>
+        <li data-index="3"><a>捕鱼达人</a></li>
+        <li data-index="4"><a>体育赛事</a></li>
+        <li data-index="5"><a>彩票游戏</a></li>
+        <li data-index="6"><a>棋牌游戏</a></li>
+        <li data-index="7"><a>优惠活动</a></li>
+        <li data-index="8"><a>加盟合作</a></li>
+        <li data-index="9"><a>在线客服</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+  
+    
+</body>
+</html>
+<script>
+  Element.prototype.addClass = function (cn) {
+    let className = this.className
+    if (className.indexOf(cn) > -1) return this
+    className = (className + ' ' + cn).replace(/\s+/, ' ')
+    this.className = className
+    return this
+  }
+  Element.prototype.delClass = function (cn) {
+    let className = this.className
+    if (className.indexOf(cn) < 0) return this
+    className = className.replace(cn, '')
+    this.className = className
+    return this
+  }
+  Element.prototype.hasClass = function (cn) {
+    return this.className.indexOf(cn) > -1
+  }
+
+
+  var activePointer = 0        // 激活指针
+  var listPositions = {0: 0}   // 子元素位置下标映射 指针访问
+  var listContents  = {0: 0}   // 子元素内容下标映射 指针访问
+
+  var isInArea = false         // 鼠标是否在下拉容器范围
+  var timerLeave               // 退出激活计时器
+
+  var $DROPPANEL = document.getElementById('dropdown-panel')
+  var $MENU_BOX = document.getElementById('menu-box')
+
+  // 内容映射菜单下标
+  var $CONTENT_BOX_ARR = $DROPPANEL.getElementsByTagName('nav')
+  Array.prototype.forEach.call($CONTENT_BOX_ARR, function(e){
+    var index  = e.getAttribute('data-map')
+    listContents[index] = e
+  })
+  
+
+  $MENU_BOX.addEventListener('mouseover', function(e){
+    isInArea = true
+    var DOM_LI = e.target
+    e.target.tagName === 'A' && (DOM_LI = e.target.parentNode)
+    if (DOM_LI.tagName === 'LI') {
+      var offset = DOM_LI.offsetLeft
+      var index  = DOM_LI.getAttribute('data-index')
+      listPositions[index] = offset
+      setNavigationActive(offset)
+    }
+  })
+  $MENU_BOX.addEventListener('mouseleave', function(e){
+    isInArea = false
+    handleLeave() 
+  })
+  $MENU_BOX.addEventListener('click', function(e){
+    var DOM_LI = e.target
+    e.target.tagName === 'A' && (DOM_LI = e.target.parentNode)
+    if (DOM_LI.tagName === 'LI') {
+      activePointer  = DOM_LI.getAttribute('data-index')
+    }
+  })
+  
+  $DROPPANEL.addEventListener('mouseover', function(e){
+    isInArea = true
+  })
+  $DROPPANEL.addEventListener('mouseleave', function(e){
+    if (e.target === e.currentTarget){
+      isInArea = false
+      handleLeave() 
+    }
+  })
+
+  function setNavigationActive(position){
+    $DROPPANEL.addClass('overHide')
+    $MENU_BOX.style = 'background-position-x: '+ position +'px;'
+  }
+  function setNavigationNormal(){
+    $DROPPANEL.delClass('overHide')
+    $MENU_BOX.style = 'background-position-x: '+ listPositions[activePointer] +'px;'
+    // 内容
+    // Array.prototype.forEach.call($CONTENT_BOX_ARR, function(e){
+    //   e.style.display = 'none'
+    // })
+  }
+  function handleLeave(){
+    clearTimeout(timerLeave)
+    timerLeave = setTimeout(function(){
+      !isInArea && setNavigationNormal()
+    },0)
+  }
+  
+
+</script>
+
+
+
+

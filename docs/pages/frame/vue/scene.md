@@ -15,10 +15,10 @@ copyLink() {
     clipboard.on('error', function () {});
 }
 
-<input v-model="$store.state.user.cn_alias" id="cn-alias">
-<img src= "../assets/images/copy.png" title="复制" id="btn-cn-alias" data-clipboard-action="copy" data-clipboard-target="#cn-alias">
+<input v-model="$store.state.user.cn_alias" id="[cg b|cn-alias]">
+<img src= "../assets/images/copy.png" title="复制" id="[ch b|btn-cn-alias]" data-clipboard-action="copy" data-clipboard-target="#[cg b|cn-alias]">
 mounted(){
-    const clipboard = new this.Clipboard('#btn-cn-alias')
+    const clipboard = new this.Clipboard('#[ch b|btn-cn-alias]')
     clipboard.on('success', function(e) {})
     clipboard.on('error', function(e) {})
 }

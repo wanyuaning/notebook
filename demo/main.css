@@ -1,0 +1,52 @@
+li, ul {margin: 0; padding: 0}
+
+.navigation-item{
+    width: 100%; margin: auto;
+    position: relative; z-index: 1;
+    font: 12px/1.14 arial, \5b8b\4f53; color: #333; text-align: center; outline: 0; 
+}
+
+.dropdown-panel { width: 100%; height: 0; overflow: hidden; position: absolute; background: rgba(243, 194, 76, .7); transition: all .6s; }
+
+nav {width: 1000px; height: 100%; margin: auto; display: inline-block; }
+
+nav li { height: 140px; float: left; color: #814600; box-sizing: border-box; list-style:none; }
+nav li p{ margin: 0; padding: 0; }
+
+nav li:not(:first-child) { margin-left: 25px }
+
+nav li:hover { color: red }
+
+nav li a { display: inline-block; padding-top: 40px; box-sizing: border-box }
+
+.divNav { margin: auto; width: 100%; position: absolute; top: 0 }
+
+.ulMiddle { width: 1000px; height: 42px; background: #4d2a1c; margin: auto; }
+
+ul {
+    width: 972px; text-align: center; overflow: hidden; margin: auto;
+    background: url(http://753320.com/pc/l11/header/navbg.png) 0 center/100px 30px no-repeat;
+}
+
+ul, ul li { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center;}
+
+ul li {width: 97px; height: 42px; }
+ul li a {width: 100%; height: 16px; line-height: 16px; display: inline-block; color: #ffcb66; font-weight: 700; border-right: 1px solid #814600;}
+ul li:hover a {color: #000}
+ul li:last-child a {border:0}
+
+.overHide {height: 180px!important; max-height: 180px!important}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

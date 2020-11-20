@@ -127,7 +127,10 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 [h3|数据类型] [类型转换](#pages/javascript/data-type?id=类型转换)
   [title2|基本类型]：[String](#pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
   [title2|对象类型]：类对象：Object [Array](#pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
-
+[h3|事件循环][DETAIL](#)
+  回调地狱[Promise/then](#/pages/javascript/es6?id=Promise/then)
+  同一作用域自动异步[async/await](#/pages/javascript/es6?id=async/await) 
+  同一作用域手动异步[generator/yield/next](#/pages/javascript/es6?id=generator/yield/next)
 
 ```
 

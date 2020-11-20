@@ -160,11 +160,11 @@ function codeDistributeEntry(hook, vm) {
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
      */
     const Match_PRE_ARR =
-      html.match(/<pre v-pre data-lang="([^"]+)?">[\s\S]*?<\/pre>/gm) || [];
+      html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || [];
     Match_PRE_ARR.map((pre) => {
       const langArr =
         pre
-          .match(/<pre v-pre data-lang="([^"]+)?">/)[0]
+          .match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>/)[0]
           .replace('<pre v-pre data-lang="', "")
           .replace('">', "")
           .split(" ") || [];

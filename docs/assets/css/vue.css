@@ -776,7 +776,6 @@ section.cover blockquote>p>a:hover {
 
 .markdown-section code {
     border-radius: 2px;
-    color: #e96900;
     font-size: .8rem;
     margin: 0 2px;
     padding: 3px 5px;
@@ -796,7 +795,8 @@ section.cover blockquote>p>a:hover {
     overflow: auto;
     padding: 0 1.4rem;
     position: relative;
-    word-wrap: normal
+    word-wrap: normal;
+    color: #525252;
 }
 
 .token.cdata, .token.comment, .token.doctype, .token.prolog {
@@ -885,7 +885,6 @@ section.cover blockquote>p>a:hover {
     -webkit-font-smoothing: initial;
     background-color: #f8f8f8;
     border-radius: 2px;
-    color: #525252;
     display: block;
     font-family: Roboto Mono, Monaco, courier, monospace;
     font-size: .8rem;

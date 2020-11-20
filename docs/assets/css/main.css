@@ -134,8 +134,8 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
 input[type=search]{border:#f00 1px solid}
 
 /* 公共 */
-pre[data-lang~=O], pre[data-lang~=O] code{ background: transparent; padding: 0}
-pre[data-lang~=O]:after{ display: none}
+.markdown-section pre.none, .markdown-section pre.none>code{ background: transparent; padding: 0}
+pre.none:after{ display: none}
 .markdown-section ul.no-list, .markdown-section ul .no-list li{ list-style: none; padding:0; margin: 0; }
 
 :root {
