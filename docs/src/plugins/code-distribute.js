@@ -1,3 +1,5 @@
+let GLOBAL_HTML = ``
+
 function handleSitemap(data) {
   let matchStrong;
   while ((matchStrong = /█(.+)?█/.exec(data)) !== null) {
@@ -6,6 +8,7 @@ function handleSitemap(data) {
       `<span class="c3 b">${matchStrong[1]}</span>`
     );
   }
+  // 导航集
   let matchGroup;
   while ((matchGroup = /【([^\s】]+)-([^】]+)】/.exec(data)) !== null) {
     data = data.replace(
@@ -13,6 +16,7 @@ function handleSitemap(data) {
       `<span class="sitemap-group"><i class="t">${matchGroup[1]}</i><i class="l">${matchGroup[2]}</i></span>`
     );
   }
+  // 表头
   let matchTable;
   while ((matchTable = /┣([^┫]+)┫/.exec(data)) !== null) {
     let html = matchTable[1];
@@ -21,6 +25,7 @@ function handleSitemap(data) {
     html = html.replace(/┃/g, '</span><span class="c">');
     data = data.replace(matchTable[0], html);
   }
+  // 按钮
   let matchButton;
   while ((matchButton = /►([^◄]+)◄/.exec(data)) !== null) {
     data = data.replace(
@@ -110,7 +115,7 @@ function handleCommon(data) {
     );
   }
 
-  // [content](#)
+  // [content](#) 
   let matchLink;
   while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
     let linkTag = `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
@@ -118,6 +123,31 @@ function handleCommon(data) {
     matchLink[1] === 'DETAIL' && (linkTag = `<a target="_blank" class="icon-detail" href="${matchLink[2]}"></a>`)
     matchLink[1] === 'INFO'   && (linkTag = `<a target="_blank" class="icon-info" href="${matchLink[2]}"></a>`)
     data = data.replace(matchLink[0], linkTag);
+  }
+
+  /** 如果使用 ｜ 分隔的话会和class冲突
+   * [DETAIL/info01] 详情图标 提示 内容标识  [info01][content]
+   * [INFO cg/info02]   信息图标 提示 内容标识  [info02][content]
+   * [HELP>info03]   帮助图标 跳转 内容标识  [info03][content] 
+   */
+  let matchInfoLink;
+  while ((matchInfoLink = /\[(DETAIL|INFO|HELP)([^\/\>]*)(\/|\>)([^\]]+)\]/.exec(data)) !== null) {
+    let tag  = matchInfoLink[1].toLowerCase()
+    let cls  = matchInfoLink[2]
+    let type = matchInfoLink[3]
+    let id   = matchInfoLink[4]
+    switch (type){
+      case '>': // 跳转
+        data = data.replace(matchInfoLink[0], `<a class="icon-${tag}${cls}"></a>`);
+        break;
+      case '/': // 提示
+          const matchContent = new RegExp(`\\[${id}\\]\\[([^\\]]*)\\]`).exec(data)
+          matchContent && (GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div>${matchContent[1]}</div></span>`)
+          data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag}${cls}" data-id="${id}"></span>`);
+          break;
+      default:
+        data = data.replace(matchInfoLink[0], '')
+    }
   }
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
@@ -151,16 +181,21 @@ var HANDLER_MAP = {
  */
 function codeDistributeEntry(hook, vm) {
   let hasPanels = false;
+  hook.init(function() {console.log('-------1 init')});
+  hook.mounted(function(){ console.log('-------2 mounted')})
   hook.beforeEach(function (content) {
+    console.log('-------3 beforeEach')
     return content;
   });
   hook.afterEach(function (html, next) {
+    console.log('-------4 afterEach')
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
      */
     const Match_PRE_ARR =
       html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || [];
+      
     Match_PRE_ARR.map((pre) => {
       const langArr =
         pre
@@ -189,20 +224,20 @@ function codeDistributeEntry(hook, vm) {
     /**
      * 详情 <a href="#/pages/javascript/ecma">detail</a>
      */
-    const REG_Detail = /<a href="[^"]+"\s?>detail\d?<\/a>/g;
-    const Match_Detail_Arr = html.match(REG_Detail) || [];
-    Match_Detail_Arr.forEach((e) => {
-      const level = e.match(/detail\d?/)[0].charAt(6);
-      const className = "ui-detail-" + (level || 6);
+    // const REG_Detail = /<a href="[^"]+"\s?>detail\d?<\/a>/g;
+    // const Match_Detail_Arr = html.match(REG_Detail) || [];
+    // Match_Detail_Arr.forEach((e) => {
+    //   const level = e.match(/detail\d?/)[0].charAt(6);
+    //   const className = "ui-detail-" + (level || 6);
 
-      const tag = e.replace(
-        />detail\d?/,
-        ' class="' +
-          className +
-          '"><img src="../../../assets/icon/more2.svg" />'
-      );
-      html = html.replace(e, tag);
-    });
+    //   const tag = e.replace(
+    //     />detail\d?/,
+    //     ' class="' +
+    //       className +
+    //       '"><img src="../../../assets/icon/more2.svg" />'
+    //   );
+    //   html = html.replace(e, tag);
+    // });
 
     /**
      * 信息 (info http://www.androiddevtools.cn/)
@@ -255,8 +290,47 @@ function codeDistributeEntry(hook, vm) {
 
     next(html);
   });
-}
+  hook.doneEach(function() {document.body.innerHTML += GLOBAL_HTML});
+  hook.ready(function(){
+    const tipsMapId = {}      // 缓存tips内容元素
+    let hasTipsActive = false // 是否有激活的Tips 用于排除多余的Document点处理
 
+    const unboundForEach = Array.prototype.forEach
+    const forEach = Function.prototype.call.bind(unboundForEach)
+    forEach(document.querySelectorAll('.ewan-tips'), function (el) {
+      el.addEventListener('click', function (e) {console.log(e);
+        const id = e.currentTarget.getAttribute('data-id')
+        if (tipsMapId[id]) {
+          tipsMapId[id].target.style.display = 'block' 
+        } else {
+          const x = e.pageX//clientX
+          const y = e.pageY//clientY
+          const tar = document.querySelector('#'+id)
+          tar.style.display = 'block'
+          tar.style.left = x + 'px'
+          tar.style.top = y + 'px'
+          tipsMapId[id] = {
+            target: tar,
+            x,
+            y
+          }
+        } 
+        hasTipsActive = true           
+      });
+    })
+    document.addEventListener('click', function(e){
+      if (!hasTipsActive) return
+      const className = e.target.className + e.target.parentNode.className
+      if (!className.includes('tips')){
+        for (i in tipsMapId) {
+          tipsMapId[i].target.style.display = 'none'
+        }
+        hasTipsActive = false
+      }
+    })
+  })
+}
+  
 if (window) {
   window.$docsify = window.$docsify || {};
   // Init plugin

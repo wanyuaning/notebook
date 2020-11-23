@@ -41,6 +41,29 @@ LotteryGame 【/page/Center/LotteryGame】
 
 
 ```
+# SVN文件
+```
+[CLASS none cc]
+___base
+  admin adminCDN adminCDN-fen AppPack hk6 hk6-m kaijiangwang kaijiangwang-m m3.0 new-kaijiang [c3|pc_m_2.17][DETAIL ch/nby01] Tools 
+  v 
+    downloadWeb OfficailSite OfficailSite申博 WebOfficial-VM [c3 b|会员中心站改造][INFO cg/nby02] 会员中心站改造(首屏优化版) [c3 b|精简版会员中心][HELP/nby03] 客服 牛博官网 牛博官网新版 昇博官网
+  开彩网-m [c3 b|新开发m站]
+Morocco
+QQ推广
+README
+v2.13稳定版
+Vue-Admin
+彩票&&棋牌版本
+试玩版本
+NodeJsForWebUIBuild.exe
+工作内容.xlsx
+
+[nby01][迭代开发]
+[nby02][站点累积一，a-b]
+[nby03][站点累积二，b-?]
+```
+
 
 # 后台管理
 ```sitemap

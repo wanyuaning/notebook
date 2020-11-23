@@ -437,8 +437,17 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 
 /*ICON*/
 .icon-detail{ text-decoration: none;}
-.icon-detail::after{ content: '┅'; display:inline-block; vertical-align: baseline; transform-origin: center; transform: scale(1.6) rotate(90deg) translateY(-3px)}
+.icon-detail::after{ content: '┅'; display:inline-block; vertical-align: baseline; transform-origin: center; transform: scale(1.6) rotate(90deg) translateY(-1px)}
 .icon-info{ text-decoration: none;}
-.icon-info::after{ content: 'ⓘ'; display:inline-block; vertical-align: baseline;   }
+.icon-info::after{ content: 'ⓘ'; display:inline-block; vertical-align: baseline;}
+.icon-help{ text-decoration: none;}
+.icon-help::after{ content: 'ⓘ'; display:inline-block; vertical-align: baseline;}
 
-
+.ewan-tips-content{position: absolute; width: 0; height: 0; display: none; }
+.ewan-tips-content div{ 
+  width: 100px; 
+  position: absolute; bottom: 10px; left: -50px; font-size: 12px;
+  background-color: #fff; border-radius: 5px; 
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2); padding: 5px 10px; 
+  /* display: none; */
+}
