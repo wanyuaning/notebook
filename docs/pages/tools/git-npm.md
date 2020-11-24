@@ -1,4 +1,4 @@
-
+```
 配置用户名与邮箱
 用户名和邮箱地址是本地git客户端的一个变量,每次commit都会用用户名和邮箱纪录。github的contributions统计就是按邮箱来统计的
 查看
@@ -43,8 +43,10 @@ git init
 
  克隆已有仓库 
 git clone [url]
+```
 
- 开发操作 
+### 开发操作 
+```
 git add ..  【取消:git reset HEAD b.txt】【查看跟踪状态:git status】
 git commit -m '说明1'   【修正:git commit --amend -m '说明2'】【撤销:git reset --soft HEAD~】【撤消文件修改:git checkout -- b.txt】【撤消所有修改:git checkout . 】【提交信息:git log】
 git push -u origin master:master   origin为关联的远库短名，master为分支名
@@ -244,24 +246,36 @@ git status
 git add .
 git commit -m 'fix(View)' 
 git push --set-upstream origin ewan_dev
+```
 
+```
+[h3 ch|版本穿梭]
+1 [b6 cf|git log] 日志  
+  commit 859e11ac647310dc3edd24324b892e249bcd3d41
+  Author: ewan <wane@qq.com>
+  Date:   Fri Nov 20 20:26:38 2020 +0800
+  [b6 cf|git log --pretty=oneline] 一行日志
+  859e11ac647310dc3edd24324b892e249bcd3d41 提交说明
+  [b6 cf|git reflog]    HEAD@｛0｝:版本穿梭时需要移动的步数
+  [b ci|859e11a] HEAD@{1}: commit: 提交说明
+2 [b3 cf|git reset --hard [b ci|859e11a]]  基于索引值的操作【推荐】
+  [b3 cf|git reset –hard  HEAD^] （向后穿梭一步）  [b3 cf|git reset --hard HEAD^^^] (^符号有几个回退几步)  使用^符号：只能向后穿梭
+  [b3 cf|git reset  --hard HEAD~1]  (波浪线后面跟后退步数)  使用~符号
 
-<br>
-在签出前,请清理存储库工作树
-1 先暂存改动
-git stash 【查看 git stash  show】  //将修改存储到暂存区，工作区会删除这些修改
---------------------------------------------------------
-可以切换分支 git checkout <feture_branch>
-可以拉取操作 git pull
---------------------------------------------------------
-git stash pop //取出修改
-git add .
+[h3 cg|在签出前,请清理存储库工作树]
+1 [b|先暂存改动]
+  git stash 【查看 git stash  show】  //将修改存储到暂存区，工作区会删除这些修改
+  [BOX
+  可以切换分支 git checkout <feture_branch>
+  可以拉取操作 git pull]
+  git stash pop //取出修改
+  git add .
 
-2 放弃本地修改，直接覆盖
-git reset --hard
-git pull
+2 [b|放弃本地修改，直接覆盖]
+  git reset --hard
+  git pull
 
-
+```
 
 
 

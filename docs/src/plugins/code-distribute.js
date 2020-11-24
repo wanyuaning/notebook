@@ -116,7 +116,7 @@ function handleCommon(data) {
   }
 
   // [content](#) 
-  let matchLink;
+  let matchLink; 
   while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
     let linkTag = `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
     // 详情[DETAIL](#) 信息[INFO](#)
@@ -149,6 +149,14 @@ function handleCommon(data) {
         data = data.replace(matchInfoLink[0], '')
     }
   }
+
+  /**内容包裹 
+   * [BOX content]
+   * [BOX 
+   * content
+   * ]
+   */
+  let matchBox
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];

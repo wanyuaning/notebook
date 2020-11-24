@@ -5,10 +5,17 @@
 
 
 样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
+提示或跳转图标<br>
 [DETAIL/info01] 详情图标 提示 内容标识  [info01][content]<br>
 [INFO/info02]   信息图标 提示 内容标识  [info02][content]<br>
 [HELP>info03]   帮助图标 跳转 内容标识  [info03][content]<br>
 [HELP cg>info03]   帮助图标 图标颜色 跳转 内容标识  [info03][content]<br>
+内容包裹 <br>
+[BOX content]<br>
+[BOX <br>
+content<br>
+]<br>
+
 
 <br><br>
 
