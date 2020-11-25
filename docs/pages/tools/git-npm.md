@@ -249,7 +249,17 @@ git push --set-upstream origin ewan_dev
 ```
 
 ```
-[h3 ch|版本穿梭]
+【h3 ch|版本对比】
+git diff                                   查看尚未暂存的文件更新了哪些部分
+git diff filename                          查看尚未暂存的某个文件更新了哪些
+------------------------------------------------------------------------------------------
+git diff –cached                           查看已经暂存起来的文件和上次提交的版本之间的差异
+git diff –cached filename                  查看已经暂存起来的某个文件和上次提交的版本之间的差异
+------------------------------------------------------------------------------------------
+git diff 1ce40c9 d63e74c                   查看某两个版本之间的差异
+git diff 1ce40c9:filename d63e74c:filename 查看某两个版本的某个文件之间的差异
+
+【h3 ch|版本穿梭】
 1 [b6 cf|git log] 日志  
   commit 859e11ac647310dc3edd24324b892e249bcd3d41
   Author: ewan <wane@qq.com>
@@ -262,12 +272,12 @@ git push --set-upstream origin ewan_dev
   [b3 cf|git reset –hard  HEAD^] （向后穿梭一步）  [b3 cf|git reset --hard HEAD^^^] (^符号有几个回退几步)  使用^符号：只能向后穿梭
   [b3 cf|git reset  --hard HEAD~1]  (波浪线后面跟后退步数)  使用~符号
 
-[h3 cg|在签出前,请清理存储库工作树]
+【h3 cg|在签出前,请清理存储库工作树】
 1 [b|先暂存改动]
   git stash 【查看 git stash  show】  //将修改存储到暂存区，工作区会删除这些修改
-  [BOX
-  可以切换分支 git checkout <feture_branch>
-  可以拉取操作 git pull]
+    [beBOX
+    可以切换分支 git checkout <feture_branch>
+    可以拉取操作 git pull]
   git stash pop //取出修改
   git add .
 

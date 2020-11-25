@@ -1,4 +1,4 @@
-let GLOBAL_HTML = ``
+let GLOBAL_HTML = ''
 
 function handleSitemap(data) {
   let matchStrong;
@@ -131,7 +131,7 @@ function handleCommon(data) {
    * [HELP>info03]   帮助图标 跳转 内容标识  [info03][content] 
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[(DETAIL|INFO|HELP)([^\/\>]*)(\/|\>)([^\]]+)\]/.exec(data)) !== null) {
+  while ((matchInfoLink = /\[(DETAIL|INFO|HELP|LINK)([^\/\>]*)(\/|\>)([^\]]+)\]/.exec(data)) !== null) {
     let tag  = matchInfoLink[1].toLowerCase()
     let cls  = matchInfoLink[2]
     let type = matchInfoLink[3]
@@ -151,12 +151,21 @@ function handleCommon(data) {
   }
 
   /**内容包裹 
+   * [bg ciBOX content] 带CLASS
    * [BOX content]
    * [BOX 
    * content
    * ]
    */
   let matchBox
+  while ((matchBox = /\[([\w-]*)BOX[\n\s]?([^\]]+)\n?\]/.exec(data)) !== null) {
+    let arr = matchBox[2].split(/\n/)
+    arr = arr.map(e => e.trim())
+    const content = arr.join('\n')
+    let className = 'box'
+    matchBox[1] && (className += ' ' + matchBox[1])
+    data = data.replace(matchBox[0], `<span class="${className}">${content}</span>`);
+  }
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
@@ -298,7 +307,11 @@ function codeDistributeEntry(hook, vm) {
 
     next(html);
   });
-  hook.doneEach(function() {document.body.innerHTML += GLOBAL_HTML});
+  hook.doneEach(function() {
+    const outHTMLContainer = document.createElement('div')
+    outHTMLContainer.innerHTML = GLOBAL_HTML
+    document.body.appendChild(outHTMLContainer)
+  });
   hook.ready(function(){
     const tipsMapId = {}      // 缓存tips内容元素
     let hasTipsActive = false // 是否有激活的Tips 用于排除多余的Document点处理

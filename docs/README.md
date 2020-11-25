@@ -11,6 +11,7 @@
 [HELP>info03]   帮助图标 跳转 内容标识  [info03][content]<br>
 [HELP cg>info03]   帮助图标 图标颜色 跳转 内容标识  [info03][content]<br>
 内容包裹 <br>
+[bg ciBOX content] 带CLASS
 [BOX content]<br>
 [BOX <br>
 content<br>
