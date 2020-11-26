@@ -9,7 +9,7 @@
 [DETAIL/info01] 详情图标 提示 内容标识  [info01][content]<br>
 [INFO/info02]   信息图标 提示 内容标识  [info02][content]<br>
 [HELP>info03]   帮助图标 跳转 内容标识  [info03][content]<br>
-[HELP cg>info03]   帮助图标 图标颜色 跳转 内容标识  [info03][content]<br>
+[(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content]<br>
 内容包裹 <br>
 [bg ciBOX content] 带CLASS
 [BOX content]<br>

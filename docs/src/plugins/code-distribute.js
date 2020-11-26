@@ -128,22 +128,27 @@ function handleCommon(data) {
   /** 如果使用 ｜ 分隔的话会和class冲突
    * [DETAIL/info01] 详情图标 提示 内容标识  [info01][content]
    * [INFO cg/info02]   信息图标 提示 内容标识  [info02][content]
-   * [HELP>info03]   帮助图标 跳转 内容标识  [info03][content] 
+   * [(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content] 
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[(DETAIL|INFO|HELP|LINK)([^\/\>]*)(\/|\>)([^\]]+)\]/.exec(data)) !== null) {
-    let tag  = matchInfoLink[1].toLowerCase()
-    let cls  = matchInfoLink[2]
+  while ((matchInfoLink = /\[([\w\s-]*)(DETAIL|INFO|HELP|LINK)(\/|\>)([^\]\()]+)(\(([^\]\(\)]+)\))?\]/.exec(data)) !== null) {
+    console.log('matchInfoLink',matchInfoLink);
+    
+    let cls  = matchInfoLink[1]
+    let tag  = matchInfoLink[2].toLowerCase()    
     let type = matchInfoLink[3]
     let id   = matchInfoLink[4]
+    let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''
     switch (type){
       case '>': // 跳转
-        data = data.replace(matchInfoLink[0], `<a class="icon-${tag}${cls}"></a>`);
+        data = data.replace(matchInfoLink[0], `<a class="icon-${tag} ${cls}"></a>`);
         break;
       case '/': // 提示
           const matchContent = new RegExp(`\\[${id}\\]\\[([^\\]]*)\\]`).exec(data)
-          matchContent && (GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div>${matchContent[1]}</div></span>`)
-          data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag}${cls}" data-id="${id}"></span>`);
+          const content = matchContent[1].replace(/\n/g, '<br>')
+          matchContent && (GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`)
+          data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
+          data = data.replace(matchContent[0], ``);
           break;
       default:
         data = data.replace(matchInfoLink[0], '')
@@ -158,7 +163,7 @@ function handleCommon(data) {
    * ]
    */
   let matchBox
-  while ((matchBox = /\[([\w-]*)BOX[\n\s]?([^\]]+)\n?\]/.exec(data)) !== null) {
+  while ((matchBox = /\[([\w\s-]*)BOX[\n\s]?([^\]]+)\n?\]/.exec(data)) !== null) {
     let arr = matchBox[2].split(/\n/)
     arr = arr.map(e => e.trim())
     const content = arr.join('\n')
@@ -308,6 +313,8 @@ function codeDistributeEntry(hook, vm) {
     next(html);
   });
   hook.doneEach(function() {
+    console.log(GLOBAL_HTML);
+    
     const outHTMLContainer = document.createElement('div')
     outHTMLContainer.innerHTML = GLOBAL_HTML
     document.body.appendChild(outHTMLContainer)

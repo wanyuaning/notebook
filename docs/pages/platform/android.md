@@ -4,17 +4,17 @@ JDK安装包 | Android SDK
 Eclipse 或 Android Studio
 
 
-
-1. 下载安装JDK包 (info h-ttp://w-ww.oracle.com/technetwork/java/javase/downloads/index.html) jdk-15.0.1_windows-x64_bin.exe  
-2. 系统环境变量 
 ```
+1. JDK包 下载[INFO/android01(width:500px;left:-120px)] 安装   
+2. 系统环境变量 
+
     JAVA_HOME:  C:\Program Files\Java\jdk-15.0.1                    可以 %JAVA_HOME% 作为JDK安装目录的统一引用路径
     Path:       ;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin                追加 
     CLASSPATH:  .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar  程序所需要的类或者包 "."表示当前目录
-```
+
 3. 下载安装Eclipse (info h-ttp://w-ww.eclipse.org/downloads/)
 4. Android SDK  
-```
+
     下载 (info h-ttp://w-ww.androiddevtools.cn/)  [Android SDK 工具 > SDK Tools] installer_r24.4.1-windows.exe
     安装 会自动关联JDK安装 安装地址: D:\sdk\ (新建了sdk文件夹)
     启动 SDK Manager 下载安装可选工具
@@ -34,7 +34,7 @@ Eclipse 或 Android Studio
         203.208.46.146  dl.google.com
         203.208.46.146  dl-ssl.google.com
         #====
-      下载离线包 解压文档到指定目录 需新建缺失的 platforms，docs，samples，usb_driver，market_licensing 目录
+      下载离线包[ciDETAIL/android011(width:400px;left:-150px)] 解压文档到指定目录 需新建缺失的 platforms，docs，samples，usb_driver，market_licensing 目录
         把android开头 > platforms/
         把goole_apis开头 > add-ons/
         把market_licensing-r01.zip解压 > market_licensing/
@@ -47,7 +47,6 @@ Eclipse 或 Android Studio
         ANDROID_SDK_HOME: D:\sdk\
         Path: 追加 ;% ANDROID_SDK_HOME%\platform-tools;% ANDROID_SDK_HOME%\tools
     命令检测Android SDK是否安装成功：adb version
-```       
     
 5. 为Eclipse安装ADT插件（Android Development Tools）以支持Android开发
     打开Eclipse软件
@@ -57,6 +56,11 @@ Eclipse 或 Android Studio
       Location: h-ttp://dl-ssl.google.com/android/eclipse/  
       [OK]
     勾选要安装的工具 [Next]
+
+[android01][http://www.oracle.com/technetwork/java/javase/downloads/index.html
+jdk-15.0.1_windows-x64_bin.exe]
+[android011][百度云：Software/android开发环境包win64-2014-6-1.rar] 
+```
 
 [!“adb”不是内部或外部命令](platform-tools/复制adb.exe，AdbWinApi.dll，AdbWinUsbApi.dll 到 C:\用户\new 目录下.)
 [!启动 Android Studio 时，每次都 Missing SDK](Android Studio安装目录/bin/idea.properties 末尾添加： disable.android.first.run=true 保存 重启Android Studio) 
