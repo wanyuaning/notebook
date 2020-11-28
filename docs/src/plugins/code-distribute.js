@@ -126,8 +126,8 @@ function handleCommon(data) {
   }
 
   /** 如果使用 ｜ 分隔的话会和class冲突
-   * [DETAIL/info01] 详情图标 提示 内容标识  [info01][content]
-   * [INFO cg/info02]   信息图标 提示 内容标识  [info02][content]
+   * [DETAIL/info01]    详情图标 提示 内容标识  ▉info01▉content▉
+   * [INFO cg/info02]   信息图标 提示 内容标识  ▉info02▉content▉
    * [(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content] 
    */
   let matchInfoLink;
@@ -144,14 +144,17 @@ function handleCommon(data) {
         data = data.replace(matchInfoLink[0], `<a class="icon-${tag} ${cls}"></a>`);
         break;
       case '/': // 提示
-          const matchContent = new RegExp(`\\[${id}\\]\\[([^\\]]*)\\]`).exec(data)
-          let arr = matchContent[1].split(/\n/)
-          arr = arr.map(e => e.trim())
-          let content = arr.join('<br>')
-          content = content.replace(/\s/g, '&nbsp;')
-          matchContent && (GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`)
+          const matchContent = new RegExp(`▉${id}▉([^▉]*)▉`).exec(data)
+          if (matchContent) {
+            let content = matchContent[1].replace(/\n/g, '<br>')//.replace(/\s/g, '&nbsp;')
+            let space
+            while((space = /\s{2,}/.exec(content)) !== null){
+              content = content.replace(space[0], '&nbsp;'.repeat(space[0].length))
+            }
+            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`
+            data = data.replace(matchContent[0], ``); 
+          }    
           data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
-          data = data.replace(matchContent[0], ``);
           break;
       default:
         data = data.replace(matchInfoLink[0], '')

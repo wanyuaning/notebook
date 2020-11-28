@@ -1,3 +1,8 @@
+```
+[CLASS none]
+[cf reverse|概念] 返水
+```
+
 
 # 全端构建
 ```
@@ -11,6 +16,7 @@
 
 # 移动端
 ```
+䇿略：一键换肤[DETAILB/mobile01(width:800px;left:-120px;top:10px)]
 
 
 Store{
@@ -37,7 +43,26 @@ LotteryGame 【/page/Center/LotteryGame】
         运行父页面LotIndex hk6Active 方法
         $router.push
   
-
+▉mobile01▉
+Button[道奇蓝] 旺旺红 高贵紫 帝王黄 法拉利红 土豪金
+methods changeColor(0, '道奇蓝', '[ch b|blue]') 
+  store.dispatch('setCurrentTheme', '[ch b|blue]')
+  action {[ch b|blue]: {Class: 'blue'...}, lightorange, lightviolet, lightyellow, lightred, yellow}['[ch b|blue]']
+STORE{
+    [ci b|CurrentTheme]: {
+        Class: 'blue',
+        [cj|fnColor]: '#3493ff',
+        bgColor: '#f5f6f7',
+        rgColor: 'rgba(25, 180, 245, 0.7)',
+        rgbaColor: 'rgba(25, 180, 245, 0.1)',
+        lnColor: 'linear-gradient(to bottom, #19b4f5 0%,#3493ff 100%)',
+        yubColor: 'linear-gradient(to bottom, #3493ff 0%, #3b97ff 51%, #ffffff 91%, #f5f6f7 100%)'
+    }
+}
+开发调用：
+computed [ci b|color]() { return this.$store.getters.getCurrentTheme }
+[ci b|color].[cj|fnColor]
+▉
 
 
 ```
@@ -59,10 +84,10 @@ Vue-Admin
 NodeJsForWebUIBuild.exe
 工作内容.xlsx
 
-[nby01][迭代开发]
-[nby02][站点累积一，a-b]
-[nby03][站点累积二，b-?]
-[nby04][2.20版本]
+▉nby01▉迭代开发▉
+▉nby02▉站点累积一，a-b▉
+▉nby03▉站点累积二，b-?▉
+▉nby04▉2.20版本▉
 ```
 
 
