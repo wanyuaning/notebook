@@ -436,12 +436,12 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 .sitemap-table .c{background-color: #ddd; margin-right:1px;color: #fff; padding: 1px 4px;}
 
 /*ICON*/
-.icon-detail,.icon-info,.icon-help,.icon-link{text-decoration: none;}
-.icon-detail::after,.icon-info::after,.icon-help::after,.icon-link::after{font-weight: bold; cursor: pointer; display:inline-block; vertical-align: baseline;}
-.icon-detail::after{ content: '☰'; transform: scaleX(0.6)}
-.icon-info::after  { content: 'Ⓘ'; transform: translateX(1px)}
-.icon-help::after  { content: 'Ⓗ'; transform: translateX(1px)}
-.icon-link::after  { content: '☍'; transform: translate(2px, 1px) scale(1.3)}
+.ewan-detail,.ewan-info,.ewan-help,.ewan-link{text-decoration: none;}
+.ewan-detail::after,.ewan-info::after,.ewan-help::after,.ewan-link::after{font-weight: bold; cursor: pointer; display:inline-block; vertical-align: baseline;}
+.ewan-detail::after{ content: '☰'; transform: scaleX(0.6)}
+.ewan-info::after  { content: 'Ⓘ'; transform: translateX(1px)}
+.ewan-help::after  { content: 'Ⓗ'; transform: translateX(1px)}
+.ewan-link::after  { content: '☍'; transform: translate(2px, 1px) scale(1.3)}
 
 .ewan-tips-content{position: absolute; width: 0; height: 0; display: none; }
 .ewan-tips-content div{ 

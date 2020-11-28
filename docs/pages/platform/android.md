@@ -5,17 +5,9 @@ Eclipse 或 Android Studio
 
 
 ```
-1. JDK包 下载[INFO/android01(width:500px;left:-120px)] 安装   
-2. 系统环境变量 
-
-    JAVA_HOME:  C:\Program Files\Java\jdk-15.0.1                    可以 %JAVA_HOME% 作为JDK安装目录的统一引用路径
-    Path:       ;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin                追加 
-    CLASSPATH:  .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar  程序所需要的类或者包 "."表示当前目录
-
-3. 下载安装Eclipse (info h-ttp://w-ww.eclipse.org/downloads/)
-4. Android SDK  
-
-    下载 (info h-ttp://w-ww.androiddevtools.cn/)  [Android SDK 工具 > SDK Tools] installer_r24.4.1-windows.exe
+1. JDK包 下载[INFOB/android01(width:500px;left:-120px)] 安装 系统环境变量[INFOB/android02(width:750px;left:-220px)] 
+3. 下载安装Eclipse[INFOB/android03(width:250px;left:-120px)]
+4. Android SDK 下载[INFOB/android04(width:250px;left:-120px)]
     安装 会自动关联JDK安装 安装地址: D:\sdk\ (新建了sdk文件夹)
     启动 SDK Manager 下载安装可选工具
       下载不了平台工具的问题:
@@ -58,7 +50,15 @@ Eclipse 或 Android Studio
     勾选要安装的工具 [Next]
 
 [android01][http://www.oracle.com/technetwork/java/javase/downloads/index.html
-jdk-15.0.1_windows-x64_bin.exe]
+            jdk-15.0.1_windows-x64_bin.exe]
+[android02][            
+            JAVA_HOME:  C:\Program Files\Java\jdk-15.0.1                    可以 %JAVA_HOME% 作为JDK安装目录的统一引用路径
+            Path:       ;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin                追加 
+            CLASSPATH:  .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar  程序所需要的类或者包 "."表示当前目录]
+[android03][http://www.eclipse.org/downloads/]
+[android04][http://www.androiddevtools.cn/
+            Android SDK 工具 > SDK Tools
+            installer_r24.4.1-windows.exe]
 [android011][百度云：Software/android开发环境包win64-2014-6-1.rar] 
 ```
 

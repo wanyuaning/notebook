@@ -45,9 +45,9 @@ LotteryGame 【/page/Center/LotteryGame】
 ```
 [CLASS none cc]
 ___base
-  admin adminCDN adminCDN-fen AppPack hk6 hk6-m kaijiangwang kaijiangwang-m m3.0 new-kaijiang [c3|pc_m_2.17][cgDETAIL/nby01] Tools 
+  admin adminCDN adminCDN-fen AppPack hk6 hk6-m kaijiangwang kaijiangwang-m m3.0 new-kaijiang [c3|pc_m_2.17][cgHELPB/nby01] Tools 
   v 
-    downloadWeb OfficailSite OfficailSite申博 WebOfficial-VM [c3 b|会员中心站改造][ciDETAIL/nby02] 会员中心站改造(首屏优化版) [c3 b|精简版会员中心][ciINFO/nby03] 客服 牛博官网 牛博官网新版 昇博官网
+    downloadWeb OfficailSite OfficailSite申博 WebOfficial-VM [c3 b|会员中心站改造][ciDETAILB/nby02] 会员中心站改造(首屏优化版) [c3 b|精简版会员中心][ciINFOB/nby03] 客服 牛博官网 牛博官网新版 昇博官网
   开彩网-m [c3 b|新开发m站][ciLINK/nby04]
 Morocco
 QQ推广

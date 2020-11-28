@@ -2,14 +2,17 @@
 
 
 
-
+<span class="icon-help"></span>
 
 样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
 提示或跳转图标<br>
-[DETAIL/info01] 详情图标 提示 内容标识  [info01][content]<br>
-[INFO/info02]   信息图标 提示 内容标识  [info02][content]<br>
-[HELP>info03]   帮助图标 跳转 内容标识  [info03][content]<br>
-[(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content]<br>
+[DETAIL/info01]  详情图标 提示 内容标识  [info01][content]<br>
+[DETAILB/info01] 详情图标 提示 内容标识  [info01][content]<br>
+[INFO/info02]    信息图标 提示 内容标识  [info02][content]<br>
+[INFOB/info02]   信息图标 提示 内容标识  [info02][content]<br>
+[HELP>info03]    帮助图标 跳转 内容标识  [info03][content]<br>
+[HELPB>info03]   帮助图标 跳转 内容标识  [info03][content]<br>
+[cgHELP>info03(width:100px;left:50px)]   class帮助图标 跳转 内容标识(content-stype)  [info03][content]<br>
 内容包裹 <br>
 [bg ciBOX content] 带CLASS
 [BOX content]<br>

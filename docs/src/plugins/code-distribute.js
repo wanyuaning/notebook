@@ -131,7 +131,7 @@ function handleCommon(data) {
    * [(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content] 
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[([\w\s-]*)(DETAIL|INFO|HELP|LINK)(\/|\>)([^\]\()]+)(\(([^\]\(\)]+)\))?\]/.exec(data)) !== null) {
+  while ((matchInfoLink = /\[([\w\s-]*)(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)(\/|\>)([^\]\()]+)(\(([^\]\(\)]+)\))?\]/.exec(data)) !== null) {
     console.log('matchInfoLink',matchInfoLink);
     
     let cls  = matchInfoLink[1]
@@ -145,7 +145,10 @@ function handleCommon(data) {
         break;
       case '/': // 提示
           const matchContent = new RegExp(`\\[${id}\\]\\[([^\\]]*)\\]`).exec(data)
-          const content = matchContent[1].replace(/\n/g, '<br>')
+          let arr = matchContent[1].split(/\n/)
+          arr = arr.map(e => e.trim())
+          let content = arr.join('<br>')
+          content = content.replace(/\s/g, '&nbsp;')
           matchContent && (GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`)
           data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
           data = data.replace(matchContent[0], ``);
