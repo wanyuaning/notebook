@@ -108,7 +108,7 @@ function handleCommon(data) {
 
   // 样式类：[s12 c0 b0 h1 b reverse inline|内容]
   let matchClass;
-  while ((matchClass = /\[([^\|\[]+)\|([^\]]+)\]/.exec(data)) !== null) {
+  while ((matchClass = /\[([^\|\]]+)\|([^\]]+)\]/.exec(data)) !== null) {
     data = data.replace(
       matchClass[0],
       `<span class="${matchClass[1]}">${matchClass[2]}</span>`
@@ -136,7 +136,7 @@ function handleCommon(data) {
     
     let cls  = matchInfoLink[1]
     let tag  = matchInfoLink[2].toLowerCase()    
-    let type = matchInfoLink[3]
+    let type = matchInfoLink[3] 
     let id   = matchInfoLink[4]
     let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''
     switch (type){
@@ -178,6 +178,14 @@ function handleCommon(data) {
     data = data.replace(matchBox[0], `<span class="${className}">${content}</span>`);
   }
 
+  /**
+   * 搜索 [SEARCH]
+   */
+  const matchSearch = /\[SEARCH\]/.exec(data)
+  if (matchSearch) {console.log('',matchSearch)
+    data = data.replace(matchSearch[0], `<input type="text" οnkeydοwn="chenjiago()"><input type="text" οnkeydοwn="chenjiago">`);
+  }
+
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
   Match_ARR.forEach((e) => {
@@ -192,7 +200,10 @@ function handleIcon(data) {
 
   return data;
 }
-
+function chenjiago(e){
+  console.log(e.value);
+  
+}
 var HANDLER_MAP = {
   table: handleTable,
   popover: handlePop,
@@ -200,6 +211,7 @@ var HANDLER_MAP = {
   sitemap: handleSitemap,
   icon: handleIcon,
 };
+
 
 /**
  * 代码块类型分发入口
@@ -220,6 +232,7 @@ function codeDistributeEntry(hook, vm) {
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
+     * <pre v-pre data-lang="" class="none"><code class="lang-"></code></pre>
      */
     const Match_PRE_ARR =
       html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || [];
@@ -350,6 +363,11 @@ function codeDistributeEntry(hook, vm) {
           }
         } 
         hasTipsActive = true           
+      });
+    })
+    forEach(document.querySelectorAll('.ewan-search'), function (el) {
+      el.addEventListener('click', function (e) {console.log(e);
+        
       });
     })
     document.addEventListener('click', function(e){
