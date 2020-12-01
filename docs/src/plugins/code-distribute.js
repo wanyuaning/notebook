@@ -100,7 +100,29 @@ function handleBlock(data) {
  * 处理通用格式：注释
  * @param {string} data
  */
-function handleCommon(data) {
+function handleCommon(data, dataid) {
+  /**
+   * 目录 [MULU]
+   */
+  const matchMulu = /\[MULU\]/.exec(data)
+  if (matchMulu) {
+    const titleArr = data.match(/\[[\w\- ]*h\d[\w\- ]*\|[^\]]+\]/g) || []
+    const hash = location.hash.split('?')[0]
+    let muluHTML = '目录：\n'
+    let firstCount = 1
+    titleArr.forEach((e, i) => {
+      const matchArr = /\[[\w\- ]*h(\d)[\w\- ]*\|([^\]]+)\]/.exec(e)
+      i === 0 && (firstCount = matchArr[1])
+      
+      let order  = matchArr[1] - firstCount
+      order < 0 && (order = 0)
+      const text = matchArr[2]
+      muluHTML += `${' '.repeat(order*2)}<a href="${hash}?id=${text}">${text}</a>\n`
+      data = data.replace(matchArr[0], '</code></pre><span id="'+matchArr[2]+'" class="noop"></span><pre v-pre class="none"><code>'+matchArr[0]);
+    })
+    data = data.replace('[MULU]', muluHTML);
+  }
+
   // 水平线
   (data.match(/-+\n/g) || []).forEach((e) => {
     data = data.replace(e, '<div class="hr"></div>');
@@ -108,7 +130,7 @@ function handleCommon(data) {
 
   // 样式类：[s12 c0 b0 h1 b reverse inline|内容]
   let matchClass;
-  while ((matchClass = /\[([^\|\]]+)\|([^\]]+)\]/.exec(data)) !== null) {
+  while ((matchClass = /\[([^\|\[\]]+)\|([^\]]+)\]/.exec(data)) !== null) {
     data = data.replace(
       matchClass[0],
       `<span class="${matchClass[1]}">${matchClass[2]}</span>`
@@ -132,8 +154,6 @@ function handleCommon(data) {
    */
   let matchInfoLink;
   while ((matchInfoLink = /\[([\w\s-]*)(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)(\/|\>)([^\]\()]+)(\(([^\]\(\)]+)\))?\]/.exec(data)) !== null) {
-    console.log('matchInfoLink',matchInfoLink);
-    
     let cls  = matchInfoLink[1]
     let tag  = matchInfoLink[2].toLowerCase()    
     let type = matchInfoLink[3] 
@@ -182,9 +202,11 @@ function handleCommon(data) {
    * 搜索 [SEARCH]
    */
   const matchSearch = /\[SEARCH\]/.exec(data)
-  if (matchSearch) {console.log('',matchSearch)
-    data = data.replace(matchSearch[0], `<input type="text" οnkeydοwn="chenjiago()"><input type="text" οnkeydοwn="chenjiago">`);
+  if (matchSearch) {
+    data = data.replace(matchSearch[0], `<input type="text" onkeydown="if(event.keyCode!==13) return; manager.search('${dataid}', this.value)" />`);
   }
+
+  
 
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
@@ -200,10 +222,14 @@ function handleIcon(data) {
 
   return data;
 }
-function chenjiago(e){
-  console.log(e.value);
-  
+
+function handleKeydown(e){ 
+  if (e.keyCode == 13) {
+    console.log(e.currentTarget.value);
+    
+  }
 }
+
 var HANDLER_MAP = {
   table: handleTable,
   popover: handlePop,
@@ -212,6 +238,31 @@ var HANDLER_MAP = {
   icon: handleIcon,
 };
 
+/**
+ * 代码块管理
+ */
+function CodeblockManager(){
+  this.codeblock = {}
+}
+CodeblockManager.prototype = {
+  constructor: CodeblockManager,
+  addCodeblock: function(id, content){
+    this.codeblock[id] = {
+      id,
+      content
+    }
+  },
+  search: function(id, keyword){
+    const codeObj = this.codeblock[id]
+    let content = codeObj.content
+    const $code = document.querySelector('#'+id)
+    const keywordReg = new RegExp(keyword, 'g')
+    content = content.replace(keywordReg, `<span class="searched">${keyword}</span>`)
+    $code.innerHTML = content
+  }
+}
+
+const manager = new CodeblockManager()
 
 /**
  * 代码块类型分发入口
@@ -221,14 +272,18 @@ var HANDLER_MAP = {
  */
 function codeDistributeEntry(hook, vm) {
   let hasPanels = false;
-  hook.init(function() {console.log('-------1 init')});
-  hook.mounted(function(){ console.log('-------2 mounted')})
+  hook.init(function() {
+    //console.log('-------1 init')
+  });
+  hook.mounted(function(){ 
+    //console.log('-------2 mounted')
+  })
   hook.beforeEach(function (content) {
-    console.log('-------3 beforeEach')
+    //console.log('-------3 beforeEach')
     return content;
   });
   hook.afterEach(function (html, next) {
-    console.log('-------4 afterEach')
+    //console.log('-------4 afterEach')
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
@@ -237,29 +292,28 @@ function codeDistributeEntry(hook, vm) {
     const Match_PRE_ARR =
       html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || [];
       
-    Match_PRE_ARR.map((pre) => {
-      const langArr =
-        pre
-          .match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>/)[0]
-          .replace('<pre v-pre data-lang="', "")
-          .replace('">', "")
-          .split(" ") || [];
-      const Match_CODE_ARR =
-        pre.match(/<code class="lang-[^"]*">[\s\S]*?<\/code>/gm) || [];
-      const Match_CODE = Match_CODE_ARR.length > 0 ? Match_CODE_ARR[0] : "";
-      const Match_CODE_TEXT = Match_CODE.replace(
-        /<code class="lang-[\w]+[ \w-]{0,}?">/,
-        ""
-      ).replace(/<\/code>/, "");
-
-      let NEW_CODE_TEXT = handleCommon(Match_CODE_TEXT); // Match_CODE_TEXT
-
-      langArr.forEach((lang) => {
-        if (HANDLER_MAP[lang]) {
-          NEW_CODE_TEXT = HANDLER_MAP[lang](NEW_CODE_TEXT);
-        }
-      });
-      html = html.replace(Match_CODE_TEXT, NEW_CODE_TEXT);
+    Match_PRE_ARR.map((pre, index) => {
+      const id = 'CODE_BLOCK_' + index
+      const lang = /<pre v-pre data-lang="([^"]+)?"/.exec(pre)[1] || ''
+      const langArr = lang.split(" ")
+      const matchCode = /<code class="lang-[^"]*">([\s\S]*?)<\/code>/.exec(pre)
+      // 添加标识
+      let code = matchCode[0].replace('<code', `<code id="${id}"`)
+      let code_content = matchCode[1]
+      // 常规处理
+      code_content = handleCommon(code_content, id)
+      // 格式语言
+      if (!langArr.includes('runtime')){
+        langArr.forEach((lang) => {
+          if (HANDLER_MAP[lang]) {
+            code_content = HANDLER_MAP[lang](code_content);
+          }
+        });
+        code = code.replace(matchCode[1], code_content);
+        html = html.replace(matchCode[0], code);  
+        manager.addCodeblock(id, code_content)
+      } 
+      
     });
 
     /**
@@ -332,7 +386,6 @@ function codeDistributeEntry(hook, vm) {
     next(html);
   });
   hook.doneEach(function() {
-    console.log(GLOBAL_HTML);
     
     const outHTMLContainer = document.createElement('div')
     outHTMLContainer.innerHTML = GLOBAL_HTML

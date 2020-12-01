@@ -645,12 +645,43 @@ el: '#app',
       }
     },
 
+[h1|keepAlive]
+
+[cf reverse|普通组件] 
+  <keep-alive> <component>该组件将被缓存</component> </keep-alive>
+
+[cf reverse|路由组件] 缺点：需要知道组件的 name，项目复杂的时候不是很好的选择
+  export default { name: '[b ch|A]', data () { return {} } }
+  export default { name: '[b ch|B]', data () { return {} } }
+  <keep-alive> <router-view>所有路径匹配到的视图组件都会被缓存</router-view> </keep-alive>
+  <keep-alive :include="['[b ch|A]','[b ch|B]']"> <router-view>只有路径匹配到的视图 A,B 组件会被缓存</router-view> </keep-alive>
+  <keep-alive :exclude="[b ch|B]"> <router-view>除 B 组件其它匹配到的视图组件都会被缓存</router-view> </keep-alive>
+
+[cf reverse|router.meta]
+  export default [
+    {
+      path: '/',
+      name: 'home',
+      component: Home,
+      meta: {
+        [b ci|keepAlive]: true // 需要被缓存
+      }
+    }, {
+      path: '/:id',
+      name: 'edit',
+      component: Edit,
+      meta: {
+        [b ci|keepAlive]: false // 不需要被缓存
+      }
+    }
+  ]
+
 
 如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个keep-alive指令
 <component :is='curremtView' keep-alive></component>
 
 
- keepAlive
+ 
 使用一？
 
 1. 路由的meta标签中设置keepAlive属性为true

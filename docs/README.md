@@ -1,33 +1,40 @@
 
 
-
-
+```
+[CLASS none]
+[MULU]
+```
 <span class="icon-help"></span>
 
-样式类：[s12 c0 b0 h1 b reverse inline|内容] <br>
-提示或跳转图标<br>
-[DETAIL/info01]  详情图标 提示 内容标识  ▉info01▉content▉<br>
-[DETAILB/info01] 详情图标 提示 内容标识  ▉info01▉content▉<br>
-[INFO/info02]    信息图标 提示 内容标识  ▉info02▉content▉<br>
-[INFOB/info02]   信息图标 提示 内容标识  ▉info02▉content▉<br>
-[HELP>info03]    帮助图标 跳转 内容标识  ▉info03▉content▉<br>
-[HELPB>info03]   帮助图标 跳转 内容标识  ▉info03▉content▉<br>
-[cgHELP>info03(width:100px;left:50px)]   class帮助图标 跳转 内容标识(content-stype)  [info03][content]<br>
-内容包裹 <br>
+<input style="ime-mode:disabled" οnkeydοwn="if(event.keyCode==13)event.keyCode=9"> 
+
+
+```runtime
+代码块
+-----------------------------------------------------------
+目录：  [MULU]
+样式类：[s12 c0 b0 h1 b reverse inline|内容] 
+提示或跳转图标
+[DETAIL/info01]  详情图标 提示 内容标识  ▉info01▉content▉
+[DETAILB/info01] 详情图标 提示 内容标识  ▉info01▉content▉
+[INFO/info02]    信息图标 提示 内容标识  ▉info02▉content▉
+[INFOB/info02]   信息图标 提示 内容标识  ▉info02▉content▉
+[HELP>info03]    帮助图标 跳转 内容标识  ▉info03▉content▉
+[HELPB>info03]   帮助图标 跳转 内容标识  ▉info03▉content▉
+[cgHELP>info03(width:100px;left:50px)]   class帮助图标 跳转 内容标识(content-stype)  ▉info03▉content▉
+内容包裹 
 [bg ciBOX content] 带CLASS
-[BOX content]<br>
-[BOX <br>
-content<br>
-]<br>
+[BOX content]
+[BOX 
+content
+]
 
-
-<br><br>
-
-详情：`[detail3](url)`<br>
-链接：`[name](url) ` <br>
-块列表：`<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul>`
-<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul>
-
+HTML 
+-----------------------------------------------------------
+详情：[detail3](url)
+链接：[name](url) 
+块列表：<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul>
+```
 
 [极验验证码](http://docs.geetest.com/2.0/sections/idx-client-sdk.html)
 

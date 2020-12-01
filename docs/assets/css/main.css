@@ -19,10 +19,20 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
 .c0{ color:#000 !important} .c1{ color:#111 !important  } .c2{ color:#222 !important} .c3{ color:#333 !important} .c4{ color:#444 !important} 
 .c5{ color:#555 !important} .c6{ color:#666 !important} .c7{ color:#777 !important} .c8{ color:#888 !important} .c9{ color:#999 !important} 
 .ca{ color:#aaa !important} .cb{ color:#bbb !important} .cc{ color:#ccc !important} .cd{ color:#ddd !important} .ce{ color:#eee !important} .cf{ color:#fff !important}
-.cg{ color: var(--color0)} .ch{ color: var(--color1)} .ci{ color: var(--color2)} .cj{ color: var(--color3)} .ck{ color: var(--color4)}
-.cl{ color: var(--color5)} .cm{ color: var(--color6)} .cn{ color: var(--color7)} .co{ color: var(--color8)} .cp{ color: var(--color9)}
+.cg{ color: var(--color0); border-color: var(--color0)!important} 
+.ch{ color: var(--color1); border-color: var(--color1)!important} 
+.ci{ color: var(--color2); border-color: var(--color2)!important} 
+.cj{ color: var(--color3); border-color: var(--color3)!important} 
+.ck{ color: var(--color4); border-color: var(--color4)!important}
+.cl{ color: var(--color5); border-color: var(--color5)!important} 
+.cm{ color: var(--color6); border-color: var(--color6)!important} 
+.cn{ color: var(--color7); border-color: var(--color7)!important} 
+.co{ color: var(--color8); border-color: var(--color8)!important} 
+.cp{ color: var(--color9); border-color: var(--color9)!important}
 
 .red{ color: var(--color-red)} .yellow{ color: var(--color-yellow)} .blue{ color: var(--color-blue)} .green{ color: var(--color-green)}
+
+.bdg{border-color: var(--color0)} .bdh{border-color: var(--color1)} .bdi{border-color: var(--color2) !important} .bdj{border-color: var(--color3)}
 
 .b0{ background-color: #000} .b1{ background-color: #111} .b2{ background-color: #222} .b3{ background-color: #333}
 .b4{ background-color: #444} .b5{ background-color: #555} .b6{ background-color: #666} .b7{ background-color: #777} 
@@ -36,12 +46,15 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
 .alpha5{ opacity:0.5} .alpha6{ opacity:0.6} .alpha7{ opacity:0.7} .alpha8{ opacity:0.8} .alpha9{ opacity:0.9}
 
 /* 标题 */
-.h1, .h2, .h3, .h4, .h5, .h6, .h7, .h8, .h9{font-weight: bold;}
-.h1{font-size: 12px; line-height:16px} .h2{font-size: 14px; line-height:18px} .h3{font-size: 16px; line-height:20px} 
-.h4{font-size: 18px; line-height:22px} .h5{font-size: 20px; line-height:26px} .h6{font-size: 22px; line-height:30px}
-.h7{font-size: 24px; line-height:34px} .h8{font-size: 26px; line-height:36px} .h9{font-size: 28px; line-height:38px}
+.h1, .h2, .h3, .h4, .h5, .h6, .h7, .h8, .h9{font-weight: bold; border:#525252 1px solid; padding-right: 5px; ; vertical-align: middle;}
+.h6{font-size: 12px; line-height:16px} .h6::before{content:'▏'; vertical-align: middle;} 
+.h5{font-size: 16px; line-height:22px} .h5::before{content:'▎'; vertical-align: middle;} 
+.h4{font-size: 20px; line-height:26px} .h4::before{content:'▍'; vertical-align: middle;} 
+.h3{font-size: 24px; line-height:34px} .h3::before{content:'▋'; vertical-align: middle;} 
+.h2{font-size: 28px; line-height:38px} .h2::before{content:'▊'; vertical-align: middle;}
+.h1{font-size: 32px; line-height:42px} .h1::before{content:'▉'; vertical-align: middle;}
 /* 粗体 */.b{font-weight: bold}
-/* 反相 */.reverse{background-color: #333; color: #fff; padding:0 5px}
+/* 反相 */.reverse{background-color: #525252; color: #fff; padding:0 5px}
 /* 行内 */.inline{display: inline-block;}
 
 /*注释*/.comment{color: #ccc;}
@@ -102,7 +115,8 @@ body, body code{ font-size: 14px; font-family: 'Consolas';}
     font-size: 1rem
 }
 
-
+.test{border:#f00 1px solid}
+.noop{font-size: 0; line-height: 0; width: 1px; height: 1px; padding: 0; margin: 0; display: block;}
 
 
 
@@ -458,3 +472,5 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 .ewan-search{position: relative; border:#0f0 1px solid}
 .ewan-search:after{content:'搜索'; display: block; width: 30px; height: 100%; background-color: #f00; position: absolute; left: 100%; top: 0;}
  
+/* 搜索高亮 */
+.searched{ background-color: #0c0; color: #fff;}
