@@ -198,23 +198,13 @@ function handleCommon(data, dataid) {
     data = data.replace(matchBox[0], `<span class="${className}">${content}</span>`);
   }
 
-  /**
-   * 搜索 [SEARCH]
-   */
-  const matchSearch = /\[SEARCH\]/.exec(data)
-  if (matchSearch) {
-    data = data.replace(matchSearch[0], `<input type="text" onkeydown="if(event.keyCode!==13) return; manager.search('${dataid}', this.value)" />`);
-  }
-
-  
-
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
   Match_ARR.forEach((e) => {
     data = data.replace(e, `<span class="comment">${e}</span>`);
   });
 
-  return data;
+  return data; 
 }
 function handleIcon(data) {
   data = data.replace(/[0-9a-z]{3,}/g, "");
@@ -253,11 +243,11 @@ CodeblockManager.prototype = {
     }
   },
   search: function(id, keyword){
+    const $code = document.querySelector('#CODE_'+id)
     const codeObj = this.codeblock[id]
     let content = codeObj.content
-    const $code = document.querySelector('#'+id)
-    const keywordReg = new RegExp(keyword, 'g')
-    content = content.replace(keywordReg, `<span class="searched">${keyword}</span>`)
+    const value = keyword || document.querySelector('#INPUT_'+id).value
+    value.trim() && (content = content.replace(new RegExp(value, 'g'), `<span class="searched">${value}</span>`))
     $code.innerHTML = content
   }
 }
@@ -289,29 +279,44 @@ function codeDistributeEntry(hook, vm) {
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
      * <pre v-pre data-lang="" class="none"><code class="lang-"></code></pre>
      */
-    const Match_PRE_ARR =
-      html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || [];
+    const Match_PRE_ARR = html.match(/<pre v-pre data-lang="([^"]+)?"\s?(class="[0-9a-zA-Z_-\s]+")?>[\s\S]*?<\/pre>/gm) || []
       
-    Match_PRE_ARR.map((pre, index) => {
-      const id = 'CODE_BLOCK_' + index
-      const lang = /<pre v-pre data-lang="([^"]+)?"/.exec(pre)[1] || ''
-      const langArr = lang.split(" ")
-      const matchCode = /<code class="lang-[^"]*">([\s\S]*?)<\/code>/.exec(pre)
-      // 添加标识
-      let code = matchCode[0].replace('<code', `<code id="${id}"`)
-      let code_content = matchCode[1]
+    Match_PRE_ARR.map((block, index) => {
+      const ID = 'CODEBLOCK_' + index
+      const MATCH_PRE = /<pre v-pre data-lang="([^"]+)?"/.exec(block)
+      const MATCH_CODE = /<code class="lang-[^"]*">([\s\S]*?)<\/code>/.exec(block)
+      
+      let pre = MATCH_PRE[0].replace('<pre', `<pre id="PRE_${ID}"`) // 添加标识
+      let code = MATCH_CODE[0].replace('<code', `<code id="CODE_${ID}"`) // 添加标识
+      let code_content = MATCH_CODE[1]
+
+      // 搜索 [SEARCH]
+      const MATCH_SEARCH = /\[SEARCH\]\n/.exec(code_content)
+      if (MATCH_SEARCH) {
+        code = `<div class="item-search"><input type="text" id="INPUT_${ID}" onkeydown="if(event.keyCode!==13) return; manager.search('${ID}', this.value)" /><span title="搜索" class="icon-search submit" onclick="manager.search('${ID}')"></span> <input type="checkbox" name="running" checked><span class="text">忽略大小写</span></div>${code}`
+        code_content = code_content.replace(/\[SEARCH\]\n/, '')
+      }
+
+      // 切换开关 [SWITCH∨][SWITCH∧]
+      const MATCH_SWITCH = /\[SWITCH([∧∨]?)\]\n/.exec(code_content)
+      if (MATCH_SWITCH) {
+        code = `<button class="icon-arrow-down switch"></button>${code}`
+        code_content = code_content.replace(/\[SWITCH[∧∨]?\]\n/, '')
+      }
+     
       // 常规处理
-      code_content = handleCommon(code_content, id)
+      code_content = handleCommon(code_content, ID)
       // 格式语言
+      const langArr = (MATCH_PRE[1] || '').split(" ")
       if (!langArr.includes('runtime')){
         langArr.forEach((lang) => {
           if (HANDLER_MAP[lang]) {
             code_content = HANDLER_MAP[lang](code_content);
           }
         });
-        code = code.replace(matchCode[1], code_content);
-        html = html.replace(matchCode[0], code);  
-        manager.addCodeblock(id, code_content)
+        code = code.replace(MATCH_CODE[1], code_content);
+        html = html.replace(MATCH_CODE[0], code);  
+        manager.addCodeblock(ID, code_content)
       } 
       
     });

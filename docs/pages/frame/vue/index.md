@@ -707,11 +707,12 @@ keepAlive: true // 此属性可以在全局守卫
 <router-view />
 </keep-alive>
 组件里的生命周期勾子
-activated () {console.log('history activated')
-var arr = this.$store.state.catalogueChildrenArr || [];
-if(arr.length === 0) arr.push({id:'', name:''})
-this.catalogueChildrenArr = arr;
-this.$refs.categoryselector.init({value:arr[0].id, name: arr[0].name})
+activated () {
+  console.log('history activated')
+  var arr = this.$store.state.catalogueChildrenArr || [];
+  if(arr.length === 0) arr.push({id:'', name:''})
+  this.catalogueChildrenArr = arr;
+  this.$refs.categoryselector.init({value:arr[0].id, name: arr[0].name})
 }
 
 
