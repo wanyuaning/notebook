@@ -2,6 +2,23 @@
 
 [element-ui](pages/frame/element-ui)<br>
 
+```
+代理设置
+dev: {
+  ...
+  proxyTable: {
+    '/appTemp': {       
+      target: 'http://www.abc.com',  // 目标接口域名
+      changeOrigin: true,            // 是否跨域
+      pathRewrite: {
+          '^appTemp/': 'appTemp/'    // 重写接口
+      }
+    }
+  }
+  ...
+}
+```
+
 nextTick
 ```
 使用场景：

@@ -6,9 +6,9 @@
 ```
 windows: 
     安装：http://nginx.org/en/download.html   [b5 cf| 配置 ]
-    [b-green cf| 启动 ] [green|c:\server\nginx-1.0.2 > nginx.exe]  [cc|或 c:\server\nginx-1.0.2 > start nginx]
-    [b-yellow cf| 重启 ] [yellow|c:\server\nginx-1.0.2 > nginx.exe -s reload]  
-    [b-red cf| 停止 ] [red|c:\server\nginx-1.0.2 > nginx.exe -s stop] [cc|或 c:\server\nginx-1.0.2 > nginx.exe -s quit]
+    [b-green cf| 启动 ] [green|c:\nginx\ nginx.exe]  [cc|或 c:\nginx\ start nginx]
+    [b-yellow cf| 重启 ] [yellow|c:\nginx\ nginx.exe -s reload]  
+    [b-red cf| 停止 ] [red|c:\nginx\ nginx.exe -s stop] [cc|或 c:\nginx\ nginx.exe -s quit]
 mac: 
     安装：[brew](#/pages/lang/index?id=ruby) install nginx  [b5 cf| 配置 ]
     [b-green cf| 启动 ] [green|nginx]    
