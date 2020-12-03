@@ -26,7 +26,7 @@
 应用
 
 
-/ Index
+/ Index[INFOB/Router01]
     //洗码
     xima                    page/Xima                                    洗码
     zizhuxima               page/Xima/modules/zizhuxima                  自助洗码
@@ -35,21 +35,21 @@
     ximajiluDetail          page/Xima/modules/detail                     洗码记录详情
     /Lottery                /skin/sb/Lottery                             彩票游戏 props:type name
         /children           /skin/sb/Lottery/children  
-    ''                      Home                                         首页
+    ''                      Home[INFOB/Router02]                                         首页
     vipzone                 page/Activity/VipZoneNew                     我的VIP 
     promoteDetail           page/Activity/PromoteDetail                  晋升说明 
     vipLink                 page/Activity/VipLink                        专属客服 
     gerenzhanji             page/Activity/gerenzhanji                    个人战绩 
-    brandList               brandList                                    棋牌游戏 
+    brandList               brandList[INFOB/Router03]                                    棋牌游戏 
     ReturnWaterRecord       page/Center/ReturnWaterRecord ${lib.isAgent === three ? 自动洗码 : 返水记录} 
     ReturnWaterDetail       page/Center/ReturnWaterDetail  ${lib.isAgent === three ? 自动洗码 : 返水明细} 
     TransactionRecord       page/Center/TransactionRecord                交易记录 
     AccountBalance          page/Center/AccountBalance                   账户余额 
     AccountInformation      page/Center/AccountInformation               账户信息 
-    /newWithdrawMoney       DrawMoneyRoute                               取款 
-    newpay                  RechargeRoute                                充值
+    /newWithdrawMoney       DrawMoneyRoute[INFOB/Router04]                               取款 
+    newpay                  RechargeRoute[INFOB/Router05]                                充值
         chongzhifangshi     page/Center/newPay/children/chongzhifangshi  充值方式
-        /newWithdrawMoney   DrawMoneyRoute 取款
+        /newWithdrawMoney   DrawMoneyRoute[INFOB/Router04]                               取款
     online                  page/Center/newPay/children/online           充值 
     transfer                page/Center/newPay/children/transfer         充值 
     ReturnWaterRecord       page/Center/ReturnWaterRecord                返水记录 
@@ -59,8 +59,8 @@
     AccountInformation      page/Center/AccountInformation               账户信息 
     QuotaConversion         page/Center/QuotaConversion                  额度转换 
     BindingBankCard         page/Center/BindingBankCard                  绑定银行卡 
-    Center                  Center                                       个人中心 
-    Login                   Login                                        登录 
+    Center                  Center[INFOB/Router06]                                       个人中心 
+    Login                   Login[INFOB/Router07]                                        登录 
     Download                /components/Download                         APP下载 
     DownloadApp             /components/DownloadApp                      App安装教程 
     Turntable               page/Activity/Turntable                     幸运转盘 
@@ -77,7 +77,7 @@
     /AgencyDevelopCourseQB  page/Agency/AgencyDevelopCourseQB           QB面代理 
     /AgencyDevelopCourseB   page/Agency/AgencyDevelopCourseB            B面代理 
     /AgencyDevelopCourseA   page/Agency/AgencyDevelopCourseA            A面代理 
-    Register                Register                                     注册 
+    Register                Register[INFOB/Router08]                                     注册 
     GetbackPwd              /components/GetbackPwd                       找回密码 
     BankCard                page/Center/BankCard                         添加银行卡 
     BettingRecord           page/Center/BettingRecord                    投注记录 
@@ -107,15 +107,15 @@
     Account                 page/Center/Account                          账户安全 
     ElectronicGame          page/Center/ElectronicGame                   电子游艺 
     fish                    page/Center/FishGame                         捕鱼游戏 
-    FishGameDetail          FishGameDetail                               捕鱼游戏 
+    FishGameDetail          FishGameDetail[INFOB/Router09]                               捕鱼游戏 
     hk6lobby                page/Center/hk6lobby                         六合彩大厅 
     SportsGame              page/Center/SportsGame                       体育赛事 
     VideoGame               page/Center/VideoGame                        真人视讯 
-    LotteryGame             LotteryGame                                  彩票游戏 
+    LotteryGame             LotteryGame[INFOB/Router10]                                  彩票游戏 
     Brand                   page/Center/Brand                            棋牌游戏 
     esports                 page/Center/Esports                          电子竞技 
     Fishing                 page/Center/Fishing                          捕鱼王 
-    ElectronicGameDtail     ElectronicGameDtail                          电子游艺 
+    ElectronicGameDtail     ElectronicGameDtail[INFOB/Router11]                          电子游艺 
     Information             page/Center/Information                      我的消息 
     Collect                 page/Center/Collect                          我的收藏 
     SearchRecord            page/ + agentType + /SearchRecord            账户记录 
@@ -184,6 +184,51 @@
     /gameLong               page/Betting/gameDetails/gameLong  
     /OpenResult             page/Betting/gameDetails/OpenResult  
     /BetDetail              page/Betting/gameDetails/BetDetail  
+
+▉Router01▉
+sb  Index = () => import('@/skin/sb/Index.vue')
+qq2 Index = () => import('@/skin/qq2/Index.vue')
+    Index = () => import('@/page/Index.vue')▉
+▉Router02▉
+sb  Home = () => import('@/skin/sb/Home.vue')
+qq2 lib.isBusinessType
+      comprehensive Home = () => import('@/skin/qq2/Home')
+      else          Home = () => import('@/skin/qq2/LotteryBusiness')
+    Home = () => import('@/page/Center/Home')▉
+▉Router03▉
+sb  brandList = () => import('@/page/Center/Brand.vue')
+qq2 brandList = () => import('@/skin/qq2/BrandList.vue')
+    brandList = () => import('@/page/Center/Brand.vue')▉
+▉Router04▉
+DrawMoneyRoute = () => import('@page/Center/WithdrawMoney') // 默认老版取款页面▉
+▉Router05▉
+RechargeRoute = () => import('@page/Center/Rechargeonline') // 默认老版充值页面▉
+▉Router06▉
+sb  Center = () => import('@/skin/sb/Center.vue')
+qq2 Center = () => import('@/skin/sb/Center.vue')
+    Center = () => import('@/skin/sb/Center.vue')▉
+▉Router07▉
+Login = () => import('@/skin/qq2/LoginOrRegister.vue')▉
+▉Router08▉
+sb  Register = () => import('@/components/Register.vue')
+qq2 Register = () => import('@/components/Register.vue')
+    Register = () => import('@/components/Register.vue')▉
+▉Router09▉
+sb  FishGameDetail = () => import('@page/Center/FishGameDetail')
+qq2 FishGameDetail = () => import('@/skin/qq2/FishGameDetail')
+    FishGameDetail = () => import('@page/Center/FishGameDetail')▉
+▉Router10▉
+sb  LotteryGame = () => import('@/skin/sb/LotteryGame.vue')
+qq2 LotteryGame = () => import('@/skin/qq2/LotteryGame2.vue')
+    LotteryGame = () => import('@/page/Center/LotteryGame')▉
+▉Router11▉
+sb  ElectronicGameDtail = () => import('@page/Center/ElectronicGameDtail')
+qq2 ElectronicGameDtail = () => import('@/skin/qq2/ElectronicGameDtail')
+    ElectronicGameDtail = () => import('@page/Center/ElectronicGameDtail')▉
+
+
+
+
 
 
 
