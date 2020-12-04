@@ -6,15 +6,22 @@
 代理设置
 dev: {
   ...
+   
   proxyTable: {
     '/appTemp': {       
       target: 'http://www.abc.com',  // 目标接口域名
       changeOrigin: true,            // 是否跨域
       pathRewrite: {
-          '^appTemp/': 'appTemp/'    // 重写接口
+          '^/appTemp/': '/appTemp'    // 重写接口
       }
     }
   }
+  [reverse cf|'^/appTemp': '/appTemp'] 
+  http://www.abc.com/appTemp  >  http://www.abc.com/appTemp
+  [reverse cf|'^/appTemp': '/app']         
+  http://www.abc.com/appTemp  >  http://www.abc.com/app
+  [reverse cf|'^/appTemp': '/']         
+  http://www.abc.com/appTemp  >  http://www.abc.com/
   ...
 }
 ```
@@ -165,8 +172,7 @@ var app = new Vue({
 Vue-Cli3.0 独立运行 Vue 文件 图形页面构建项目
 
 ```
- $ npm install -g @vue/cli  # 全局安装       npm uninstall @vue/cli -g   # 卸载
- $ vue --version 或 vue -V   # 查看已安装版本
+ $ npm install -g @vue/cli   # 全局安装       npm uninstall @vue/cli -g   # 卸载    $ vue --version 或 vue -V   # 查看已安装版本
 
  $ vue create my-project   # 新建项目
  $ cd my-project

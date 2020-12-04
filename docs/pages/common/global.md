@@ -32,6 +32,9 @@ http {
         }
     }
 }
+验证nginx.conf配置是否正确：
+  nginx -t                     默认/conf/nginx.conf
+  nginx -tc /conf/aliase.conf  自定义名称
 ```
 
 ### 文档
