@@ -18,14 +18,54 @@
 ```
 
 # 移动端
+
+```
+充值
+API[payUtil].GetOnlinePayChannelListNew[INFO/LIUCHENG01(width:1500px;left:-500px)]
+store[ChanneList]
+
+▉LIUCHENG01▉
+[
+  {
+    "ID": 426,
+    "GLOBAL_TYPE": "global_jd_pay",         // codeType 激活的大类指针
+    "SYS_ITEM_DETAIL_TYPE": "jd_scan",
+    "SOURCE_CODE": "transfer",
+    "REMARK": "啊啊啊啊啊啊啊",
+    "SYS_ITEM_DETALL_NAME": "京东转账",
+    "PAY_STEPS": "&nbsp;",
+    "RECOMMEND": "0",
+    "SORT": 1
+  },
+  {"ID":428,"GLOBAL_TYPE":"global_cloudpay_pay","SYS_ITEM_DETAIL_TYPE":"cloudpay_wallet","SOURCE_CODE":"online","REMARK":"限额1000","SYS_ITEM_DETALL_NAME":"云闪付钱包","PAY_STEPS":null,"RECOMMEND":"1","SORT":1  },
+  {"ID":60,"GLOBAL_TYPE":"global_alipay_pay","SYS_ITEM_DETAIL_TYPE":"alipay","SOURCE_CODE":"online","REMARK":"快捷方便，自动到账","SYS_ITEM_DETALL_NAME":"支付宝扫码","PAY_STEPS":"<p><img src=\"/bb/20200628/ac2ca102e4974ecd807ac6eb7424db4e.png\" title=\"00628160457.png\" alt=\"00628160457.png\"/></p>","RECOMMEND":"0","SORT":2  },
+  {"ID":557,"GLOBAL_TYPE":"global_jd_pay","SYS_ITEM_DETAIL_TYPE":"jd_wallet","SOURCE_CODE":"online","REMARK":"实时到账0000000","SYS_ITEM_DETALL_NAME":"京东钱包","PAY_STEPS":"&nbsp;","RECOMMEND":"0","SORT":2  },
+  {"ID":427,"GLOBAL_TYPE":"global_cloudpay_pay","SYS_ITEM_DETAIL_TYPE":"cloudpay","SOURCE_CODE":"online","REMARK":"实时到账，充100到账10元","SYS_ITEM_DETALL_NAME":"云闪付扫码","PAY_STEPS":"<p><img src=\"/bb/20200901/8ad5a35b6f1d4a64bd88ecb4cd151d40.jpg\" title=\"下载.jpg\" alt=\"下载.jpg\"/></p>","RECOMMEND":"1","SORT":2  },
+  {"ID":65,"GLOBAL_TYPE":"global_alipay_pay","SYS_ITEM_DETAIL_TYPE":"alipay","SOURCE_CODE":"transfer","REMARK":"USDT","SYS_ITEM_DETALL_NAME":"支付宝转账","PAY_STEPS":"<p><img class=\"loadingclass\" id=\"loading_kejbes3c\" src=\"http://admin.n-b-e-t.com/Content/js/UEditor/themes/default/images/spacer.gif\" title=\"正在上传...\"/></p>","RECOMMEND":"1","SORT":2  },
+  {"ID":431,"GLOBAL_TYPE":"global_unionpay_pay","SYS_ITEM_DETAIL_TYPE":"unionpay_wallet","SOURCE_CODE":"online","REMARK":"实时到账","SYS_ITEM_DETALL_NAME":"银联钱包","PAY_STEPS":null,"RECOMMEND":"0","SORT":4  },
+  {"ID":57,"GLOBAL_TYPE":"global_wechat_pay","SYS_ITEM_DETAIL_TYPE":"wechat_wallet","SOURCE_CODE":"online","REMARK":"mier测试","SYS_ITEM_DETALL_NAME":"微信钱包","PAY_STEPS":"<p><img src=\"/bb/20200214/e5bad8c4a5174af58b05be7ede5008ce.jpg\" title=\"截图未命名.jpg\" alt=\"截图未命名.jpg\"/><br/>agbigbiab</p>","RECOMMEND":"1","SORT":4  },
+  {"ID":66,"GLOBAL_TYPE":"global_wechat_pay","SYS_ITEM_DETAIL_TYPE":"wechat","SOURCE_CODE":"transfer","REMARK":"请务必填写订单号后四位","SYS_ITEM_DETALL_NAME":"微信转账","PAY_STEPS":"<p>123.<br/></p>","RECOMMEND":"1","SORT":5  },
+  {"ID":69,"GLOBAL_TYPE":"global_wechat_pay","SYS_ITEM_DETAIL_TYPE":"wechat_bank","SOURCE_CODE":"transfer","REMARK":"大额推荐，可单笔3W","SYS_ITEM_DETALL_NAME":"微信转银行","PAY_STEPS":null,"RECOMMEND":"0","SORT":6  },
+  {"ID":836,"GLOBAL_TYPE":"global_usdt_pay","SYS_ITEM_DETAIL_TYPE":"virtual","SOURCE_CODE":"online","REMARK":"USDT扫码","SYS_ITEM_DETALL_NAME":"USDT扫码","PAY_STEPS":null,"RECOMMEND":"1","SORT":9  },
+  {"ID":837,"GLOBAL_TYPE":"global_usdt_pay","SYS_ITEM_DETAIL_TYPE":"virtual_wallet","SOURCE_CODE":"online","REMARK":"USDT钱包","SYS_ITEM_DETALL_NAME":"USDT钱包","PAY_STEPS":null,"RECOMMEND":"1","SORT":9  },
+  {"ID":56,"GLOBAL_TYPE":"global_alipay_pay","SYS_ITEM_DETAIL_TYPE":"alipay_bank","SOURCE_CODE":"transfer","REMARK":"大额推","SYS_ITEM_DETALL_NAME":"支付宝转银行","PAY_STEPS":null,"RECOMMEND":"1","SORT":10  },
+  {"ID":425,"GLOBAL_TYPE":"global_jd_pay","SYS_ITEM_DETAIL_TYPE":"jd","SOURCE_CODE":"online","REMARK":"实时到账111","SYS_ITEM_DETALL_NAME":"京东扫码","PAY_STEPS":null,"RECOMMEND":"0","SORT":12  },
+  {"ID":429,"GLOBAL_TYPE":"global_cloudpay_pay","SYS_ITEM_DETAIL_TYPE":"bank_quick","SOURCE_CODE":"transfer","REMARK":"实时到账","SYS_ITEM_DETALL_NAME":"云闪付转账","PAY_STEPS":null,"RECOMMEND":"1","SORT":12  },
+  {"ID":797,"GLOBAL_TYPE":"global_usdt_pay","SYS_ITEM_DETAIL_TYPE":"usdt","SOURCE_CODE":"transfer","REMARK":"强烈推荐，不要问为什么，就是棒。强烈推荐，不要问为什么，就是棒。","SYS_ITEM_DETALL_NAME":"USDT转账","PAY_STEPS":"<p>充值步骤充值步骤充值步骤充值步骤充值步骤充值步骤<img src=\"/public/20200630/3dc346e0c15341a78e4c445af0e6c16e.png\" title=\"image_2019_11_23T01_04_55_217Z.png\" alt=\"image_2019_11_23T01_04_55_217Z.png\"/></p>","RECOMMEND":"1","SORT":55  },
+  {"ID":63,"GLOBAL_TYPE":"global_qq_pay","SYS_ITEM_DETAIL_TYPE":"qq_scan","SOURCE_CODE":"online","REMARK":"快捷方便，自动到账","SYS_ITEM_DETALL_NAME":"QQ扫码","PAY_STEPS":null,"RECOMMEND":"0","SORT":null  },
+  {"ID":67,"GLOBAL_TYPE":"global_qq_pay","SYS_ITEM_DETAIL_TYPE":"qq","SOURCE_CODE":"transfer","REMARK":"提交订单、三分钟到账","SYS_ITEM_DETALL_NAME":"QQ转账","PAY_STEPS":null,"RECOMMEND":"0","SORT":null  },
+  {"ID":61,"GLOBAL_TYPE":"global_alipay_pay","SYS_ITEM_DETAIL_TYPE":"alipay_wallet","SOURCE_CODE":"online","REMARK":"跳转支付宝，快速到账","SYS_ITEM_DETALL_NAME":"支付宝钱包","PAY_STEPS":"<p>对一笔第二部第二部第二部第二部第二部第二部第二部第二部第二部第二部第二部第二部第二部第二部</p><p>第二部</p><p>第三分部</p>","RECOMMEND":"0","SORT":null  }
+]
+▉
+
+
+
+```
+
 路由
 ```
 [SEARCH]
 [SWITCH]
-
-应用
-
-
 / Index[INFOB/Router01]
     //洗码
     xima                    page/Xima                                    洗码
