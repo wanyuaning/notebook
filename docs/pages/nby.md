@@ -75,7 +75,7 @@ store[ChanneList]
     ximajiluDetail          page/Xima/modules/detail                     洗码记录详情
     /Lottery                /skin/sb/Lottery                             彩票游戏 props:type name
         /children           /skin/sb/Lottery/children  
-    ''                      Home[INFOB/Router02]                                         首页
+    ''                      Home[INFOB/Router02]                                        首页
     vipzone                 page/Activity/VipZoneNew                     我的VIP 
     promoteDetail           page/Activity/PromoteDetail                  晋升说明 
     vipLink                 page/Activity/VipLink                        专属客服 
@@ -86,10 +86,10 @@ store[ChanneList]
     TransactionRecord       page/Center/TransactionRecord                交易记录 
     AccountBalance          page/Center/AccountBalance                   账户余额 
     AccountInformation      page/Center/AccountInformation               账户信息 
-    /newWithdrawMoney       DrawMoneyRoute[INFOB/Router04]                               取款 
-    newpay                  RechargeRoute[INFOB/Router05]                                充值
+    /newWithdrawMoney       DrawMoneyRoute[INFOB/Router04]                              取款 
+    newpay                  RechargeRoute[INFOB/Router05]                               充值
         chongzhifangshi     page/Center/newPay/children/chongzhifangshi  充值方式
-        /newWithdrawMoney   DrawMoneyRoute[INFOB/Router04]                               取款
+        /newWithdrawMoney   DrawMoneyRoute[INFOB/Router04]                              取款
     online                  page/Center/newPay/children/online           充值 
     transfer                page/Center/newPay/children/transfer         充值 
     ReturnWaterRecord       page/Center/ReturnWaterRecord                返水记录 
@@ -99,25 +99,25 @@ store[ChanneList]
     AccountInformation      page/Center/AccountInformation               账户信息 
     QuotaConversion         page/Center/QuotaConversion                  额度转换 
     BindingBankCard         page/Center/BindingBankCard                  绑定银行卡 
-    Center                  Center[INFOB/Router06]                                       个人中心 
-    Login                   Login[INFOB/Router07]                                        登录 
+    Center                  Center[INFOB/Router06]                                      个人中心 
+    Login                   Login[INFOB/Router07]                                       登录 
     Download                /components/Download                         APP下载 
     DownloadApp             /components/DownloadApp                      App安装教程 
-    Turntable               page/Activity/Turntable                     幸运转盘 
-    Turntables              page/Activity/Turntableresult               抽奖记录 
-    Handsel                 page/Center/Handsel                         聚宝彩金 
-    AboutHandsel            page/Center/Handsel/About                   聚宝彩金 
-    HandselDetail           page/Center/Handsel/Detail                  聚宝彩金 
-    UserMsg                 page/Center/UserMsg                         个人资料 
-    CellMe                  page/Center/CellMe                          联系我们 
-    /Service                page/Center/template/Service                客服 
-    EditAccount             page/Center/EditAccount                     修改账户 
-    wechat                  page/Center/wechat                          微信联系 
-    Complaint               page/Center/Complaint                       投诉建议 
-    /AgencyDevelopCourseQB  page/Agency/AgencyDevelopCourseQB           QB面代理 
-    /AgencyDevelopCourseB   page/Agency/AgencyDevelopCourseB            B面代理 
-    /AgencyDevelopCourseA   page/Agency/AgencyDevelopCourseA            A面代理 
-    Register                Register[INFOB/Router08]                                     注册 
+    Turntable               page/Activity/Turntable                      幸运转盘 
+    Turntables              page/Activity/Turntableresult                抽奖记录 
+    Handsel                 page/Center/Handsel                          聚宝彩金 
+    AboutHandsel            page/Center/Handsel/About                    聚宝彩金 
+    HandselDetail           page/Center/Handsel/Detail                   聚宝彩金 
+    UserMsg                 page/Center/UserMsg                          个人资料 
+    CellMe                  page/Center/CellMe                           联系我们 
+    /Service                page/Center/template/Service                 客服 
+    EditAccount             page/Center/EditAccount                      修改账户 
+    wechat                  page/Center/wechat                           微信联系 
+    Complaint               page/Center/Complaint                        投诉建议 
+    /AgencyDevelopCourseQB  page/Agency/AgencyDevelopCourseQB            QB面代理 
+    /AgencyDevelopCourseB   page/Agency/AgencyDevelopCourseB             B面代理 
+    /AgencyDevelopCourseA   page/Agency/AgencyDevelopCourseA             A面代理 
+    Register                Register[INFOB/Router08]                                    注册 
     GetbackPwd              /components/GetbackPwd                       找回密码 
     BankCard                page/Center/BankCard                         添加银行卡 
     BettingRecord           page/Center/BettingRecord                    投注记录 
@@ -141,47 +141,47 @@ store[ChanneList]
     SubFinance              page/ + agentType + /SubFinance              下级财务 
     Createsubordinate       page/ + agentType + /Createsubordinate       创建下级 
     Codemanagement          page/ + agentType + /Codemanagement          邀请码管理 
-    /Flowdetails            page/Center/Flowdetails                     账务明细 
+    /Flowdetails            page/Center/Flowdetails                      账务明细 
     Promotions              page/Center/Promotions                       优惠活动 
     PromotionsDtail         page/Center/PromotionsDtail                  优惠活动详情 
     Account                 page/Center/Account                          账户安全 
     ElectronicGame          page/Center/ElectronicGame                   电子游艺 
     fish                    page/Center/FishGame                         捕鱼游戏 
-    FishGameDetail          FishGameDetail[INFOB/Router09]                               捕鱼游戏 
+    FishGameDetail          FishGameDetail[INFOB/Router09]                              捕鱼游戏 
     hk6lobby                page/Center/hk6lobby                         六合彩大厅 
     SportsGame              page/Center/SportsGame                       体育赛事 
     VideoGame               page/Center/VideoGame                        真人视讯 
-    LotteryGame             LotteryGame[INFOB/Router10]                                  彩票游戏 
+    LotteryGame             LotteryGame[INFOB/Router10]                                 彩票游戏 
     Brand                   page/Center/Brand                            棋牌游戏 
     esports                 page/Center/Esports                          电子竞技 
     Fishing                 page/Center/Fishing                          捕鱼王 
-    ElectronicGameDtail     ElectronicGameDtail[INFOB/Router11]                          电子游艺 
+    ElectronicGameDtail     ElectronicGameDtail[INFOB/Router11]                         电子游艺 
     Information             page/Center/Information                      我的消息 
     Collect                 page/Center/Collect                          我的收藏 
     SearchRecord            page/ + agentType + /SearchRecord            账户记录 
     Aboutbk                 page/Center/Aboutbk                          关于我们 
     AboutUs                 page/Center/AboutUs                          关于我们 
     VipCenter               page/ + agentType + /VipCenter               下级列表 
-    /CaptailDetail          page/Center/CaptailDetail                   账务明细  
-    /Calculation            page/ + agentType + /Calculation            返点赔率  
-    /SubDivided             page/ + agentType + /SubDivided             我的收益 
-    /AgencyDevelopCourse    page/Agency/ + agencyType                   代理加盟 
-    /GuildList              page/Agency/GuildList                       金字塔教程 
-    /GuildSwiperList        page/Agency/GuildSwiperList                 金字塔教程
-    /DiscountsActivity      page/Activity/DiscountsActivity             今日活动     
-    /baijiale               page/Betting/baijiale                       游戏大厅   
-    /Baccarat               page/Betting/Baccarat                       百家乐    
-    /FishingGame            page/Center/FishingGame.vue                 捕鱼游戏   
-    agencyPerformance       page/ + agentType + /agencyPerformance      代理业绩    
+    /CaptailDetail          page/Center/CaptailDetail                    账务明细  
+    /Calculation            page/ + agentType + /Calculation             返点赔率  
+    /SubDivided             page/ + agentType + /SubDivided              我的收益 
+    /AgencyDevelopCourse    page/Agency/ + agencyType                    代理加盟 
+    /GuildList              page/Agency/GuildList                        金字塔教程 
+    /GuildSwiperList        page/Agency/GuildSwiperList                  金字塔教程
+    /DiscountsActivity      page/Activity/DiscountsActivity              今日活动     
+    /baijiale               page/Betting/baijiale                        游戏大厅   
+    /Baccarat               page/Betting/Baccarat                        百家乐    
+    /FishingGame            page/Center/FishingGame.vue                  捕鱼游戏   
+    agencyPerformance       page/ + agentType + /agencyPerformance       代理业绩    
     agencyPerformanceDetail page/ + agentType + /agencyPerformanceDetail 代理业绩收益明细   
-    task                    page/Center/TaskNew                         任务活动    
-    taskNew                 page/Center/TaskNew                         任务活动   
-    TaskDetail              page/Center/TaskDetail                      任务完成明细   
-    TaskNewDetail           page/Center/TaskNewDetail                   任务奖励详情    
-    SafeBox                 page/Center/template/SafeBox                保险箱    
-    IntegralIndex           page/Activity/IntegralIndex                 钻石    
-    yinShangPay             page/Center/Payment/yinShangPay             银商支付    
-    IntegralRecord          page/Activity/Integral-record               活动记录   
+    task                    page/Center/TaskNew                          任务活动    
+    taskNew                 page/Center/TaskNew                          任务活动   
+    TaskDetail              page/Center/TaskDetail                       任务完成明细   
+    TaskNewDetail           page/Center/TaskNewDetail                    任务奖励详情    
+    SafeBox                 page/Center/template/SafeBox                 保险箱    
+    IntegralIndex           page/Activity/IntegralIndex                  钻石    
+    yinShangPay             page/Center/Payment/yinShangPay              银商支付    
+    IntegralRecord          page/Activity/Integral-record                活动记录   
     /GameStock              /skin/qq2/GameStock                          股市T+0    
     /GameStockHome          /skin/qq2/GameStockHome                      股市T+0
 

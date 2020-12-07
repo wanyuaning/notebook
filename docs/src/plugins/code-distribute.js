@@ -166,10 +166,27 @@ function handleCommon(data, dataid) {
       case '/': // 提示
           const matchContent = new RegExp(`▉${id}▉([^▉]*)▉`).exec(data)
           if (matchContent) {
-            let content = matchContent[1].replace(/\n/g, '<br>')//.replace(/\s/g, '&nbsp;')
+            const lineArr = matchContent[1].split(/\n/)
+            let maxLineLength = 0
+            let content = ''
+            lineArr.forEach(e => {
+              if(!!e){
+                maxLineLength = Math.max(maxLineLength, e.length)
+                content += e + '<br>'
+              }
+            })
             let space
             while((space = /\s{2,}/.exec(content)) !== null){
               content = content.replace(space[0], '&nbsp;'.repeat(space[0].length))
+            }
+
+            // 如果没有样式匹配
+            if(!contentStyle){
+              let width = maxLineLength * 8
+              width = width > 1000 ? 1000 : width
+              //console.log('len',len);
+              
+              contentStyle = ' style="width:'+width+'px;left:50px"'
             }
             GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`
             data = data.replace(matchContent[0], ``); 
@@ -403,8 +420,9 @@ function codeDistributeEntry(hook, vm) {
     const unboundForEach = Array.prototype.forEach
     const forEach = Function.prototype.call.bind(unboundForEach)
     forEach(document.querySelectorAll('.ewan-tips'), function (el) {
-      el.addEventListener('click', function (e) {console.log(e);
+      el.addEventListener('click', function (e) {
         const id = e.currentTarget.getAttribute('data-id')
+        console.log(id);
         if (tipsMapId[id]) {
           tipsMapId[id].target.style.display = 'block' 
         } else {
