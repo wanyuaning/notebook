@@ -1,15 +1,20 @@
+```
+[SCENE]
+
+```
+
 #### 浏览器对象模型
   Browser Object Model 
 #### 文档对象模型
   Document Object Model
 
 #### Window
-```js
+```
 {
-  document: Document
-  location: Location
-  navigator: Navigator
-  screen: Screen
+  document: [Document](pages/javascript/bom?id=document)
+  location: [Location](pages/javascript/bom?id=location)
+  navigator: [Navigator](pages/javascript/bom?id=navigator)
+  screen: [Screen](pages/javascript/bom?id=screen)
   history: 
     length
     back()  
@@ -91,83 +96,121 @@
 ```
 #### Location
 ![Location](../../assets/images/location.jpg "Location")
-```js
+```
+◐编码&解码{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAIL/Location02]
 {
   protocol: "http:"
   hostname: "localhost" 
   port:     "9527"
   pathname: "/main"
   hash:     "#/minioninfo/minion"
-  search:   "?v=1"
+  search:   "?v=1" ◐解析URL参数{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAIL/Location01]
   host:     "localhost:9527"
   origin:   "http://localhost:9527"
   href:     "http://localhost:9527/main#/minioninfo/minion?v=1"  
 }
-```
-**编码&解码**:en/decodeURI 不能编码和解码URI特殊字符（如#，/，￥等）
+
+
+▉Location01▉
+解析search
+let searchStr = location.search
+searchStr = searchStr.replace(/^\?/g, '')   // 删除'?'字符
+searchStr = searchStr.replace(/&/g, '","')  // '&'替换成','
+searchStr = searchStr.replace(/=/g, '":"')  // '='替换成':'
+searchStr = `{"${searchStr}"}`  // '='替换成':'
+const obj = JSON.parse(searchStr)
+
+简写：JSON.parse(`{"${location.search.replace(/^\?/g, '').replace(/&/g, '","').replace(/=/g, '":"')}"}`)▉
+
+▉Location02▉
+var uri="http://w3cschool.cc/my test.php?name=ståle&car=saab"
+document.write(encodeURIComponent(uri))  // http%3A%2F%2Fw3cschool.cc%2Fmy%20test.php%3Fname%3Dst%C3%A5le%26car%3Dsaab
+
+encodeURI/decodeURI 不能编码和解码URI特殊字符（如#，/，￥等）
 <table>
     <tr style="background:#eee"><td>编码</td><td>目标字符</td><td>结果字符</td> <td rowspan="3">></td> <td>解码</td><td>目标字符</td><td>结果字符</td></tr>
     <tr><td><strong>encodeURIComponent</strong>('#')</td><td>'#'</td><td>"%23"</td> <td><strong>decodeURIComponent</strong>('%23')</td><td>'%23'</td><td>"#"</td></tr>
     <tr><td><strong>encodeURI('#')</strong></td><td>'#'</td><td>"#"</td> <td><strong>decodeURI</strong>('%23')</td><td>'%23'</td><td>"%23"</td></tr>
-</table>
-
-**解析search**: JSON.parse(`{"${location.search.replace(/^\?/g, '').replace(/&/g, '","').replace(/=/g, '":"')}"}`)
-
+</table>▉
+```
 
 
 
 
-#### Navigator 浏览器信息
-```js
+
+
+
+
+#### Navigator
+```
+浏览器信息: ◐判断当前设备及获取设备{'path':'pages/javascript/bom?id=navigator','type':''}◑[DETAIL/Navigator01]
 {
-  appCodeName                //浏览器代码名 "Mozilla"
-  appName                    //浏览器步伐名 "Netscape"
-  appVersion                 //"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
-  appMinorVersion            //浏览器补钉版本 
-  cookieEnabled              //浏览器是否撑持cookie true
-  platform                   //操作体系类型 "Win32"
+  appCodeName: "Mozilla"  // 浏览器代码名 "Mozilla"
+  appName: "Netscape"     // 浏览器步伐名 "Netscape"
+  appVersion: "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"  // 返回浏览器的平台和版本信息 只读字符串
+  cookieEnabled: true     // 浏览器是否撑持cookie
 
-  cpuClass                   //cpu类型x86
-  plugins                    //浏览器已经安装的插件集
-  opsProfile
-  userProfile
-  systemLanguage             //客户体系语言zh-cn简体中文
-  userLanguage               //用户语言,同上
-  appVersion                 //浏览器版本(包括 体系版本)
-  userAgent .                //用户代理头的字符串表示
-  onLine                     //用户否在线 true
-  
-  mimeTypes
-  screen
-  width                      //屏幕宽度
-  height                     //屏幕高度
-  colorDepth                 //屏幕颜色深度
-  availWidth                 //可用宽度(除去任务栏的高度)
-  availHeight                //可用高度(除去任务栏的高度)
-  history
-  frames
-  external
-  AddFavorite("地址","标题" ) //把网站新增到保藏夹
-
+  bluetooth: Bluetooth {}
+  clipboard: Clipboard {}
+  connection: NetworkInformation {onchange: null, effectiveType: "4g", rtt: 100, downlink: 3.25, saveData: false}
   
 
-deviceMemory: 8
-
-language: "zh-CN"
-languages: (2) ["zh-CN", "zh"]
-
-
-
-presentation: Presentation {receiver: null, defaultRequest: null}
-product: "Gecko"
-productSub: "20030107"
-serviceWorker: ServiceWorkerContainer {ready: Promise, controller: null, oncontrollerchange: null, onmessage: null}
-
-
-userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
-vendor: "Google Inc."
-vendorSub: ""
+  credentials: CredentialsContainer {}
+  deviceMemory: 8
+  
+  doNotTrack: null
+  geolocation: Geolocation {}
+  hardwareConcurrency: 8
+  keyboard: Keyboard {}
+  language: "zh-CN"
+  languages: (2) ["zh-CN", "zh"]
+  locks: LockManager {}
+  maxTouchPoints: 0
+  mediaCapabilities: MediaCapabilities {}
+  mediaDevices: MediaDevices {ondevicechange: null}
+  mediaSession: MediaSession {metadata: null, playbackState: "none"}
+  mimeTypes: MimeTypeArray {0: MimeType, 1: MimeType, 2: MimeType, 3: MimeType, application/pdf: MimeType, application/x-google-chrome-pdf: MimeType, application/x-nacl: MimeType, application/x-pnacl: MimeType, length: 4}
+  onLine: true    // 用户否在线 true
+  permissions: Permissions {}
+  platform: "Win32"   // 操作体系类型 "Win32"
+  plugins: PluginArray {0: Plugin, 1: Plugin, 2: Plugin, Chrome PDF Plugin: Plugin, Chrome PDF Viewer: Plugin, Native Client: Plugin, length: 3}  // 浏览器已经安装的插件集
+  presentation: Presentation {defaultRequest: null, receiver: null}
+  product: "Gecko"
+  productSub: "20030107"
+  serviceWorker: ServiceWorkerContainer {controller: ServiceWorker, ready: Promise, oncontrollerchange: null, onmessage: null, onmessageerror: null}
+  storage: StorageManager {}
+  usb: USB {onconnect: null, ondisconnect: null}
+  userActivation: UserActivation {hasBeenActive: true, isActive: true}
+  userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"  //用户代理头的字符串表示
+  vendor: "Google Inc."
+  vendorSub: ""
+  wakeLock: WakeLock {}
+  webkitPersistentStorage: DeprecatedStorageQuota {}
+  webkitTemporaryStorage: DeprecatedStorageQuota {}
+  xr: XRSystem {ondevicechange: null}
 }
+
+▉Navigator01▉
+function currDevice(){
+  var u = navigator.userAgent;
+  var app = navigator.appVersion;
+  var browserLang = (navigator.browserLanguage || navigator.language).toLowerCase();    //获取浏览器语言
+  return{
+    trident: u.indexOf('Trident') > -1,                             //IE内核
+    presto:  u.indexOf('Presto') > -1,                              //opera内核
+    webKit:  u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
+    gecko:   u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,   //火狐内核
+    mobile:  !!u.match(/AppleWebKit.*Mobile.*/),                    //是否为移动终端
+    ios:     !!u.match(/\(i[^;]+;( U;)? CPU.Mac OS X/),             //ios终端
+    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,  //android终端或者uc浏览器
+    iPhone:  u.indexOf('iPhone') > -1,                              //是否为iPhone或者QQHD浏览器
+    iPad:    u.indexOf('iPad') > -1,                                //是否iPad
+    webApp:  u.indexOf('Safari') == -1,                             //是否web应用程序，没有头部和底部
+    weixin:  u.indexOf('MicroMessenger') > -1,                      //是否微信
+    qq:      u.match(/\sQQ/i) == " qq",                             //是否QQ
+  }
+}▉
+
 ```
 
 #### Screen

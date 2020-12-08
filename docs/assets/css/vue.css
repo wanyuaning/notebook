@@ -784,7 +784,7 @@ section.cover blockquote>p>a:hover {
 
 .markdown-section code, .markdown-section pre {
     background-color: #f8f8f8;
-    font-family: Roboto Mono, Monaco, courier, monospace
+    /* font-family: Roboto Mono, Monaco, courier, monospace */
 }
 
 .markdown-section pre {
@@ -886,8 +886,8 @@ section.cover blockquote>p>a:hover {
     background-color: #f8f8f8;
     border-radius: 2px;
     display: block;
-    font-family: Roboto Mono, Monaco, courier, monospace;
-    font-size: .8rem;
+    /* font-family: Roboto Mono, Monaco, courier, monospace; */
+    /* font-size: .8rem; */
     margin: 0 2px;
     max-width: inherit;
     overflow: inherit;

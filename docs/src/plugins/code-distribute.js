@@ -1,5 +1,45 @@
 let GLOBAL_HTML = ''
 
+/**
+ * 代码块管理
+ */
+function CodeblockManager(){
+  this.codeblock = {}
+  // 场景列表
+  this.SCENE = [
+    //{title: '判断当前设备及获取设备', path: 'pages/javascript/bom?id=navigator', type: ''}  "◐判断当前设备及获取设备{path:'pages/javascript/bom?id=navigator',type:''}◑"
+  ]      
+}
+CodeblockManager.prototype = {
+  constructor: CodeblockManager,
+  addCodeblock(id, content){
+    this.codeblock[id] = {
+      id,
+      content
+    }
+  },
+  search(id, keyword){
+    const $code = document.querySelector('#CODE_'+id)
+    const codeObj = this.codeblock[id]
+    let content = codeObj.content
+    const value = keyword || document.querySelector('#INPUT_'+id).value
+    value.trim() && (content = content.replace(new RegExp(value, 'g'), `<span class="searched">${value}</span>`))
+    $code.innerHTML = content
+  },
+  addScene(scene){ this.SCENE.push(scene)},
+  createScene(){
+    let content = ''
+    this.SCENE.forEach(e => {
+      console.log(e);
+      
+      content += `<a href="#/${e.path}">${e.title}</a>`
+    })
+    return `<div class="box-scene">${content}</div>`
+  }
+}
+
+const manager = new CodeblockManager()
+
 function handleSitemap(data) {
   let matchStrong;
   while ((matchStrong = /█(.+)?█/.exec(data)) !== null) {
@@ -102,6 +142,21 @@ function handleBlock(data) {
  */
 function handleCommon(data, dataid) {
   /**
+   * 场景元素
+   * 数据：◐判断当前设备及获取设备{'path':'pages/javascript/bom?id=navigator','type':''}◑
+   * 匹配：[数据, 判断当前设备及获取设备, {'path':'pages/javascript/bom?id=navigator','type':''}]
+   */
+  //  
+  let matchScene;
+  while ((matchScene = /◐([^◑{]+)({[^◑}]+})◑/.exec(data)) !== null) {
+    const sceneStr = matchScene[2].replace(/'/g, '"')
+    const sceneObj = JSON.parse(sceneStr)
+    sceneObj.title = matchScene[1]
+    manager.addScene(sceneObj)
+    data = data.replace(matchScene[0], `<span class="block-scene">${matchScene[1]}</span>`)
+  }
+
+  /**
    * 目录 [MULU]
    */
   const matchMulu = /\[MULU\]/.exec(data)
@@ -137,13 +192,12 @@ function handleCommon(data, dataid) {
     );
   }
 
-  // [content](#) 
+  /**链接
+   * MATCH[[content](#), content, #]
+   */ 
   let matchLink; 
   while ((matchLink = /\[([^\]]+)\]\(([^\)]+)\)/.exec(data)) !== null) {
-    let linkTag = `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>`
-    // 详情[DETAIL](#) 信息[INFO](#)
-    matchLink[1] === 'DETAIL' && (linkTag = `<a target="_blank" class="icon-detail" href="${matchLink[2]}"></a>`)
-    matchLink[1] === 'INFO'   && (linkTag = `<a target="_blank" class="icon-info" href="${matchLink[2]}"></a>`)
+    let linkTag = matchLink[2].includes('://') ? `<a target="_blank" href="${matchLink[2]}">${matchLink[1]}</a>` : `<a href="#${matchLink[2]}">${matchLink[1]}</a>`
     data = data.replace(matchLink[0], linkTag);
   }
 
@@ -169,8 +223,8 @@ function handleCommon(data, dataid) {
             const lineArr = matchContent[1].split(/\n/)
             let maxLineLength = 0
             let content = ''
-            lineArr.forEach(e => {
-              if(!!e){
+            lineArr.forEach((e, i) => {
+              if(!!e || i!==0){
                 maxLineLength = Math.max(maxLineLength, e.length)
                 content += e + '<br>'
               }
@@ -245,31 +299,7 @@ var HANDLER_MAP = {
   icon: handleIcon,
 };
 
-/**
- * 代码块管理
- */
-function CodeblockManager(){
-  this.codeblock = {}
-}
-CodeblockManager.prototype = {
-  constructor: CodeblockManager,
-  addCodeblock: function(id, content){
-    this.codeblock[id] = {
-      id,
-      content
-    }
-  },
-  search: function(id, keyword){
-    const $code = document.querySelector('#CODE_'+id)
-    const codeObj = this.codeblock[id]
-    let content = codeObj.content
-    const value = keyword || document.querySelector('#INPUT_'+id).value
-    value.trim() && (content = content.replace(new RegExp(value, 'g'), `<span class="searched">${value}</span>`))
-    $code.innerHTML = content
-  }
-}
 
-const manager = new CodeblockManager()
 
 /**
  * 代码块类型分发入口
@@ -339,7 +369,7 @@ function codeDistributeEntry(hook, vm) {
     });
 
     /**
-     * 详情 <a href="#/pages/javascript/ecma">detail</a>
+     * 详情 <a href="/pages/javascript/ecma">detail</a>
      */
     // const REG_Detail = /<a href="[^"]+"\s?>detail\d?<\/a>/g;
     // const Match_Detail_Arr = html.match(REG_Detail) || [];
@@ -403,6 +433,13 @@ function codeDistributeEntry(hook, vm) {
       setTimeout(function () {
         document.title = title[1];
       }, 0);
+    }
+
+    // 场景元素展示模块：[SCENE]
+    matchScene = /\[SCENE\]/.exec(html)
+    if(matchScene){
+      const content = manager.createScene()
+      html = html.replace(matchScene[0], content)
     }
 
     next(html);

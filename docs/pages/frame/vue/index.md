@@ -1,6 +1,20 @@
-[规范](pages/frame/vue/guifan.md) &emsp; [实践方案](pages/frame/vue/plans.md) &emsp; [全局状态](pages/frame/vue/store.md) &emsp;
+[规范](pages/frame/vue/guifan.md) &emsp; [实践方案](pages/frame/vue/plans.md) &emsp; [全局状态](pages/frame/vue/store.md) &emsp; [核心](pages/frame/vue/core.md) &emsp;
 
 [element-ui](pages/frame/element-ui)<br>
+
+# 场景
+```
+分支
+  内外网 if (href.includes('://')) { window.open(href, '_blank') }else{ this.$router.push(href) }
+链接跳转 
+  普通：window.open(href, '_blank')
+  IOS套壳包, 描述文件必须要跳出去：
+  var wi = window.open('about:blank', '_blank')
+      wi.document.write("<a id='startTelMedicine' href='" + href + "'>")
+      wi.document.write('<scr' + "ipt> document.getElementById('startTelMedicine').click();</scr" + 'ipt>')
+      wi.close()
+
+```
 
 ```
 代理设置
@@ -326,6 +340,7 @@ https://blog.csdn.net/jjb520/article/details/79551943
 #### 多页开发
 
 ```
+[CLASS cc none font1 line2]
 <!DOCTYPE html>
 <html>
   <head>
@@ -333,25 +348,25 @@ https://blog.csdn.net/jjb520/article/details/79551943
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="./js/vue.js"></script>
+    [cg|<script src="./js/vue.js"></script>]
   </head>
 <body>
   <div id="container">
-    <div>{{title}}:
-      <span v-text="firstName"></span>
-      <span v-html="lastName"></span>
+    <div>[c0 b|{{title}}]:
+      <span [c0 b|v-text="firstName"]></span>
+      <span [c0 b|v-html="lastName"]></span>
     </div>
-    <div v-bind:title="fullName"
-      v-bind:class="{active: isActive, otherclass: isOtherclass}"
-      :class="[isActiveClass, isOtherClass]"
-      :class="`ball${item.id}`"
-      :style="{color: activeColor, fontSize: fontSize + 'px'}"
+    <div [ch b|v-bind:title]="fullName"
+      [ch b|v-bind:class]="{active: isActive, otherclass: isOtherclass}"
+      [ch b|:class]="[isActiveClass, isOtherClass]"
+      [ch b|:class]="`ball${item.id}`"
+      [ci b|:style]="{color: activeColor, fontSize: fontSize + 'px'}"
       >
     属性绑定：v-bind:title="fullName" ／ 简写：:title="fullName" ／ 表达式：:title="'表达式' + fullName"
     </div>
     <div>
       双向绑定：
-      <input v-model.trim ="firstName" />
+      <input v-model.[ci b|trim] ="firstName" />
       <input v-model="lastName" /> ／
       计算属性：
       {{fullName}} ／
@@ -362,20 +377,20 @@ https://blog.csdn.net/jjb520/article/details/79551943
       <input v-model="todoListAddValue" />
       <!-- 事件: @click="handleClick"
                 @click="handleClick($event, 1)"  带参
-                v-on:click="handleClick"
-                v-on:click.stop       修饰：阻止冒泡
-                v-on:click.prevent    修饰：阻止默认事件
-                v-on:click.self       修饰：只对绑定标签有效
-                v-on:click.once       修饰：只作用一次
-                v-on:keyup.enter      修饰：捕获特定的键
-                v-on:keyup.tab
-                v-on:keyup.delete
-                v-on:keyup.esc
-                v-on:keyup.space
-                v-on:keyup.up
-                v-on:keyup.down
-                v-on:keyup.left
-                v-on:keyup.right-->
+                [cj b|v-on:click]="handleClick"
+                [cj b|v-on:click.stop]       修饰：阻止冒泡
+                [cj b|v-on:click.prevent]    修饰：阻止默认事件
+                [cj b|v-on:click.self]       修饰：只对绑定标签有效
+                [cj b|v-on:click.once]       修饰：只作用一次
+                [ci b|v-on:keyup.enter]      修饰：捕获特定的键
+                [ci b|v-on:keyup.tab]
+                [ci b|v-on:keyup.delete]
+                [ci b|v-on:keyup.esc]
+                [ci b|v-on:keyup.space]
+                [ci b|v-on:keyup.up]
+                [ci b|v-on:keyup.down]
+                [ci b|v-on:keyup.left]
+                [ci b|v-on:keyup.right]-->
       <button @click="todoListAdd">添加</button>
       <button @click="handleClick">隐藏列表</button>
     </div>
@@ -385,10 +400,10 @@ https://blog.csdn.net/jjb520/article/details/79551943
       <!-- 子向父传参:this.$emit('del', this.index) @del="todoListDel"-->
       <todo-item
         v-for="(item, index) of todoList" :key="index"
-        :content="item"
-        :index="index"
-        @del="todoListDel">
-        <span solt="soltname"></span>
+        [ch b|:content="item"]
+        [ch b|:index="index"]
+        [cj b|@del="todoListDel"]>
+        <span [ck b|solt="soltname"]></span>
       </todo-item>
     </ul>
   </div>
@@ -399,10 +414,10 @@ https://blog.csdn.net/jjb520/article/details/79551943
   // })
   // 局部组件
   var TodoItem = {
-    props: ['content', 'index'],
-    template: '<li @click="handleDel"><solt id="soltname"/>{{content}}</li>',
+    props: ['[ch b|content]', '[ch b|index]'],
+    template: '<li @click="handleDel">[ck b|<solt id="soltname"/>]{{content}}</li>',
     methods: {
-      handleDel: function () { this.$emit('del', this.index) }
+      handleDel: function () { this.[cj b|$emit('del', this.index)] }
     }
   }
 
@@ -464,53 +479,54 @@ https://blog.csdn.net/jjb520/article/details/79551943
 #### 单页应用
 
 ```
+[CLASS cc none font1 line2]
 <template>
-<div>
-<Counter></Counter>
-</div>
+  <div>
+    [red b|<Counter></Counter>] 
+  </div>
 </template>
 
 import Vue from 'vue'
-import vuex from 'vuex'
-import { mapState } from 'vuex' // vuex解决计算属性重复冗余
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import [green b|vuex] from 'vuex'
+[blue b|import { mapState } from 'vuex'] // vuex解决计算属性重复冗余
+[blue b|import { mapGetters } from 'vuex']
+[blue b|import { mapActions } from 'vuex']
 
-import Counter from './components/counter.vue' // 组件
+[red b|import Counter from './components/counter.vue'] // 组件
 
 
-Vue.use(vuex)
-const store = new vuex.Store(参考Vuex)
+Vue.use([green b|vuex])
+[green b|const store = new vuex.Store(参考Vuex)]
 
 
 new Vue({
-el: '#app',
-store,
-// 组件
-components: {
-Counter
-},
-// 计算属性
-computed: {
-count () {
-return this.$store.state.count
-},
-...mapState({
-count: state => state.count
-}),
-...mapGetters({
-//
-})
-},
-// 方法集
-methods: {
-increment () {
-this.$store.commit('increment')
-},
-...mapActions({
-//
-})
-}
+  el: '#app',
+  [green b|store],
+  // 组件
+  components: {
+    [red b|Counter]
+  },
+  // 计算属性
+  computed: {
+    count () {
+      return this.[green b|$store.state.count]
+    },
+    [blue b|...mapState({
+      count: state => [green b|state.count]
+    })],
+    [blue b|...mapGetters({]
+      //
+    [blue b|})]
+  },
+  // 方法集
+  methods: {
+    increment () {
+      this.[green b|$store.commit('increment')]
+    },
+    [blue b|...mapActions({]
+      //
+    [blue b|})]
+  }
 })
 
 <style lang="less">

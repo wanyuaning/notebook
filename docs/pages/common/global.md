@@ -1,8 +1,8 @@
 
 > **Windows全局目录：C:\Users\new\AppData\Roaming\npm**
 ❷❸❹❺❻❼❽❾❿
-### nginx
-
+### nginx 
+[detail3](/pages/common/nginx.md)
 ```
 windows: 
     安装：http://nginx.org/en/download.html   [b5 cf| 配置 ]
@@ -10,14 +10,14 @@ windows:
     [b-yellow cf| 重启 ] [yellow|c:\nginx\ nginx.exe -s reload]  
     [b-red cf| 停止 ] [red|c:\nginx\ nginx.exe -s stop] [cc|或 c:\nginx\ nginx.exe -s quit]
 mac: 
-    安装：[brew](#/pages/lang/index?id=ruby) install nginx  [b5 cf| 配置 ]
+    安装：[brew](/pages/lang/index?id=ruby) install nginx  [b5 cf| 配置 ]
     [b-green cf| 启动 ] [green|nginx]    
     [b-yellow cf| 重启 ] [yellow|nginx -s reload]  
     [b-red cf| 停止 ] [red|nginx -s stop]
 ```
 ```
 [CLASS s12 l12]
-[b5 cf|Windows c:\nginx\conf\nginx.conf] [b5 cf|Mac /usr/local/etc/nginx/nginx.conf][DETAIL](#/pages/common/nginx?id=nginx.conf)
+[b5 cf|Windows c:\nginx\conf\nginx.conf] [b5 cf|Mac /usr/local/etc/nginx/nginx.conf][DETAIL](/pages/common/nginx?id=nginx.conf)
 http {
     server {
         listen 8080;

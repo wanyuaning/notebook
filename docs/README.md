@@ -10,6 +10,11 @@
 
 
 ```runtime
+聚合元素
+-----------------------------------------------------------
+◐title{'id':'navigator','path':'pages/javascript/bom?id=navigator','type':''}◑  展示模块：[SCENE]
+
+
 代码块
 -----------------------------------------------------------
 目录：  [MULU]
@@ -98,43 +103,43 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 [MySQL](pages/common/mysql.md)
 
 <ul class="no-list block-list">
-  <li><a href="#/pages/system/index">系统</a></li>
-  <li><a href="#/pages/system/windows/index">Windows</a></li>
-  <li><a href="#/pages/system/mac/index">MAC</a></li>
-  <li><a href="#/pages/system/linux/index">Linux</a></li>
+  <li><a href="/pages/system/index">系统</a></li>
+  <li><a href="/pages/system/windows/index">Windows</a></li>
+  <li><a href="/pages/system/mac/index">MAC</a></li>
+  <li><a href="/pages/system/linux/index">Linux</a></li>
 </ul>
 <ul class="no-list block-list">
-  <li><a href="#/pages/platform/index">平台</a></li>
-  <li><a href="#/pages/platform/node.md">Node</a></li>
-  <li><a href="#/pages/platform/android.md">Adroid</a></li>
-  <li><a href="#/pages/platform/ios.md">IOS</a></li>
+  <li><a href="/pages/platform/index">平台</a></li>
+  <li><a href="/pages/platform/node.md">Node</a></li>
+  <li><a href="/pages/platform/android.md">Adroid</a></li>
+  <li><a href="/pages/platform/ios.md">IOS</a></li>
 </ul>
 <ul class="no-list block-list">
   <li>CSS</li>
-  <li><a href="#/pages/css/main.md?id=动画">动画</a></li>
-  <li><a href="#/pages/css/main.md?id=选择器">选择器</a></li>
+  <li><a href="/pages/css/main.md?id=动画">动画</a></li>
+  <li><a href="/pages/css/main.md?id=选择器">选择器</a></li>
 </ul>
 
 <br>
 <ul class="no-list block-list">
-  <li><a href="#/pages/tools/index">工具</a></li>
-  <li><a href="#/pages/tools/git-npm">GIT&NPM</a></li>
-  <li><a href="#/pages/tools/regular-expression">正则表达式</a></li>
+  <li><a href="/pages/tools/index">工具</a></li>
+  <li><a href="/pages/tools/git-npm">GIT&NPM</a></li>
+  <li><a href="/pages/tools/regular-expression">正则表达式</a></li>
 </ul>
 <ul class="no-list block-list">
   <li>VSCode</li>
-  <li><a href="#/pages/tools/vscode.md?id=settings">settings</a></li>
-  <li><a href="#/pages/tools/vscode.md?id=koroFileHeader">koroFileHeader</a></li>
-  <li><a href="#/pages/tools/vscode.md?id=用户片段">用户片段</a></li>
+  <li><a href="/pages/tools/vscode.md?id=settings">settings</a></li>
+  <li><a href="/pages/tools/vscode.md?id=koroFileHeader">koroFileHeader</a></li>
+  <li><a href="/pages/tools/vscode.md?id=用户片段">用户片段</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">
-  <li><a href="#/pages/frame/index.md">框架</a></li>
-  <li><a href="#/pages/frame/vue/index.md">VUE</a></li>
+  <li><a href="/pages/frame/index.md">框架</a></li>
+  <li><a href="/pages/frame/vue/index.md">VUE</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">
-  <li><a href="#/pages/plugin/index.md">插件&功能</a></li>
+  <li><a href="/pages/plugin/index.md">插件&功能</a></li>
 </ul>
 
 
@@ -150,9 +155,9 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
   [title2|基本类型]：[String](#pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
   [title2|对象类型]：类对象：Object [Array](#pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
 [h3|事件循环][DETAIL](#)
-  回调地狱[Promise/then](#/pages/javascript/es6?id=Promise/then)
-  同一作用域自动异步[async/await](#/pages/javascript/es6?id=async/await) 
-  同一作用域手动异步[generator/yield/next](#/pages/javascript/es6?id=generator/yield/next)
+  回调地狱[Promise/then](/pages/javascript/es6?id=Promise/then)
+  同一作用域自动异步[async/await](/pages/javascript/es6?id=async/await) 
+  同一作用域手动异步[generator/yield/next](/pages/javascript/es6?id=generator/yield/next)
 
 ```
 

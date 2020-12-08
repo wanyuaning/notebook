@@ -47,7 +47,7 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 
 #### 窗口管理
 　　方档规范 | 当前URL信息 | 浏览器信息 | 显示屏信息 | 用户访问信息 | 窗口集
-```tree link
+```tree
 [Window](pages/javascript/bom?id=Window) [BOM规范](pages/javascript/bom?id=浏览器对象模型)
   document: [Document](pages/javascript/bom?id=document) [DOM规范](pages/javascript/bom?id=文档对象模型)
     element:[Element](pages/javascript/bom?id=element)
