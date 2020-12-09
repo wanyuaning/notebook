@@ -97,14 +97,14 @@
 #### Location
 ![Location](../../assets/images/location.jpg "Location")
 ```
-◐编码&解码{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAIL/Location02]
+◐编码&解码{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAILB/Location02]
 {
   protocol: "http:"
   hostname: "localhost" 
   port:     "9527"
   pathname: "/main"
   hash:     "#/minioninfo/minion"
-  search:   "?v=1" ◐解析URL参数{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAIL/Location01]
+  search:   "?v=1" ◐解析URL参数{'id':'Location','path':'pages/javascript/bom?id=Location','type':''}◑[DETAILB/Location01]
   host:     "localhost:9527"
   origin:   "http://localhost:9527"
   href:     "http://localhost:9527/main#/minioninfo/minion?v=1"  
@@ -127,23 +127,19 @@ var uri="http://w3cschool.cc/my test.php?name=ståle&car=saab"
 document.write(encodeURIComponent(uri))  // http%3A%2F%2Fw3cschool.cc%2Fmy%20test.php%3Fname%3Dst%C3%A5le%26car%3Dsaab
 
 encodeURI/decodeURI 不能编码和解码URI特殊字符（如#，/，￥等）
+∵ 
 <table>
     <tr style="background:#eee"><td>编码</td><td>目标字符</td><td>结果字符</td> <td rowspan="3">></td> <td>解码</td><td>目标字符</td><td>结果字符</td></tr>
     <tr><td><strong>encodeURIComponent</strong>('#')</td><td>'#'</td><td>"%23"</td> <td><strong>decodeURIComponent</strong>('%23')</td><td>'%23'</td><td>"#"</td></tr>
     <tr><td><strong>encodeURI('#')</strong></td><td>'#'</td><td>"#"</td> <td><strong>decodeURI</strong>('%23')</td><td>'%23'</td><td>"%23"</td></tr>
-</table>▉
+</table>
+∴▉
 ```
-
-
-
-
-
-
 
 
 #### Navigator
 ```
-浏览器信息: ◐判断当前设备及获取设备{'path':'pages/javascript/bom?id=navigator','type':''}◑[DETAIL/Navigator01]
+浏览器信息: ◐判断当前设备及获取设备{'path':'pages/javascript/bom?id=navigator','type':''}◑[DETAILB/Navigator01]
 {
   appCodeName: "Mozilla"  // 浏览器代码名 "Mozilla"
   appName: "Netscape"     // 浏览器步伐名 "Netscape"

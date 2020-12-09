@@ -220,7 +220,18 @@ function handleCommon(data, dataid) {
       case '/': // 提示
           const matchContent = new RegExp(`▉${id}▉([^▉]*)▉`).exec(data)
           if (matchContent) {
-            const lineArr = matchContent[1].split(/\n/)
+            let match1 = matchContent[1]
+            // HTML块暂存 ∵html∴
+            let matchHTML, countHTML = 0, mapHTML = {};
+            while ((matchHTML = /∵([^∴]+)∴/.exec(match1)) !== null) {
+              const html = matchHTML[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+              const name = 'HTML_BLOCK_'+countHTML
+              mapHTML[name] = html
+              match1 = match1.replace(matchHTML[0], name)
+              countHTML++
+            }
+
+            const lineArr = match1.split(/\n/)
             let maxLineLength = 0
             let content = ''
             lineArr.forEach((e, i) => {
@@ -229,6 +240,7 @@ function handleCommon(data, dataid) {
                 content += e + '<br>'
               }
             })
+            // 转义空格
             let space
             while((space = /\s{2,}/.exec(content)) !== null){
               content = content.replace(space[0], '&nbsp;'.repeat(space[0].length))
@@ -236,13 +248,15 @@ function handleCommon(data, dataid) {
 
             // 如果没有样式匹配
             if(!contentStyle){
-              let width = maxLineLength * 8
+              let width = maxLineLength * 7
               width = width > 1000 ? 1000 : width
-              //console.log('len',len);
-              
               contentStyle = ' style="width:'+width+'px;left:50px"'
-            }
-            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`
+            }   
+            
+            // HTML块回填
+            for (let i in mapHTML) { content = content.replace(i, mapHTML[i]) }
+
+            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`            
             data = data.replace(matchContent[0], ``); 
           }    
           data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
@@ -269,6 +283,7 @@ function handleCommon(data, dataid) {
     data = data.replace(matchBox[0], `<span class="${className}">${content}</span>`);
   }
 
+  // 注释
   const REG = /(\/\/|#)\s.+?(\n|$)/g;
   const Match_ARR = data.match(REG) || [];
   Match_ARR.forEach((e) => {
@@ -447,7 +462,9 @@ function codeDistributeEntry(hook, vm) {
   hook.doneEach(function() {
     
     const outHTMLContainer = document.createElement('div')
+    outHTMLContainer.className = 'markdown-outer'    
     outHTMLContainer.innerHTML = GLOBAL_HTML
+    console.log('content:',GLOBAL_HTML);
     document.body.appendChild(outHTMLContainer)
   });
   hook.ready(function(){

@@ -4,6 +4,11 @@
 
 # 场景
 ```
+全局导航勾子里访问 $store
+  // 或 import store from '@/store/store'
+  router.beforeEach((to, from, next) => {
+    // router.app.$store.state
+  }
 分支
   内外网 if (href.includes('://')) { window.open(href, '_blank') }else{ this.$router.push(href) }
 链接跳转 

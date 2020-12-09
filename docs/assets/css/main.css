@@ -7,6 +7,11 @@
     --color-blue9: #
 }
 
+body {
+  font-family: 'Consolas', Arial, sans-serif;
+  font-size: 15px;
+}
+
 code{ font-size: 14px; font-family: 'Consolas';}
 
 
@@ -486,3 +491,26 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 .markdown-section pre.font1 code { font-family: Arial;}
 .markdown-section pre.line1 code { line-height: 12px;}
 .markdown-section pre.line2 code { line-height: 14px;}
+
+/* 域外容器 */
+.markdown-outer table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  margin-bottom: 1rem;
+  overflow: auto;
+  width: 100%
+}
+
+.markdown-outer th {
+  font-weight: 700
+}
+
+.markdown-outer td, .markdown-outer th {
+  border: 1px solid #ddd;
+  padding: 6px 13px
+}
+
+.markdown-outer tr {
+  border-top: 1px solid #ccc
+}

@@ -27,6 +27,9 @@
 [HELP>info03]    帮助图标 跳转 内容标识  ▉info03▉content▉
 [HELPB>info03]   帮助图标 跳转 内容标识  ▉info03▉content▉
 [cgHELP>info03(width:100px;left:50px)]   class帮助图标 跳转 内容标识(content-stype)  ▉info03▉content▉
+
+内容插入HTML块: ∵html∴
+
 内容包裹 
 [bg ciBOX content] 带CLASS
 [BOX content]
