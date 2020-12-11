@@ -4,4 +4,4 @@
   - [Markdown](pages/tools/markdown.md)
   - [Chrome Tools](pages/tools/chrome-tools.md)
 * 聚合
-  - [VUE](pages/aggregate/index.md)
+  - [场景](pages/aggregate/index.md)

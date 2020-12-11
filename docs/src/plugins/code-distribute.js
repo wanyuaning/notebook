@@ -38,6 +38,7 @@ CodeblockManager.prototype = {
   },
   // 聚合
   aggregate(type){
+    alert(type)
     return `<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul> `
   }
 }
