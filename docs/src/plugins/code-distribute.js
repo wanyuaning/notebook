@@ -35,6 +35,10 @@ CodeblockManager.prototype = {
       content += `<a href="#/${e.path}">${e.title}</a>`
     })
     return `<div class="box-scene">${content}</div>`
+  },
+  // 聚合
+  aggregate(type){
+    return `<ul class="no-list block-list"><li>标题</li><li><a href="#">子类一</a></li><li>子类二</li></ul> `
   }
 }
 
@@ -447,7 +451,7 @@ function codeDistributeEntry(hook, vm) {
     if ((title = /<title>(.+?)<\/title>/.exec(html)) !== null) {
       setTimeout(function () {
         document.title = title[1];
-      }, 0);
+        }, 0);
     }
 
     // 场景元素展示模块：[SCENE]
@@ -455,6 +459,14 @@ function codeDistributeEntry(hook, vm) {
     if(matchScene){
       const content = manager.createScene()
       html = html.replace(matchScene[0], content)
+    }
+    
+  
+    // 聚合：[SCENE_LIST]
+    matchSceneList = /\[SCENE_LIST\]/.exec(html)
+    if(matchSceneList){
+      const content = manager.aggregate('SCENE')
+      html = html.replace(matchSceneList[0], content)
     }
 
     next(html);
