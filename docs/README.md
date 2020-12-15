@@ -1,3 +1,5 @@
+{{asdf}}
+
 http://www.chaiguanxin.com/articles/2019/03/05/1551755027239.html
 <img src="assets/images/fa-page.jpg">
 <img src="assets/images/nby-login.jpg">
@@ -113,43 +115,43 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 [MySQL](pages/common/mysql.md)
 
 <ul class="no-list block-list">
-  <li><a href="/pages/system/index">系统</a></li>
-  <li><a href="/pages/system/windows/index">Windows</a></li>
-  <li><a href="/pages/system/mac/index">MAC</a></li>
-  <li><a href="/pages/system/linux/index">Linux</a></li>
+  <li><a href="#/pages/system/index">系统</a></li>
+  <li><a href="#/pages/system/windows/index">Windows</a></li>
+  <li><a href="#/pages/system/mac/index">MAC</a></li>
+  <li><a href="#/pages/system/linux/index">Linux</a></li>
 </ul>
 <ul class="no-list block-list">
-  <li><a href="/pages/platform/index">平台</a></li>
-  <li><a href="/pages/platform/node.md">Node</a></li>
-  <li><a href="/pages/platform/android.md">Adroid</a></li>
-  <li><a href="/pages/platform/ios.md">IOS</a></li>
+  <li><a href="#/pages/platform/index">平台</a></li>
+  <li><a href="#/pages/platform/node.md">Node</a></li>
+  <li><a href="#/pages/platform/android.md">Adroid</a></li>
+  <li><a href="#/pages/platform/ios.md">IOS</a></li>
 </ul>
 <ul class="no-list block-list">
   <li>CSS</li>
-  <li><a href="/pages/css/main.md?id=动画">动画</a></li>
-  <li><a href="/pages/css/main.md?id=选择器">选择器</a></li>
+  <li><a href="#/pages/css/main.md?id=动画">动画</a></li>
+  <li><a href="#/pages/css/main.md?id=选择器">选择器</a></li>
 </ul>
 
 <br>
 <ul class="no-list block-list">
-  <li><a href="/pages/tools/index">工具</a></li>
-  <li><a href="/pages/tools/git-npm">GIT&NPM</a></li>
-  <li><a href="/pages/tools/regular-expression">正则表达式</a></li>
+  <li><a href="#/pages/tools/index">工具</a></li>
+  <li><a href="#/pages/tools/git-npm">GIT&NPM</a></li>
+  <li><a href="#/pages/tools/regular-expression">正则表达式</a></li>
 </ul>
 <ul class="no-list block-list">
   <li>VSCode</li>
-  <li><a href="/pages/tools/vscode.md?id=settings">settings</a></li>
-  <li><a href="/pages/tools/vscode.md?id=koroFileHeader">koroFileHeader</a></li>
-  <li><a href="/pages/tools/vscode.md?id=用户片段">用户片段</a></li>
+  <li><a href="#/pages/tools/vscode.md?id=settings">settings</a></li>
+  <li><a href="#/pages/tools/vscode.md?id=koroFileHeader">koroFileHeader</a></li>
+  <li><a href="#/pages/tools/vscode.md?id=用户片段">用户片段</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">
-  <li><a href="/pages/frame/index.md">框架</a></li>
-  <li><a href="/pages/frame/vue/index.md">VUE</a></li>
+  <li><a href="#/pages/frame/index.md">框架</a></li>
+  <li><a href="#/pages/frame/vue/index.md">VUE</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">
-  <li><a href="/pages/plugin/index.md">插件&功能</a></li>
+  <li><a href="#/pages/plugin/index.md">插件&功能</a></li>
 </ul>
 
 

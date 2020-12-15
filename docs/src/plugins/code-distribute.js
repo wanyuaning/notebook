@@ -479,6 +479,8 @@ function codeDistributeEntry(hook, vm) {
     outHTMLContainer.innerHTML = GLOBAL_HTML
     console.log('content:',GLOBAL_HTML);
     document.body.appendChild(outHTMLContainer)
+
+    mvvm.$init()
   });
   hook.ready(function(){
     const tipsMapId = {}      // 缓存tips内容元素
