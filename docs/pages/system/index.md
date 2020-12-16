@@ -1,4 +1,5 @@
 # Windows [detail1](pages/system/windows/index)
+node C:\Users\new\AppData\Roaming\npm\
 
 # Mac [detail1](pages/system/mac/index)
 

@@ -147,6 +147,17 @@ function handleBlock(data) {
  */
 function handleCommon(data, dataid) {
   /**
+   * HTML显示
+   */
+  let matchCodeHTML;
+  while ((matchCodeHTML = /\[HTML([^\]]+)\]/.exec(data)) !== null) {
+    let codeHTML = matchCodeHTML[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    console.log('codeHTML',codeHTML);
+    
+    data = data.replace(matchCodeHTML[0], codeHTML)
+  }
+
+  /**
    * 场景元素
    * 数据：◐判断当前设备及获取设备{'path':'pages/javascript/bom?id=navigator','type':''}◑
    * 匹配：[数据, 判断当前设备及获取设备, {'path':'pages/javascript/bom?id=navigator','type':''}]

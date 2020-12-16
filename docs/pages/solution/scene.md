@@ -4,6 +4,8 @@
 [CLASS none]
 [MULU]
 
+[h3 cg|分页]
+[HTML<img src="assets/images/fa-page.jpg">]
 
 [h3 cg|Enter提交表单]
 <input type="text" onchange="console.log(this.value);" />
@@ -34,6 +36,8 @@ chrome 身份验证器 插件
 身份验证器用以在浏览器中生成二步认证代码
 
 [h3 cj|微前端架构]
+
+
 微前端架构旨在解决单体应用在一个相对长的时间跨度下，由于参与的人员、团队的增多、变迁，从一个普通应用演变成一个巨石应用(Frontend Monolith)后，随之而来的应用不可维护的问题
 ##### 使用场景
 - 项目很多，规模很大，都是每个项目独立使用git此类仓库维护的、技术栈为vue/react/angular的这类应用

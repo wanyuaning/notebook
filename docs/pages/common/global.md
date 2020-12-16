@@ -1,6 +1,12 @@
 
 > **Windows全局目录：C:\Users\new\AppData\Roaming\npm**
 ❷❸❹❺❻❼❽❾❿
+### yarn
+```
+npm i yarn -g
+yarn -version
+```
+
 ### nginx 
 [detail3](/pages/common/nginx.md)
 ```

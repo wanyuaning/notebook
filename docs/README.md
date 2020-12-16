@@ -1,21 +1,17 @@
-{{asdf}}
 
-http://www.chaiguanxin.com/articles/2019/03/05/1551755027239.html
-<img src="assets/images/fa-page.jpg">
-<img src="assets/images/nby-login.jpg">
-```
-[CLASS none]
-[MULU]
-[h1|提示或跳转图标]
-[h2|提示或跳转图标]
-[h3|提示或跳转图标]
-[h4|提示或跳转图标]
-[h5|提示或跳转图标]
-[h6|提示或跳转图标]
-```
-<span class="icon-help"></span>
 
-<input style="ime-mode:disabled" οnkeydοwn="if(event.keyCode==13)event.keyCode=9"> 
+
+UmiJS  https://umijs.org/zh-CN
+# 创建目录
+$ mkdir myapp && cd myapp
+# 安装依赖
+$ yarn add umi
+# 创建页面
+$ npx umi g page index --typescript --less
+# 启动开发
+$ npx umi dev
+
+
 
 
 ```runtime
