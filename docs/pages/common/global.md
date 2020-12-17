@@ -16,7 +16,7 @@ touch main.js
 touch foo.js
   export default 'hello rollup!'
 
-[cc|rollup-demo>] [b c0|rollup] src/main.js [cg|-o lib/bundle.js] [ch|-f cjs] [HELP/rollup-webpack-01]
+|rollup-demo> [b c0|rollup] src/main.js [cg|-o lib/bundle.js] [ch|-f cjs] [HELP/rollup-webpack-01]
 
 ▉rollup-webpack-01▉
 [cg|-o表示输出bundle.js文件] [ch|-f cjs表示使用commonjs标准输出]
@@ -29,7 +29,7 @@ rollup -v
 [开发一个NPM插件]($SCENE?id=开发一个NPM插件)
 ▉
 ▉rollup-webpack-03▉
-1111111111111
+[前端工程搭建]($SCENE?id=前端工程搭建)
 ▉
 
 ```

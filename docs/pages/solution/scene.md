@@ -142,8 +142,60 @@ CONF_THEME = {
 暴力破解密码  频繁操作导致服务器压力崩溃的恶意攻击
 数字、字母、中文的组合 缺点：用户需要在鼠标-键盘、中英文之间切换，不具备任何趣味性
 
+
 [h3|开发一个NPM插件]
 1111111111111111111111111
+
+[h3|前端工程搭建]
+|Global> npm install -g babel-cli & babel --version
+|es6-project> npm init -y 
+|es6-project> npm install --save-dev babel-preset-es2015 babel-cli
+
+[index.html, src[index.js], dist[], .babelrc]
+/index.html   [DETAIL/es6-project-02]
+/src/index.js [DETAIL/es6-project-03]
+/.babelrc     [DETAIL/es6-project-04]
+
+|es6-project> babel src/index.js -o dist/index.js  或  npm run build [HELP/es6-project-01]
+浏览 /index.html
+
+▉es6-project-01▉
+/package.json
+{
+  "scripts": {
+    "build": "babel src/index.js -o dist/index.js"
+  }
+}
+▉
+▉es6-project-02▉
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6项目搭建</title>
+    <script src="dist/index.js"></script>
+</head>
+<body>
+    Hello ECMA Script2016
+</body>
+</html>
+▉
+▉es6-project-03▉
+let a = 1
+console.log(a)
+
+const b = '测试ES6'
+console.log(b)
+▉
+▉es6-project-04▉
+{
+  "presets":["es2015"],
+  "plugins":[]
+}
+▉
+
+
 
 
 

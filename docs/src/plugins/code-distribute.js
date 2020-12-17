@@ -264,7 +264,7 @@ function handleCommon(data, dataid) {
 
             // 如果没有样式匹配
             if(!contentStyle){
-              let width = maxLineLength * 8
+              let width = maxLineLength * 8 + 50
               width = width > 1000 ? 1000 : width
               contentStyle = ' style="width:'+width+'px;left:50px"'
             }   
@@ -297,6 +297,12 @@ function handleCommon(data, dataid) {
     let className = 'box'
     matchBox[1] && (className += ' ' + matchBox[1])
     data = data.replace(matchBox[0], `<span class="${className}">${content}</span>`);
+  }
+
+  // 命令目标 |es6-project>
+  let matchCommendTarget
+  while ((matchCommendTarget = /\|([\w-]{1,20}&gt;)/.exec(data)) !== null) {
+    data = data.replace(matchCommendTarget[0], `<span class="cc">${matchCommendTarget[1]}</span>`);
   }
 
   // 注释
