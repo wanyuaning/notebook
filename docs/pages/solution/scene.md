@@ -4,6 +4,8 @@
 [CLASS none]
 [MULU]
 
+
+
 [h3 cg|分页]
 [HTML<img src="assets/images/fa-page.jpg">]
 
@@ -36,7 +38,32 @@ chrome 身份验证器 插件
 身份验证器用以在浏览器中生成二步认证代码
 
 [h3 cj|微前端架构]
-
+mkdir qiankun-platform & cd qiankun-platform
+yarn add qiankun (无需如npm init)
+mkdir main & cd main
+touch index.html
+  [cc|<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  </head>
+  <body>
+      [b cg|<div id="view-01">loading...</div>]
+  </body>
+  </html>]
+touch index.js
+  [cc|import { [b ci|loadMicroApp] } from 'qiankun'
+  // 加载微应用
+  [b ci|loadMicroApp]({
+    name: '应用一',
+    entry: '//localhost:7100',
+    container: '[b cg|#view-01]',
+    props: {
+      slogan: 'Hello View01'
+    }
+  })]
 
 微前端架构旨在解决单体应用在一个相对长的时间跨度下，由于参与的人员、团队的增多、变迁，从一个普通应用演变成一个巨石应用(Frontend Monolith)后，随之而来的应用不可维护的问题
 ##### 使用场景
@@ -114,6 +141,12 @@ CONF_THEME = {
 # 人机验证
 暴力破解密码  频繁操作导致服务器压力崩溃的恶意攻击
 数字、字母、中文的组合 缺点：用户需要在鼠标-键盘、中英文之间切换，不具备任何趣味性
+
+[h3|开发一个NPM插件]
+1111111111111111111111111
+
+
+
 ```
 
 ```plantuml

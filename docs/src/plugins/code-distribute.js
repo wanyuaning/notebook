@@ -264,7 +264,7 @@ function handleCommon(data, dataid) {
 
             // 如果没有样式匹配
             if(!contentStyle){
-              let width = maxLineLength * 7
+              let width = maxLineLength * 8
               width = width > 1000 ? 1000 : width
               contentStyle = ' style="width:'+width+'px;left:50px"'
             }   
@@ -347,7 +347,9 @@ function codeDistributeEntry(hook, vm) {
     //console.log('-------2 mounted')
   })
   hook.beforeEach(function (content) {
-    //console.log('-------3 beforeEach')
+    // 别名
+    content = content.replace(/\$SCENE/g, '/pages/solution/scene')
+    
     return content;
   });
   hook.afterEach(function (html, next) {

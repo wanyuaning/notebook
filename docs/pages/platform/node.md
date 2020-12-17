@@ -3,6 +3,63 @@ __dirname      当前 执行文件 所在目录的完整目录名
 __filename     当前 执行文件 的带有完整绝对路径的文件名
 process.cwd()  当前 node命令 所定位的文件夹目录名 
 ./             文件所在目录
+
+
+[h4|package.json]
+
+{
+  "name": "[b ci|ewan]",                   // 项目名称
+  // 命令入口[c0HELP/package03]
+  "bin": {
+    "ewan": "./bin/ewan.js"
+  },
+  // 模板入口[c0HELP/package02]
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "browser": "",
+  "types": "./es/index.d.ts",
+  // 软件包作为依赖项被安装时要包括的条目[c0HELP/package01]
+  "files": [ "dist", "es", "lib" ],
+}
+
+▉package03▉
+命令对应的可执行文件，通常放在bin目录下
+
+▉
+▉package02▉
+场景：当外部require("[b ci|ewan]"), 就返回main路径内容
+如果 npm 包导出的是 ESM 规范的包，使用 module
+如果 npm 包只在 web 端使用，并且严禁在 server 端使用，使用 browser。
+如果 npm 包只在 server 端使用，使用 main
+如果 npm 包在 web 端和 server 端都允许使用，使用 browser 和 main
+▉
+▉package01▉
+以下文件无论是否设置，总是包含：
+*   `package.json`
+*   `README`
+*   `CHANGES`/`CHANGELOG`/`HISTORY`
+*   `LICENSE`/`LICENCE`
+*   `NOTICE`
+*   The file in the “main” field
+
+以下文件总是被忽略：
+*   `.git`
+*   `CVS`
+*   `.svn`
+*   `.hg`
+*   `.lock-wscript`
+*   `.wafpickle-N`
+*   `.*.swp`
+*   `.DS_Store`
+*   `._*`
+*   `npm-debug.log`
+*   `.npmrc`
+*   `node_modules`
+*   `config.gypi`
+*   `*.orig`
+*   `package-lock.json`(use shrinkwrap instead)
+▉
+
 ```
 
 #### child_process

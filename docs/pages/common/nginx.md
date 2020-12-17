@@ -2,6 +2,16 @@
 
 # nginx.conf
 
+<pre class="hljs nginx"><code><span class="hljs-attribute">location</span> / {  
+    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin *;
+    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Methods <span class="hljs-string">'GET, POST, OPTIONS'</span>;
+    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Headers <span class="hljs-string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'</span>;
+
+    <span class="hljs-attribute">if</span> (<span class="hljs-variable">$request_method</span> = <span class="hljs-string">'OPTIONS'</span>) {
+        <span class="hljs-attribute">return</span> <span class="hljs-number">204</span>;
+    }
+} </code></pre>
+
 ```O
 http {
     server {

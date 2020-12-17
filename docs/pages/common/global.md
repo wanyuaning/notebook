@@ -1,11 +1,62 @@
 
-> **Windows全局目录：C:\Users\new\AppData\Roaming\npm**
-❷❸❹❺❻❼❽❾❿
-### yarn
+
+### qiankun
+
 ```
-npm i yarn -g
-yarn -version
+[h4|rollup ------------------------------------- webpack]
+偏向应用于js库                                                           偏向应用于前端工程
+Install[HELP/rollup-webpack-02]                                                                 Install[HELP/rollup-webpack-03]
+mkdir rollup-demo & cd rollupdemo
+mkdir src & cd src
+touch main.js
+  import foo from './foo.js';
+  export default function () {
+    console.log(foo);
+  }
+touch foo.js
+  export default 'hello rollup!'
+
+[cc|rollup-demo>] [b c0|rollup] src/main.js [cg|-o lib/bundle.js] [ch|-f cjs] [HELP/rollup-webpack-01]
+
+▉rollup-webpack-01▉
+[cg|-o表示输出bundle.js文件] [ch|-f cjs表示使用commonjs标准输出]
+▉
+▉rollup-webpack-02▉
+npm i rollup -g 
+rollup -v
+
+项目打包及更复杂功能：https://www.rollupjs.com/guide/command-line-reference
+[开发一个NPM插件]($SCENE?id=开发一个NPM插件)
+▉
+▉rollup-webpack-03▉
+1111111111111
+▉
+
 ```
+### linux ----------------------------------------- windows
+mkdir
+touch index.js                                      touch index.js(需npm i touch-cli -g)        
+
+### npm ------------------------------------------- yarn   
+npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
+install node                                        npm i yarn -g                                     安装
+npm -v                                              yarn -v                                           版本
+npm init	                                          yarn init	                                        初始化某个项目
+npm install/link	                                  yarn install/link	                                默认的安装依赖操作
+npm install xx —save	                              yarn add xx	                                      安装某个依赖，并且默认保存到package.
+npm uninstall taco —save	                          yarn remove taco	                                移除某个依赖项目
+npm install xx --save-dev                           yarn add xx --dev	                                安装某个开发时依赖项目
+npm update taco —save	                              yarn upgrade taco	                                更新某个依赖项目
+npm install taco --global	                          yarn global add taco	                            安装某个全局依赖项目
+npm publish/login/logout	                          yarn publish/login/logout	                        发布/登录/登出，一系列NPM Registry操作
+npm run/test	                                      yarn run/test	                                    运行某个命令
+
+npm view vue            更丰富 npm info vue        https://www.npmjs.com/
+npm view vue version    服务器上包的最新的版本信息   https://www.npmjs.com/
+npm view vue versions   服务器上包的所有的版本信息   https://www.npmjs.com/
+npm ls vue              本地安装包版本信息          project/
+npm ls vue -g           本地全局安装的pkg版本       全局
+
 
 ### nginx 
 [detail3](/pages/common/nginx.md)
@@ -76,13 +127,7 @@ $ npm install --save-dev nodemon
 }
 $ npm run dev
 ```
-### npm
-npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
-npm view vue            更丰富 npm info vue        https://www.npmjs.com/
-npm view vue version    服务器上包的最新的版本信息   https://www.npmjs.com/
-npm view vue versions   服务器上包的所有的版本信息   https://www.npmjs.com/
-npm ls vue              本地安装包版本信息          project/
-npm ls vue -g           本地全局安装的pkg版本       全局
+
 
 ### nvm 
 nodejs的版本管理工具
