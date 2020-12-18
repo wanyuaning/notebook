@@ -161,7 +161,7 @@ CONF_THEME = {
 
 
 
-[h3|前端工程搭建 Babel7+]
+[h3|前端工程搭建 Babel7+] https://www.babeljs.cn/docs/usage 
 |es6-babel7> npm init -y
 |es6-babel7> npm install --save-dev [b ch|@babel/core @babel/cli]
 
