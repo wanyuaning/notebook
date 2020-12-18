@@ -198,6 +198,13 @@ CONF_THEME = {
 npm install --save-dev @babel/core @babel/cli @babel/preset-env
 npm install --save @babel/polyfill
 
+
+
+
+
+
+
+
 ▉es6-project-11▉
 "useBuiltIns" 参数设置为 "usage" 时，Babel 将检查你的所有代码，以便查找目标环境中缺失的功能，然后只把必须的 polyfill 包含进来。
 否则，必须在所有代码之前通过 require 加载一次完整的 polyfill。

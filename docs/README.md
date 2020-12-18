@@ -1,5 +1,72 @@
 
+```
 
+[h3|webpack]
+可以做的事情：
+代码转换 文件优化 代码分割 模块合并 自动刷新 代码校验 自动发布
+
+webpack常见配置
+
+webpack高级配置
+
+webpack优化策略
+
+ast抽象语法树
+
+webpack中的Tapable
+掌握webpack流程，手写webpack
+手写webpack中常见的loader
+手写webpack中常见的plugin
+
+|demo> yarn init -y
+|demo> yarn add webpack webpack-cli -D
+
+[src[index.js, a.js]]
+src/index.js
+  console.log('hello webpack')
+  
+  let str = require('./a.js')
+  console.log(str)
+  
+src/a.js
+  module.exports = 'ewan'
+  
+  
+可以零配置
+|demo> npx webpack
+/dist/main.js
+
+手动配置
+/webpack.configure.js
+  let path = require('path')
+  module.exports = {
+    // 环境
+    mode: '', // 默认两种：production/development
+    
+    // 入口
+    entry: './src/index.js',
+    
+    // 出口
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist'), // 绝对路径
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
 
 
 
