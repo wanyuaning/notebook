@@ -37,6 +37,9 @@ code{ font-size: 14px; font-family: 'Consolas';}
 .cp{ color: var(--color9); border-color: var(--color9)!important}
 
 .red{ color: var(--color-red)} .yellow{ color: var(--color-yellow)} .blue{ color: var(--color-blue)} .green{ color: var(--color-green)}
+.b-red,.b-yellow,.b-blue,.b-green{color: #fff;}
+.b-red{ background-color: var(--color-red)} .b-yellow{ background-color: var(--color-yellow)} 
+.b-blue{ background-color: var(--color-blue)} .b-green{ background-color: var(--color-green)}
 
 .bdg{border-color: var(--color0)} .bdh{border-color: var(--color1)} .bdi{border-color: var(--color2) !important} .bdj{border-color: var(--color3)}
 

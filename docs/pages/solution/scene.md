@@ -147,9 +147,9 @@ CONF_THEME = {
 1111111111111111111111111
 
 [h3|前端工程搭建]
-|Global> npm install -g babel-cli & babel --version
+|Global> npm install -g [b cg|babel-cli] & babel --version
 |es6-project> npm init -y 
-|es6-project> npm install --save-dev babel-preset-es2015 babel-cli
+|es6-project> npm install --save-dev [b cg|babel-preset-es2015 babel-cli]
 
 [index.html, src[index.js], dist[], .babelrc]
 /index.html   [DETAIL/es6-project-02]
@@ -159,6 +159,138 @@ CONF_THEME = {
 |es6-project> babel src/index.js -o dist/index.js  或  npm run build [HELP/es6-project-01]
 浏览 /index.html
 
+
+
+[h3|前端工程搭建 Babel7+]
+|es6-babel7> npm init -y
+|es6-babel7> npm install --save-dev [b ch|@babel/core @babel/cli]
+
+[src[a.js], lib, package.json]
+[b-blue|/src/a.js] [DETAIL/es6-project-07]
+|es6-babel7> ./node_modules/.bin/babel src --out-dir lib [DETAIL/es6-project-05] 
+[b-blue|/lib/a.js] [DETAIL/es6-project-07]           
+
+[b3 cf| 指定代码转换功能 ] 箭头函数
+|es6-babel7> npm install --save-dev [b ch|@babel/plugin-transform-arrow-functions]
+|es6-babel7> ./node_modules/.bin/babel src --out-dir lib [b ch|--plugins=@babel/plugin-transform-arrow-functions]
+[b-green|/lib/a.js] [DETAIL/es6-project-06] 
+
+[b3 cf| 指定代码转换功能 ] 更多 避免添加很多插件 使用官方预设定(preset)
+|es6-babel7> npm install --save-dev [b ch|@babel/preset-env]
+|es6-babel7> ./node_modules/.bin/babel src --out-dir lib [b ch|--presets=@babel/env]
+[b-green|/lib/a.js] [DETAIL/es6-project-08]
+
+[b3 cf| 指定代码转换功能 ] 预设配置 
+/babel.config.json [DETAIL/es6-project-09]
+|es6-babel7> ./node_modules/.bin/babel src --out-dir lib 
+[b-green|/lib/a.js] 
+
+[b3 cf| 指定代码转换功能 ] 预设配置 Polyfill[DETAIL/es6-project-10] 
+|es6-babel7> npm install --save [b ch|@babel/polyfill]
+/babel.config.json [DETAIL/es6-project-11]
+|es6-babel7> ./node_modules/.bin/babel src --out-dir lib 
+[b-green|/lib/a.js] 
+
+
+
+总结：
+[@babel/core, @babel/cli, @babel/preset-env, @babel/polyfill]
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
+npm install --save @babel/polyfill
+
+▉es6-project-11▉
+"useBuiltIns" 参数设置为 "usage" 时，Babel 将检查你的所有代码，以便查找目标环境中缺失的功能，然后只把必须的 polyfill 包含进来。
+否则，必须在所有代码之前通过 require 加载一次完整的 polyfill。
+
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1",
+        },
+        [b ci|"useBuiltIns": "usage"],
+      }
+    ]
+  ]
+}
+▉
+▉es6-project-10▉
+@babel/polyfill 模块包含 core-js 和一个自定义的 regenerator runtime 来模拟完整的 ES2015+ 环境。
+
+这意味着你可以使用诸如 Promise 和 WeakMap 之类的新的内置组件、 Array.from 或 Object.assign 之类的静态方法、 Array.prototype.includes 之类的实例方法以及生成器函数（generator functions）（前提是你使用了 regenerator 插件）。为了添加这些功能，polyfill 将添加到全局范围（global scope）和类似 String 这样的原生原型（native prototypes）中。
+
+对于软件库/工具的作者来说，这可能太多了。如果你不需要类似 Array.prototype.includes 的实例方法，可以使用 transform runtime 插件而不是对全局范围（global scope）造成污染的 @babel/polyfill。
+
+更进一步，如果你确切地知道你所需要的 polyfills 功能，你可以直接从 core-js 获取它们。
+如：
+require("core-js/modules/es.promise.finally");
+Promise.resolve().finally();
+
+▉
+▉es6-project-09▉
+{
+  "presets": [
+    [
+    "@babel/env",
+      {
+        // 只为目标浏览器中没有的功能加载转换插件
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1"
+          }
+        }
+      ]
+    ]
+}
+▉
+▉es6-project-08▉
+"use strict";
+
+var a = 11;
+console.log(a);
+
+var fn = function fn() {
+  return 1;
+};
+▉
+▉es6-project-07▉
+const a = 11;
+console.log(a);
+
+const fn = () => 1;
+▉
+▉es6-project-06▉
+const a = 11;
+console.log(a);
+
+const fn = function () {
+  return 1;
+};
+▉
+▉es6-project-05▉
+将解析 src 目录下的所有 JavaScript 文件输出到 lib 目录下。由于还[b ci|没有指定任何代码转换功能]，所以输出的代码将[b ci|与输入的代码相同]。
+
+其它动行参数：
+  -o, --out-file [out]                        将所有输入文件编译成一个文件.
+  -d, --out-dir [out]                         将模块的输入目录编译成输出目录.
+  --relative                                  编译成相对于输入目录或文件的输出目录.
+  -D, --copy-files                            在非编译文件上编译目录副本时.
+  --include-dotfiles                          编译和复制非编译文件时包含点文件.
+  --no-copy-ignored                           在复制非编译文件时排除忽略的文件.
+  --verbose                                   记录一切。这个选项与——quiet相冲突.
+  --quiet                                     不记录任何东西。此选项与——verbose冲突.
+  --delete-dir-on-start                       在编译前删除out目录.
+  --out-file-extension [string]               对输出文件使用特定的扩展名.
+  -V, --version                               输出版本号.
+  -h, --help                                  输出使用信息.
+▉
 ▉es6-project-01▉
 /package.json
 {
