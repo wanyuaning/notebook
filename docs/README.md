@@ -6,13 +6,9 @@
 代码转换 文件优化 代码分割 模块合并 自动刷新 代码校验 自动发布
 
 webpack常见配置
-
 webpack高级配置
-
 webpack优化策略
-
 ast抽象语法树
-
 webpack中的Tapable
 掌握webpack流程，手写webpack
 手写webpack中常见的loader
@@ -33,29 +29,75 @@ src/a.js
   
   
 可以零配置
+默认:{
+  mode: 'production'
+  entry: ./src/index.js
+  output: {
+    filename: main.js
+    path: ./dist
+  }
+}
 |demo> npx webpack
 /dist/main.js
 
+、
+
 手动配置
 /webpack.configure.js
+  
   let path = require('path')
   module.exports = {
     // 环境
-    mode: '', // 默认两种：production/development
+    mode: 'development', // 值：production/development/none
     
     // 入口
-    entry: './src/index.js',
+    entry: './src/index.js',                           // 相对路径
     
     // 出口
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'), // 绝对路径
+      path: path.resolve(__dirname, 'dist'),           // 绝对路径
     }
+
+    // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
+    module: {
+      rules: [
+        { test: /\.txt$/, use: 'raw-loader' } [DETAIL/WEBPACK_LOADER_RAW]
+      ]
+    }
+
+    // 插件任务如：打包优化，资源管理，注入环境变量
+    plugins: [
+      new HtmlWebpackPlugin({template: './src/index.html'}) [DETAIL/WEBPACK_PLUGIN_HTML]
+    ]
   }
+-----
 
 
+▉WEBPACK_PLUGIN_HTML▉
+为应用程序生成一个 HTML 文件，并自动注入所有生成的 bundle
+-----
+npm i html-webpack-plugin -D
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+▉
+▉WEBPACK_LOADER_RAW▉
+场景一：import txt from 'file.txt';
+场景二：<script>${ require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible.js') }</script>
+---------------------------------------
+[s18|npm install --save-dev raw-loader]
+---------------------------------------
+[b9 cf|配置使用]
+module: {
+  rules: [
+    {test: /\.txt$/, use: 'raw-loader'}
+  ]
+}
+[b9 cf|命令使用]
+webpack --module-bind 'txt=raw-loader'
 
-
+[b9 cf|内联使用]
+import txt from 'raw-loader!./file.txt';
+▉
 
 
 
@@ -218,9 +260,9 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 ### ECMAScript规范 [detail](pages/javascript/ecma.md)
 
 ```link
-[h5|数据类型] [类型转换](#pages/javascript/data-type?id=类型转换)
-  [title2|基本类型]：[String](#pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
-  [title2|对象类型]：类对象：Object [Array](#pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
+[h5|数据类型] [类型转换](/pages/javascript/data-type?id=类型转换)
+  [title2|基本类型]：[String](/pages/javascript/data-type?id=String)  Number  Boolean   null  undefined  Symbol
+  [title2|对象类型]：类对象：Object [Array](/pages/javascript/data-type?id=Array)  Function Map  Set  Date  RegExp  Error  实例对象：{} [] fn
 [h5|事件循环][DETAIL](#)
   回调地狱[Promise/then](/pages/javascript/es6?id=Promise/then)
   同一作用域自动异步[async/await](/pages/javascript/es6?id=async/await) 

@@ -195,7 +195,7 @@ function handleCommon(data, dataid) {
   }
 
   // 水平线
-  (data.match(/-+\n/g) || []).forEach((e) => {
+  (data.match(/-{3,}\n/g) || []).forEach((e) => {
     data = data.replace(e, '<div class="hr"></div>');
   });
 
@@ -272,7 +272,7 @@ function handleCommon(data, dataid) {
             // HTML块回填
             for (let i in mapHTML) { content = content.replace(i, mapHTML[i]) }
 
-            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div${contentStyle}>${content}</div></span>`            
+            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div class="box"${contentStyle}>${content}</div></span>`            
             data = data.replace(matchContent[0], ``); 
           }    
           data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
