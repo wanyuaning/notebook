@@ -474,6 +474,9 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2); padding: 5px 10px; 
   /* display: none; */
 }
+.ewan-tips-content .box .MOVE_BTN{
+  position: absolute; right: 10px; top: 5px; cursor: move;
+}
 
 
 .box{border:#ccc 1px solid; display: inline-block; padding: 0 5px;}

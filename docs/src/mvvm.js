@@ -35,7 +35,6 @@ function initComputed () {
 // ④模板编译
 function Compile (el, vm) {
   vm.$el = document.querySelector(el)
-  console.log(vm.$el);
   let fragment = document.createDocumentFragment()
   while (child = vm.$el.firstChild) {
     fragment.appendChild(child)

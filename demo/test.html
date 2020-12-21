@@ -4,11 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style type="text/css">
+    body{margin:0;}
+    #one{
+           width:50px;
+           height:50px;
+        background:rgb(255,0,0);
+           border: 1px solid transparent;
+           position:absolute;
+           left: 100px;
+           top: 50px;
+    }
+    
+</style>
 </head>
 <body>
   
+  <div id="one"></div>
   
-  <div style="background-color: #f00; width: 100px; height: 100px;" ></div>
 
   
   
@@ -16,5 +29,39 @@
 </body>
 </html>
 <script>
-function handleKeydown(e){ console.log(e.keyCode) }
+  var one = document.getElementById('one')
+  var left = 100
+  var topp = 50
+
+  function handleMove(offset){
+    console.log('offset', offset);
+    
+    one.style.left = left + offset.x + 'px'
+    one.style.top = topp + offset.y + 'px'
+  }
+
+var DRAG_EVENT_STATE = 0
+var MOUSE_DATA = {x: 0, y: 0}
+
+
+
+document.addEventListener('mousedown', function(e){
+  var e = e || window.event            // 兼容event事件  
+  MOUSE_DATA.x = e.clientX             // 获取鼠标坐标
+  MOUSE_DATA.y = e.clientY 
+  DRAG_EVENT_STATE = 1
+})
+document.addEventListener('mousemove', function(e){
+  if (!DRAG_EVENT_STATE) return
+  var offset = {x: 0, y: 0}
+  var e = e || window.event            // 兼容event事件  
+  var x = e.clientX, y = e.clientY     // 获取鼠标坐标
+  offset.x = x - MOUSE_DATA.x
+  offset.y = y - MOUSE_DATA.y
+  handleMove(offset)
+  
+})
+document.addEventListener('mouseup', function(e){
+  DRAG_EVENT_STATE = 0
+})     
 </script>

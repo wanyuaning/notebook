@@ -1,4 +1,21 @@
 let GLOBAL_HTML = ''
+Element.prototype.addClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) > -1) return this
+  className = (className + ' ' + cn).replace(/\s{2,}/g, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.delClass = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) < 0) return this
+  className = className.replace(cn, '').replace(/\s{2,}/g, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.hasClass = function (cn) {
+  return this.className.indexOf(cn) > -1
+}
 
 /**
  * 代码块管理
@@ -218,20 +235,24 @@ function handleCommon(data, dataid) {
   }
 
   /** 如果使用 ｜ 分隔的话会和class冲突
-   * [DETAIL/info01]    详情图标 提示 内容标识  ▉info01▉content▉
-   * [INFO cg/info02]   信息图标 提示 内容标识  ▉info02▉content▉
-   * [(cg)HELP>info03(width:100px;left:50px)]   (class)帮助图标 跳转 内容标识(content-stype)  [info03][content] 
+   * [DETAIL/info01]        详情图标 提示 内容标识  ▉info01▉content▉
+   * [INFO cg/info02]       信息图标 提示 内容标识  ▉info02▉content▉∵html∴
+   * [(cg)HELP>info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
+   * [INFO/info04]          代码保持               ▉info04▉content∵<h1>HTML保持</h1>∴content▉
+   * [DETAIL/info05(BASE)]  激活高亮               ▉info05▉content ▀激活代码(BASE)▀ content▉
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[([\w\s-]*)(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)(\/|\>)([^\]\()]+)(\(([^\]\(\)]+)\))?\]/.exec(data)) !== null) {
-    let cls  = matchInfoLink[1]
-    let tag  = matchInfoLink[2].toLowerCase()    
-    let type = matchInfoLink[3] 
-    let id   = matchInfoLink[4]
-    let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''
+  while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB|CONFIG|TARGET)(\/|\>)([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
+    let cls  = matchInfoLink[1]                // ([\w\s-]*)
+    let tag  = matchInfoLink[2]  // (DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)  
+    let type = matchInfoLink[3]                // (\/|\>)
+    let id   = matchInfoLink[4]                // ([^\]\()]+)
+    let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''   // (\{([^\]\(\)]+)\})?
+    let lightId = matchInfoLink[8] ? matchInfoLink[8] : ''                       // (\(([^\]]+)\))?
+    
     switch (type){
       case '>': // 跳转
-        data = data.replace(matchInfoLink[0], `<a class="icon-${tag} ${cls}"></a>`);
+        data = data.replace(matchInfoLink[0], `<a class="icon-${tag.toLowerCase()} ${cls}"></a>`);
         break;
       case '/': // 提示
           const matchContent = new RegExp(`▉${id}▉([^▉]*)▉`).exec(data)
@@ -245,6 +266,11 @@ function handleCommon(data, dataid) {
               mapHTML[name] = html
               match1 = match1.replace(matchHTML[0], name)
               countHTML++
+            }
+            // 
+            let matchLight
+            while ((matchLight = /▀([^▀]+)\(([^\)]+)\)▀/.exec(match1)) !== null) {
+              match1 = match1.replace(matchLight[0], `<span class="LIGHT LIGHT_${matchLight[2]}">${matchLight[1]}</span>`)
             }
 
             const lineArr = match1.split(/\n/)
@@ -272,10 +298,14 @@ function handleCommon(data, dataid) {
             // HTML块回填
             for (let i in mapHTML) { content = content.replace(i, mapHTML[i]) }
 
-            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div class="box"${contentStyle}>${content}</div></span>`            
+            const divClass = lightId ? 'box cc l12' : 'box'
+            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div class="${divClass}"${contentStyle}>${content}<button draggable="true" ondragstart="drag(event)" class="MOVE_BTN icon-move"></button></div></span>`            
             data = data.replace(matchContent[0], ``); 
-          }    
-          data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag} ${cls}" data-id="${id}"></span>`);
+          } 
+          
+          data = data.replace(matchInfoLink[0], `<span class="ewan-tips icon-${tag.toLowerCase()} ${cls}" data-id="${id}" data-light="${lightId}"></span>`)
+          
+          
           break;
       default:
         data = data.replace(matchInfoLink[0], '')
@@ -347,19 +377,19 @@ var HANDLER_MAP = {
 function codeDistributeEntry(hook, vm) {
   let hasPanels = false;
   hook.init(function() {
-    //console.log('-------1 init')
+    console.log('-------1 init')
   });
   hook.mounted(function(){ 
-    //console.log('-------2 mounted')
+    console.log('-------2 mounted')
   })
   hook.beforeEach(function (content) {
-    // 别名
+    console.log('-------3 beforeEach')
     content = content.replace(/\$SCENE/g, '/pages/solution/scene')
     
     return content;
   });
   hook.afterEach(function (html, next) {
-    //console.log('-------4 afterEach')
+    console.log('-------4 afterEach')
     /**
      * 识别 <pre v-pre data-lang="tree link"></pre>
      * 正则 /<pre v-pre data-lang="[\w| ?|\w?]+">[\s\S]*?<\/pre>?/
@@ -492,62 +522,74 @@ function codeDistributeEntry(hook, vm) {
     next(html);
   });
   hook.doneEach(function() {
-    
+    console.log('-------5 doneEach')
     const outHTMLContainer = document.createElement('div')
     outHTMLContainer.className = 'markdown-outer'    
     outHTMLContainer.innerHTML = GLOBAL_HTML
-    console.log('content:',GLOBAL_HTML);
     document.body.appendChild(outHTMLContainer)
 
+    initHTML()
     mvvm.$init()
   });
   hook.ready(function(){
-    const tipsMapId = {}      // 缓存tips内容元素
-    let hasTipsActive = false // 是否有激活的Tips 用于排除多余的Document点处理
-
-    const unboundForEach = Array.prototype.forEach
-    const forEach = Function.prototype.call.bind(unboundForEach)
-    forEach(document.querySelectorAll('.ewan-tips'), function (el) {
-      el.addEventListener('click', function (e) {
-        const id = e.currentTarget.getAttribute('data-id')
-        console.log(id);
-        if (tipsMapId[id]) {
-          tipsMapId[id].target.style.display = 'block' 
-        } else {
-          const x = e.pageX//clientX
-          const y = e.pageY//clientY
-          const tar = document.querySelector('#'+id)
-          tar.style.display = 'block'
-          tar.style.left = x + 'px'
-          tar.style.top = y + 'px'
-          tipsMapId[id] = {
-            target: tar,
-            x,
-            y
-          }
-        } 
-        hasTipsActive = true           
-      });
-    })
-    forEach(document.querySelectorAll('.ewan-search'), function (el) {
-      el.addEventListener('click', function (e) {console.log(e);
-        
-      });
-    })
-    document.addEventListener('click', function(e){
-      if (!hasTipsActive) return
-      const className = e.target.className + e.target.parentNode.className
-      if (!className.includes('tips')){
-        for (i in tipsMapId) {
-          tipsMapId[i].target.style.display = 'none'
-        }
-        hasTipsActive = false
-      }
-    })
+    console.log('-------6 ready')
   })
 }
+
+function initHTML(){
+  const tipsMapId = {}      // 缓存tips内容元素
+  let hasTipsActive = false // 是否有激活的Tips 用于排除多余的Document点处理
+
+  const unboundForEach = Array.prototype.forEach
+  const forEach = Function.prototype.call.bind(unboundForEach)
+  forEach(document.querySelectorAll('.ewan-tips'), function (el) {
+    el.addEventListener('click', function (e) {
+      const id = e.currentTarget.getAttribute('data-id')
+      const light = e.currentTarget.getAttribute('data-light')
+      if (tipsMapId[id]) {
+        tipsMapId[id].target.style.display = 'block' 
+      } else {
+        const x = e.pageX//clientX
+        const y = e.pageY//clientY
+        const tar = document.querySelector('#'+id)
+        tar.style.display = 'block'
+        tar.style.left = x + 'px'
+        tar.style.top = y + 'px'
+        tipsMapId[id] = {
+          target: tar,
+          x,
+          y
+        }
+      } 
+      if (light) {
+        forEach(tipsMapId[id].target.querySelectorAll('.LIGHT'), function(e){
+          e.className.includes('LIGHT_'+light) ? e.addClass('b ci') : e.delClass('b ci')
+        })
+      }
+      hasTipsActive = true           
+    });
+  })
+  forEach(document.querySelectorAll('.ewan-search'), function (el) {
+    el.addEventListener('click', function (e) {console.log(e);
+      
+    });
+  })
+  document.addEventListener('click', function(e){
+    if (!hasTipsActive) return
+    const className = e.target.className + e.target.parentNode.className
+    className.includes('MOVE_BTN') && (className += 'tips')
+    if (!className.includes('tips')){
+      for (i in tipsMapId) {
+        tipsMapId[i].target.style.display = 'none'
+      }
+      hasTipsActive = false
+    }
+  })
+}
+
+
   
-if (window) {
+;if (window) {
   window.$docsify = window.$docsify || {};
   // Init plugin
   window.$docsify.plugins = [].concat(

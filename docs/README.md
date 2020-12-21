@@ -1,7 +1,56 @@
 
 ```
 
-[h3|webpack]
+[h3|webpack] [DETAIL/WEBPACK_ABOUT]
+
+|demo> yarn init -y
+|demo> yarn add webpack webpack-cli -D
+
+[src[index.js, a.js]]
+[cf bc|src/index.js]
+  console.log('hello webpack')  
+  let str = require('./a.js')
+  console.log(str)
+  
+[cf bc|src/a.js]
+  module.exports = 'ewan'
+  
+  
+[h5|零配置] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT]
+|demo> npx webpack [DETAIL/WEBPACK_RUN]
+/src/index.js > /dist/main.js
+
+[h5|配置 去混淆模式] [CONFIG/WEBPACK_CONFIG(MODE)]
+{
+  mode: 'development'
+}
+
+[h5|配置 入口&出口] [CONFIG/WEBPACK_CONFIG(BASE)]
+{
+  entry: './src/index.js', 
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'), 
+  }
+}
+
+[h5|配置 资源类型支持]
+{
+  module: {
+    rules: [
+      .text [CONFIG/WEBPACK_CONFIG(LOADER01)] [TARGET/WEBPACK_LOADER_RAW]
+    ]
+  }
+}  
+
+[h5|配置 代码优化]
+{
+  plugins: [
+    为入口生成HTML文件 [CONFIG/WEBPACK_CONFIG(PLUGIN_HTML)] [TARGET/WEBPACK_PLUGIN_HTML] 
+  ]
+}
+
+▉WEBPACK_ABOUT▉
 可以做的事情：
 代码转换 文件优化 代码分割 模块合并 自动刷新 代码校验 自动发布
 
@@ -13,23 +62,15 @@ webpack中的Tapable
 掌握webpack流程，手写webpack
 手写webpack中常见的loader
 手写webpack中常见的plugin
-
-|demo> yarn init -y
-|demo> yarn add webpack webpack-cli -D
-
-[src[index.js, a.js]]
-src/index.js
-  console.log('hello webpack')
-  
-  let str = require('./a.js')
-  console.log(str)
-  
-src/a.js
-  module.exports = 'ewan'
-  
-  
-可以零配置
-默认:{
+▉
+▉WEBPACK_RUN▉
+启动方式：
+1 $ npx webpack
+2 $ node node_modules/webpack/bin/webpack.js
+3 "scripts": {"build": "webpack"}  $ npm run build
+▉
+▉WEBPACK_CONFIG_DEFAULT▉
+{
   mode: 'production'
   entry: ./src/index.js
   output: {
@@ -37,43 +78,39 @@ src/a.js
     path: ./dist
   }
 }
-|demo> npx webpack
-/dist/main.js
-
-、
-
-手动配置
+▉
+▉WEBPACK_CONFIG▉
 /webpack.configure.js
+
+const ▀HtmlWebpackPlugin(PLUGIN_HTML)▀ = require('html-webpack-plugin')
+let ▀path(BASE)▀ = require('path')
+
+module.exports = {
+  // 环境
+  ▀mode: 'development'(MODE)▀, // 值：production/development/none
   
-  let path = require('path')
-  module.exports = {
-    // 环境
-    mode: 'development', // 值：production/development/none
-    
-    // 入口
-    entry: './src/index.js',                           // 相对路径
-    
-    // 出口
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),           // 绝对路径
-    }
+  // 入口
+  ▀entry: './src/index.js'(BASE)▀,                           // 相对路径
+  
+  // 出口
+  ▀output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),           // 绝对路径
+  }(BASE)▀,
 
-    // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
-    module: {
-      rules: [
-        { test: /\.txt$/, use: 'raw-loader' } [DETAIL/WEBPACK_LOADER_RAW]
-      ]
-    }
-
-    // 插件任务如：打包优化，资源管理，注入环境变量
-    plugins: [
-      new HtmlWebpackPlugin({template: './src/index.html'}) [DETAIL/WEBPACK_PLUGIN_HTML]
+  // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
+  module: {
+    rules: [
+      ▀{ test: /\.txt$/, use: 'raw-loader' }(LOADER01)▀ 
     ]
   }
------
 
-
+  // 插件任务如：打包优化，资源管理，注入环境变量
+  plugins: [
+    ▀new HtmlWebpackPlugin({template: './src/index.html'})(PLUGIN_HTML)▀ 
+  ]
+}
+▉
 ▉WEBPACK_PLUGIN_HTML▉
 为应用程序生成一个 HTML 文件，并自动注入所有生成的 bundle
 -----
@@ -126,15 +163,11 @@ import txt from 'raw-loader!./file.txt';
 目录：  [MULU]
 样式类：[s12 c0 b0 h1 b reverse inline|内容] 
 提示或跳转图标
-[DETAIL/info01]  详情图标 提示 内容标识  ▉info01▉content▉
-[DETAILB/info01] 详情图标 提示 内容标识  ▉info01▉content▉
-[INFO/info02]    信息图标 提示 内容标识  ▉info02▉content▉
-[INFOB/info02]   信息图标 提示 内容标识  ▉info02▉content▉
-[HELP>info03]    帮助图标 跳转 内容标识  ▉info03▉content▉
-[HELPB>info03]   帮助图标 跳转 内容标识  ▉info03▉content▉
-[cgHELP>info03(width:100px;left:50px)]   class帮助图标 跳转 内容标识(content-stype)  ▉info03▉content▉
-
-内容插入HTML块: ∵html∴
+[DETAIL/info01]        详情图标 提示 内容标识  ▉info01▉content▉
+[INFO cg/info02]       信息图标 提示 内容标识  ▉info02▉content▉∵html∴
+[(cg)HELP>info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
+[INFO/info04]          代码保持               ▉info04▉content∵<h1>HTML保持</h1>∴content▉
+[DETAIL/info05(BASE)]  激活高亮               ▉info05▉content ▀激活代码(BASE)▀ content▉
 
 内容包裹 
 [bg ciBOX content] 带CLASS

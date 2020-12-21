@@ -227,7 +227,8 @@ function currDevice(){
 ```
 
 #### Element
-```js
+```
+扩展方法 [DETAIL/Element_Extend]
 {
   accessKey: '',             //设置或返回元素的快捷键。
   attributes: '',            // 返回元素属性的集合。
@@ -300,14 +301,77 @@ function currDevice(){
   toggle(),                  //(<class>)如果类不存在就添加它存在就移除它
   toString(),                //() 把元素转换为字符串。
 }
+
+▉Element_Extend▉
+Element.prototype.[b ci|addClass] = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) > -1) return this
+  className = (className + ' ' + cn).replace(/\s{2,}/g, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.[b ci|delClass] = function (cn) {
+  let className = this.className
+  if (className.indexOf(cn) < 0) return this
+  className = className.replace(cn, '').replace(/\s{2,}/g, ' ')
+  this.className = className
+  return this
+}
+Element.prototype.[b ci|hasClass] = function (cn) {
+  return this.className.indexOf(cn) > -1
+}
+▉
 ```
 
 #### Event
+事件流
 ```js
 {
   screenX pageX layerX clientX
   
   type: '',                  //事件的名称如mouseover 字符串
   target: {}                 // Element
+
+  altKey: false
+  bubbles: true
+  button: 0
+  buttons: 1
+  cancelBubble: false
+  cancelable: true
+  clientX: 1012
+  clientY: 365
+  composed: true
+  ctrlKey: false
+  currentTarget: null
+  defaultPrevented: false
+  detail: 1
+  eventPhase: 0
+  fromElement: null
+  isTrusted: true
+  layerX: 577
+  layerY: 475
+  metaKey: false
+  movementX: 0
+  movementY: 0
+  offsetX: 577
+  offsetY: 475
+  pageX: 1012
+  pageY: 565
+  path: (10) [code#CODE_CODEBLOCK_0.lang-, pre, article#main.markdown-section, section.content, main, div#mvvm, body.ready.sticky, html, document, Window]
+  relatedTarget: null
+  returnValue: true
+  screenX: 1076
+  screenY: 445
+  shiftKey: false
+  sourceCapabilities: InputDeviceCapabilities {firesTouchEvents: false}
+  srcElement: code#CODE_CODEBLOCK_0.lang-
+  target: code#CODE_CODEBLOCK_0.lang-
+  timeStamp: 7610.935000004247
+  toElement: code#CODE_CODEBLOCK_0.lang-
+  type: "mousedown"
+  view: Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+  which: 1
+  x: 1012
+  y: 365
 }
 ```
