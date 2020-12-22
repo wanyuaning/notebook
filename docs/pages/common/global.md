@@ -2,11 +2,19 @@
 
 ### qiankun
 
+
+
 ```
-[h4|rollup ------------------------------------- webpack]
-偏向应用于js库                                                           偏向应用于前端工程
-Install[HELP/rollup-webpack-02]                                                                 Install[HELP/rollup-webpack-03]
-mkdir rollup-demo & cd rollupdemo
+
+▃
+▅
+▇12
+[h4|rollup][HELP/rollup-webpack-02] 
+偏向应用于js库                                                              
+> npm i [b ci|rollup] -g 
+> [b ci|rollup] -v      
+
+mkdir demo & cd rollupdemo
 mkdir src & cd src
 touch main.js
   import foo from './foo.js';
@@ -16,7 +24,43 @@ touch main.js
 touch foo.js
   export default 'hello rollup!'
 
-|rollup-demo> [b c0|rollup] src/main.js [cg|-o lib/bundle.js] [ch|-f cjs] [HELP/rollup-webpack-01]
+|demo> [b c0|rollup] src/main.js [cg|-o lib/bundle.js] [ch|-f cjs] [HELP/rollup-webpack-01]
+▇
+▇12
+[h4|webpack][DETAIL&#/pages/common/webpack.md]
+偏向应用于前端工程
+demo> yarn init -y
+demo> yarn add [b ci|webpack webpack-cli] -D
+
+[cf b b9|/webpack.config.js]
+const [b cg|HtmlWebpackPlugin] = require('html-webpack-plugin')
+const path = require('path')
+module.exports = {
+  [b ch|mode]: 'development', // 值：production/development/none
+  [b ch|entry]: './src/index.js',                           // 相对路径
+  [b ch|output]: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),           // 绝对路径
+  },
+  [b ch|module]: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  }
+  [b ch|plugins]: [
+    new [b cg|HtmlWebpackPlugin]({template: './src/index.html'})
+  ]
+}
+▇
+▅
+▃
+
+
+
+
+
+
+
 
 ▉rollup-webpack-01▉
 [cg|-o表示输出bundle.js文件] [ch|-f cjs表示使用commonjs标准输出]
@@ -30,27 +74,54 @@ rollup -v
 ▉
 ▉rollup-webpack-03▉
 [前端工程搭建]($SCENE?id=前端工程搭建)
+
+demo> yarn init -y
+demo> yarn add webpack webpack-cli -D
 ▉
 
-```
-### linux ----------------------------------------- windows
+
+[h4|linux ----------------------------------------- windows]
 mkdir
 touch index.js                                      touch index.js(需npm i touch-cli -g)        
 
-### npm ------------------------------------------- yarn   
-npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
-install node                                        npm i yarn -g                                     安装
-npm -v                                              yarn -v                                           版本
-npm init	                                          yarn init	                                        初始化某个项目
-npm install/link	                                  yarn install/link	                                默认的安装依赖操作
-npm install xx —save	                              yarn add xx	                                      安装某个依赖，并且默认保存到package.
-npm uninstall taco —save	                          yarn remove taco	                                移除某个依赖项目
-npm install xx --save-dev                           yarn add xx --dev	                                安装某个开发时依赖项目
-npm update taco —save	                              yarn upgrade taco	                                更新某个依赖项目
-npm install taco --global	                          yarn global add taco	                            安装某个全局依赖项目
-npm publish/login/logout	                          yarn publish/login/logout	                        发布/登录/登出，一系列NPM Registry操作
-npm run/test	                                      yarn run/test	                                    运行某个命令
+[h4|npm][h4|yarn] 
+▃
+▅
+▇10 
+   
+npm config set registry https://registry.npm.taobao.org  
+添加镜像  npm config delete registry
+install node                                        
+npm -v                                             
+npm init	                                          
+npm install/link	                                  
+npm install xx —save	                              
+npm uninstall taco —save	                          
+npm install xx --save-dev                           
+npm update taco —save	                             
+npm install taco --global	                          
+npm publish/login/logout	                          
+npm run/test	                                      
 
+
+▇
+▇14
+  
+npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
+npm i yarn -g                                     安装
+yarn -v                                           版本
+yarn init	                                        初始化某个项目
+yarn install/link	                                默认的安装依赖操作
+yarn add xx	                                      安装某个依赖，并且默认保存到package.
+yarn remove taco	                                移除某个依赖项目
+yarn add xx --dev	                                安装某个开发时依赖项目
+yarn upgrade taco	                                更新某个依赖项目
+yarn global add taco	                            安装某个全局依赖项目
+yarn publish/login/logout	                        发布/登录/登出，一系列NPM Registry操作
+yarn run/test	                                    运行某个命令
+▇
+▅
+▃
 npm view vue            更丰富 npm info vue        https://www.npmjs.com/
 npm view vue version    服务器上包的最新的版本信息   https://www.npmjs.com/
 npm view vue versions   服务器上包的所有的版本信息   https://www.npmjs.com/
@@ -58,9 +129,10 @@ npm ls vue              本地安装包版本信息          project/
 npm ls vue -g           本地全局安装的pkg版本       全局
 
 
-### nginx 
+
+[h4|nginx]
 [detail3](/pages/common/nginx.md)
-```
+
 windows: 
     安装：http://nginx.org/en/download.html   [b5 cf| 配置 ]
     [b-green cf| 启动 ] [green|c:\nginx\ nginx.exe]  [cc|或 c:\nginx\ start nginx]
@@ -71,8 +143,7 @@ mac:
     [b-green cf| 启动 ] [green|nginx]    
     [b-yellow cf| 重启 ] [yellow|nginx -s reload]  
     [b-red cf| 停止 ] [red|nginx -s stop]
-```
-```
+
 [CLASS s12 l12]
 [b5 cf|Windows c:\nginx\conf\nginx.conf] [b5 cf|Mac /usr/local/etc/nginx/nginx.conf][DETAIL](/pages/common/nginx?id=nginx.conf)
 http {
@@ -92,15 +163,15 @@ http {
 验证nginx.conf配置是否正确：
   nginx -t                     默认/conf/nginx.conf
   nginx -tc /conf/aliase.conf  自定义名称
-```
 
-### 文档
+
+[h4|文档]
 >$ sudo npm i docsify-cli -g<br>
 >$ docsify init ./docs<br>
 >$ docsify serve docs
 
 
-### express(Web Back-End/node/express)
+[h4|express(Web Back-End/node/express)]
 >$ sudo npm install express-generator -g<br>
 >$ express --version<br>
 >$ express projectname<br>
@@ -109,16 +180,15 @@ http {
 >$ sudo npm i -g nodemon cross-env  - package.json/scripts/"dev":"cross-env NODE_ENV=dev nodemon node ./bin/www"  - npm run dev
 
 
-### cross-env
+[h4|cross-env]
 
-### nodemon
+[h4|nodemon]
 通过监视启动文件来监视node.js应用程序中的任何更改并自动重启服务
-```全局
+全局
 $ sudo npm install -g nodemon
 $ cd 项目
 $ nodemon bin/www.js
-```
-```本地
+本地
 $ npm install --save-dev nodemon
 {
 "scripts": {
@@ -126,27 +196,28 @@ $ npm install --save-dev nodemon
 }
 }
 $ npm run dev
-```
 
 
-### nvm 
+[h4|nvm]
 nodejs的版本管理工具
 windows: https://github.com/coreybutler/nvm-windows/releases (nvm-setup.zip)下载安装
 nvm install v8.16.0  
 nvm use v8.16.0  
 nvm list    
 
-### nrm
+
+[h4|nrm]
 + sudo npm i nrm -g
 + nrm ls // 代理源列表
 + nrm use taobao 使用taobao源
 
-### http-server
+[h4|http-server]
 - sudo npm i http-server -g
 - 项目目录 $ hs   
 - 访问http://127.0.0.1:8080
 
-### curl
+
+[h4|curl]
 客户端Web服务请求工具, mac机自带，curl --version
  * -d 参数用于发送POST请求时带参数据体 *
 + $ curl -d 'login=ewan＆password=123' -X POST https://google.com/login
@@ -158,13 +229,14 @@ nvm list
  * -X 参数指定 HTTP 请求的方法 *
 + $ curl -X POST https://google.com/login
 
-### parcel-bundler
+
+[h4|parcel-bundler]
 极速零配置Web应用打包工具
 + $ sudo npm i -g parcel-bundler
 + 项目目录 $parcel index.html
 
 
-### VScode
+[h4|VScode]
 + auto close tag
 + auto rename tag
 + path-alias
@@ -175,7 +247,7 @@ nvm list
 + npm dependency links
 
 
-
+```
 
 
 

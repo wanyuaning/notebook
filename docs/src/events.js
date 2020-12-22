@@ -1,50 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style type="text/css">
-    body{margin:0;}
-    #one{
-           width:500px;
-           height:300px;
-        background:rgb(255,0,0);
-           border: 1px solid transparent;
-           position:absolute;
-           left: 100px;
-           top: 50px;
-    }
-    #two{
-           width:30px;
-           height:30px;
-        background:#0f0;
-           border: 1px solid transparent;
-           position:absolute;
-           left: 100px;
-           top: 50px;
-    }
-</style>
-</head>
-<body>
-  
-  <div id="one">
-    <div id="two"></div>
-  </div>
-  
-
-  
-  
-  
-</body>
-</html>
-<script>
-
-
 /**
  * 注册事件过程
  */
-function EvertCycle(){
+function EventCycle(){
   this.DRAGER_MAP = {}
   this.EL_COUNT = 0
 
@@ -108,17 +65,20 @@ function EvertCycle(){
     handleEnd.call(this, offset)
   }) 
 }  
-EvertCycle.prototype = {
-  constructor: EvertCycle,
+EventCycle.prototype = {
+  constructor: EventCycle,
   /**
    * @type   事件类型
    * @el     事件元素
    * @target 响应目标
    */
   register: function(type, el, target){
-    var style = window.getComputedStyle(el, null)
+    if (el.getAttribute('data-ev-iden')) return
+    var styleTarget = target || el    
+    var style = window.getComputedStyle(styleTarget, null)
     var x = parseInt(style.left) || 0
     var y = parseInt(style.top) || 0
+    el.style.cursor = 'move'
     var dragItem = {
       el,
       target: target || null,
@@ -134,16 +94,4 @@ EvertCycle.prototype = {
   end: function(){}  
 }
 
-
-var one = document.getElementById('one')
-var two = document.getElementById('two')
-
-var ec = new EvertCycle()
-ec.register('DRAG', two, one)
-
-
-
-
-
-    
-</script>
+//module.exports = new EventCycle()

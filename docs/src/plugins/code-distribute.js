@@ -164,6 +164,23 @@ function handleBlock(data) {
  */
 function handleCommon(data, dataid) {
   /**
+   * 布局
+   * ▃▅▇5 LAYOUT CELL TOTAL 24 cell content▇▇12cell content▇▅▃
+   */
+  let matchLayout
+  while ((matchLayout = /▃([^▃]+)▃/.exec(data)) !== null) {
+    let matchTR
+    while ((matchTR = /▅([^▅]+)▅/.exec(matchLayout[1])) !== null) {
+      let matchTD
+      while ((matchTD = /▇(\d{1,2})\n([^▇]+)▇/.exec(matchTR[1])) !== null) {
+        matchTR[1] = matchTR[1].replace(matchTD[0], `<div class="col col-${matchTD[1]}">${matchTD[2]}</div>`)
+      }
+      matchLayout[1] = matchLayout[1].replace(matchTR[0], `<div class="row">${matchTR[1]}</div>`)
+    }
+    data = data.replace(matchLayout[0], `<div class="layout">${matchLayout[1]}</div>`)
+  }
+
+  /**
    * HTML显示
    */
   let matchCodeHTML;
@@ -237,22 +254,23 @@ function handleCommon(data, dataid) {
   /** 如果使用 ｜ 分隔的话会和class冲突
    * [DETAIL/info01]        详情图标 提示 内容标识  ▉info01▉content▉
    * [INFO cg/info02]       信息图标 提示 内容标识  ▉info02▉content▉∵html∴
-   * [(cg)HELP>info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
+   * [(cg)HELP&info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
    * [INFO/info04]          代码保持               ▉info04▉content∵<h1>HTML保持</h1>∴content▉
    * [DETAIL/info05(BASE)]  激活高亮               ▉info05▉content ▀激活代码(BASE)▀ content▉
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB|CONFIG|TARGET)(\/|\>)([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
+  while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB|CONFIG|TARGET)([\/\&])([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
     let cls  = matchInfoLink[1]                // ([\w\s-]*)
     let tag  = matchInfoLink[2]  // (DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)  
     let type = matchInfoLink[3]                // (\/|\>)
     let id   = matchInfoLink[4]                // ([^\]\()]+)
     let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''   // (\{([^\]\(\)]+)\})?
     let lightId = matchInfoLink[8] ? matchInfoLink[8] : ''                       // (\(([^\]]+)\))?
+    console.log('matchInfoLink',matchInfoLink[0]);
     
     switch (type){
-      case '>': // 跳转
-        data = data.replace(matchInfoLink[0], `<a class="icon-${tag.toLowerCase()} ${cls}"></a>`);
+      case '&': // 跳转
+        data = data.replace(matchInfoLink[0], `<a href="${id}" class="icon-${tag.toLowerCase()} ${cls}"></a>`);
         break;
       case '/': // 提示
           const matchContent = new RegExp(`▉${id}▉([^▉]*)▉`).exec(data)
@@ -299,7 +317,9 @@ function handleCommon(data, dataid) {
             for (let i in mapHTML) { content = content.replace(i, mapHTML[i]) }
 
             const divClass = lightId ? 'box cc l12' : 'box'
-            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div class="${divClass}"${contentStyle}>${content}<button draggable="true" ondragstart="drag(event)" class="MOVE_BTN icon-move"></button></div></span>`            
+
+            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div id="${id}_div" class="${divClass}"${contentStyle}>${content}<button data-event-cycle="${id}_div" class="MOVE_BTN icon-move"></button></div></span>`            
+            
             data = data.replace(matchContent[0], ``); 
           } 
           
@@ -535,7 +555,7 @@ function codeDistributeEntry(hook, vm) {
     console.log('-------6 ready')
   })
 }
-
+const EC = new EventCycle()
 function initHTML(){
   const tipsMapId = {}      // 缓存tips内容元素
   let hasTipsActive = false // 是否有激活的Tips 用于排除多余的Document点处理
@@ -584,6 +604,15 @@ function initHTML(){
       }
       hasTipsActive = false
     }
+  })
+
+  // 为tips添加拖动事件
+  const dragTips = document.querySelectorAll('button[data-event-cycle]')
+  forEach(dragTips, e => {
+    const targetId = e.getAttribute('data-event-cycle')
+    let target = null
+    targetId && (target = document.querySelector('#'+targetId))
+    EC.register('DRAG', e, target)
   })
 }
 

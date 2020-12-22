@@ -8,9 +8,13 @@
 }
 
 body {
-  font-family: 'Consolas', Arial, sans-serif;
+  font-family: 'Consolas', sans-serif;
   font-size: 12.8px;
 }
+.font-ar{
+  font-family: Arial
+}
+
 
 code{ font-size: 14px; font-family: 'Consolas';}
 
@@ -170,7 +174,7 @@ pre.none:after{ display: none}
 .docsify-tabs__tab~.docsify-tabs__tab{outline:none;} /* 去除蓝框 */
 .docsify-tabs--classic .docsify-tabs__tab:first-of-type {outline:none;}
 
-.col{ background: #f6f6f6; padding: 5px; border: #fff 1px solid; text-align: center}
+/* .col{ background: #f6f6f6; padding: 5px; border: #fff 1px solid; text-align: center} */
 
 
 .class1 .col,
@@ -475,7 +479,7 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
   /* display: none; */
 }
 .ewan-tips-content .box .MOVE_BTN{
-  position: absolute; right: 10px; top: 5px; cursor: move;
+  position: absolute; right: 10px; top: 5px; 
 }
 
 
@@ -520,3 +524,34 @@ pre[data-lang~=sitemap] code .button{color: #fff; background:linear-gradient(#cc
 .markdown-outer tr {
   border-top: 1px solid #ccc
 }
+
+/*布局*/
+.layout{ border:#f00 0px solid}
+.row{ display: flex; }
+.row:after, .row:before { display: table; content: "";}
+.row:after { clear: both; }
+[class*=col-] { float: right; box-sizing: border-box; padding: 0 5px; }
+.col-1{ width: 4.166666%;}
+.col-2{ width: 8.333333%;}
+.col-3{ width: 12.5%;}
+.col-4{ width: 16.66667%;}
+.col-5{ width: 20.833333%}
+.col-6{ width: 25%}
+.col-7{ width: 29.166666%}
+.col-8{ width: 33.333333%;}
+.col-9{ width: 37.5%}
+.col-10{ width: 41.666666%}
+.col-11{ width: 45.833333%}
+.col-12{ width: 50%;}
+.col-13{ width: 54.166666%;}
+.col-14{ width: 58.333333%;}
+.col-15{ width: 62.5%;}
+.col-16{ width: 66.666666%;}
+.col-17{ width: 70.833333%;}
+.col-18{ width: 75%;}
+.col-19{ width: 79.166666%;}
+.col-20{ width: 83.333333%;}
+.col-21{ width: 87.5%;}
+.col-22{ width: 91.666666%;}
+.col-23{ width: 95.833333%;}
+.col-24{ width: 100%;}
