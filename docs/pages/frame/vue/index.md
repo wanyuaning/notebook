@@ -4,6 +4,31 @@
 
 # 场景
 ```
+Vue中使用cdn加载资源
+1. 在index.html中，添加CDN资源
+  <head><script src="https://cdn.bootcdn.net/ajax/libs/vue-i18n/8.22.1/vue-i18n.common.min.js"></script></head>
+2. 添加配置
+  module.exports = {
+    entry: {app: './src/main.js'},
+    externals:{
+      [cl b|'vue-i18n':'VueI18n'] // vue-i18n 要引入的资源的名字  VueI18n 该模块提供给外部引用的名字
+    }
+  }
+  
+  如果vue-cli3+ /vue.config.js
+  module.exports = {
+    configureWebpack: {
+        externals: {
+            'vue-i18n':'VueI18n'
+        }
+    }
+  }
+3. 去掉原有的引用: import VueI18n from 'vue-i18n'
+4. 去掉原有的使用: Vue.use(VueI18n)
+
+
+
+
 全局导航勾子里访问 $store
   // 或 import store from '@/store/store'
   router.beforeEach((to, from, next) => {
