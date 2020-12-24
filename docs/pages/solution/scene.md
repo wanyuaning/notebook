@@ -1,43 +1,44 @@
 
 
+
+
+
+
+
+### 分页
 ```
-[CLASS none]
-[MULU]
-
-
-
-[h3 cg|分页]
 [HTML<img src="assets/images/fa-page.jpg">]
+```
 
-[h3 cg|Enter提交表单]
+
+### Enter提交表单
+```
 <input type="text" onchange="console.log(this.value);" />
 <input type="text" onkeydown="handleKeydown(event)" />
 function handleKeydown(e){ console.log(e.keyCode) }
-
-# 重复字符串
-'&nbsp;'.repeat(space[0].length)
+```
 
 
-[h3 ch|用户账户体系]
-
+### 用户账户体系
+```
 特性：纯js 无依赖
 要求：通用性 兼容性 可靠性 封装性
 架构：
     搭建es6+工程环境：webpack babel  
     模块：common 登录 注册 账号设置 密码找回
 
-
-
-
-[h3 ci|场景]
+[s14 b ci|场景]
 MPA
 SPA
 Portal
 ### 身份验证
 chrome 身份验证器 插件
 身份验证器用以在浏览器中生成二步认证代码
+```
 
-[h3 cj|微前端架构]
+
+### 微前端架构
+```
 mkdir qiankun-platform & cd qiankun-platform
 yarn add qiankun (无需如npm init)
 mkdir main & cd main
@@ -141,12 +142,17 @@ CONF_THEME = {
 # 人机验证
 暴力破解密码  频繁操作导致服务器压力崩溃的恶意攻击
 数字、字母、中文的组合 缺点：用户需要在鼠标-键盘、中英文之间切换，不具备任何趣味性
+```
 
 
-[h3|开发一个NPM插件]
+### 开发一个NPM插件
+```
 1111111111111111111111111
+```
 
-[h3|前端工程搭建]
+
+### 前端工程搭建
+```
 |Global> npm install -g [b cg|babel-cli] & babel --version
 |es6-project> npm init -y 
 |es6-project> npm install --save-dev [b cg|babel-preset-es2015 babel-cli]
@@ -158,10 +164,13 @@ CONF_THEME = {
 
 |es6-project> babel src/index.js -o dist/index.js  或  npm run build [HELP/es6-project-01]
 浏览 /index.html
+```
 
 
+### 前端工程搭建-Babel7+
+```
+https://www.babeljs.cn/docs/usage
 
-[h3|前端工程搭建 Babel7+] https://www.babeljs.cn/docs/usage 
 |es6-babel7> npm init -y
 |es6-babel7> npm install --save-dev [b ch|@babel/core @babel/cli]
 

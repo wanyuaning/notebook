@@ -172,7 +172,7 @@ function handleCommon(data, dataid) {
     let matchTR
     while ((matchTR = /▅([^▅]+)▅/.exec(matchLayout[1])) !== null) {
       let matchTD
-      while ((matchTD = /▇(\d{1,2})\n([^▇]+)▇/.exec(matchTR[1])) !== null) {
+      while ((matchTD = /▇(\d{1,2})\s*\n([^▇]+)▇/.exec(matchTR[1])) !== null) {
         matchTR[1] = matchTR[1].replace(matchTD[0], `<div class="col col-${matchTD[1]}">${matchTD[2]}</div>`)
       }
       matchLayout[1] = matchLayout[1].replace(matchTR[0], `<div class="row">${matchTR[1]}</div>`)
@@ -257,6 +257,7 @@ function handleCommon(data, dataid) {
    * [(cg)HELP&info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
    * [INFO/info04]          代码保持               ▉info04▉content∵<h1>HTML保持</h1>∴content▉
    * [DETAIL/info05(BASE)]  激活高亮               ▉info05▉content ▀激活代码(BASE)▀ content▉
+   * [DETAIL/info06]        可移动层               ▉-info06▉content▉
    */
   let matchInfoLink;
   while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB|CONFIG|TARGET)([\/\&])([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
@@ -266,7 +267,6 @@ function handleCommon(data, dataid) {
     let id   = matchInfoLink[4]                // ([^\]\()]+)
     let contentStyle = matchInfoLink[6] ? ' style="'+matchInfoLink[6]+'"' : ''   // (\{([^\]\(\)]+)\})?
     let lightId = matchInfoLink[8] ? matchInfoLink[8] : ''                       // (\(([^\]]+)\))?
-    console.log('matchInfoLink',matchInfoLink[0]);
     
     switch (type){
       case '&': // 跳转
@@ -317,8 +317,11 @@ function handleCommon(data, dataid) {
             for (let i in mapHTML) { content = content.replace(i, mapHTML[i]) }
 
             const divClass = lightId ? 'box cc l12' : 'box'
-
-            GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div id="${id}_div" class="${divClass}"${contentStyle}>${content}<button data-event-cycle="${id}_div" class="MOVE_BTN icon-move"></button></div></span>`            
+            if (id[0]==='-') {
+              GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div id="${id}_div" class="${divClass}"${contentStyle}>${content}<button data-event-cycle="${id}_div" class="MOVE_BTN icon-move"></button></div></span>`  
+            } else {
+              GLOBAL_HTML += `<span id="${id}" class="ewan-tips-content"><div class="${divClass}"${contentStyle}>${content}</div></span>`  
+            }       
             
             data = data.replace(matchContent[0], ``); 
           } 
@@ -596,7 +599,7 @@ function initHTML(){
   })
   document.addEventListener('click', function(e){
     if (!hasTipsActive) return
-    const className = e.target.className + e.target.parentNode.className
+    let className = e.target.className + e.target.parentNode.className
     className.includes('MOVE_BTN') && (className += 'tips')
     if (!className.includes('tips')){
       for (i in tipsMapId) {
@@ -610,9 +613,10 @@ function initHTML(){
   const dragTips = document.querySelectorAll('button[data-event-cycle]')
   forEach(dragTips, e => {
     const targetId = e.getAttribute('data-event-cycle')
-    let target = null
-    targetId && (target = document.querySelector('#'+targetId))
-    EC.register('DRAG', e, target)
+    if(targetId && targetId[0]==='-') {
+      let target = document.querySelector('#'+targetId)
+      EC.register('DRAG', e, target)
+    }
   })
 }
 

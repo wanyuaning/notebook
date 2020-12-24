@@ -1,3 +1,57 @@
+```
+
+npm install vue-i18n
+
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)  // 引用：this.$i18n.locale 
+
+// 引入语言文件[DETAIL/vue_i18n_lang]
+const i18n = new VueI18n({
+ locale: 'zh', // 定义默认语言为中文
+ messages: {
+    'zh': require('@/assets/languages/zh.json'),
+    'en': require('@/assets/languages/en.json')
+  }
+});
+
+
+
+
+// 注入到vue实例中
+new Vue({
+   el: '#app',
+   i18n
+}); 
+
+// 模板渲染
+HTML: {{$t('common.home')}}
+JS: $t('common.home')
+
+// 语言切换
+<button @click="Ch">中文</button>
+<button @click="En">English</button>
+<p>{{$t('common.home')}}</p>
+methods: {
+  Ch(){
+    this.$i18n.locale = 'zh'
+  },
+  En(){
+    this.$i18n.locale = 'en'
+  }
+}
+
+
+▉vue_i18n_lang▉
+语言文件.json
+{
+  "common": {
+    "home": "首页"
+  },
+  "name": "名字"
+}
+▉
+
+```
 
 
 ### qiankun
@@ -5,6 +59,20 @@
 
 
 ```
+▃
+▅
+▇12
+[h4|Linux][DETAIL&#/pages/system/linux.md]
+mkdir
+touch index.js                                        
+▇
+▇12
+[h4|Windows][DETAIL&#/pages/system/windows.md]
+/
+touch index.js(需npm i touch-cli -g)  
+▇
+▅
+▃
 
 ▃
 ▅
@@ -55,13 +123,6 @@ module.exports = {
 ▅
 ▃
 
-
-
-
-
-
-
-
 ▉rollup-webpack-01▉
 [cg|-o表示输出bundle.js文件] [ch|-f cjs表示使用commonjs标准输出]
 ▉
@@ -72,53 +133,41 @@ rollup -v
 项目打包及更复杂功能：https://www.rollupjs.com/guide/command-line-reference
 [开发一个NPM插件]($SCENE?id=开发一个NPM插件)
 ▉
-▉rollup-webpack-03▉
-[前端工程搭建]($SCENE?id=前端工程搭建)
-
-demo> yarn init -y
-demo> yarn add webpack webpack-cli -D
-▉
 
 
-[h4|linux ----------------------------------------- windows]
-mkdir
-touch index.js                                      touch index.js(需npm i touch-cli -g)        
+
+
+      
 
 [h4|npm][h4|yarn] 
+npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
 ▃
 ▅
-▇10 
-   
-npm config set registry https://registry.npm.taobao.org  
-添加镜像  npm config delete registry
+▇8
 install node                                        
-npm -v                                             
-npm init	                                          
-npm install/link	                                  
-npm install xx —save	                              
-npm uninstall taco —save	                          
-npm install xx --save-dev                           
+[cl|npm -v]                                             
+[cl|npm init]	                                          
+[cl|npm install/link]	
+[cl|npm publish/login/logout]	                          
+[cl|npm run/test]                                  
+[ci|npm install xx —save]  
+[ci|npm install xx --save-dev]                              
+npm uninstall taco —save
 npm update taco —save	                             
-npm install taco --global	                          
-npm publish/login/logout	                          
-npm run/test	                                      
-
-
+npm install taco --global
 ▇
-▇14
-  
-npm config set registry https://registry.npm.taobao.org  添加镜像  npm config delete registry
-npm i yarn -g                                     安装
-yarn -v                                           版本
-yarn init	                                        初始化某个项目
-yarn install/link	                                默认的安装依赖操作
-yarn add xx	                                      安装某个依赖，并且默认保存到package.
-yarn remove taco	                                移除某个依赖项目
-yarn add xx --dev	                                安装某个开发时依赖项目
-yarn upgrade taco	                                更新某个依赖项目
-yarn global add taco	                            安装某个全局依赖项目
-yarn publish/login/logout	                        发布/登录/登出，一系列NPM Registry操作
-yarn run/test	                                    运行某个命令
+▇16
+npm i yarn -g                   安装                          
+[cl|yarn -v                         版本]                                        
+[cl|yarn init    	                  初始化某个项目]                                      
+[cl|yarn install/link               默认的安装依赖操作]
+[cl|yarn publish/login/logout    	  发布/登录/登出，一系列NPM Registry操作]                      
+[cl|yarn run/test    	              运行某个命令]                                
+[ci|yarn add xx                     安装某个依赖，并且默认保存到package]
+[ci|yarn add xx --dev               安装某个开发时依赖项目]                                   
+yarn remove taco                移除某个依赖项目           
+yarn upgrade taco	              更新某个依赖项目                            
+yarn global add taco            安装某个全局依赖项目            
 ▇
 ▅
 ▃

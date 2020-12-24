@@ -1,4 +1,6 @@
 ```
+场景：[前端工程搭建Babel7+](/pages/solution/scene?id=前端工程搭建-babel7+)
+
 [h3|webpack] [DETAIL/WEBPACK_ABOUT]
 
 |demo> yarn init -y

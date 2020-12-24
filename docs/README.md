@@ -26,6 +26,7 @@ cell content
 [(cg)HELP&info03{width:100px;left:50px}]    (class)帮助图标 跳转 内容标识{content-stype} 
 [INFO/info04]          代码保持               ▉info04▉content∵<h1>HTML保持</h1>∴content▉
 [DETAIL/info05(BASE)]  激活高亮               ▉info05▉content ▀激活代码(BASE)▀ content▉
+[DETAIL/info06]        可移动层               ▉-info06▉content▉
 
 内容包裹 
 [bg ciBOX content] 带CLASS
