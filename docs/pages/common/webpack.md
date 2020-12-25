@@ -1,5 +1,29 @@
 ```
-场景：[前端工程搭建Babel7+](/pages/solution/scene?id=前端工程搭建-babel7+)
+场景：[前端工程搭建Babel7+](/pages/solution/scene?id=前端工程搭建-babel7+)  require动态变量[DETAIL/WEBPACK_REQUIRE_01]
+
+▉WEBPACK_REQUIRE_01▉
+let test = './less/Test.css'
+require(test);
+//报错  Uncaught Error: Cannot find module "."
+
+let test2 = 'Test'
+require("./less/"+test2 + ".css");
+//报错 Uncaught Error: Cannot find module "./less"
+
+解决方案：
+// 引入语言包
+const langConf = lib.langCustom
+const langFilesContext = require.context('static/lang', false, /\.json$/)
+const messages = {}
+for (let key in langConf.options) {
+    let path = './' + key + '.json'
+    messages[key] = langFilesContext(path)
+}
+const i18n = new VueI18n({
+    locale: langConf.default, // 定义默认语言为中文
+    messages
+})
+▉
 
 [h3|webpack] [DETAIL/WEBPACK_ABOUT]
 
