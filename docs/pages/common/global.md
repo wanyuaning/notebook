@@ -1,57 +1,4 @@
-```
 
-npm install vue-i18n
-
-import VueI18n from 'vue-i18n'
-Vue.use(VueI18n)  // 引用：this.$i18n.locale 
-
-// 引入语言文件[DETAIL/vue_i18n_lang]
-const i18n = new VueI18n({
- locale: 'zh', // 定义默认语言为中文
- messages: {
-    'zh': require('@/assets/languages/zh.json'),
-    'en': require('@/assets/languages/en.json')
-  }
-});
-
-
-
-
-// 注入到vue实例中
-new Vue({
-   el: '#app',
-   i18n
-}); 
-
-// 模板渲染
-HTML: {{$t('common.home')}}
-JS: $t('common.home')
-
-// 语言切换
-<button @click="Ch">中文</button>
-<button @click="En">English</button>
-<p>{{$t('common.home')}}</p>
-methods: {
-  Ch(){
-    this.$i18n.locale = 'zh'
-  },
-  En(){
-    this.$i18n.locale = 'en'
-  }
-}
-
-
-▉vue_i18n_lang▉
-语言文件.json
-{
-  "common": {
-    "home": "首页"
-  },
-  "name": "名字"
-}
-▉
-
-```
 
 
 ### qiankun
@@ -285,7 +232,7 @@ nvm list
 + 项目目录 $parcel index.html
 
 
-[h4|VScode]
+[h4|VScode][DETAIL&#/pages/tools/vscode]
 + auto close tag
 + auto rename tag
 + path-alias

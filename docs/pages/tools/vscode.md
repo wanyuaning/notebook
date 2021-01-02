@@ -52,7 +52,9 @@
 ### 功能
 
 对比<br>
-![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")
+![对比](../../assets/images/compare.jpg "ctrl+点选 右键[将已选项进行比较]")<br>
+注释：<br>
+   选中文本： shift+alt+a<br>
 
 ### 插件
 

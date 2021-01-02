@@ -4,6 +4,11 @@
 
 # 场景
 ```
+移动端 $router.push无效
+  1.this指针异常
+  2.有效，但又跳回了
+
+
 Vue中使用cdn加载资源
 1. 在index.html中，添加CDN资源
   <head><script src="https://cdn.bootcdn.net/ajax/libs/vue-i18n/8.22.1/vue-i18n.common.min.js"></script></head>
