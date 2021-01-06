@@ -165,6 +165,7 @@ http {
 >$ sudo npm i docsify-cli -g<br>
 >$ docsify init ./docs<br>
 >$ docsify serve docs
+windows系统变量：C:\Users\new\AppData\Roaming\npm\docsify
 
 
 [h4|express(Web Back-End/node/express)]

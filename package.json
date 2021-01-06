@@ -9,6 +9,7 @@
     "description": "云笔记",
     "main": "index.js",
     "scripts": {
+      "build": "node build/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
