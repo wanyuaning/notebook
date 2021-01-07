@@ -25,7 +25,7 @@ const i18n = new VueI18n({
 })
 ▉
 
-[h3|webpack] [DETAIL/WEBPACK_ABOUT]
+[h3|webpack4] [DETAIL/WEBPACK_ABOUT]
 
 |demo> yarn init -y
 |demo> yarn add webpack webpack-cli -D
@@ -38,16 +38,18 @@ const i18n = new VueI18n({
   
 [cf bc|src/a.js]
   module.exports = 'ewan'
-  
+
+[cf b3| 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  开发配置[DETAIL/WEBPACK_CONFIG(DEV_SERVER)]  缺失HTML:1模板[DETAIL/WEBPACK_TEMPLATE] 2插件[CONFIG/WEBPACK_CONFIG(PLUGIN_HTML)]
   
 [cf b3| 配置零 ] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT]
 |demo> npx webpack [DETAIL/WEBPACK_RUN]
 /src/index.js > /dist/main.js
 
+[cf b3| 配置 文件重命名] 
+|demo> npx webpack --config webpack.conf.js 或 "scripts":{"build":"webpack --config webpack.conf.js"}
+
 [cf b3| 配置 去混淆模式 ] [CONFIG/WEBPACK_CONFIG(MODE)]
-{
-  mode: 'development'
-}
+{ mode: 'development' }
 
 [cf b3| 配置 入口&出口 ] [CONFIG/WEBPACK_CONFIG(BASE)]
 {
@@ -74,6 +76,26 @@ const i18n = new VueI18n({
   ]
 }
 
+▉WEBPACK_TEMPLATE▉
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
+▉
+▉WEBPACK_DEV_SERVER▉
+yarn add webpack-dev-server -D
+以当前目录为静态目录(默认)：npx webpack-dev-server 或 "scripts":{"dev":"webpack-dev-server"}
+指定目录：参考开发配置
+
+▉
 ▉WEBPACK_ABOUT▉
 可以做的事情：
 代码转换 文件优化 代码分割 模块合并 自动刷新 代码校验 自动发布
@@ -94,6 +116,7 @@ webpack中的Tapable
 3 "scripts": {"build": "webpack"}  $ npm run build
 ▉
 ▉WEBPACK_CONFIG_DEFAULT▉
+webpack.config.js
 {
   mode: 'production'
   entry: ./src/index.js
@@ -106,10 +129,16 @@ webpack中的Tapable
 ▉WEBPACK_CONFIG▉
 /webpack.config.js
 
-const ▀HtmlWebpackPlugin(PLUGIN_HTML)▀ = require('html-webpack-plugin')
+const ▀HtmlWebpackPlugin(PLUGIN_HTML)▀ = require('html-webpack-plugin') // yarn add html-webpack-plugin -D
 let ▀path(BASE)▀ = require('path')
 
 module.exports = {
+  ▀devServer: {
+    port: 3000,             // 端口
+    progress: true,         // 显示进度条
+    contentBase: './build', // 重新指定静态服务
+    compress: true,         // 压缩
+  }(DEV_SERVER)▀,
   // 环境
   ▀mode: 'development'(MODE)▀, // 值：production/development/none
   
@@ -131,7 +160,10 @@ module.exports = {
 
   // 插件任务如：打包优化，资源管理，注入环境变量
   plugins: [
-    ▀new HtmlWebpackPlugin({template: './src/index.html'})(PLUGIN_HTML)▀ 
+    ▀new HtmlWebpackPlugin({
+      template: './src/index.html', // 模板地址 
+      filename: 'index.html',       // 打包后的文件名
+    })(PLUGIN_HTML)▀ 
   ]
 }
 ▉
