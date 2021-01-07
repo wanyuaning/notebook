@@ -77,6 +77,7 @@ const i18n = new VueI18n({
 }
 
 ▉WEBPACK_TEMPLATE▉
+/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
