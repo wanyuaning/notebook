@@ -9,16 +9,16 @@ process.cwd()  当前 node命令 所定位的文件夹目录名
 
 {
   "name": "[b ci|ewan]",                   // 项目名称
-  // 命令入口[c0HELP/package03]
+  // 命令入口[(c0)HELP/package03]
   "bin": {
     "ewan": "./bin/ewan.js"
   },
-  // 模板入口[c0HELP/package02]
+  // 模板入口[(c0)HELP/package02]
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "browser": "",
   "types": "./es/index.d.ts",
-  // 软件包作为依赖项被安装时要包括的条目[c0HELP/package01]
+  // 软件包作为依赖项被安装时要包括的条目[(c0)HELP/package01]
   "files": [ "dist", "es", "lib" ],
 }
 
