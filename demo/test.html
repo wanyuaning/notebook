@@ -31,61 +31,68 @@
   <div id="one">
     <div id="two"></div>
   </div>
-  
 
+Web服务 在当前build文件夹下生成HTML文件  
+  yarn add webpack-dev-server -D
+  
+  
+HTML模板文件压缩
+  删除属性双引号
+  折叠空行
   
   
   
 </body>
 </html>
 <script>
-  var a = {
-    "imgRepeat0": "点击下载APP后选择“允许”",
-        "imgRepeat1": "描述文件下载完成后点击“关闭”",
-        "imgRepeat2": "回到设置，点击已下载描述文件、进入安装",
-        "imgRepeat3": "进入安装描述文件，点击“安装”",
-        "imgRepeat4": "安装开始前需要输入解锁密码（无密码忽略此步）",
-        "imgRepeat5": "最后再次点击“安装”后，即可完成安装",
-  }
-var imgRepeat= [
-                {
-                    title: '',
-                    image: ''
-                },
-                {
-                    title: '',
-                    image: ''
-                },
-                {
-                    title: '',
-                    image: ''
-                },
-                {
-                    title: '',
-                    image: ''
-                },
-                {
-                    title: '',
-                    image: ''
-                },
-                {
-                    title: '',
-                    image: ''
-                }
-            ]
-            console.log('imgRepeat',imgRepeat);
+  
 
-imgRepeat.forEach((item,index) => {  
-  item.title = a['imgRepeat'+index]
-})
-ios_Repeat.forEach((item,index) => {  
-  item.title = a['iosRepeat'+index]
-})
+const HtmlWebpackPlugin = require('html-webpack-plugin') // yarn add html-webpack-plugin -D
+let path = require('path')
 
-console.log('imgRepeat',imgRepeat);
+module.exports = {
+  // Web服务
+  devServer: {
+    port: 3000,             // 端口
+    progress: true,         // 显示进度条
+    contentBase: './build', // 重新指定静态服务
+    compress: true,         // 压缩
+  },
+  // 环境
+  mode: 'development', // 值：production/development/none
 
+  // 入口
+  entry: './src/index.js',                           // 相对路径
 
+  // 出口
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),           // 绝对路径
+  },
 
+  // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  },
+
+  // 插件任务如：打包优化，资源管理，注入环境变量
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html', // 模板地址
+      filename: 'index.html',       // 打包后的文件名
+      // 压缩
+      minify: {
+        removeAttributeQuotes: true, // 删除属性双引号
+        collapseWhitespace: true, // 折叠空行
+
+      },
+      // 给资源加HASH戳防缓存
+
+    })
+  ]
+}
 
 
 

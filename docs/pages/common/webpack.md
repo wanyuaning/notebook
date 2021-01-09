@@ -164,6 +164,14 @@ module.exports = {
     ▀new HtmlWebpackPlugin({
       template: './src/index.html', // 模板地址 
       filename: 'index.html',       // 打包后的文件名
+      // 压缩
+      minify: {
+        removeAttributeQuotes: true, // 删除属性双引号
+        collapseWhitespace: true, // 折叠空行
+
+      },
+      // 给资源加HASH戳防缓存
+      
     })(PLUGIN_HTML)▀ 
   ]
 }
@@ -193,4 +201,28 @@ webpack --module-bind 'txt=raw-loader'
 import txt from 'raw-loader!./file.txt';
 ▉
 
+
+
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
