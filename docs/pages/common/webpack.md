@@ -1,57 +1,19 @@
 ```
 场景：[前端工程搭建Babel7+](/pages/solution/scene?id=前端工程搭建-babel7+)  require动态变量[DETAIL/WEBPACK_REQUIRE_01]
 
-▉WEBPACK_REQUIRE_01▉
-let test = './less/Test.css'
-require(test);
-//报错  Uncaught Error: Cannot find module "."
 
-let test2 = 'Test'
-require("./less/"+test2 + ".css");
-//报错 Uncaught Error: Cannot find module "./less"
-
-解决方案：
-// 引入语言包
-const langConf = lib.langCustom
-const langFilesContext = require.context('static/lang', false, /\.json$/)
-const messages = {}
-for (let key in langConf.options) {
-    let path = './' + key + '.json'
-    messages[key] = langFilesContext(path)
-}
-const i18n = new VueI18n({
-    locale: langConf.default, // 定义默认语言为中文
-    messages
-})
-▉
 
 [h3|webpack4] [DETAIL/WEBPACK_ABOUT]
 
 |demo> yarn init -y
 |demo> yarn add webpack webpack-cli -D
-
-[src[index.js, a.js]]
-[cf bc|src/index.js]
-  console.log('hello webpack')  
-  let str = require('./a.js')
-  console.log(str)
   
-[cf bc|src/a.js]
-  module.exports = 'ewan'
+[cf b3| 零配置 ] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT] Demo[DETAIL/WEBPACK_DEMO_01]
 
-[cf b3| 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  开发配置[DETAIL/WEBPACK_CONFIG(DEV_SERVER)]  缺失HTML:1模板[DETAIL/WEBPACK_TEMPLATE] 2插件[CONFIG/WEBPACK_CONFIG(PLUGIN_HTML)]
-  
-[cf b3| 配置零 ] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT]
-|demo> npx webpack [DETAIL/WEBPACK_RUN]
-/src/index.js > /dist/main.js
+[cf b3| 配置文件 ] 默认 /webpack.config.js
+|demo> npx webpack --config webpack.rename.js 或 "scripts":{"build":"webpack --config webpack.rename.js"}
 
-[cf b3| 配置 文件重命名] 
-|demo> npx webpack --config webpack.conf.js 或 "scripts":{"build":"webpack --config webpack.conf.js"}
-
-[cf b3| 配置 去混淆模式 ] [CONFIG/WEBPACK_CONFIG(MODE)]
-{ mode: 'development' }
-
-[cf b3| 配置 入口&出口 ] [CONFIG/WEBPACK_CONFIG(BASE)]
+[cf b3| 配置 入口&出口 ] [CONFIG/-WEBPACK_CONFIG(BASE)]
 {
   entry: './src/index.js', 
   output: {
@@ -60,19 +22,26 @@ const i18n = new VueI18n({
   }
 }
 
+[cf b3| 配置 去混淆模式 ] [CONFIG/-WEBPACK_CONFIG(MODE)]
+{ mode: 'development' }
+
+
+
 [cf b3| 配置 资源类型支持 ]
-{
+{1
   module: {
     rules: [
-      .text [CONFIG/WEBPACK_CONFIG(LOADER01)] [TARGET/WEBPACK_LOADER_RAW]
+      .text [CONFIG/-WEBPACK_CONFIG(LOADER01)] [TARGET/WEBPACK_LOADER_RAW]
     ]
   }
 }  
 
+[cf b3| 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  开发配置[DETAIL/-WEBPACK_CONFIG(DEV_SERVER)]  缺失HTML:1模板[DETAIL/WEBPACK_TEMPLATE] 2插件[CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)]
+
 [cf b3| 配置 代码优化 ]
 {
   plugins: [
-    为入口生成HTML文件 [CONFIG/WEBPACK_CONFIG(PLUGIN_HTML)] [TARGET/WEBPACK_PLUGIN_HTML] 
+    为入口生成HTML文件 [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)] [TARGET/WEBPACK_PLUGIN_HTML] 
   ]
 }
 
@@ -110,12 +79,7 @@ webpack中的Tapable
 手写webpack中常见的loader
 手写webpack中常见的plugin
 ▉
-▉WEBPACK_RUN▉
-启动方式：
-1 $ npx webpack
-2 $ node node_modules/webpack/bin/webpack.js
-3 "scripts": {"build": "webpack"}  $ npm run build
-▉
+
 ▉WEBPACK_CONFIG_DEFAULT▉
 webpack.config.js
 {
@@ -127,22 +91,13 @@ webpack.config.js
   }
 }
 ▉
-▉WEBPACK_CONFIG▉
+▉-WEBPACK_CONFIG▉
 /webpack.config.js
 
 const ▀HtmlWebpackPlugin(PLUGIN_HTML)▀ = require('html-webpack-plugin') // yarn add html-webpack-plugin -D
 let ▀path(BASE)▀ = require('path')
 
 module.exports = {
-  ▀devServer: {
-    port: 3000,             // 端口
-    progress: true,         // 显示进度条
-    contentBase: './build', // 重新指定静态服务
-    compress: true,         // 压缩
-  }(DEV_SERVER)▀,
-  // 环境
-  ▀mode: 'development'(MODE)▀, // 值：production/development/none
-  
   // 入口
   ▀entry: './src/index.js'(BASE)▀,                           // 相对路径
   
@@ -152,12 +107,15 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),           // 绝对路径
   }(BASE)▀,
 
-  // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
-  module: {
-    rules: [
-      ▀{ test: /\.txt$/, use: 'raw-loader' }(LOADER01)▀ 
-    ]
-  }
+  // 环境
+  ▀mode: 'development'(MODE)▀, // 值：production/development/none
+
+  ▀devServer: {
+    port: 3000,             // 端口
+    progress: true,         // 显示进度条
+    contentBase: './build', // 重新指定静态服务
+    compress: true,         // 压缩
+  }(DEV_SERVER)▀,
 
   // 插件任务如：打包优化，资源管理，注入环境变量
   plugins: [
@@ -174,6 +132,13 @@ module.exports = {
       
     })(PLUGIN_HTML)▀ 
   ]
+
+  // Loader 打包特定类型模块时 对其进行转换 Webpack默认能识别 JavaScript 和 JSON
+  module: {
+    rules: [
+      ▀{ test: /\.txt$/, use: 'raw-loader' }(LOADER01)▀ 
+    ]
+  }
 }
 ▉
 ▉WEBPACK_PLUGIN_HTML▉
@@ -201,7 +166,48 @@ webpack --module-bind 'txt=raw-loader'
 import txt from 'raw-loader!./file.txt';
 ▉
 
+▉WEBPACK_REQUIRE_01▉
+let test = './less/Test.css'
+require(test);
+//报错  Uncaught Error: Cannot find module "."
 
+let test2 = 'Test'
+require("./less/"+test2 + ".css");
+//报错 Uncaught Error: Cannot find module "./less"
+
+解决方案：
+// 引入语言包
+const langConf = lib.langCustom
+const langFilesContext = require.context('static/lang', false, /\.json$/)
+const messages = {}
+for (let key in langConf.options) {
+    let path = './' + key + '.json'
+    messages[key] = langFilesContext(path)
+}
+const i18n = new VueI18n({
+    locale: langConf.default, // 定义默认语言为中文
+    messages
+})
+▉
+▉WEBPACK_DEMO_01▉
+[src[index.js, a.js]]
+
+[cf bc|src/index.js]
+  console.log('hello webpack')  
+  let str = require('./a.js')
+  console.log(str)
+  
+[cf bc|src/a.js]
+  module.exports = 'ewan'
+
+
+启动方式：
+|demo> npx webpack 
+|demo> node node_modules/webpack/bin/webpack.js
+|demo> npm run build         // "scripts": {"build": "webpack"} 
+
+/src/index.js > /dist/main.js
+▉
 
 
 ```
