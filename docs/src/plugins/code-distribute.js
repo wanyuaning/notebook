@@ -260,7 +260,7 @@ function handleCommon(data, dataid) {
    * [DETAIL/-info06]        可移动层               ▉-info06▉content▉
    */
   let matchInfoLink;
-  while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB|CONFIG|TARGET)([\/\&])([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
+  while ((matchInfoLink = /\[(\([\w\s-]*\))?(DETAIL|INFO|INFOB|INFO2|HELP|LINK|DETAILB|HELPB|CONFIG|TARGET)([\/\&])([^\]\(\)\{\}]+)(\{([^\]\(\)]+)\})?(\(([^\]]+)\))?\]/.exec(data)) !== null) {
     let cls  = matchInfoLink[1]                // ([\w\s-]*)
     let tag  = matchInfoLink[2]  // (DETAIL|INFO|HELP|LINK|DETAILB|INFOB|HELPB)  
     let type = matchInfoLink[3]                // (\/|\>)

@@ -10,56 +10,41 @@
   
 [cf b3| 零配置 ] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT] Demo[DETAIL/WEBPACK_DEMO_01]
 
-[cf b3| 配置文件 ] 默认 /webpack.config.js
-|demo> npx webpack --config webpack.rename.js 或 "scripts":{"build":"webpack --config webpack.rename.js"}
+[cf b3| 配置文件 ] 默认：/webpack.config.js  命名：|demo> npx webpack --config webpack.rename.js 或 "scripts":{"build":"webpack --config webpack.rename.js"}
 
 [cf b3| 配置 入口&出口 ] [CONFIG/-WEBPACK_CONFIG(BASE)]
 {
   entry: './src/index.js', 
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.js', // Hash后缀: bundle.[hash:8].js
     path: path.resolve(__dirname, 'dist'), 
   }
 }
 
 [cf b3| 配置 去混淆模式 ] [CONFIG/-WEBPACK_CONFIG(MODE)]
-{ mode: 'development' }
-
-
+{ 
+  mode: 'development' 
+}
 
 [cf b3| 配置 资源类型支持 ]
-{1
+{
   module: {
     rules: [
-      .text [CONFIG/-WEBPACK_CONFIG(LOADER01)] [TARGET/WEBPACK_LOADER_RAW]
+      .text [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
     ]
   }
 }  
 
-[cf b3| 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  开发配置[DETAIL/-WEBPACK_CONFIG(DEV_SERVER)]  缺失HTML:1模板[DETAIL/WEBPACK_TEMPLATE] 2插件[CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)]
+[cf b3| 配置 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  [CONFIG/-WEBPACK_CONFIG(DEV_SERVER)]
 
 [cf b3| 配置 代码优化 ]
 {
   plugins: [
-    为入口生成HTML文件 [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)] [TARGET/WEBPACK_PLUGIN_HTML] 
+    HTML模板注入 [INFO2/WEBPACK_PLUGIN_HTML] [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)] 
   ]
 }
 
-▉WEBPACK_TEMPLATE▉
-/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="main.js"></script>
-</head>
-<body>
-    
-</body>
-</html>
-▉
+
 ▉WEBPACK_DEV_SERVER▉
 yarn add webpack-dev-server -D
 以当前目录为静态目录(默认)：npx webpack-dev-server 或 "scripts":{"dev":"webpack-dev-server"}
@@ -113,7 +98,7 @@ module.exports = {
   ▀devServer: {
     port: 3000,             // 端口
     progress: true,         // 显示进度条
-    contentBase: './build', // 重新指定静态服务
+    contentBase: './build', // 重新指定服务目录
     compress: true,         // 压缩
   }(DEV_SERVER)▀,
 

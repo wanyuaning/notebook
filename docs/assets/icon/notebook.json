@@ -8,12 +8,53 @@
     {
       "selection": [
         {
+          "order": 12,
+          "id": 0,
+          "name": "info2",
+          "prevSize": 32,
+          "code": 59659,
+          "tempChar": ""
+        }
+      ],
+      "id": 9,
+      "metadata": {
+        "name": "Untitled Set 4",
+        "importSize": {
+          "width": 210,
+          "height": 297
+        }
+      },
+      "height": 1024,
+      "prevSize": 32,
+      "icons": [
+        {
+          "id": 0,
+          "paths": [
+            "M376.702 19.758c54.204 0 98.143 43.939 98.143 98.091 0 54.204-43.939 98.143-98.143 98.143-54.151 0-98.091-43.939-98.091-98.143 0-54.151 43.939-98.091 98.091-98.091zM204.21 383.246l198.817-45.056 42.944 49.159-62.077 424.588c0 0-11.452 53.331 8.764 77.142 20.197 23.776 64.486-19.953 79.988-42.996h31.318c0 0-48.635 144.456-162.018 149.117s-127.872-145.975-116.472-227.831l47.116-297.675c0 0 6.215-41.443-15.013-53.331s-34.687-7.786-48.67-4.643l-4.643-28.472z"
+          ],
+          "attrs": [],
+          "width": 724,
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 0,
+          "tags": [
+            "icons"
+          ],
+          "colorPermutations": {}
+        }
+      ],
+      "invisible": false,
+      "colorThemes": []
+    },
+    {
+      "selection": [
+        {
           "order": 1,
           "id": 0,
           "prevSize": 32,
           "code": 59658,
           "name": "move",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 8,
@@ -60,7 +101,7 @@
           "prevSize": 24,
           "code": 59657,
           "name": "config",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 7,
@@ -129,7 +170,7 @@
           "name": "clear",
           "prevSize": 32,
           "code": 59656,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 9,
@@ -137,7 +178,7 @@
           "name": "search",
           "prevSize": 32,
           "code": 59655,
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 5,
@@ -217,7 +258,7 @@
           "name": "detail",
           "prevSize": 32,
           "code": 59648,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 4,
@@ -225,7 +266,7 @@
           "name": "info",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -233,7 +274,7 @@
           "name": "help",
           "prevSize": 32,
           "code": 59650,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 6,
@@ -241,7 +282,7 @@
           "name": "link",
           "prevSize": 32,
           "code": 59651,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -249,7 +290,7 @@
           "name": "detailb",
           "prevSize": 32,
           "code": 59652,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 8,
@@ -257,7 +298,7 @@
           "name": "infob",
           "prevSize": 32,
           "code": 59653,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 2,
@@ -265,7 +306,7 @@
           "name": "helpb",
           "prevSize": 32,
           "code": 59654,
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 3,
@@ -1498,7 +1539,7 @@
           "id": 180,
           "prevSize": 32,
           "code": 59827,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "ligatures": "shield, security",
@@ -1640,9 +1681,12 @@
         },
         {
           "ligatures": "link, chain",
-          "name": "link",
+          "name": "link1",
           "order": 0,
-          "id": 204
+          "id": 204,
+          "prevSize": 32,
+          "code": 59851,
+          "tempChar": ""
         },
         {
           "ligatures": "flag, report",
