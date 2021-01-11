@@ -26,25 +26,82 @@
   mode: 'development' 
 }
 
-[cf b3| 配置 资源类型支持 ]
-{
-  module: {
-    rules: [
-      .text [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
-    ]
-  }
-}  
-
 [cf b3| 配置 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  [CONFIG/-WEBPACK_CONFIG(DEV_SERVER)]
 
 [cf b3| 配置 代码优化 ]
 {
   plugins: [
     HTML模板注入 [INFO2/WEBPACK_PLUGIN_HTML] [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)] 
+    抽离css样式成link标签形式 [INFO2/WEBPACK_PLUGIN_CSS]
   ]
 }
 
+[cf b3| 配置 资源 CSS ]
+{
+  module: {
+    rules: [
+      {test: /\.css$/, use:['style-loader', 'css-loader']} [INFO2/WEBPACK_MODULE_CSS]
+    ]
+  }
+}
 
+[cf b3| 配置 资源 Text ]
+{
+  module: {
+    rules: [
+      .text [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
+    ]
+  }
+} 
+
+▉WEBPACK_PLUGIN_CSS▉
+yarn add mini-css-extract-plugin -D
+let MiniCssExtractPlugin = require('mini-css-extract-plugin')
+{
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'main.css' // 抽离出来的文件名
+    })
+  ]
+}
+再设置Loader的输出端，参考Module CSS
+{
+  module: {
+    rules: [
+      {test: /\.css$/, use:[MiniCssExtractPlugin.loader, 'css-loader']}
+    ]
+  }
+}
+▉
+▉WEBPACK_MODULE_CSS▉
+yarn add less less-loader css-loader style-loader -D
+其它：node-sass sass-loader  stylus stylus-loader
+
+{
+  test: /\.css$/, 
+  use:[
+    {
+      loader: 'style-loader',
+      options: {
+        insertAt: 'top', // 资源插入到模板的位置
+      }
+    }, 
+    'css-loader'
+  ]
+}
+
+抽离css样式成link标签形式，而不是以<style>形式插入模板里
+先：Plugin 抽离css样式成link标签形式
+再：
+{
+  test: /\.less$/, 
+  use:[
+    MiniCssExtractPlugin.loader, 
+    'css-loader',
+    'less-loader'
+  ]
+}
+▉
 ▉WEBPACK_DEV_SERVER▉
 yarn add webpack-dev-server -D
 以当前目录为静态目录(默认)：npx webpack-dev-server 或 "scripts":{"dev":"webpack-dev-server"}
