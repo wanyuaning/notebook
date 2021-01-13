@@ -54,13 +54,126 @@
   }
 } 
 
+[cf b3| 第三方模块 ]
+场景一：安装/引入/打包进bundle,暴露到全局
+场景二：安装/引入/打包进bundle,为每个模块注入变量
+场景三：CDN引入，打包忽略
+yarn add jquery
+import $ from 'jquery'
+console.log($)
+
+暴露全局变量
+yarn add expose-loader -D
+import $ from 'expose-loader?$!jquery'
+console.log(window.$)
+或
+{
+  module: {
+    rules: [
+      {
+        test: require.resolve('jquery'), 
+        use: 'expose-loader?$'
+      }
+    ]
+  }
+}
+现希望jquery不用import引用而改为在模板里CDN引用 
+1.在每个模块中注入变量 此方法不能使用window.$ 只能使用$
+let webpack = require('webpack')
+{
+  plugins: [
+    new webpack.ProvidePlugin: {
+      $: 'jquery'
+    }
+  ]
+}
+2.模板中：<script src=".../jquery.js"></script> 参考【资源路径】
+{
+  externals: {
+    jquery: '$' // 遇到$引入 忽略打包
+  }
+}
+import $ from 'jquery' // 仍然可以引用 安慰作用
+console.log($)
+
+[cf b3| 资源 图片 ]
+场景一：在JS中创建引入
+  import logo from './logo.png' 或 let logo = require('./logo.png')
+  let image = new Image()
+  image.src = logo
+  document.body.appendChild(image)  
+  module.rules: [
+    // yarn add file-loader -D 
+    // file-loader默认会在内部生成一张图片到build下，返回图片地址
+    // 通常会使用url-loader 有更丰富的配置 参考场景三
+    {test: /\.(png|jpg|gif)$/, use: 'file-loader'}
+  ]    
+  
+场景二：在CSS中引入 如background('url') 
+  默认支持 由css-loader调用require('url')解决
+场景三：在HTML中<img src="">  
+  module.rules: [
+    // yarn add html-withimg-loader -D 
+    {test: /\.html$/, use: 'html-withimg-loader'},
+    {
+      test: /\.(png|jpg|gif)$/, 
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 200*1024,   // 小于200k 转为base64 否则用file-loader生成图片
+          outputPath: '/img' // 输出路径 其它资源路径参考【资源路径】
+        }
+      }
+    }
+  ]
+
+[cf b3| 资源路径 ]
+图片：module.rules: [
+    {
+      test: /\.(png|jpg|gif)$/, 
+      use: {
+        loader: 'url-loader',
+        options: {
+          outputPath: '/img/' // 输出路径
+        }
+      }
+    }
+  ]
+CSS: plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/main.css' 
+    })
+  ]
+CDN所有资源
+{
+  output: {
+    publicPach: 'http://abc.com' // 给所有解析资源加前缀 成为绝对路径
+  }
+}
+CDN图片 
+  不能设置output.publicPath了 改为设置module.rules.urlLoader.options.publicPath
+  module.rules: [
+    {
+      test: /\.(png|jpg|gif)$/, 
+      use: {
+        loader: 'url-loader',
+        options: { 
+          publicPach: 'http://abc.com'
+        }
+      }
+    }
+  ]
+
+
+
+
 ▉WEBPACK_PLUGIN_CSS▉
 yarn add mini-css-extract-plugin -D
 let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 {
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'main.css' // 抽离出来的文件名
+      filename: 'main.css' // 抽离出来的文件名 输出路径参考【资源路径】
     })
   ]
 }
