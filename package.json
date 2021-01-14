@@ -9,7 +9,7 @@
     "description": "云笔记",
     "main": "index.js",
     "scripts": {
-        "build": "webpack",
+        "build": "webpack --config build/webpack.conf.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -19,5 +19,8 @@
         "html-webpack-plugin": "^4.5.1",
         "webpack": "^5.12.3",
         "webpack-cli": "^4.3.1"
+    },
+    "dependencies": {
+        "docsify-cli": "^4.4.2"
     }
 }
