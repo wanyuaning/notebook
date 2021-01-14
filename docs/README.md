@@ -7,6 +7,14 @@
   .hide{display:none}
 </style>
 
+{{testStr}}
+<input type="text" v-model="testStr" />
+<div class="1234">
+  <span v-for="item in occurDate"><input type="checkbox" /> {{item.title}}</span>
+</div>
+
+  
+
 <input type="checkbox" /> 第一点
 <input type="checkbox" /> 第二点
 <input type="checkbox" /> 第三点

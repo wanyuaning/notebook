@@ -33,6 +33,7 @@ function initComputed () {
     })
   })
 }
+
 // ④模板编译
 function Compile (el, vm) {
   vm.$el = document.querySelector(el)
@@ -45,6 +46,8 @@ function Compile (el, vm) {
   function replace (nodes) {
     Array.from(nodes.childNodes).forEach((node) => {
       let text = node.textContent
+      
+      
       if (node.nodeType === 3 && reg.test(text)) {
         //console.log(RegExp.$1)
         let exp = RegExp.$1

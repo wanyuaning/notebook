@@ -95,7 +95,13 @@
       var mvvm = new Mvvm({
         el: '#mvvm',
         data: {
-          asdf: 'aaaaa111111'
+          testStr: '测试文本',
+          occurDate: [
+            {value: 1, type: 'checkbox', name: 'entry', title: '入口'},
+            {value: 1, type: 'checkbox', name: 'output', title: '出口'},
+            {value: 0, type: 'radio', name: 'mode', title: '生产模式'},
+            {value: 0, type: 'radio', name: 'mode', title: '开发模式'}
+          ]
         }
       })
       //setTimeout(()=>{

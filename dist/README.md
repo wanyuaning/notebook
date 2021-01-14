@@ -7,7 +7,10 @@
   .hide{display:none}
 </style>
 
-<input type="checkbox" /> 第一点
+
+{{testStr}}
+111
+<input type="checkbox" /> 第一点2
 <input type="checkbox" /> 第二点
 <input type="checkbox" /> 第三点
 <input type="checkbox" /> 第四点

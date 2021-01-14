@@ -43,27 +43,31 @@ function Compile (el, vm) {
   function replace (nodes) {
     Array.from(nodes.childNodes).forEach((node) => {
       let text = node.textContent
-      if (node.nodeType === 3 && reg.test(text)) {
-        //console.log(RegExp.$1)
-        let exp = RegExp.$1
-        let arr = exp.split('.')
-        let val = vm
-        arr.forEach((key) => {
-          val = val[key]
-        })
-        node.textContent = text.replace(reg, val)
-        // ⑤单向绑定[M→V]-watcher
-        let watcher = new Watcher(vm, exp, function (newVal) {
-          node.textContent = text.replace(reg, newVal)
-        })
-      }
+      // nodeType 1元素节点 2属性节点 3文本节点 8注释节点
+      //console.log('节点', node.nodeType, node);
+      // if (node.nodeType === 3 && reg.test(text)) {
+      //   console.log(RegExp.$1)
+      //   console.log(node.nodeType,node);
+        
+      //   let exp = RegExp.$1
+      //   let arr = exp.split('.')
+      //   let val = vm
+      //   arr.forEach((key) => {
+      //     val = val[key]
+      //   })
+      //   node.textContent = text.replace(reg, val)
+      //   // ⑤单向绑定[M→V]-watcher
+      //   let watcher = new Watcher(vm, exp, function (newVal) {
+      //     node.textContent = text.replace(reg, newVal)
+      //   })
+      // }
       // ⑥双向绑定
       if (node.nodeType === 1) {
         let nodeAttrs = node.attributes
         Array.from(nodeAttrs).forEach(attr => {
           let name = attr.name
           let exp = attr.value
-          if (name.indexOf('v-') == 0) {
+          if (name.indexOf('v-model') == 0) {
             let val = vm
             let arr = exp.split('.')
             arr.forEach(key => {
@@ -89,6 +93,30 @@ function Compile (el, vm) {
               })
 
             })
+          }
+          if (name.indexOf('v-for') == 0) {
+            let vfor = exp.split(' ')
+            let val = vm
+            let arr = vfor[2].split('.')
+            arr.forEach(key => {
+              val = val[key]
+            })
+            let parentNode = node.parentNode            
+            node.removeAttribute('v-for')
+            _node = parentNode.innerHTML
+            
+            const reg = new RegExp(`{{${vfor[0]}.([^}]+)}}`)  
+            let contentHTML = '' 
+                 
+            val.forEach((e, i) => {
+              let listHTML = _node
+              let matchCodeBlock
+              while ((matchCodeBlock = reg.exec(listHTML)) !== null) {                
+                listHTML = listHTML.replace(matchCodeBlock[0], e[matchCodeBlock[1]])
+              }
+              contentHTML += listHTML
+            })
+            parentNode.innerHTML = contentHTML
           }
         })
       }
