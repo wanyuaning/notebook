@@ -129,3 +129,41 @@ semver.patch(‘1.2.3’) // ‘3’
 // 尝试将字符串解析为SemVer对象 { ...raw: '1.2.3', version: '1.2.3' }
 semver.parse('1.2.3');        
 // 分析版本号是否属于某个范围或符合一系列条件
+
+
+autoprefixer
+cheerio
+colors
+commander
+del
+file-loader": "0.9.0",
+fs-extra": "^1.0.0",
+gulp": "^3.9.1",
+gulp-base64": "0.1.3",
+gulp-bird": "0.2.4",
+gulp-changed": "1.3.2",
+gulp-clean-css": "2.3.2",
+gulp-concat": "^2.6.1",
+gulp-connect": "5.0.0",
+gulp-debug": "3.0.0",
+gulp-file-count
+gulp-if
+gulp-inline-source
+gulp-less
+gulp-minify-html
+gulp-plumber
+gulp-postcss
+gulp-sourcemaps
+gulp-uglify
+gulp-util
+happypack
+html-loader
+is_js
+json-loader
+lodash
+node-sloc
+through2
+url-loader
+webpack
+webpack-stream
+is-stream
