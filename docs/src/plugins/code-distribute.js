@@ -235,7 +235,7 @@ function handleCommon(data, dataid) {
 
   // 样式类：[s12 c0 b0 h1 b reverse inline|内容]
   let matchClass;
-  while ((matchClass = /\[([^\|\[\]]+)\|([^\]]+)\]/.exec(data)) !== null) {
+  while ((matchClass = /\[([^\|\[\]\{\}\\\/]+)\|([^\]]+)\]/.exec(data)) !== null) {
     data = data.replace(
       matchClass[0],
       `<span class="${matchClass[1]}">${matchClass[2]}</span>`

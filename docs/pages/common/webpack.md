@@ -8,30 +8,138 @@
 [cf b3| 零配置 ] 默认值[DETAIL/WEBPACK_CONFIG_DEFAULT] Demo[DETAIL/WEBPACK_DEMO_01]
 
 [cf b3| 配置文件 ] 默认：/webpack.config.js  命名：|demo> npx webpack --config webpack.rename.js 或 "scripts":{"build":"webpack --config webpack.rename.js"}
+[cf b3| 配置 入口&出口 ] [INFO2/WEBPACK_ENTRY_OUTPUT] [CONFIG/-WEBPACK_CONFIG(BASE)]
+[cf b3| 配置 去混淆模式 ] mode: 'development' [CONFIG/-WEBPACK_CONFIG(MODE)]
+[cf b3| 配置 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  [CONFIG/-WEBPACK_CONFIG(DEV_SERVER)]
+[cf b3| 配置 代码优化 ] plugins: [ HTML模板注入 [INFO2/WEBPACK_PLUGIN_HTML] [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)]  抽离css样式成link标签形式 [INFO2/WEBPACK_PLUGIN_CSS] [CONFIG/-WEBPACK_CONFIG(PLUGIN_LINK)]]
 
-[cf b3| 配置 入口&出口 ] [INFO2/WEBPACK_ENTRY_OUTPUT] [CONFIG/-WEBPACK_CONFIG(BASE)] 
+[cf b3| 资源 CSS   ] module/rules: [ {test: /\.css$/, use:['style-loader', 'css-loader']} ] [INFO2/WEBPACK_MODULE_CSS] [CONFIG/-WEBPACK_CONFIG(PLUGIN_CSS)]
+[cf b3| 资源 Text  ] module/rules: [ {test: /\.txt$/, use: 'raw-loader'} ] [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
+[cf b3| 资源 Image ] █ 在JS中创建引入[INFO2/WEBPACK_RES_IMAGE]   █ 在CSS中引入 [INFO2/WEBPACK_RES_IMAGE_2]   █ 在HTML标签引入 [INFO2/WEBPACK_RES_IMAGE_3]
+
+[cf b3| 第三方模块 ] █ 安装/引入/打包进bundle,暴露到全局 [INFO2/WEBPACK_RES_THIRD]  █ 安装/引入/打包进bundle,为每个模块注入变量 [INFO2/WEBPACK_RES_THIRD_2]  █ CDN引入，打包忽略 [INFO2/WEBPACK_RES_THIRD_3]
+
+[cf b3| 资源路径 ] 图片[INFO2/WEBPACK_RES_PATH_IMG] CSS[INFO2/WEBPACK_RES_PATH_CSS] CDN所有资源[INFO2/WEBPACK_RES_PATH_ALL] CDN图片[INFO2/WEBPACK_RES_PATH_CDN]
+
+
+▉WEBPACK_RES_THIRD▉
+yarn add jquery
+import $ from 'jquery'
+console.log($)
+
+内联方式 暴露全局变量
+  yarn add expose-loader -D
+  import $ from 'expose-loader?$!jquery'
+  console.log(window.$)
+
+配置方式 暴露全局变量
+  module.rules: [
+    {
+      test: require.resolve('jquery'), 
+      use: 'expose-loader?$'
+    }
+  ]  
+▉
+▉WEBPACK_RES_THIRD_2▉ 
+在每个模块中注入变量 此方法不能使用window.$ 只能使用$
+let webpack = require('webpack')
 {
-  entry: './src/index.js',                 
-  output: {
-    filename: 'bundle.js', // Hash后缀: bundle.[hash:8].js
-    path: path.resolve(__dirname, 'dist'), 
+  plugins: [
+    new webpack.ProvidePlugin: {
+      $: 'jquery'
+    }
+  ]
+}
+▉
+▉WEBPACK_RES_THIRD_3▉ 
+现希望jquery不用import引用而改为在模板里CDN引用 如：<script src=".../jquery.js"></script> 
+{
+  externals: {
+    jquery: '$' // 遇到$引入 忽略打包 需心理安慰仍 import $ from 'jquery' 时
   }
 }
+$ 和 window.$ 都可使用
+▉ 
 
-[cf b3| 配置 去混淆模式 ] [CONFIG/-WEBPACK_CONFIG(MODE)]
-  mode: 'development' 
+▉WEBPACK_RES_IMAGE▉ 
+import logo from './logo.png' 或 let logo = require('./logo.png')
 
-[cf b3| 配置 开发服务 ] 安装&启动[DETAIL/WEBPACK_DEV_SERVER]  [CONFIG/-WEBPACK_CONFIG(DEV_SERVER)]
+let image = new Image()
+image.src = logo
+document.body.appendChild(image) 
 
-[cf b3| 配置 代码优化 ]
-  plugins: [
-    HTML模板注入 [INFO2/WEBPACK_PLUGIN_HTML] [CONFIG/-WEBPACK_CONFIG(PLUGIN_HTML)] 
-    抽离css样式成link标签形式 [INFO2/WEBPACK_PLUGIN_CSS] [CONFIG/-WEBPACK_CONFIG(PLUGIN_LINK)]
+module.rules: [  
+  // yarn add file-loader -D 
+  // file-loader默认会在内部生成一张图片到build下，返回图片地址
+  // 通常会使用url-loader 有更丰富的配置 参考场景三
+  {test: /\.(png|jpg|gif)$/, use: 'file-loader'}
+]    
+▉  
+▉WEBPACK_RES_IMAGE_2▉ 
+如：background('./logo.png')
+
+默认支持 由css-loader调用require('url')解决
+▉
+▉WEBPACK_RES_IMAGE_3▉  
+  如：<img src="./logo.png">
+
+  module.rules: [
+    // yarn add html-withimg-loader -D 
+    {test: /\.html$/, use: 'html-withimg-loader'},
+    {
+      test: /\.(png|jpg|gif)$/, 
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 200*1024,   // 小于200k 转为base64 否则用file-loader生成图片
+          outputPath: '/img' // 输出路径 其它资源路径参考【资源路径】
+        }
+      }
+    }
   ]
-
-[cf b3| 资源 CSS  ] module/rules: [ {test: /\.css$/, use:['style-loader', 'css-loader']} ] [INFO2/WEBPACK_MODULE_CSS] [CONFIG/-WEBPACK_CONFIG(PLUGIN_CSS)]
-[cf b3| 资源 Text ] module/rules: [ {test: /\.txt$/, use: 'raw-loader'} ] [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
-  
+▉
+ 
+▉WEBPACK_RES_PATH_IMG▉
+module.rules: [
+  {
+    test: /\.(png|jpg|gif)$/, 
+    use: {
+      loader: 'url-loader',
+      options: {
+        outputPath: '/img/' // 输出路径
+      }
+    }
+  }
+]
+▉ 
+▉WEBPACK_RES_PATH_CSS▉
+plugins: [
+  new MiniCssExtractPlugin({
+    filename: 'css/main.css' 
+  })
+]
+▉
+▉WEBPACK_RES_PATH_ALL▉
+{
+  output: {
+    publicPach: 'http://abc.com' // 给所有解析资源加前缀 成为绝对路径
+  }
+}
+▉
+▉WEBPACK_RES_PATH_CDN▉
+不能设置output.publicPath了 改为设置module.rules.urlLoader.options.publicPath
+module.rules: [
+  {
+    test: /\.(png|jpg|gif)$/, 
+    use: {
+      loader: 'url-loader',
+      options: { 
+        publicPach: 'http://abc.com'
+      }
+    }
+  }
+]
+▉  
 
 ▉WEBPACK_ENTRY_OUTPUT▉
 如：build/webpack.conf.js
@@ -53,7 +161,7 @@ yarn add mini-css-extract-plugin -D
 let MiniCssExtractPlugin = require('mini-css-extract-plugin')
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'main.css' // 抽离出来的文件名
+      filename: 'main.css' // 抽离出来的文件名 输出路径参考【资源路径】
     })
   ]
 
@@ -113,7 +221,7 @@ webpack中的Tapable
 ▉
 
 ▉WEBPACK_CONFIG_DEFAULT▉
-webpack.config.js
+/webpack.config.js
 {
   mode: 'production'
   entry: ./src/index.js
