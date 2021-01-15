@@ -17,7 +17,7 @@
 [cf b3| 资源 Text  ] module/rules: [ {test: /\.txt$/, use: 'raw-loader'} ] [INFO2/WEBPACK_LOADER_RAW] [CONFIG/-WEBPACK_CONFIG(LOADER01)]
 [cf b3| 资源 Image ] █ 在JS中创建引入[INFO2/WEBPACK_RES_IMAGE]   █ 在CSS中引入 [INFO2/WEBPACK_RES_IMAGE_2]   █ 在HTML标签引入 [INFO2/WEBPACK_RES_IMAGE_3]
 
-[cf b3| 第三方模块 ] █ 安装/引入/打包进bundle,暴露到全局 [INFO2/WEBPACK_RES_THIRD]  █ 安装/引入/打包进bundle,为每个模块注入变量 [INFO2/WEBPACK_RES_THIRD_2]  █ CDN引入，打包忽略 [INFO2/WEBPACK_RES_THIRD_3]
+[cf b3| 第三方模块 ] █ 安装/引入/打包进bundle,暴露到全局 [INFO2/WEBPACK_RES_THIRD] [CONFIG/-WEBPACK_CONFIG(PLUGIN_EXPOSE_LOADER)]  █ 安装/引入/打包进bundle,为每个模块注入变量 [INFO2/WEBPACK_RES_THIRD_2]  █ CDN引入，打包忽略 [INFO2/WEBPACK_RES_THIRD_3]
 
 [cf b3| 资源路径 ] 图片[INFO2/WEBPACK_RES_PATH_IMG] CSS[INFO2/WEBPACK_RES_PATH_CSS] CDN所有资源[INFO2/WEBPACK_RES_PATH_ALL] CDN图片[INFO2/WEBPACK_RES_PATH_CDN]
 
@@ -297,6 +297,7 @@ module.exports = {
           'css-loader'
         ]
       }(PLUGIN_CSS)▀,
+      ▀{ test: require.resolve('jquery'), use: 'expose-loader?$'}(PLUGIN_EXPOSE_LOADER)▀, // yarn add expose-loader -D 
       ▀{ test: /\.txt$/, use: 'raw-loader' }(LOADER01)▀ 
     ]
   }

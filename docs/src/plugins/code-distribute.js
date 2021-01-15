@@ -288,8 +288,12 @@ function handleCommon(data, dataid) {
             // 
             let matchLight
             while ((matchLight = /▀([^▀]+)\(([^\)]+)\)▀/.exec(match1)) !== null) {
+              
+              
               match1 = match1.replace(matchLight[0], `<span class="LIGHT LIGHT_${matchLight[2]}">${matchLight[1]}</span>`)
+
             }
+            console.log(match1);
 
             const lineArr = match1.split(/\n/)
             let maxLineLength = 0
