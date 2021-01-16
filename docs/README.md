@@ -1,54 +1,7 @@
-<style>
-  .level2{text-indent: 2em;}
-  .level3{text-indent: 4em;}
-  .level4{text-indent: 6em;}
-  .level5{text-indent: 8em;}
-  .level6{text-indent: 10em;}
-  .hide{display:none}
-</style>
 
-{{testStr}}
-<input type="text" v-model="testStr" />
-<div class="1234">
-  <span v-for="item in occurDate"><input type="checkbox" /> {{item.title}}</span>
-</div>
 
-  
 
-<input type="checkbox" /> 第一点
-<input type="checkbox" /> 第二点
-<input type="checkbox" /> 第三点
-<input type="checkbox" /> 第四点
-
-<div class="level1">{</div>
-<div class="level2 hide">  devServer: {</div>
-<div class="level3 hide">    port: 3000,             // 端口</div>
-<div class="level3 hide">    progress: true,         // 显示进度条</div>
-<div class="level3 hide">    contentBase: './build', // 重新指定静态服务</div>
-<div class="level3 hide">    compress: true,         // 压缩</div>
-<div class="level2 hide">  },</div>
-<div class="level2 hide">  mode: 'development',      // 值：production/development/none</div>
-<div class="level2">  entry: './src/index.js',  // 相对路径</div>
-<div class="level2">  output: {</div>
-<div class="level3 hide">    filename: 'bundle.js',</div>
-<div class="level3 hide">    path: path.resolve(__dirname, 'dist'),           // 绝对路径</div>
-<div class="level2">  },</div>
-<div class="level2 hide">  module: {</div>
-<div class="level3 hide">    rules: [</div>
-<div class="level4 hide">      { test: /\.txt$/, use: 'raw-loader' }</div>
-<div class="level3 hide">    ]</div>
-<div class="level2 hide">  }</div>
-<div class="level2 hide">  plugins: [</div>
-<div class="level3 hide">    new HtmlWebpackPlugin({</div>
-<div class="level4 hide">      template: './src/index.html',  // 模板地址 </div>
-<div class="level4 hide">      filename: 'index.html',        // 打包后的文件名</div>
-<div class="level4 hide">      minify: {</div>
-<div class="level5 hide">        removeAttributeQuotes: true, // 删除属性双引号</div>
-<div class="level5 hide">        collapseWhitespace: true,    // 折叠空行</div>
-<div class="level4 hide">      }</div>
-<div class="level3 hide">    })</div>
-<div class="level2 hide">  ]</div>
-<div class="level1">}</div>
+create-react-app + unt-design-mobile
 
 
 ```runtime
