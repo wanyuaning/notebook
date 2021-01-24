@@ -3,6 +3,9 @@
 
 create-react-app + unt-design-mobile
 
+先选取多行文本，shift+alt+i 已选的文本    末尾多光标
+指定光标起始位，shift+alt 再指定结束位    多行同位多光标
+选取无素，shift+ctrl+L                             全文同位同元素被选取
 
 ```runtime
 聚合元素
