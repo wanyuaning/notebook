@@ -2,8 +2,19 @@
 
 [element-ui](pages/frame/element-ui)<br>
 
+
+
+
+
 # 场景
 ```
+提供和注入 实现跨级访问祖先组件的数据
+  由于vue有$parent属性可以让子组件访问父组件。但孙组件想要访问祖先组件就比较困难。
+  provide：Object | () => Object
+  inject：Array<string> | { [key: string]: string | Symbol | Object }
+  [INFO/SCENE_provide_inject_01] [INFO/SCENE_provide_inject_02]
+
+
 移动端 $router.push无效
   1.this指针异常
   2.有效，但又跳回了
@@ -49,6 +60,128 @@ Vue中使用cdn加载资源
       wi.document.write('<scr' + "ipt> document.getElementById('startTelMedicine').click();</scr" + 'ipt>')
       wi.close()
 
+
+▉SCENE_provide_inject_01▉
+<template>
+  <div
+    id="app"
+  >
+    <router-view
+      v-if="isRouterAlive"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  components: {
+    MergeTipDialog,
+    BreakNetTip
+  },
+  data () {
+    return {
+      isShow: false,
+      isRouterAlive: true
+  },
+
+// 父组件中返回要传给下级的数据
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
+  methods: {
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(() => {
+        this.isRouterAlive = true
+      })
+    }
+  }
+}
+</script>
+<template>
+  <popup-assign
+    :id="id"
+    @success="successHandle"
+  >
+    <div class="confirm-d-tit"><span class="gray-small-btn">{{ name }}</span></div>
+    <strong>将被分配给</strong>
+    <a
+      slot="reference"
+      class="unite-btn"
+    >
+      指派
+    </a>
+  </popup-assign>
+</template>
+<script>
+import PopupAssign from '../PopupAssign'
+export default {
+//引用vue reload方法
+  inject: ['reload'],
+  components: {
+    PopupAssign
+  },
+methods: {
+    // ...mapActions(['freshList']),
+    async successHandle () {
+      this.reload()
+    }
+  }
+}
+</script>
+▉
+▉SCENE_provide_inject_02▉
+<template>
+    <div id="app">
+    </div>
+</template>
+<script>
+    export default {
+        data () {
+                return {
+                    datas: [
+                        {
+                            id: 1,
+                            label: '产品一'
+                        },
+                        {
+                            id: 1,
+                            label: '产品二'
+                        },
+                        {
+                            id: 1,
+                            label: '产品三'
+                        }
+                    ]
+                }
+        },
+        provide {
+            return {
+                datas: this.datas
+            }
+        }
+    }
+</script>
+后代组件
+<template>
+    <div>
+        <ul>
+        <li v-for="(item, index) in datas" :key="index">
+            {{ item.label }}
+        </li>
+        </ul>
+    </div>
+</template>
+<script>
+    export default {
+        inject: ['datas']
+    }
+</script>
+
+▉
 ```
 
 ```
