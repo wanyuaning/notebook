@@ -1,4 +1,149 @@
 ```
+多入口
+yarn add @babel/core @babel/preset-env babel-loader webpack-dev-server -D
+
+webpack.config.js
+
+let path = require('path')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  mode: 'development',
+  entry: {
+    home: './src/index.js',
+    other:'./src/other.js'
+  },
+  output: {
+    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
+    1.两个入口，以两个实例来产生两个输出
+    2.两个输出都会插入所有资源，需使用chunks罗列所需的资源
+    3.
+    new HtmlWebpackPlugin({
+      template:'./index.html',
+      filename: 'index.html',
+      chunks: ['home']
+    }),
+    new HtmlWebpackPlugin({
+      template:'./other.html',
+      filename: 'other.html',
+      chunks: ['other', 'home']
+    })
+  ]
+}
+
+
+SOURCE MAP
+module.exports = {
+  mode: 'production',
+  entry: {
+    home: './src/index.js'
+  },
+  module: {
+    rules: [
+      {test:/\.js$/, use: {loader: 'babel-loader', options: {presets:['@bebal/preset-env']}}}
+    ]
+  },
+  // 增加映射文件，调试代码
+  1.source-map 会单独生成一个sourcemap文件，会标识列和行
+  2.eval-source-map 无单独文件而和资源打包在一起，会标识列和行
+  3.cheap-module-source-map 单独映射文件，不会标识列
+  4.cheap-module-eval-source-map 集成在打包文件里，不会标识列
+  devtool: 'source-map',
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template:'./index.html',
+      filename: 'index.html'
+    })
+  ]
+}
+
+自动打包实体文件
+module.exports = {
+  mode: 'production',
+  entry: {
+    home: './src/index.js'
+  },
+  module: {
+    rules: [
+      {test:/\.js$/, use: {loader: 'babel-loader', options: {presets:['@bebal/preset-env']}}}
+    ]
+  },
+  // 监控当前代码变化
+  watch: true,
+  watchOptions: {
+    poll: 1000,  // 频率(毫秒)多少时长检查一次变动
+    aggregateTimeout: 500, // 防抖(毫秒)
+    ignored: /node_modules/,  // 忽略监控
+
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template:'./index.html',
+      filename: 'index.html'
+    })
+  ]
+}
+
+一些小插件
+1.cleanWebpackPlugin  防止输出文件堆叠  yarn add clean-webpack-plugin -D
+2.copyWebpackPlugin   拷贝指定文件(夹)  yarn add copy-webpack-plugin -D
+3.bannerPlugin 内置 版权申明插件
+
+let CleanWebpackPlugin = require('clean-webpack-plugin')
+let CopyWebpackPlugin = require('copy-webpack-plugin')
+let webpack = require('webpack')
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    home: './src/index.js'
+  },
+  module: {
+    rules: [
+      {test:/\.js$/, use: {loader: 'babel-loader', options: {presets:['@bebal/preset-env']}}}
+    ]
+  },
+  watch: true,
+  watchOptions: {
+    poll: 1000,  
+    aggregateTimeout: 500, 
+    ignored: /node_modules/, 
+
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template:'./index.html',
+      filename: 'index.html'
+    }),
+    new CleanWebpackPlugin('./dist'), // 可用数组清空多个文件夹
+    new CopyWebpackPlugin([
+      {from: 'doc', to: './'}  // doc目录下的文件拷贝到输出目录下
+    ]),
+    new webpack.BannerPlugin('make 2020 by ewan')
+  ]
+}
+
+
+
+
+
+
+
 场景：[前端工程搭建Babel7+](/pages/solution/scene?id=前端工程搭建-babel7+)  require动态变量[DETAIL/WEBPACK_REQUIRE_01]
 
 [h3|webpack4] [DETAIL/WEBPACK_ABOUT]
