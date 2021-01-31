@@ -66,6 +66,8 @@ Alt+M              紧凑化代码
 [h2 reverse|koroFileHeader]
 ctrl + Alt + i     文件头部注释 [fileheader.customMade](pages/tools/vscode.md?id=settings)
 ctrl + Alt + t     在鼠标位置插入相应的注释 [fileheader.cursorMode](pages/tools/vscode.md?id=settings)
+
+code runner
 ```
 
 ### 用户片段

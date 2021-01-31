@@ -138,6 +138,66 @@ module.exports = {
   ]
 }
 
+代理
+/server.js
+let express = require('express') //webpackDevServer自带
+let app = express()
+app.get('api/user', (req,res)=>{
+  res.json({name:'服务数据'})
+})
+app.listen(3000)
+
+/src/index.js  
+let xhr = new XMLHttpReuquest()
+xhr.open('GET', '/api/user', true)
+xhr.onload = function(){
+  console.log(xhr.response)
+}
+xhr.send()
+
+index.js运行在8080端口，请求不到3000端口，这时可设置一个代理服务
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    home: './src/index.js'
+  },
+  module: {
+    rules: [
+      {test:/\.js$/, use: {loader: 'babel-loader', options: {presets:['@bebal/preset-env']}}}
+    ]
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  devServer: {
+    // 服务端app.get('/api/user')与方问路径xhr.open('GET', '/api/user', true)吻合时
+    proxy: {'/api': 'http://localhost:3000'}
+    // 服务端app.get('/user')与方问路径xhr.open('GET', '/api/user', true)不吻合时
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {'/api': ''}
+      }
+    }
+    //单纯模拟数据(由webpackDevServer内置的express通过注入app支持 没有跨域问题)
+    before(app){
+      app.get('/user', (req,res)=>{
+        res.json({name:'服务数据'})
+      })
+    }
+    //服务端是自己的 在服务端里启动webpack
+    webpack-dev-middleware
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template:'./index.html',
+      filename: 'index.html'
+    })
+  ]
+}
+
 
 
 
