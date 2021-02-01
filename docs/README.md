@@ -1,4 +1,34 @@
 
+
+
+
+Rust https://hardocs.com/d/rustprimer/1st-glance/index.html
+IDE:VSCode
+安装：Rust编译工具      https://www.rust-lang.org/zh-CN/tools/install  
+安装  C++ build tools  http://go.microsoft.com/fwlink/?LinkId=691126
+> rustc -V
+
+Demo
+新建文件夹 runoob-greeting
+runoob-greeting> cargo new greeting    // 会构建一个名叫 greeting 的 Rust 工程目录
+runoob-greeting> cd ./greeting
+runoob-greeting\greeting> cargo build
+runoob-greeting\greeting> cargo run
+
+慕课 https://www.imooc.com/learn/1301
+教程 https://edu.51cto.com/center/course/lesson/index?id=497275
+
+构建一个浏览器引擎 https://github.com/mbrubeck/robinson.git
+DOM树 + 样式树 = 布局树，绘图程序 绘制到 浏览器画板
+浏览器引擎
+  HTTP客户端
+  HTML解析器
+  CSS解析器
+  JavaScript引擎
+    解析器
+    解释器
+    编译器
+
 发起数据请求 （webpack)
 创建一个服务器
 
