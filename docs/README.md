@@ -20,7 +20,7 @@ runoob-greeting\greeting> cargo run
   获取参数：std::env::args()
   索引参数：std::env::args().nth(1)
   期望参值：std::env::args().nth(1).expect("no pattern given") // foobar
-  
+
 打造一个命令行工具 https://juejin.cn/post/6844903821307723789
 与人交互
 与机器交互
@@ -32,6 +32,8 @@ runoob-greeting\greeting> cargo run
 
 构建一个浏览器引擎 https://github.com/mbrubeck/robinson.git
 DOM树 + 样式树 = 布局树，绘图程序 绘制到 浏览器画板
+
+
 浏览器引擎
   HTTP客户端
   HTML解析器
@@ -40,6 +42,14 @@ DOM树 + 样式树 = 布局树，绘图程序 绘制到 浏览器画板
     解析器
     解释器
     编译器
+
+
+
+
+
+
+
+
 
 发起数据请求 （webpack)
 创建一个服务器
