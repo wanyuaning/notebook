@@ -15,6 +15,18 @@ runoob-greeting> cd ./greeting
 runoob-greeting\greeting> cargo build
 runoob-greeting\greeting> cargo run
 
+命令行应用  http://llever.com/cli-wg-zh/tutorial/README.zh.html
+  目标 > grrs foobar test.txt   默认值String  值类型std::path::PathBuf(PathBuf就像一个String专用作跨平台工作的文件系统路径)
+  获取参数：std::env::args()
+  索引参数：std::env::args().nth(1)
+  期望参值：std::env::args().nth(1).expect("no pattern given") // foobar
+  
+打造一个命令行工具 https://juejin.cn/post/6844903821307723789
+与人交互
+与机器交互
+
+
+
 慕课 https://www.imooc.com/learn/1301
 教程 https://edu.51cto.com/center/course/lesson/index?id=497275
 
