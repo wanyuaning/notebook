@@ -1,5 +1,70 @@
+构建canvas动画框架
+通用类的提取 https://www.cnblogs.com/shawn-xie/archive/2012/07/11/2585551.html
 
+Electron
+node -v
+npm -v
+安装：cd electron-demo && npm init -y && npm i --save-dev electron
+/main.js
+  const { app, BrowserWindow } = require('electron')
 
+  function createWindow () {
+    const win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        nodeIntegration: true // 如果要从渲染过程中访问Node.js API 则需设为true
+      }
+    })
+
+    win.loadFile('index.html')
+  }
+
+  app.whenReady().then(createWindow)
+
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow()
+    }
+  })
+/html.html
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Hello World!</title>
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  </head>
+  <body style="background: white;">
+      <h1>Hello World!</h1>
+      <p>
+          We are using node <script>document.write(process.versions.node)</script>,
+          Chrome <script>document.write(process.versions.chrome)</script>,
+          and Electron <script>document.write(process.versions.electron)</script>.
+          ewan
+      </p>
+  </body>
+  </html>
+/package.json {
+  "author": "ewan",
+  "description": "demo",  
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}
+electron-demo> npm start
+
+打包并分发应用程序
+electron-demo> npm install electron-squirrel-startup --save
+electron-demo> npx @electron-forge/cli import
+electron-demo> npm run make
 
 
 Rust https://hardocs.com/d/rustprimer/1st-glance/index.html
