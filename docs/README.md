@@ -1,5 +1,10 @@
+ewan96 ewan... ...  ewan9616696010@gmail.com
+
 构建canvas动画框架
 通用类的提取 https://www.cnblogs.com/shawn-xie/archive/2012/07/11/2585551.html
+
+cnGameJS
+1.A星寻址 aStar.js
 
 Electron
 node -v
