@@ -8,9 +8,12 @@
 ### settings
 
 ```O
-{
-  "editor.detectIndentation": false,     // 默认启用了根据文件类型自动设置tabSize
-  "editor.tabSize": 4,                   // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
+{  
+  "editor.tabSize": 4,                   // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先,再不行应如下插件设置
+    // "editor.detectIndentation": false,     默认启用了根据文件类型自动设置tabSize
+    // "beautify.tabSize": 4,                 beautify插件
+    // "vetur.format.options.tabSize": 4,     vetur插件
+    // "prettier.tabWidth": 4,                prettier插件
   "editor.fontFamily": "monospace",      // windows下IDE正常："consolas"
   "editor.formatOnSave": false,          // 保存时格式化文档
 
