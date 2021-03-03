@@ -78,6 +78,32 @@ IDE:VSCode
 安装  C++ build tools  http://go.microsoft.com/fwlink/?LinkId=691126
 > rustc -V
 
+
+泛型
+fn largest_u32(a:u32, b:u32) -> u32 {
+  if a>b {
+    a
+  } else {
+    b
+  }
+}
+fn main(){
+  println!("{}", largest_u32(1, 2));
+}
+
+fn largest<T:std::cmp::PartialOrd>(a:T, b:T) -> T {
+  if a>b {
+    a
+  } else {
+    b
+  }
+}
+fn main(){
+  println!("{}", largest<T:u32>(1, 2));
+  println!("{}", largest<T:f32>(1.1, 2.2));
+}
+
+
 Demo
 新建文件夹 runoob-greeting
 runoob-greeting> cargo new greeting    // 会构建一个名叫 greeting 的 Rust 工程目录
