@@ -29,6 +29,7 @@ React Component
   JSX语法：const ele = <h1>欢迎进入React的世界</h1>   脚本语法：const ele = React.createElement('h1', {className: 'blue', children: 'Hello, world'})
   插入元素：{ele}   渲染元素：ReactDOM.render( <Demo list={['张三', '李四', '王五']} />, document.getElementById('root') );
 组件：
+  静态
   function Demo(props) { return ( <div className="red"> { props.list.map(item => { return <span>{item}</span> }) } </div> ) }
   ReactDOM.render( <Demo list={['张三', '李四', '王五']} />, document.getElementById('root') );
 实例和节点
@@ -39,7 +40,7 @@ React Component
 })}
 
 ##### 组件
-  /////////////////////////////components/game.jsx
+  /////////////////////////////components/game.jsx 以类的形式可实现动态效果
   import React from 'react'
   class Game extends React.Component { render() { return ( <div className="shopping-list"> <h1>Shopping List for {this.props.name}</h1> </div> ) } }
   export default Game;
@@ -58,13 +59,41 @@ https://www.gugeapps.net/webstore/category/extensions
 
 
 
+<Message style={{color:'red', groundbackColor: 'green'}}/>
+
+默认属性
+class Person extends Component{
+    static defaultProps = { name: '无名' }
+    render(){
+        return <div>{this.props.name}</div>
+    }
+}
+<Person name="ewan" />
+<Person />
 
 
+状态管理
+class Timer extends Component{
+    constructor(){
+        super()
+        this.state = { time: new Date().toLocaleString() }
+    }
+    render(){
+        return <h1>{this.state.time}</h1>
+    }
+    componentDidMount(){
+        window.setInterval(() => {
+            this.setState({ time: new Date().toLocaleString() })
+        })
+    }
+}
 
 
-
-
-
+组件生命周期
+class Demo extends React.Component {
+  componentWillMount(){}
+  componentDidMount(){}
+}
 
 
 
