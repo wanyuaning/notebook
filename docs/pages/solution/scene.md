@@ -2,7 +2,11 @@
 
 
 
-
+### 浏览器静默与激活
+var hiddenProperty = 'hidden' in document ? 'hidden' : 'webkitHidden' in document ? 'webkitHidden' : 'mozHidden' in document ? 'mozHidden' : null; // 不同浏览器 hidden 名称
+var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange'); // 不同浏览器的事件名
+var onVisibilityChange = function(){ if (!document[hiddenProperty]) { console.log('页面非激活') }else{ console.log('页面激活') } }
+document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 
 
 ### 分页

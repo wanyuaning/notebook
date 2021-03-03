@@ -124,7 +124,7 @@ DOM树 + 样式树 = 布局树，绘图程序 绘制到 浏览器画板
 发起数据请求 （webpack)
 创建一个服务器
 
-create-react-app + unt-design-mobile
+
 
 先选取多行文本，shift+alt+i 已选的文本    末尾多光标
 指定光标起始位，shift+alt 再指定结束位    多行同位多光标
@@ -267,6 +267,7 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 <ul class="no-list block-list">
   <li><a href="#/pages/frame/index.md">框架</a></li>
   <li><a href="#/pages/frame/vue/index.md">VUE</a></li>
+  <li><a href="#/pages/frame/react/index.md">React</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">

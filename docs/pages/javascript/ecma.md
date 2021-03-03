@@ -49,7 +49,7 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 　　方档规范 | 当前URL信息 | 浏览器信息 | 显示屏信息 | 用户访问信息 | 窗口集
 ```tree
 [Window](pages/javascript/bom?id=Window) [BOM规范](pages/javascript/bom?id=浏览器对象模型)
-  document: [Document](pages/javascript/bom?id=document) [DOM规范](pages/javascript/bom?id=文档对象模型)
+  document: [Document](pages/javascript/bom?id=document) [DOM规范](pages/javascript/bom?id=文档对象模型) [浏览器静默与激活](pages/solution/scene?id=浏览器静默与激活)
     element:[Element](pages/javascript/bom?id=element)
     title
     cookie
