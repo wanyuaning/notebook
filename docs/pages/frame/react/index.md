@@ -61,14 +61,39 @@ https://www.gugeapps.net/webstore/category/extensions
 
 <Message style={{color:'red', groundbackColor: 'green'}}/>
 
-默认属性
+
+
+
+
+受控/非受控组件
+
+
+
+事件
+class Button extends Component{
+    constructor(){
+        super()
+        this.state = {buttonText: 'on'}
+    }
+    handleClick = () => { this.setState({buttonText: 'off'}) } // 这个方法是按钮对象引用 要保持this不变
+    render(){ return <button onClick={this.handleClick}>{this.state.buttonText}</button> }
+}
+
+
+默认属性&属性限制
+import React, {Component} from 'react'
+import PropTypes from 'prop-types' // 脚手架已经代为安装了
 class Person extends Component{
     static defaultProps = { name: '无名' }
+    static propTypes = {
+        name: PropTypes.string,
+        age: PropTypes.number.isRequired
+    }
     render(){
-        return <div>{this.props.name}</div>
+        return <div>{this.props.name} {this.props.age}</div>
     }
 }
-<Person name="ewan" />
+<Person name="ewan" age={20} />
 <Person />
 
 
