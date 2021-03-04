@@ -1,11 +1,21 @@
-create-react-app + unt-design-mobile
+create-react-app / unt-design-mobile
+react / react-dom / react-router / redux / axios 
+
+
+
+框架是  Create React App
+UI库是Ant Design Mobile of React
+yarn install
+yarn start
+yarn build
+ui库文档 https://mobile.ant.design/docs/react/introduce-cn
 
 ##### 环境&应用
-会自动安装运行环境，包括react react-dom等
+会自动安装运行环境，集成了react/react-dom/react-router等
 ```
-npm install -g create-react-app // create-react-app --version 
+npm install -g create-react-app  // create-react-app --version 
 
-npx create-react-app react-app
+npx create-react-app react-app       
 cd react-app
 react-app > npm start // http://localhost:3000/
 ```
@@ -62,8 +72,9 @@ https://www.gugeapps.net/webstore/category/extensions
 <Message style={{color:'red', groundbackColor: 'green'}}/>
 
 
-
-
+性能检测工具 Web Vitals
+src/index.js 最后一行末
+reportWebVitals(console.log);
 
 受控/非受控组件
 
@@ -120,15 +131,67 @@ class Demo extends React.Component {
   componentDidMount(){}
 }
 
+##### 路由(5.x)
+1. npm install react-router-dom --save
+2. src/App.js
+    import { BrowserRouter, Route, Link } from 'react-router-dom';
+    import Home from './pages/home';
+    import Detail from './pages/detail';
+    import Login from './pages/login';
+    <BrowserRouter>
+      <Route path='/login' exact component={Login}></Route>
+      <Route path='/detail/:id' exact component={Detail}></Route>
+      <Route path='/' exact component={Home}></Route>                  
+      <Link to="/">Home</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/detail/5">Detail</Link>
+    </BrowserRouter>
+    脚本跳转：this.props.history.push({pathname:"/path/" + name});
+    取参接收：this.props.match.params.name
+
+    <Route path='/web/departManange ' component={DepartManange}/>
+    <Link to="web/departManange?tenantId=12121212">xxx</Link>
+    脚本跳转：this.props.history.push({pathname:"/web/departManange?tenantId" + row.tenantId});
+    取参接收：this.props.location.search
+
+    <Route path='/query' component={Query}/>
+    <Link to={{ path : '/query' , query : { name : 'sunny' }}}>
+    脚本跳转：this.props.history.push({pathname:"/query",query: { name : 'sunny' }});
+    取参接收：this.props.location.query.name
+
+    <Route path='/sort ' component={Sort}/>
+    <Link to={{ path : ' /sort ' , state : { name : 'sunny' }}}> 
+    脚本跳转：this.props.history.push({pathname:"/sort ",state : { name : 'sunny' }});
+    取参接收：this.props.location.query.state 
+
+##### 状态管理机
+  单一数据源
+  State 是只读的
+  使用纯函数来执行修改
+
+  reducers  描述action如何改变state tree
+
+1. npm install redux react-redux --save
+2. src/index.js
 
 
 
 
+##### 坑
+使用scss，遇上node-sass安装不上
+  1. 下载 https://npm.taobao.org/mirrors/node-sass/v4.14.1/win32-x64-64_binding.node 下载完成放在如D:\；
+  2. 运行命令： npm install node-sass -D --sass_binary_path=D:/win32-x64-64_binding.node
 
+node_modules\node-sass\vendor 的报错解决方法
+  Error: ENOENT: no such file or directory, scandir 'D:\Work\ybxzs\node_modules\node-sass\vendor'
+  按提示创建vendor文件夹 ...\node_modules\node-sass\vendor
+  yarn start
+  这时报错：
+  Error: Missing binding D:\Work\ybxzs\node_modules\node-sass\vendor\win32-x64-72\binding.node
+  Node Sass could not find a binding for your current environment: Windows 64-bit with Node.js 12.x
 
-
-
-
+  去 https://github.com/sass/node-sass/releases 跟据.node或.pdb下载对应版本的node-sass的binding,比如我这里就要下载: win32-x64-72_binding.node
+  将该文件改名并放到相应目录： ...\node_modules\node-sass\vendor\win32-x64-47\binding.node
 
 
 
