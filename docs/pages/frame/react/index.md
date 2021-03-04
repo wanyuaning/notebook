@@ -172,7 +172,27 @@ class Demo extends React.Component {
   reducers  描述action如何改变state tree
 
 1. npm install redux react-redux --save
-2. src/index.js
+2. 注入 src/index.js
+    import { createStore } from "redux"
+    import { Provider } from "react-redux"
+    import reducer from "./store/reducer"
+    const store = createStore(reducer)
+    ReactDOM.render(  
+      <React.StrictMode>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+3. 使用 src/component/Store.jsx
+    import React,{Component} from 'react'
+    import {connect} from 'react-redux'
+    class Store extends Component{
+        constructor({title}){ super(); this.state = { title } }
+        render(){ return <h1>状态管理机:{this.state.title}</h1> }
+    }
+    export default connect(state => { return { title: state.title } })(Store)
 
 
 
