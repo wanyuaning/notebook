@@ -140,7 +140,7 @@ class Demo extends React.Component {
 }
 
 ##### 路由(5.x)
-1. npm install react-router-dom --save
+1. npm install react-router react-router-dom --save
 2. src/App.js
     import { BrowserRouter, Route, Link } from 'react-router-dom';
     import Home from './pages/home';
