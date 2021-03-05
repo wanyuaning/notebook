@@ -76,12 +76,17 @@ https://www.gugeapps.net/webstore/category/extensions
 src/index.js 最后一行末
 reportWebVitals(console.log);
 
-受控/非受控组件
+##### 受控组件
 class Form extends Component{
     constructor(){ super(); this.state = {a: 0, b: 0, res: 0} }
     handleA = e => { let val = Number(e.target.value); this.setState({ a: val, res: val + this.state.b }) }
     handleB = e => { let val = Number(e.target.value); this.setState({ b: val, res: this.state.a + val }) }
     render(){ return <div><input value={this.state.a} onChange={this.handleA}></input>+<input value={this.state.b} onChange={this.handleB}></input>=<input value={this.state.res} readOnly></input></div> }
+}
+##### 非受控组件
+class Form2 extends Component{
+    handle = e => { let a = Number(this.refs.a.value); let b = Number(this.refs.b.value); this.refs.c.value = a + b }
+    render(){ return <div  onChange={this.handle}><input ref="a" type="text"/> + <input ref="b" type="text"/> = <input ref="c" type="text"/></div> }
 }
 
 
