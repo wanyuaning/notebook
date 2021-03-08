@@ -294,6 +294,7 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
   <li><a href="#/pages/frame/index.md">框架</a></li>
   <li><a href="#/pages/frame/vue/index.md">VUE</a></li>
   <li><a href="#/pages/frame/react/index.md">React</a></li>
+  <li><a href="#/pages/frame/typescript/index.md">Typescript</a></li>
 </ul>
 <br>
 <ul class="no-list block-list">
