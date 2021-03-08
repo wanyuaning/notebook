@@ -297,6 +297,12 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 </ul>
 <br>
 <ul class="no-list block-list">
+  <li><a href="#/pages/concept/index.md">理念</a></li>
+  <li><a href="#/pages/concept/design-pattern/index.md">设计模式</a></li>
+  <li><a href="#/pages/concept/object-oriented/index.md">面向对象</a></li>
+</ul>
+<br>
+<ul class="no-list block-list">
   <li><a href="#/pages/plugin/index.md">插件&功能</a></li>
 </ul>
 
