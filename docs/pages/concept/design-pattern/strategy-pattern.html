@@ -11,33 +11,50 @@
     <div id="move" style="position: absolute;background-color:blue;width:20px;height:20px"></div>
   </div>
   <script>
+    /* 策略模式
+     * 
+     */
     class StrategyPattern{
       #strategy
+      #name
       setStrategy(obj){this.#strategy = obj}
+      useStrategy(name){this.#name = name}
+      // 触手API
       addStrategy(name, fn){this.#strategy[name] = fn}
-      useStrategy(name){return this.#strategy[name]}
+      get(){return this.#strategy[this.#name]}
+      run(){return this.#strategy[this.#name].apply(null, arguments)}
     }
+
+    /* 状态模式
+     * 
+     */
     class StatePattern{
-      #state
+      #state      
       setState(obj){this.#state = obj}
-      autoUse(name){return this.#state[name]}
+      // 触手API
+      addState(name, fn){this.#state[name] = fn}
+      select(name){return this.#state[name]}
+      run(name){return this.#state[name].apply(null, arguments)}
     }
 
     var container = document.getElementById('container'); container.style.height = window.innerHeight +"px";
-    var move = document.getElementById('move');
-
+    var ele = document.getElementById('move');
+    // 缓动策略解耦
     let tweens = new StrategyPattern()
     tweens.setStrategy({
-      linear: (t,b,c,d) => c*t/d+b,
-      easeIn: (t,b,c,d) => c*(t/=d)*t+b,
-      strongEaseIn: (t,b,c,d) => c*(t/=d)*t*t*t*t+b,
-      strongEaseOut: (t,b,c,d) => c*((t=t/d-1)*t*t*t*t+1)+b,
-      sineaseIn: (t,b,c,d) => c*(t/=d)*t*t+b,
-      sineaseOut: (t,b,c,d) => c*((t=t/d-1)*t*t+1)+b
+      linear: (t,b,c,d) => c * t / d + b,
+      easeIn: (t,b,c,d) => c * (t /= d) * t + b,
+      strongEaseIn: (t,b,c,d) => c * (t /= d) * t * t * t * t + b,
+      strongEaseOut: (t,b,c,d) => c * ((t = t / d - 1) * t * t * t * t + 1) + b,
+      sineaseIn: (t,b,c,d) => c * (t /= d) * t * t + b,
+      sineaseOut: (t,b,c,d) => c * ((t = t / d - 1) * t * t + 1) + b
     })
+    tweens.useStrategy('easeIn')
+
+    // Dom状态解耦
     let domState = new StatePattern()
     domState.setState({
-      bottom: (val) => {move.style.bottom = val +'px';}
+      bottom: (val) => {console.log(val); ele.style.bottom = val +'px';}
     })
 
     
@@ -50,22 +67,25 @@
         this.endPos = 0
         this.duration = 0        //小球运动的时间
         this.propertyName = null //要改变的css属性,例如top,left
-        this.easing=null         //缓动算法
+        this.tweens = null       //缓动策略对象 解耦到外部维护
       }
-      start(endPos,duration,propertyName,easing){
+      setTweens(tweens){this.tweens = tweens}
+      start(endPos,duration,propertyName){
         //记录开始位置,并设置定时器是否有要执行的步数
         this.startTime = new Date();
+        console.log('getBoundingClientRect',this.dom.getBoundingClientRect());
+        
         this.startPos = this.dom.getBoundingClientRect()[propertyName];
         this.endPos = endPos;
         this.duration = duration;
         this.propertyName = propertyName;
-        this.easing = tweens.useStrategy(easing);
+        
         var setTime = setInterval(function(){
             if(this.step()){
                 clearsetInterval(setTime);
             }
             this.step();
-        }.bind(this),20)
+        }.bind(this),1000)
       }
       step(){//动画执行一步需要的操作
         var t = +new Date();
@@ -73,27 +93,27 @@
             this.update(this.endPos);
             return false;
         }
-        var pos = this.easing(t-this.startTime,this.startPos,this.endPos,this.duration);//t动画已消耗时间、b原始位置、c目标位置、d持续时间
+        var pos = this.tweens.run(t-this.startTime, this.startPos, this.endPos, this.duration) //t动画已消耗时间、b原始位置、c目标位置、d持续时间
         this.update(pos);
       }
       update(pos){//更新div的css属性
         if(pos > window.innerWidth || pos>window.innerHeight){
             //this.dom.style[this.propertyName] = this.endPos +'px';
-            domState.autoUse(this.propertyName)(this.endPos)
+            domState.select(this.propertyName)(this.endPos)
             return false;
         }
         //this.dom.style[this.propertyName] = pos +'px';
-        domState.autoUse(this.propertyName)(this.endPos)
+        domState.select(this.propertyName)(pos)
       }
     }
     
     
     
     
-    //调用
-    
-    var a = new Animation(move);
-    a.start(100,1000,'bottom','easeIn')
+    //调用    
+    var a = new Animation(ele);
+    a.setTweens(tweens)
+    a.start(100,1000,'bottom')
   </script>
 </body>
 </html>
