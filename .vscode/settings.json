@@ -3,7 +3,7 @@
   "editor.tabSize": 2,                  // 设置缩进不生效时关闭editor.detectIndentation 插件设置优先
   "editor.fontFamily": "consolas",      // 'consolas', monospace
   "editor.formatOnSave": false,         // 保存时格式化文档
-  
+  "editor.minimap.enabled":   false,
   "editor.mouseWheelZoom":     true,     // 滚轮缩放字号大小
 
   // 格式 依赖Prettier 可搜esbenp关键词
