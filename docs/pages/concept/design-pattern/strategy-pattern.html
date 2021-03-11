@@ -11,56 +11,27 @@
     <div id="move" style="position: absolute;background-color:blue;width:20px;height:20px"></div>
   </div>
   <script>
-    /* 策略模式
-     * 
-     */
+    
     class StrategyPattern{
       #strategy
       #name
-      setStrategy(obj){this.#strategy = obj}
+      setStrategyObj(obj){this.#strategy = obj}
       useStrategy(name){this.#name = name}
       // 触手API
       addStrategy(name, fn){this.#strategy[name] = fn}
       get(){return this.#strategy[this.#name]}
       run(){return this.#strategy[this.#name].apply(null, arguments)}
     }
-
-    /* 状态模式
-     * 
-     */
     class StatePattern{
       #state      
-      setState(obj){this.#state = obj}
+      setStateObj(obj){this.#state = obj}
       // 触手API
       addState(name, fn){this.#state[name] = fn}
-      select(name){return this.#state[name]}
+      get(name){return this.#state[name]}
       run(name){return this.#state[name].apply(null, arguments)}
     }
-
-    
-    // 
-    /**
-     * ▇▇▇▇ 缓动策略解耦 ▇▇▇▇
-                                                                                                                         ▮ linear        ▮ easeIn                 
-                               ┌────────────────────── DURATION d=10 ──────────────────────┐                             100*1 /10+0=10   100*(t/=10)*0.1+0=1      
-            START_POSITION b=0 ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅ END_POSITION c=100           100*2 /10+0=20   100*(t/=10)*0.2+0=4 
-                               ▲           ▲           ▲           ▲           ▲           ▲                             100*3 /10+0=30   100*(t/=10)*0.3+0=9 
-                               0           1           2           3           4           5                             100*4 /10+0=40   100*(t/=10)*0.4+0=16
-                                                                                                                         100*5 /10+0=50   100*(t/=10)*0.5+0=25
-
-       ▮ strongEaseIn                      ▮ strongEaseOut                                ▮ sineaseIn                  ▮ sineaseOut 
-       100*(t/=10)*0.1*0.1*0.1*0.1+0=0.001  100*((t=1/10-1)*-0.9*-0.9*-0.9*-0.9+1)+0=40.95  100*(t/=10)*0.1*0.1+0=0.100  100*((t=1/10-1)*-0.9*-0.9+1)+0=27.09
-       100*(t/=10)*0.2*0.2*0.2*0.2+0=0.032  100*((t=1/10-1)*-0.8*-0.8*-0.8*-0.8+1)+0=67.23  100*(t/=10)*0.2*0.2+0=0.800  100*((t=1/10-1)*-0.8*-0.8+1)+0=48.79
-       100*(t/=10)*0.3*0.3*0.3*0.3+0=0.242  100*((t=1/10-1)*-0.7*-0.7*-0.7*-0.7+1)+0=83.19  100*(t/=10)*0.3*0.3+0=2.690  100*((t=1/10-1)*-0.7*-0.7+1)+0=65.70             
-       100*(t/=10)*0.4*0.4*0.4*0.4+0=1.024  100*((t=1/10-1)*-0.6*-0.6*-0.6*-0.6+1)+0=92.22  100*(t/=10)*0.4*0.4+0=6.400  100*((t=1/10-1)*-0.6*-0.6+1)+0=78.40
-       100*(t/=10)*0.5*0.5*0.5*0.5+0=3.125  100*((t=1/10-1)*-0.5*-0.5*-0.5*-0.5+1)+0=96.87  100*(t/=10)*0.5*0.5+0=12.50  100*((t=1/10-1)*-0.5*-0.5+1)+0=87.50
-     *  
-     */
-     
-      
-
     let tweens = new StrategyPattern()
-    tweens.setStrategy({
+    tweens.setStrategyObj({
       linear: (t,b,c,d) => c * t / d + b,
       easeIn: (t,b,c,d) => c * (t /= d) * t + b,
       strongEaseIn: (t,b,c,d) => c * (t /= d) * t * t * t * t + b,
@@ -70,47 +41,36 @@
     })
     tweens.useStrategy('sineaseOut')
 
-    // Dom状态解耦
+
+    /**
+     * Dom状态
+     */ 
     var container = document.getElementById('container'); container.style.height = window.innerHeight +"px";
     var ele = document.getElementById('move');
     let domState = new StatePattern()
-    domState.setState({
-      bottom: (val) => {ele.style.bottom = val +'px';}
-    })
-
+    domState.setStateObj({ bottom: (val) => {ele.style.bottom = val +'px';} })
     
-
     class Animation{
       constructor(dom){
         this.dom = dom
-        this.startTime = this.startPos = this.endPos = this.duration = 0        //小球运动的时间
-        this.propertyName = this.tweens = this.state = null       //缓动策略对象 解耦到外部维护
+        this.startPos = 28        
+        this.tweens = this.state = null       
       }
       setTweens(tweens){this.tweens = tweens}
       setState(state){this.state = state}
-      start(endPos,duration,propertyName){
-        //记录开始位置,并设置定时器是否有要执行的步数
-        this.startTime = new Date().getTime();
-        this.startPos = this.dom.getBoundingClientRect()[propertyName];
-        this.endPos = endPos;
-        this.duration = duration;
-        this.propertyName = propertyName;
-        
-        var setTime = setInterval(function(){
-            if(this.step()){ clearInterval(setTime) }
-            this.step();
-        }.bind(this),20)
-      }
-      step(){//动画执行一步需要的操作
-        var t = +new Date();
-        if(t>this.startTime+this.duration){ this.update(this.endPos); return true }
-        //t动画已消耗时间、b原始位置、c目标位置、d持续时间
-        var pos = this.tweens.run(t-this.startTime, this.startPos, this.endPos, this.duration)
-        this.update(pos);
-      }
-      update(pos){
-        if(pos > this.endPos){ this.state.select(this.propertyName)(this.endPos); return false }
-        this.state.select(this.propertyName)(pos)
+      start(endPos, duration, propertyName){        
+        let startTime = new Date().getTime(), startPos = this.startPos, timer
+        timer = setInterval(() => {
+          let t = new Date().getTime();
+          if(t > startTime + duration){ 
+            clearInterval(timer)
+            this.state && this.state.get(propertyName)(endPos)
+          } else {
+            var pos = this.tweens.run(t - startTime, startPos, endPos, duration)
+            if(pos > endPos) pos = endPos
+            this.state && this.state.get(propertyName)(pos)
+          }
+        },20)
       }
     }
     
