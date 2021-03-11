@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="1000" height="600"></canvas>
+
+  <div>
+    <button onclick="stage.clean()">clear</button>
+  </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  使坐标相对于view
+  context.save();
+  context.translate(-this.x, -this.y);
+  context.restore();
+
+  canvas的save和restore方法：
+
+save() 方法把当前绘画状态的一份拷贝压入到一个保存图像状态的栈中。这里的绘画状态指坐标原点、变形时的变化矩阵（该矩阵是调用 rotate()、scale() 和 translate() 的结果）、以及图形上下文对象的当前属性值等内容。
+
+1.图像上下文CanvasRenderingContext2D的属性和方法：
+
+属性                              描述
+canvas                          取得画布Canvas 元素。
+fillStyle                          填充路径的当前的颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象。
+globalAlpha                    绘制内容的不透明度。值：在 0.0（完全透明）和 1.0（完全不透明）范围间。默认值为 1.0。
+globalCompositeOperation        指定颜色如何与画布上已有颜色组合（合成）。
+lineCap                          指定线条末端如何绘制。值：butt、round和square。默认值是 butt。
+lineJoin                          指定两条线条如何连接。值：round、bevel和miter。默认值是 "miter"。
+lineWidth                       绘制线条的线条宽度。默认值是 1.0，且必须大于 0.0。线条在路径上居中，每边有线条宽的一半。
+miterLimit                       当 lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率。
+shadowBlur                    指定羽化阴影的程度。默认值是 0。
+shadowColor                  把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black。
+shadowOffsetX, shadowOffsetY    指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0。
+strokeStyle                     绘制路径的颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象。
+
+CanvasRenderingContext2D方法
+方法                            描述
+arc()                           用一个中心点和半径，为一个画布的当前子路径添加一条弧线。
+arcTo()                         使用目标点和一个半径，为当前的子路径添加一条弧线。
+beginPath()                     开始一个画布中的一条新路径（或者子路径的一个集合）。
+bezierCurveTo()                 为当前的子路径添加一个三次贝塞尔曲线。
+clearRect()                     在一个画布的一个矩形区域中清除掉像素。
+clip()                          使用当前路径作为连续绘制操作的剪切区域。
+closePath()                     如果当前子路径是打开的，就关闭它。
+createLinearGradient()          返回代表线性颜色渐变的一个 CanvasGradient 对象。
+createPattern()                 返回代表贴图图像的一个 CanvasPattern 对象。
+createRadialGradient()          返回代表放射颜色渐变的一个 CanvasGradient 对象。
+drawImage()                     绘制一幅图像。
+fill()                          使用指定颜色、渐变或模式来绘制或填充当前路径的内部。
+fillRect()                      绘制或填充一个矩形。
+lineTo()                        为当前的子路径添加一条直线线段。
+moveTo()                        设置当前位置并开始一条新的子路径。
+quadraticCurveTo()              为当前路径添加一条贝塞尔曲线。
+rect()                          为当前路径添加一条矩形子路径。
+restore()                       为画布重置为最近保存的图像状态。
+rotate()                        旋转画布。
+save()                          保存 CanvasRenderingContext2D 对象的属性、剪切区域和变换矩阵。
+scale()                         标注画布的用户坐标系统。
+stroke()                        沿着当前路径绘制或画一条直线。
+strokeRect()                    绘制（但不填充）一个矩形。
+translate()                     转换画布的用户坐标系统。
+
+2.translate() 方法为画布的变换矩阵添加水平的和垂直的偏移。参数 dx 和 dy 添加给后续定义路径中的所有点。
+
+restore() 方法从栈中弹出存储的图形状态并恢复 CanvasRenderingContext2D 对象的属性、剪切路径和变换矩阵的值
+
+
+
+{
+  fillStyle: {}, 
+  strokeStyle: {}, 
+  font: {desc: '设置文本'}
+  textBaseline: {}, 
+  textAlign: {}, 
+  maxWidth: {}, 
+  lineWidth: {},
+  clearRect: {props:'(0, 0, width, height)'},
+  fillRect: {props:'x, y, width, height'},
+  strokeRect: {props:'x, y, width, height'},
+  beginPath:{},
+  arc: {props:'x, y, r, startAngle, endAngle, antiClock'};
+  closePath:{},
+  fill:{},
+  stroke:{},
+  save:{},
+  fillText:{props:'text, x, y, maxWidth'},
+  strokeText:{props:'text, x, y, maxWidth'}
+  restore:{},
+  lineTo:{props:'x, y'}, 
+  drawImage:{props:'image, x, y, width, height, x, y, scale, scale'}, 
+  translate:{props:'x, y'},
+  rotate:{}
+} 
+ 
+
+
+  
+</body>
+</html>
+<script type="text/javascript">
+  
+
+  
+
+  class Scene{
+    #canvas
+    #context
+    #width
+    #height
+    constructor(canvas, width, height){
+      this.#canvas = canvas
+      this.#context = canvas.getContext("2d")
+      this.#width = width
+      this.#height = height
+    }
+    clean(){ this.#context.clearRect(0, 0, this.#width, this.#height) }
+    drawRectFill(x, y, w, h, style){ let ctx = this.#context; ctx.fillStyle = style; ctx.fillRect(x, y, w, h) }
+    drawRectStroke(x, y, w, h, style){let ctx = this.#context; ctx.strokeStyle = style; ctx.strokeRect(x, y, w, h) }
+    
+    /**
+     * 创建弧/曲线：arc(x, y, radius, startRad, endRad, anticlockwise)
+     *                   1.5π
+     *                    │
+     *           π ───────┼─────── 0｜2π
+     *                    │
+     *                   0.5π
+     * 以(x,y)为圆心、半径radius的圆上的一段弧线。默认以x轴正方向为基准、顺时针旋转计算角度。
+     * 以startRad起始 默认顺时针旋转 endRad结束 
+     * anticlockwise 是否逆时针旋转 默认为 false
+     */
+    drawCircleFill(x, y, r, startAngle, endAngle, antiClock, style){
+      let context = this.#context;
+      context.beginPath();
+      context.arc(x, y, r, startAngle, endAngle, antiClock);
+      context.closePath();
+      context.fillStyle = style;
+      context.fill();
+    }
+    drawCircleStroke(x, y, r, startAngle, endAngle, antiClock, style){
+      let context = this.#context;
+      context.beginPath();
+      context.arc(x, y, r, startAngle, endAngle, antiClock);
+      context.closePath();
+      context.strokeStyle = style;
+      context.stroke();
+    }
+
+    /**
+     * 文本
+     */
+    drawTextFill(text, font, textBaseline, textAlign, maxWidth, style, x, y){
+      let context = this.#context;
+      context.save();
+      context.font = font
+      context.textBaseline = textBaseline
+      context.textAlign = textAlign
+      context.maxWidth = maxWidth      
+      context.fillStyle = style;
+      maxWidth ? context.fillText(text, x, y, maxWidth) : context.fillText(text, x, y);
+      context.restore();
+    }
+    drawTextStroke(text, font, textBaseline, textAlign, maxWidth, style, x, y){
+      let context = this.#context;
+      context.save();
+      context.font = font
+      context.textBaseline = textBaseline
+      context.textAlign = textAlign
+      context.maxWidth = maxWidth      
+      context.strokeStyle = style;
+      maxWidth ? context.strokeText(text, x, y, maxWidth) : context.strokeText(text, x, y);      
+      context.restore();
+    }
+    /**
+     * 直线
+     */
+    drawLine(style, lineWidth, start, end){
+      let context = this.#context;
+      context.strokeStyle = style;
+      context.lineWidth = lineWidth;
+      context.beginPath();
+      context.lineTo(start[0], start[1]);
+      context.lineTo(end[0], end[1]);
+      context.closePath();
+      context.stroke();
+    }
+
+    /**
+     * 多边形
+     */
+    drawPolygonFill(pointsArr, style){
+      let context = this.#context;
+      context.beginPath();
+      for(var i=0,len=pointsArr.length;i<len-1;i++){
+					var start=pointsArr[i],end=pointsArr[i+1];
+					context.lineTo(start[0],start[1]);
+					context.lineTo(end[0],end[1]);
+			}
+      context.closePath();
+      context.fillStyle = style;
+      context.fill();
+    }
+    drawPolygonStroke(pointsArr, style, lineWidth){
+      let context = this.#context;
+      context.beginPath();
+      for(var i=0,len=pointsArr.length;i<len-1;i++){
+					var start=pointsArr[i],end=pointsArr[i+1];
+					context.lineTo(start[0],start[1]);
+					context.lineTo(end[0],end[1]);
+			}
+      context.closePath();
+      context.lineWidth = lineWidth;
+      context.strokeStyle = style;
+      context.stroke();
+    }
+    /**
+     * 图片
+     * img	          规定要使用的图像、画布或视频。
+       sx	sy	        可选。开始剪切的 xy 坐标位置。
+       swidth sheight	可选。被剪切图像的宽度高度。
+       x y	          在画布上放置图像的 xy 坐标位置。
+       width height	  可选。要使用的图像的宽度高度。（伸展或缩小图像）
+     */
+    drawImage(img, sx, sy, swidth, sheight, x, y, width, height){
+      let context = this.#context;
+      context.drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
+    }
+    aa(){
+      context.save();
+      context.translate(this.x + halfWith, this.y + halfHeight);
+      context.rotate(((this.angle * Math.PI) / 180) * -1);
+      context.drawImage(this.image, this.imgX, this.imgY, this.imgWidth, this.imgHeight, -halfWith, -halfHeight, this.width, this.height);
+      context.restore();
+    }
+  }
+
+  let stage = new Scene(document.getElementById("myCanvas"), 1000, 600)
+  stage.drawRectFill(10, 10, 50, 50, '#f00')
+  stage.drawRectStroke(80, 10, 50, 50, '#0f0')
+  stage.drawCircleFill(170, 35, 25, 0, Math.PI*2, false, '#0f0')
+  stage.drawCircleStroke(240, 35, 25, 0, Math.PI*2, false, '#0f0')
+  stage.drawTextFill("文本样本", "20px Georgia", null, 'left', 200, '#f00', 300, 40)
+  stage.drawTextStroke("文本样本", "20px Georgia", null, 'left', 200, '#f00', 400, 40)
+  stage.drawLine('#00f', 5, [500,35], [600,35])
+  stage.drawPolygonFill([[10,80], [100,80], [100, 180], [20, 180]], '#00f')
+  stage.drawPolygonStroke([[120,80], [200,80], [200, 180], [130, 180]], '#f00')
+  var img = new Image()
+  img.onload = function(){
+    stage.drawImage(this, 0, 0, 202, 205, 10, 220, 80, 80)
+  }
+  img.src = '001.png'
+  
+  
+
+</script>
+
+  
+
+  
+  
+  
+  
