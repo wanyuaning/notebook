@@ -12,103 +12,55 @@
   <div>
     <button onclick="stage.clean()">clear</button>
   </div>
+
+
+
+管理
+clearRect(x, y, width, height)            在一个画布的一个矩形区域中清除掉像素。
+beginPath()            开启一条新路径的唯一方法
+save()                 保存当前环境状态
+restore()              恢复当前环境状态
+
+指针
+moveTo()               子路径 设置当前位置并开始一条新的子路径
+
+路径
+lineTo()               为当前的子路径添加一条直线线段
+arc()                  用一个中心点和半径，为一个画布的当前子路径添加一条弧线。
+arcTo()                使用目标点和一个半径，为当前的子路径添加一条弧线。
+rect()                 为当前路径添加一条矩形子路径。
+quadraticCurveTo()     为当前路径添加一条贝塞尔曲线。
+bezierCurveTo()        为当前的子路径添加一个三次贝塞尔曲线。
+
+路径工具
+fill()                 使用指定颜色、渐变或模式来绘制或填充当前路径的内部。
+stroke()               沿着当前路径绘制或画一条直线。
+fillText
+strokeText
+closePath()            仅仅是闭合路径的功能 与beginPath没有任何联系！！！！！！！
+
+绘制
+drawImage()            绘制一幅图像
+fillRect(x,y,width,height)             绘制或填充一个矩形
+strokeRect()           绘制（但不填充）一个矩形。
+
+变换
+rotate(angle)                  angle以弧度计 角度与弧度换算：角度*Math.PI/180 公式进行计算 如需旋转 5 度：5*Math.PI/180
+scale(scalewidth,scaleheight)  1=100% 0.5=50% 2=200% 依次类推
+translate(x, y)            方法为画布的变换矩阵添加水平的和垂直的偏移。参数 dx 和 dy 添加给后续定义路径中的所有点
+clip()                 用当前路径去定义的剪切区域
+
+createLinearGradient() 返回代表线性颜色渐变的一个 CanvasGradient 对象
+createPattern()        返回代表贴图图像的一个 CanvasPattern 对象
+createRadialGradient() 返回代表放射颜色渐变的一个 CanvasGradient 对象
+
+
+
+
+
   
-
   
-
   
-
-  
-
-  
-
-  
-
-  
-
-  使坐标相对于view
-  context.save();
-  context.translate(-this.x, -this.y);
-  context.restore();
-
-  canvas的save和restore方法：
-
-save() 方法把当前绘画状态的一份拷贝压入到一个保存图像状态的栈中。这里的绘画状态指坐标原点、变形时的变化矩阵（该矩阵是调用 rotate()、scale() 和 translate() 的结果）、以及图形上下文对象的当前属性值等内容。
-
-1.图像上下文CanvasRenderingContext2D的属性和方法：
-
-属性                              描述
-canvas                          取得画布Canvas 元素。
-fillStyle                          填充路径的当前的颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象。
-globalAlpha                    绘制内容的不透明度。值：在 0.0（完全透明）和 1.0（完全不透明）范围间。默认值为 1.0。
-globalCompositeOperation        指定颜色如何与画布上已有颜色组合（合成）。
-lineCap                          指定线条末端如何绘制。值：butt、round和square。默认值是 butt。
-lineJoin                          指定两条线条如何连接。值：round、bevel和miter。默认值是 "miter"。
-lineWidth                       绘制线条的线条宽度。默认值是 1.0，且必须大于 0.0。线条在路径上居中，每边有线条宽的一半。
-miterLimit                       当 lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率。
-shadowBlur                    指定羽化阴影的程度。默认值是 0。
-shadowColor                  把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black。
-shadowOffsetX, shadowOffsetY    指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0。
-strokeStyle                     绘制路径的颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象。
-
-CanvasRenderingContext2D方法
-方法                            描述
-arc()                           用一个中心点和半径，为一个画布的当前子路径添加一条弧线。
-arcTo()                         使用目标点和一个半径，为当前的子路径添加一条弧线。
-beginPath()                     开始一个画布中的一条新路径（或者子路径的一个集合）。
-bezierCurveTo()                 为当前的子路径添加一个三次贝塞尔曲线。
-clearRect()                     在一个画布的一个矩形区域中清除掉像素。
-clip()                          使用当前路径作为连续绘制操作的剪切区域。
-closePath()                     如果当前子路径是打开的，就关闭它。
-createLinearGradient()          返回代表线性颜色渐变的一个 CanvasGradient 对象。
-createPattern()                 返回代表贴图图像的一个 CanvasPattern 对象。
-createRadialGradient()          返回代表放射颜色渐变的一个 CanvasGradient 对象。
-drawImage()                     绘制一幅图像。
-fill()                          使用指定颜色、渐变或模式来绘制或填充当前路径的内部。
-fillRect()                      绘制或填充一个矩形。
-lineTo()                        为当前的子路径添加一条直线线段。
-moveTo()                        设置当前位置并开始一条新的子路径。
-quadraticCurveTo()              为当前路径添加一条贝塞尔曲线。
-rect()                          为当前路径添加一条矩形子路径。
-restore()                       为画布重置为最近保存的图像状态。
-rotate()                        旋转画布。
-save()                          保存 CanvasRenderingContext2D 对象的属性、剪切区域和变换矩阵。
-scale()                         标注画布的用户坐标系统。
-stroke()                        沿着当前路径绘制或画一条直线。
-strokeRect()                    绘制（但不填充）一个矩形。
-translate()                     转换画布的用户坐标系统。
-
-2.translate() 方法为画布的变换矩阵添加水平的和垂直的偏移。参数 dx 和 dy 添加给后续定义路径中的所有点。
-
-restore() 方法从栈中弹出存储的图形状态并恢复 CanvasRenderingContext2D 对象的属性、剪切路径和变换矩阵的值
-
-
-
-{
-  fillStyle: {}, 
-  strokeStyle: {}, 
-  font: {desc: '设置文本'}
-  textBaseline: {}, 
-  textAlign: {}, 
-  maxWidth: {}, 
-  lineWidth: {},
-  clearRect: {props:'(0, 0, width, height)'},
-  fillRect: {props:'x, y, width, height'},
-  strokeRect: {props:'x, y, width, height'},
-  beginPath:{},
-  arc: {props:'x, y, r, startAngle, endAngle, antiClock'};
-  closePath:{},
-  fill:{},
-  stroke:{},
-  save:{},
-  fillText:{props:'text, x, y, maxWidth'},
-  strokeText:{props:'text, x, y, maxWidth'}
-  restore:{},
-  lineTo:{props:'x, y'}, 
-  drawImage:{props:'image, x, y, width, height, x, y, scale, scale'}, 
-  translate:{props:'x, y'},
-  rotate:{}
-} 
  
 
 
@@ -116,15 +68,48 @@ restore() 方法从栈中弹出存储的图形状态并恢复 CanvasRenderingCon
 </body>
 </html>
 <script type="text/javascript">
-  
+var canvas = document.getElementById("myCanvas");
+		var context = canvas.getContext("2d");
+		context.strokeStyle = "black";
+    context.lineWidth=5
+		context.moveTo(0,0);
+		context.lineTo(100,100);
+		//context.stroke();
+		context.strokeStyle = "red";
+		context.moveTo(0,20);
+		context.lineTo(100,120);
+		context.stroke();
 
-  
 
   class Scene{
     #canvas
     #context
     #width
     #height
+
+
+
+
+
+    canvas                       // 取得画布Canvas 元素
+    fillStyle                    // 填充路径的当前的颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
+    strokeStyle                  // 绘制路径的颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
+    globalAlpha                  // 绘制内容的不透明度。值：在 0.0（完全透明）和 1.0（完全不透明）范围间。默认值为 1.0
+    globalCompositeOperation     // 指定颜色如何与画布上已有颜色组合（合成）
+    lineCap                      // 指定线条末端如何绘制。值：butt、round和square。默认值是 butt
+    lineJoin                     // 指定两条线条如何连接。值：round、bevel和miter。默认值是 "miter"
+    miterLimit                   // 当 lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率
+    lineWidth                    // 绘制线条的线条宽度。默认值是 1.0，且必须大于 0.0。线条在路径上居中，每边有线条宽的一半    
+    shadowBlur                   // 指定羽化阴影的程度。默认值是 0
+    shadowColor                  // 把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black
+    shadowOffsetX                // 指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0
+    shadowOffsetY   
+    
+    font
+    textBaseline 
+    textAlign 
+    maxWidth
+
     constructor(canvas, width, height){
       this.#canvas = canvas
       this.#context = canvas.getContext("2d")
@@ -251,21 +236,21 @@ restore() 方法从栈中弹出存储的图形状态并恢复 CanvasRenderingCon
     }
   }
 
-  let stage = new Scene(document.getElementById("myCanvas"), 1000, 600)
-  stage.drawRectFill(10, 10, 50, 50, '#f00')
-  stage.drawRectStroke(80, 10, 50, 50, '#0f0')
-  stage.drawCircleFill(170, 35, 25, 0, Math.PI*2, false, '#0f0')
-  stage.drawCircleStroke(240, 35, 25, 0, Math.PI*2, false, '#0f0')
-  stage.drawTextFill("文本样本", "20px Georgia", null, 'left', 200, '#f00', 300, 40)
-  stage.drawTextStroke("文本样本", "20px Georgia", null, 'left', 200, '#f00', 400, 40)
-  stage.drawLine('#00f', 5, [500,35], [600,35])
-  stage.drawPolygonFill([[10,80], [100,80], [100, 180], [20, 180]], '#00f')
-  stage.drawPolygonStroke([[120,80], [200,80], [200, 180], [130, 180]], '#f00')
-  var img = new Image()
-  img.onload = function(){
-    stage.drawImage(this, 0, 0, 202, 205, 10, 220, 80, 80)
-  }
-  img.src = '001.png'
+  // let stage = new Scene(document.getElementById("myCanvas"), 1000, 600)
+  // stage.drawRectFill(10, 10, 50, 50, '#f00')
+  // stage.drawRectStroke(80, 10, 50, 50, '#0f0')
+  // stage.drawCircleFill(170, 35, 25, 0, Math.PI*2, false, '#0f0')
+  // stage.drawCircleStroke(240, 35, 25, 0, Math.PI*2, false, '#0f0')
+  // stage.drawTextFill("文本样本", "20px Georgia", null, 'left', 200, '#f00', 300, 40)
+  // stage.drawTextStroke("文本样本", "20px Georgia", null, 'left', 200, '#f00', 400, 40)
+  // stage.drawLine('#00f', 5, [500,35], [600,35])
+  // stage.drawPolygonFill([[10,80], [100,80], [100, 180], [20, 180]], '#00f')
+  // stage.drawPolygonStroke([[120,80], [200,80], [200, 180], [130, 180]], '#f00')
+  // var img = new Image()
+  // img.onload = function(){
+  //   stage.drawImage(this, 0, 0, 202, 205, 10, 220, 80, 80)
+  // }
+  // img.src = '001.png'
   
   
 
