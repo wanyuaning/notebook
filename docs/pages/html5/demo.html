@@ -30,15 +30,48 @@
       this.#width = width
       this.#height = height
     }
+    showRuler(){
+      let w = this.#width, h = this.#height, ctx = this.#context
+      ctx.strokeStyle = '#ccc'
+      ctx.beginPath()
+      for(let i = 10; i < w; i += 10){ ctx.moveTo(i+0.5, 0); ctx.lineTo(i+0.5, 4) }
+      for(let i = 10; i < h; i += 10){ ctx.moveTo(0, i+0.5); ctx.lineTo(4, i+0.5) }
+      for(let i = 100; i < w; i += 100){ ctx.moveTo(i+0.5, 0); ctx.lineTo(i+0.5, 8) }
+      for(let i = 100; i < h; i += 100){ ctx.moveTo(0, i+0.5); ctx.lineTo(8, i+0.5) }
+      ctx.moveTo(0, h)
+      ctx.lineTo(0, 0)
+      ctx.lineTo(w, 0)
+      ctx.stroke()
+      ctx.beginPath()
+    }
+    // config{cellSize: 10}
+    showGrid(config){
+      let w = this.#width, h = this.#height, size = 20, color = '#eee', lineWidth = '1px', ctx = this.#context
+      if(config) {
+        config.cellSize && (size = config.cellSize)
+        config.strokeStyle && (color = config.strokeStyle)
+        config.lineWidth && (lineWidth = config.lineWidth)
+      }
+      ctx.strokeStyle = color
+      ctx.lineWidth = lineWidth
+      ctx.beginPath()
+      for(let i = 0; i < w; i += size){ ctx.moveTo(i+0.5, 0); ctx.lineTo(i+0.5, h) }
+      for(let i = 0; i < h; i += size){ ctx.moveTo(0, i+0.5); ctx.lineTo(w, i+0.5) }
+      ctx.moveTo(w, 0)
+      ctx.lineTo(w, h)
+      ctx.lineTo(0, h)
+      ctx.stroke()
+      ctx.beginPath()
+    }
     clean(){ this.#context .clearRect(0, 0, this.#width, this.#height) }    
-    drawRect(x, y, width, height, options){ 
+    drawRect(x, y, width, height, options, config){ 
       if (!options) { console.error('Stage: drawRect(x, y, width, height, options), Please configure options'); return }
       Object.assign(this.#context, options || {})
       this.#context.beginPath()
       options.fillStyle && this.#context.fillRect(x, y, width, height)
       options.strokeStyle && this.#context.strokeRect(x, y, width, height)
     }
-    drawCircle(x, y, r, options){
+    drawCircle(x, y, r, options, config){
       if (!options) { console.error('Stage: drawCircle(x, y, r, options), Please configure options'); return }
       Object.assign(this.#context, options || {})
       this.#context.beginPath()
@@ -47,7 +80,7 @@
       options.fillStyle && this.#context.fill();
       options.strokeStyle && this.#context.stroke();
     }
-    drawText(text, x, y, options){
+    drawText(text, x, y, options, config){
       if (!options) { 
         console.error('Stage: drawText(text, x, y, options), Please configure options')
         console.info('For example: {fillStyle:"#999", strokeStyle:"#000", maxWidth:100, font:"20px Arial", textBaseline:"top", textAlign:"center"}')
@@ -60,7 +93,7 @@
       options.fillStyle && this.#context.fillText(text, x, y, maxWidth)
       options.strokeStyle && this.#context.strokeText(text, x, y, maxWidth)
     }
-    drawLine(start, end, options){
+    drawLine(start, end, options, config){
       if (!options) { 
         console.error('Stage: drawLine(start, end, options), Please configure options')
         console.info('For example: {strokeStyle:"#000", lineWidth:5, lineCap:"round"}')
@@ -72,42 +105,29 @@
       this.#context.lineTo(end[0], end[1]);
       options.strokeStyle && this.#context.stroke();
     }
-    drawPolygon(pointsArr, options){
-      if (!options) { 
-        console.error('Stage: drawPolygon(pointsArr, options), Please configure options')
-        console.info('For example: {fillStyle:"#ccc", strokeStyle:"#000", lineWidth:5, lineCap:"round"}')
-        return 
-      }
-      Object.assign(this.#context, options)
-      options.strokeStyle && this.#context.stroke();
-    }
+
     /**
      * 多边形
+     * [[0,0], [50,0]]
+     * options{fillStyle:'#ccc', strokeStyle:'#000', lineWidth:5, lineCap:'round'}
+     * config{closePath: true, startPosition: [0, 0]}
      */
-    drawPolygonFill(pointsArr, style){
-      let context = this.#context;
-      context.beginPath();
-      for(var i=0,len=pointsArr.length;i<len-1;i++){
-					var start=pointsArr[i],end=pointsArr[i+1];
-					context.lineTo(start[0],start[1]);
-					context.lineTo(end[0],end[1]);
+    drawPolygon(pointsArr, options, config){
+      let xPos = 0, yPos = 0, ctx = this.#context
+      Object.assign(ctx, options || {})
+      ctx.beginPath()
+      if (config && config.startPosition) {xPos = config.startPosition[0], yPos = config.startPosition[1]} 
+      for(let i = 0, len = pointsArr.length; i < len - 1; i++){
+        let start=pointsArr[i], end=pointsArr[i+1]
+        ctx.lineTo(start[0] + xPos, start[1] + yPos)
+        ctx.lineTo(end[0] + xPos, end[1] + yPos)
 			}
-      context.closePath();
-      context.fillStyle = style;
-      context.fill();
-    }
-    drawPolygonStroke(pointsArr, style, lineWidth){
-      let context = this.#context;
-      context.beginPath();
-      for(var i=0,len=pointsArr.length;i<len-1;i++){
-					var start=pointsArr[i],end=pointsArr[i+1];
-					context.lineTo(start[0],start[1]);
-					context.lineTo(end[0],end[1]);
-			}
-      context.closePath();
-      context.lineWidth = lineWidth;
-      context.strokeStyle = style;
-      context.stroke();
+      if(options.fillStyle) {
+        ctx.closePath()
+        ctx.fill()
+      }
+      config && config.closePath && ctx.closePath()
+      options.strokeStyle && ctx.stroke()
     }
     /**
      * 图片
@@ -131,11 +151,14 @@
   }
 
   let stage = new Stage(document.getElementById("myCanvas"), 1000, 600)
+  //stage.showGrid({cellSize: 40})
+  stage.showRuler()
   stage.drawRect(10, 10, 100, 50, {fillStyle: '#0f0'})
   stage.drawCircle(200, 35, 25, {fillStyle: '#f00', strokeStyle: '#000', lineWidth: 5})
   stage.drawText('123456789', 10, 70, {fillStyle: '#f00', font: '30px'})
   stage.drawLine([10,90], [200,100], {strokeStyle:'#00f', lineWidth:10, lineCap: 'round'})
   stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
+  stage.drawPolygon([[0,0], [50,0], [50,50], [100,50], [100,100], [50,100], [50,150], [0,150], [0,100], [-50,100], [-50,50], [0,50]], {strokeStyle:'#0f0', lineWidth:5}, {closePath: true, startPosition: [300, 100]})
   // stage.drawRectFill(10, 10, 50, 50, '#f00')
   // stage.drawRectStroke(80, 10, 50, 50, '#0f0')
   // stage.drawCircleFill(170, 35, 25, 0, Math.PI*2, false, '#0f0')
