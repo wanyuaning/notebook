@@ -16,152 +16,71 @@
 </body>
 </html>
 <script type="text/javascript">
-var c=document.getElementById("myCanvas");
-var context=c.getContext("2d");
-
-var linearGradient = context.createLinearGradient(0,0,170,0)  
-    linearGradient.addColorStop(0, "#f00")       
-    linearGradient.addColorStop(0.8, "#000")
-    context.fillStyle = linearGradient          
-    context.fillRect(20, 20, 150, 100)
-
-var img = new Image()
-    img.onload = function(){
-      var pattern = context.createPattern(this,"repeat")             
-      context.rect(200,100,150,100) 
-      context.fillStyle = pattern
-      context.fill()
-    }
-    img.src = '001.png'
-
-var radialGradient = context.createRadialGradient(20,200,5,20,200,100)            
-    radialGradient.addColorStop(0,"red");
-    radialGradient.addColorStop(1,"white");
-    context.fillStyle = radialGradient                           
-    context.fillRect(20, 200, 150, 100)
 
 
 
-
-// var canvas = document.getElementById("myCanvas");
-// 		var context = canvas.getContext("2d");
-// 		context.strokeStyle = "black";
-//     context.lineWidth=5
-// 		context.moveTo(0,0);
-// 		context.lineTo(100,100);
-// 		//context.stroke();
-// 		context.strokeStyle = "red";
-// 		context.moveTo(0,20);
-// 		context.lineTo(100,120);
-// 		context.stroke();
-
-
-  class Scene{
+  class Stage{
     #canvas
     #context
     #width
     #height
-
-
-
-
-
-    canvas                       // 取得画布Canvas 元素
-    fillStyle                    // 填充路径的当前的颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
-    strokeStyle                  // 绘制路径的颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
-    globalAlpha                  // 绘制内容的不透明度。值：在 0.0（完全透明）和 1.0（完全不透明）范围间。默认值为 1.0
-    globalCompositeOperation     // 指定颜色如何与画布上已有颜色组合（合成）
-    lineCap                      // 指定线条末端如何绘制。值：butt、round和square。默认值是 butt
-    lineJoin                     // 指定两条线条如何连接。值：round、bevel和miter。默认值是 "miter"
-    miterLimit                   // 当 lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率
-    lineWidth                    // 绘制线条的线条宽度。默认值是 1.0，且必须大于 0.0。线条在路径上居中，每边有线条宽的一半    
-    shadowBlur                   // 指定羽化阴影的程度。默认值是 0
-    shadowColor                  // 把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black
-    shadowOffsetX                // 指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0
-    shadowOffsetY   
-    
-    font
-    textBaseline 
-    textAlign 
-    maxWidth
-
     constructor(canvas, width, height){
       this.#canvas = canvas
       this.#context = canvas.getContext("2d")
       this.#width = width
       this.#height = height
     }
-    clean(){ this.#context.clearRect(0, 0, this.#width, this.#height) }
-    drawRectFill(x, y, w, h, style){ let ctx = this.#context; ctx.fillStyle = style; ctx.fillRect(x, y, w, h) }
-    drawRectStroke(x, y, w, h, style){let ctx = this.#context; ctx.strokeStyle = style; ctx.strokeRect(x, y, w, h) }
-    
-    /**
-     * 创建弧/曲线：arc(x, y, radius, startRad, endRad, anticlockwise)
-     *                   1.5π
-     *                    │
-     *           π ───────┼─────── 0｜2π
-     *                    │
-     *                   0.5π
-     * 以(x,y)为圆心、半径radius的圆上的一段弧线。默认以x轴正方向为基准、顺时针旋转计算角度。
-     * 以startRad起始 默认顺时针旋转 endRad结束 
-     * anticlockwise 是否逆时针旋转 默认为 false
-     */
-    drawCircleFill(x, y, r, startAngle, endAngle, antiClock, style){
-      let context = this.#context;
-      context.beginPath();
-      context.arc(x, y, r, startAngle, endAngle, antiClock);
-      context.closePath();
-      context.fillStyle = style;
-      context.fill();
+    clean(){ this.#context .clearRect(0, 0, this.#width, this.#height) }    
+    drawRect(x, y, width, height, options){ 
+      if (!options) { console.error('Stage: drawRect(x, y, width, height, options), Please configure options'); return }
+      Object.assign(this.#context, options || {})
+      this.#context.beginPath()
+      options.fillStyle && this.#context.fillRect(x, y, width, height)
+      options.strokeStyle && this.#context.strokeRect(x, y, width, height)
     }
-    drawCircleStroke(x, y, r, startAngle, endAngle, antiClock, style){
-      let context = this.#context;
-      context.beginPath();
-      context.arc(x, y, r, startAngle, endAngle, antiClock);
-      context.closePath();
-      context.strokeStyle = style;
-      context.stroke();
+    drawCircle(x, y, r, options){
+      if (!options) { console.error('Stage: drawCircle(x, y, r, options), Please configure options'); return }
+      Object.assign(this.#context, options || {})
+      this.#context.beginPath()
+      this.#context.arc(x, y, r, 0, 2*Math.PI, false);
+      this.#context.closePath();
+      options.fillStyle && this.#context.fill();
+      options.strokeStyle && this.#context.stroke();
     }
-
-    /**
-     * 文本
-     */
-    drawTextFill(text, font, textBaseline, textAlign, maxWidth, style, x, y){
-      let context = this.#context;
-      context.save();
-      context.font = font
-      context.textBaseline = textBaseline
-      context.textAlign = textAlign
-      context.maxWidth = maxWidth      
-      context.fillStyle = style;
-      maxWidth ? context.fillText(text, x, y, maxWidth) : context.fillText(text, x, y);
-      context.restore();
+    drawText(text, x, y, options){
+      if (!options) { 
+        console.error('Stage: drawText(text, x, y, options), Please configure options')
+        console.info('For example: {fillStyle:"#999", strokeStyle:"#000", maxWidth:100, font:"20px Arial", textBaseline:"top", textAlign:"center"}')
+        return 
+      }
+      if (options.font && options.font.indexOf(' ') < 0) options.font += ' Arial'
+      Object.assign(this.#context, options)
+      let maxWidth = options.maxWidth || this.#context.measureText(text).width
+      this.#context.beginPath()
+      options.fillStyle && this.#context.fillText(text, x, y, maxWidth)
+      options.strokeStyle && this.#context.strokeText(text, x, y, maxWidth)
     }
-    drawTextStroke(text, font, textBaseline, textAlign, maxWidth, style, x, y){
-      let context = this.#context;
-      context.save();
-      context.font = font
-      context.textBaseline = textBaseline
-      context.textAlign = textAlign
-      context.maxWidth = maxWidth      
-      context.strokeStyle = style;
-      maxWidth ? context.strokeText(text, x, y, maxWidth) : context.strokeText(text, x, y);      
-      context.restore();
+    drawLine(start, end, options){
+      if (!options) { 
+        console.error('Stage: drawLine(start, end, options), Please configure options')
+        console.info('For example: {strokeStyle:"#000", lineWidth:5, lineCap:"round"}')
+        return 
+      }
+      Object.assign(this.#context, options)
+      this.#context.beginPath();
+      this.#context.lineTo(start[0], start[1]);
+      this.#context.lineTo(end[0], end[1]);
+      options.strokeStyle && this.#context.stroke();
     }
-    /**
-     * 直线
-     */
-    drawLine(style, lineWidth, start, end){
-      let context = this.#context;
-      context.strokeStyle = style;
-      context.lineWidth = lineWidth;
-      context.beginPath();
-      context.lineTo(start[0], start[1]);
-      context.lineTo(end[0], end[1]);
-      context.closePath();
-      context.stroke();
+    drawPolygon(pointsArr, options){
+      if (!options) { 
+        console.error('Stage: drawPolygon(pointsArr, options), Please configure options')
+        console.info('For example: {fillStyle:"#ccc", strokeStyle:"#000", lineWidth:5, lineCap:"round"}')
+        return 
+      }
+      Object.assign(this.#context, options)
+      options.strokeStyle && this.#context.stroke();
     }
-
     /**
      * 多边形
      */
@@ -211,7 +130,12 @@ var radialGradient = context.createRadialGradient(20,200,5,20,200,100)
     }
   }
 
-  // let stage = new Scene(document.getElementById("myCanvas"), 1000, 600)
+  let stage = new Stage(document.getElementById("myCanvas"), 1000, 600)
+  stage.drawRect(10, 10, 100, 50, {fillStyle: '#0f0'})
+  stage.drawCircle(200, 35, 25, {fillStyle: '#f00', strokeStyle: '#000', lineWidth: 5})
+  stage.drawText('123456789', 10, 70, {fillStyle: '#f00', font: '30px'})
+  stage.drawLine([10,90], [200,100], {strokeStyle:'#00f', lineWidth:10, lineCap: 'round'})
+  stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
   // stage.drawRectFill(10, 10, 50, 50, '#f00')
   // stage.drawRectStroke(80, 10, 50, 50, '#0f0')
   // stage.drawCircleFill(170, 35, 25, 0, Math.PI*2, false, '#0f0')
