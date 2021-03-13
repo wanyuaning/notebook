@@ -46,11 +46,11 @@ globalCompositeOperation     // 新图像如何覆盖旧图像
 ▇ 管理 ▇
 clearRect(x, y, width, height) 清除画布特定矩形区域中像素。
 beginPath()                    开启一条新路径的唯一方法
+moveTo(x, y)                   抬悬笔触定位到目标位置
 save()                         保存当前环境状态
 restore()                      恢复当前环境状态
 
 ▇ 路径 ▇ 
-moveTo(x, y)                            抬悬笔触定位到目标位置
 lineTo(x, y)                            当前路径延伸到下一点
 arc(x, y, r, sAngle, eAngle, nishizhen) 当前路径添加一条弧线(角度用弧度Math.PI表示) 
 arcTo(sX, sY, eX, eY, r)                创建介于两个切线之间的弧
