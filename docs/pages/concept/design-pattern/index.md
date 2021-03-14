@@ -2,9 +2,7 @@
 
 ##### 设计模式
 
-/* 策略模式
- * 
- */
+// 策略模式 //
 class StrategyPattern{
   #strategy
   #name
@@ -15,10 +13,7 @@ class StrategyPattern{
   get(){return this.#strategy[this.#name]}
   run(){return this.#strategy[this.#name].apply(null, arguments)}
 }
-
-/* 状态模式
- * 
- */
+// 状态模式 //
 class StatePattern{
   #state      
   setStateObj(obj){this.#state = obj}
@@ -27,4 +22,11 @@ class StatePattern{
   get(name){return this.#state[name]}
   run(name){return this.#state[name].apply(null, arguments)}
 }
+
+
+// 观察者模式 //
+class StatePattern{}
+// 发布订阅模式 //
+class StatePattern{}
+
 
