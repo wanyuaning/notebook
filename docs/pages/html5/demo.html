@@ -40,21 +40,14 @@
     console.log('资源加载完成') 
     //document.querySelector('#asd').appendChild(loader.get('002.png'))
     //stage.drawImage(loader.get('003.png'), 0, 0, 202, 205, 10, 220, 80, 80)
-    let ss = new SpriteSheet(loader.get('marry.png'), [[1,1,1],[1,1,1]], { 
-      id: 'marry',
-      x: 450, y: 200,
-      duration: 100,
-      children: [
-        {id:'righter', orders: [0,1,2]},
-        {id:'lefter', orders: [3,4,5]}
-      ]
-    })
+    let marry = new SpriteSheet(loader.get('marry.png'), [[1,1,1],[1,1,1]], {id: 'marry', x: 450, y: 200, duration: 100})
+    let lefter = marry.createChild('lefter', [3,4,5])
     setInterval(()=>{
+      console.log(11)
       stage.clean()
-      ss.update('lefter');
-      ss.draw('lefter');
-    },33.3333)
-    
+      lefter.update();
+      lefter.draw();
+    },100)
 
   })
   loader.load(['001.png', '002.png', '003.png', 'marry.png'])

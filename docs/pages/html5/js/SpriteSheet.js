@@ -20,15 +20,13 @@ class SpriteSheet{
   #cellHeight
   #root = {id: '', x: 0, y: 0, duration: 100, type: 'loop', currentIndex: 0, now: new Date().getTime(), last: new Date().getTime()}
   #children = {} 
-  #path = 1 // bounce运动模式下 转向因子
+  #dir = 1 // bounce运动模式下 转向因子
   
   constructor(image, matrix, options){
     Object.assign(this.#root, options || {})
     this.#IMAGE = image    
     this.#cellWidth = image.width/matrix[0].length
     this.#cellHeight = image.height/matrix.length
-    console.log(this.#cellWidth, this.#cellHeight);
-    
     
     let frames = [], count = 0 // 有效单元计数
 
@@ -46,25 +44,18 @@ class SpriteSheet{
     let children = options.children
     if (children) {
       for(let i = 0, len = children.length; i < len; i++){
-        let obj = Object.assign({}, this.#root), 
-            child = children[i], 
-            frames2 = []
-
-        Object.assign(obj, child)
-        child.orders.forEach(order => { 
-          frames2.push(frames[order]) 
-        })
-        obj.frames = frames2
-        this.#children[child.id] = obj
+        let {x, y, duration, type} = this.#root, child = children[i], _frames = []
+        this.#children[child.id] = Object.assign({id: child.id, x, y, duration, type, currentIndex: 0, now: new Date().getTime(), last: new Date().getTime(), frames: _frames}, child)
+        child.orders.forEach(order => {_frames.push(frames[order])})
       }
     }
     this.#root.frames = frames
   }
-  createChild(id, options){
-    var obj = options, frames = [], _this = this
-    obj.indexs.forEach(e => { frames.push(_this.FRAMES_MAP_ORDER[e]) })
-    obj.frames = frames
-    this.childFrames[id] = obj
+  createChild(id, orders, options){
+    let parent = this, {x, y, duration, type, frames} = this.#root, _frames = []
+    this.#children[id] = Object.assign({id, x, y, duration, type, currentIndex: 0, now: new Date().getTime(), last: new Date().getTime(), frames: _frames}, options || {})
+    orders.forEach(order => { _frames.push(frames[order]) })
+    return {update(){parent.update(id)}, draw(){parent.draw(id)}}
   }
   index(index, id){
     var that = id ? this.childFrames[id] : this
@@ -76,27 +67,21 @@ class SpriteSheet{
     return obj.frames[obj.currentIndex];	
   }
   update(id){
-    let obj = id ? this.#children[id] : this.#root             
-    obj.now = new Date().getTime();
-    var frames = obj.frames;
-    
-    if((obj.now - obj.last) > obj.duration){
-      var cIndex = obj.currentIndex, len = obj.frames.length;
-      obj.last = obj.now;
-      
-      if(cIndex >= len - 1){
+    let obj = id ? this.#children[id] : this.#root, frames = obj.frames, index = obj.currentIndex, now = new Date().getTime(), timed = now - obj.last  
+    if(timed - obj.duration > -5){
+      if (timed >= obj.duration) obj.last = now
+      let len = frames.length
+      if(index >= len - 1){
           if (obj.type === 'loop'){	
               return frames[obj.currentIndex = 0];	
           } else if (obj.type !== 'bounce'){
-              obj.onFinish && obj.onFinish();
-              obj.onFinish = undefined;
-              return frames[cIndex];
+              obj.onFinish && obj.onFinish(); obj.onFinish = undefined; return frames[index]
           }
       }
-      if((obj.type === 'bounce') && ((cIndex>=len-1&&this.#path>0) || (cIndex<=0&&this.#path<0))) this.#path*=(-1);
-      obj.currentIndex += this.#path;
+      if((obj.type === 'bounce') && ((index>=len-1&&this.#dir>0) || (index<=0&&this.#dir<0))) this.#dir*=(-1)
+      obj.currentIndex += this.#dir
     }
-    return frames[obj.currentIndex];
+    return frames[index]
   }
   draw(id){
     let obj = id ? this.#children[id] : this.#root,
