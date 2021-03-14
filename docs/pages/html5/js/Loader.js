@@ -7,21 +7,36 @@ class Loader{
   #resource = {}
   #total = 0
   #loaded = 0
+  #loaderror = 0
   #handleProgram = function(rate, id){}
   #handleReady = function(){}
+  #publicPath = ''
+  /**
+   * {publicPath:'images/'}
+   */
+  constructor(options){
+    options && options.publicPath && (this.#publicPath = options.publicPath)
+  }
   load(arr){
     let root = this
     root.#total = arr.length
     arr.forEach(src => {
       let img = new Image()
       tool.bind(img, 'load', function(){
-        this.onLoad = this.load = null
+        img.onLoad = img.load = null
         root.#resource[this.id] = this
         root.#loaded++
-        root.#handleProgram(root.#loaded/root.#total, this.id)
-        root.#loaded >= root.#total && root.#handleReady()
+        root.#handleProgram((root.#loaded + root.#loaderror)/root.#total, this.id)
+        root.#loaded + root.#loaderror >= root.#total && root.#handleReady()
       })
-      img.id = img.src = src
+      tool.bind(img, 'error', function(){
+        this.οnerrοr= this.error = null
+        root.#loaderror++
+        root.#handleProgram((root.#loaded + root.#loaderror)/root.#total, this.id)
+        root.#loaded + root.#loaderror >= root.#total && root.#handleReady()
+      })
+      img.src = this.#publicPath + src
+      img.id = src
     })
   }
   get(id){return this.#resource[id]}

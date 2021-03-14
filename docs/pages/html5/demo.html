@@ -17,6 +17,7 @@
 </html>
 <script src="js/Stage.js"></script>
 <script src="js/Loader.js"></script>
+<script src="js/SpriteSheet.js"></script>
 <script type="text/javascript">
   
   
@@ -32,19 +33,31 @@
   stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
   stage.drawPolygon([[0,0], [50,0], [50,50], [100,50], [100,100], [50,100], [50,150], [0,150], [0,100], [-50,100], [-50,50], [0,50]], {strokeStyle:'#0f0', lineWidth:5}, {closePath: true, startPosition: [300, 100]})
   
-  var img = new Image()
-  img.onload = function(){
-    stage.drawImage(this, 0, 0, 202, 205, 10, 220, 80, 80)
-  }
-  img.src = '001.png'
   
-  let loader = new Loader()
+  let loader = new Loader({publicPath:'images/'})
   loader.program((rate, id) => { console.log(rate, id) })
   loader.ready(() => { 
     console.log('资源加载完成') 
-    document.querySelector('#asd').appendChild(loader.get('002.png'))
+    //document.querySelector('#asd').appendChild(loader.get('002.png'))
+    //stage.drawImage(loader.get('003.png'), 0, 0, 202, 205, 10, 220, 80, 80)
+    let ss = new SpriteSheet(loader.get('marry.png'), [[1,1,1],[1,1,1]], { 
+      id: 'marry',
+      x: 450, y: 200,
+      duration: 100,
+      children: [
+        {id:'righter', orders: [0,1,2]},
+        {id:'lefter', orders: [3,4,5]}
+      ]
+    })
+    setInterval(()=>{
+      stage.clean()
+      ss.update('lefter');
+      ss.draw('lefter');
+    },33.3333)
+    
+
   })
-  loader.load(['001.png', '002.png', '003.png'])
+  loader.load(['001.png', '002.png', '003.png', 'marry.png'])
 
 </script>
 

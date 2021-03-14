@@ -60,15 +60,18 @@ class Stage{
     ctx.stroke()
     ctx.beginPath()
   }
-      
+  /**
+   * drawRect(x, y, width, height, options)
+   */    
   drawRect(x, y, width, height, options, config){ 
-    if (!options) { console.error('Stage: drawRect(x, y, width, height, options), Please configure options'); return }
     Object.assign(this.#context, options || {})
-    console.log(JSON.stringify(this.#context))
     this.#context.beginPath()
     options.fillStyle && this.#context.fillRect(x, y, width, height)
     options.strokeStyle && this.#context.strokeRect(x, y, width, height)
   }
+  /**
+   * drawCircle(x, y, r, options)
+   */
   drawCircle(x, y, r, options, config){
     if (!options) { console.error('Stage: drawCircle(x, y, r, options), Please configure options'); return }
     Object.assign(this.#context, options || {})
@@ -114,7 +117,6 @@ class Stage{
   drawPolygon(pointsArr, options, config){
     let xPos = 0, yPos = 0, ctx = this.#context      
     Object.assign(ctx, options || {})
-    console.log(ctx)
     ctx.beginPath()
     if (config && config.startPosition) {xPos = config.startPosition[0], yPos = config.startPosition[1]} 
     for(let i = 0, len = pointsArr.length; i < len - 1; i++){
@@ -130,13 +132,13 @@ class Stage{
     options.strokeStyle && ctx.stroke()
   }
   /**
-   * 图片
+   * 绘制图片
    * img	          规定要使用的图像、画布或视频。
      sx	sy	        可选。开始剪切的 xy 坐标位置。
      swidth sheight	可选。被剪切图像的宽度高度。
      x y	          在画布上放置图像的 xy 坐标位置。
      width height	  可选。要使用的图像的宽度高度。（伸展或缩小图像）
-   * config{save: true, clip: true, transform:[{name:'translate', props:[10,10]}]}
+   * config{save: true, clip: true, transform:[]}
    */
   drawImage(img, sx, sy, swidth, sheight, x, y, width, height, config){
     let ctx = this.#context;

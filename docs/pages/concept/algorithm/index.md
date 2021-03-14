@@ -26,6 +26,9 @@ tweens.setStrategyObj({
   sineaseIn: (t,b,c,d) => c * (t /= d) * t * t + b,
   sineaseOut: (t,b,c,d) => c * ((t = t / d - 1) * t * t + 1) + b
 })
-tweens.useStrategy('sineaseOut')
+// 指针
+// tweens.useStrategy('sineaseOut')
+// 策略使用
+// tweens.run(t - startTime, startPos, endPos, duration)
 
 ##### 矩阵

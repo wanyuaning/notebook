@@ -327,7 +327,7 @@ plugins: [
 ▉WEBPACK_RES_PATH_ALL▉
 {
   output: {
-    publicPach: 'http://abc.com' // 给所有解析资源加前缀 成为绝对路径
+    publicPath: 'http://abc.com' // 给所有解析资源加前缀 成为绝对路径
   }
 }
 ▉
@@ -339,7 +339,7 @@ module.rules: [
     use: {
       loader: 'url-loader',
       options: { 
-        publicPach: 'http://abc.com'
+        publicPath: 'http://abc.com'
       }
     }
   }
