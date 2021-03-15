@@ -11,7 +11,6 @@ class Input{
   })
 
   constructor(){
-
     // 键盘按键编码和键名
     let keyboardMap = {
       8: "backspace", 9: "tab", 13: "enter", 16: "shift", 17: "ctrl", 18: "alt", 19: "pause", 20: "capslock", 27: "esc", 32: "space", 33: "pageup", 34: "pagedown", 35: "end", 36: "home", 
@@ -29,7 +28,7 @@ class Input{
     tool.bind(window, "mousedown", e => {
      let sub = this.#subscribe; sub['mousedown'] && sub['mousedown'].forEach(handler => handler()) })
     tool.bind(window, "mousemove", e => { 
-      window.dispatchEvent(this.#DragEvent)
+      //window.dispatchEvent(this.#DragEvent)
       //let sub = this.#subscribe; sub['mousemove'] && sub['mousemove'].forEach(handler => handler()) 
     })
 		tool.bind(window, "mouseup", e => { let sub = this.#subscribe; sub['mouseup'] && sub['mouseup'].forEach(handler => handler()) })
