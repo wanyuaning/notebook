@@ -1,18 +1,18 @@
 
 /**
-   * @param image  资源图   loader.get('marry.png')
-   * @param matrix 单元矩阵 [[1,1,1],[1,1,1]]
-   * @param options {
-   *     id: 'marry',                     查找与引用 ss.update('lefter') ss.draw('lefter')
-   *     x:100, y:100,                    舞台位置(像素)
-   *     duration:100,                    帧时长(毫秒)
-   *     type: 'loop',                    循环/往复loop/bounce 默认loop
-   *     children: [ {id:'righter', orders: [0,1,2]}, {id:'lefter', orders: [3,4,5]} ] 定义子动画
-   * }
-   * 编序规范：order
-   *     0 1 2 -
-   *     3 - 4 5
-   **/
+ * @param image  资源图   loader.get('marry.png')
+ * @param matrix 单元矩阵 [[1,1,1],[1,1,1]]
+ * @param options {
+ *     id: 'marry',                     查找与引用 ss.update('lefter') ss.draw('lefter')
+ *     x:100, y:100,                    舞台位置(像素)
+ *     duration:100,                    帧时长(毫秒)
+ *     type: 'loop',                    循环/往复loop/bounce 默认loop
+ *     children: [ {id:'righter', orders: [0,1,2]}, {id:'lefter', orders: [3,4,5]} ] 定义子动画
+ * }
+ * 编序规范：order
+ *     0 1 2 -
+ *     3 - 4 5
+ **/
 class SpriteSheet{
   
   #IMAGE
@@ -67,9 +67,11 @@ class SpriteSheet{
     return obj.frames[obj.currentIndex];	
   }
   update(id){
-    let obj = id ? this.#children[id] : this.#root, frames = obj.frames, index = obj.currentIndex, now = new Date().getTime(), timed = now - obj.last  
-    if(timed - obj.duration > -5){
-      if (timed >= obj.duration) obj.last = now
+    let obj = id ? this.#children[id] : this.#root, frames = obj.frames, index = obj.currentIndex, now = new Date().getTime(), d = now - obj.last  
+    
+    
+    if (d >= obj.duration){
+      obj.last = now
       let len = frames.length
       if(index >= len - 1){
           if (obj.type === 'loop'){	
@@ -80,6 +82,8 @@ class SpriteSheet{
       }
       if((obj.type === 'bounce') && ((index>=len-1&&this.#dir>0) || (index<=0&&this.#dir<0))) this.#dir*=(-1)
       obj.currentIndex += this.#dir
+    } else {
+      console.log('d', d);
     }
     return frames[index]
   }

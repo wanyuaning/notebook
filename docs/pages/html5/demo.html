@@ -11,16 +11,36 @@
   <div id="asd"></div>
   <div>
     <button onclick="stage.clean()">clear</button>
+    <button id="left">left</button>
+    <button id="right">right</button>
   </div>
   
 </body>
 </html>
+<script src="js/tool.js"></script>
+<script src="js/Input.js"></script>
 <script src="js/Stage.js"></script>
 <script src="js/Loader.js"></script>
 <script src="js/SpriteSheet.js"></script>
+<script src="js/Sprite.js"></script>
 <script type="text/javascript">
-  
-  
+// 首先需要提前定义好事件，并且注册相关的EventListener
+var myEvent = new CustomEvent('event_name', { 
+    detail: { title: 'This is title!'},
+});
+
+window.addEventListener('event_name', function(event){
+    console.log('得到标题为：', event.detail.title);
+});
+// 随后在对应的元素上触发该事件
+if(window.dispatchEvent) {  
+    window.dispatchEvent(myEvent);
+} else {
+    window.fireEvent(myEvent);
+}
+// 根据listener中的callback函数定义，应当会在console中输出 "得到标题为： This is title!"
+
+
 
   let stage = new Stage()
   stage.setCanvas(document.getElementById("myCanvas"))
@@ -33,24 +53,54 @@
   stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
   stage.drawPolygon([[0,0], [50,0], [50,50], [100,50], [100,100], [50,100], [50,150], [0,150], [0,100], [-50,100], [-50,50], [0,50]], {strokeStyle:'#0f0', lineWidth:5}, {closePath: true, startPosition: [300, 100]})
   
-  
+  let marry = {
+    lefter: null, 
+    righter: null
+  }
+
   let loader = new Loader({publicPath:'images/'})
   loader.program((rate, id) => { console.log(rate, id) })
   loader.ready(() => { 
     console.log('资源加载完成') 
     //document.querySelector('#asd').appendChild(loader.get('002.png'))
     //stage.drawImage(loader.get('003.png'), 0, 0, 202, 205, 10, 220, 80, 80)
-    let marry = new SpriteSheet(loader.get('marry.png'), [[1,1,1],[1,1,1]], {id: 'marry', x: 450, y: 200, duration: 100})
-    let lefter = marry.createChild('lefter', [3,4,5])
-    setInterval(()=>{
-      console.log(11)
-      stage.clean()
-      lefter.update();
-      lefter.draw();
-    },100)
+    let mry = new SpriteSheet(loader.get('marry.png'), [[1,1,1],[1,1,1]], {id: 'marry', x: 450, y: 200, duration: 100})
+    marry.lefter = mry.createChild('lefter', [3,4,5])
+    marry.righter = mry.createChild('righter', [0,1,2])
+    //timer()
+
+    var sp = new Sprite()
+    sp.addEventListener('drag', function(){
+      console.log('拖动中。。。');
+      
+    })
 
   })
   loader.load(['001.png', '002.png', '003.png', 'marry.png'])
+
+
+  let cr = 'righter';
+  function timer(){
+    stage.clean();
+    
+    marry[cr].update();
+    marry[cr].draw();
+    window.setTimeout(timer,100);
+  }
+
+  let input = new Input();
+  input.keydown('right', function(){
+    cr = 'righter'
+  })
+  input.keydown('left', function(){
+    cr = 'lefter'
+  })
+  input.mousedown(document.getElementById('left'), function(){
+    cr = 'lefter'
+  })
+  input.mousedown(document.getElementById('right'), function(){
+    cr = 'righter'
+  })
 
 </script>
 
