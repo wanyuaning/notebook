@@ -57,6 +57,7 @@ class SpriteSheet{
     orders.forEach(order => { _frames.push(frames[order]) })
     return {update(){parent.update(id)}, draw(){parent.draw(id)}}
   }
+  goto(){}
   index(index, id){
     var that = id ? this.childFrames[id] : this
     that.currentIndex = index;
