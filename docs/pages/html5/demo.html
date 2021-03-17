@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <canvas id="myCanvas" width="600" height="300"></canvas>
+  <canvas id="myCanvas" width="1000" height="600"></canvas>
   <div id="asd"></div>
   <div>
     <button onclick="stage.clean()">clear</button>
@@ -24,24 +24,42 @@
 <script src="js/SpriteSheet.js"></script>
 <script src="js/Sprite.js"></script>
 <script src="js/Shape.js"></script>
+<script src="js/Pattern.js"></script>
+<script src="js/tweens.js"></script>
 <script type="text/javascript">
+  
   
 
 
   let stage = new Stage()
   stage.setCanvas(document.getElementById("myCanvas"))
-  stage.setStageSize(600, 300)
+  stage.setStageSize(1000, 600)
   stage.showRuler()
-  stage.drawRect(10, 10, 100, 50, {fillStyle: '#0f0'})
-  stage.drawCircle(200, 35, 25, {fillStyle: '#f00', strokeStyle: '#000', lineWidth: 5})
-  stage.drawText('123456789', 10, 70, {fillStyle: '#f00', font: '30px'})
-  stage.drawLine([10,90], [200,100], {strokeStyle:'#00f', lineWidth:10, lineCap: 'round'})
-  stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
-  stage.drawPolygon([[0,0], [50,0], [50,50], [100,50], [100,100], [50,100], [50,150], [0,150], [0,100], [-50,100], [-50,50], [0,50]], {strokeStyle:'#0f0', lineWidth:5}, {closePath: true, startPosition: [300, 100]})
+  // stage.drawRect(10, 10, 100, 50, {fillStyle: '#0f0'})
+  // stage.drawCircle(200, 35, 25, {fillStyle: '#f00', strokeStyle: '#000', lineWidth: 5})
+  // stage.drawText('123456789', 10, 70, {fillStyle: '#f00', font: '30px'})
+  // stage.drawLine([10,90], [200,100], {strokeStyle:'#00f', lineWidth:10, lineCap: 'round'})
+  // stage.drawLine([10,120], [200,130], {strokeStyle:'#0f0', lineWidth:5})
+  // stage.drawPolygon([[0,0], [50,0], [50,50], [100,50], [100,100], [50,100], [50,150], [0,150], [0,100], [-50,100], [-50,50], [0,50]], {strokeStyle:'#0f0', lineWidth:5}, {closePath: true, startPosition: [300, 100]})
   
-  let shape = new Shape()
-  let s1 = shape.line([100,100], [300,300], {strokeStyle: '#00f'})
-  stage.draw(s1.draw())
+  // let shape = new Shape()
+  // let s1 = shape.line([100,100], [300,300], {strokeStyle: '#00f'})
+  // stage.draw(s1.draw())
+
+  var sp = new Sprite(100, 100)
+  sp.translate(100, 100)
+  
+  var timecount = 0
+  function timer(){
+    if(timecount > 600) return
+    stage.clean();
+    sp.update()
+    sp.draw()
+    timecount++
+    //console.log(timecount)
+    window.setTimeout(timer,33.3333);
+  }
+  timer()
   
 
   let marry = {
@@ -60,40 +78,40 @@
     marry.righter = mry.createChild('righter', [0,1,2])
     //timer()
 
-    var sp = new Sprite({x:30, y:50, width: 100, height: 100})
-    sp.addEventListener('drag', function(e){
-      console.log(e,'拖动中。。。');
+    // var sp = new Sprite({x:30, y:50, width: 100, height: 100})
+    // sp.addEventListener('drag', function(e){
+    //   console.log(e,'拖动中。。。');
       
-    })
-    sp.draw()
+    // })
+    // sp.draw()
     
 
   })
   loader.load(['001.png', '002.png', '003.png', 'marry.png'])
 
 
-  let cr = 'righter';
-  function timer(){
-    stage.clean();
+  // let cr = 'righter';
+  // function timer(){
+  //   stage.clean();
     
-    marry[cr].update();
-    marry[cr].draw();
-    window.setTimeout(timer,100);
-  }
+  //   marry[cr].update();
+  //   marry[cr].draw();
+  //   window.setTimeout(timer,100);
+  // }
 
-  let input = new Input();
-  input.keydown('right', function(){
-    cr = 'righter'
-  })
-  input.keydown('left', function(){
-    cr = 'lefter'
-  })
-  input.mousedown(document.getElementById('left'), function(){
-    cr = 'lefter'
-  })
-  input.mousedown(document.getElementById('right'), function(){
-    cr = 'righter'
-  })
+  // let input = new Input();
+  // input.keydown('right', function(){
+  //   cr = 'righter'
+  // })
+  // input.keydown('left', function(){
+  //   cr = 'lefter'
+  // })
+  // input.mousedown(document.getElementById('left'), function(){
+  //   cr = 'lefter'
+  // })
+  // input.mousedown(document.getElementById('right'), function(){
+  //   cr = 'righter'
+  // })
 
 </script>
 

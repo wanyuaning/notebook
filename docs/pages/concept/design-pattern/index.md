@@ -13,6 +13,8 @@ class StrategyPattern{
   get(){return this.#strategy[this.#name]}
   run(){return this.#strategy[this.#name].apply(null, arguments)}
 }
+
+
 // 状态模式 //
 class StatePattern{
   #state      

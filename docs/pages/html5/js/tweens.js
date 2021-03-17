@@ -10,6 +10,6 @@ tweens.setStrategyObj({
   sineaseOut: (t,b,c,d) => c * ((t = t / d - 1) * t * t + 1) + b
 })
 // 指针
-// tweens.useStrategy('sineaseOut')
+tweens.useStrategy('strongEaseIn')
 // 策略使用
 // tweens.run(t - startTime, startPos, endPos, duration)
