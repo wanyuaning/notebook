@@ -1,4 +1,29 @@
 ```
+模拟特定版本
+babel-core@6.22.1
+babel-loader@6.2.10
+babel-preset-es2015@6.22.0
+babel-preset-stage-2@6.22.0
+
+/src/main.js
+var a = ()=>{return 'qqqwwerrrrr'}
+a()
+
+/webpack.config.js
+module.exports = {
+    entry: './src/main.js',
+    output: { path: './dist', filename: 'bundle.js' },
+    module: { rules: [ 
+      {
+        test: /\.js$/,
+        use: { loader: 'babel-loader', options: { presets: ['es2015', 'stage-2'] } },
+        include: [resolve('src'), resolve('test'), resolve('node_modules/@slevin/vue-wheel-drawer/lib/vue-wheel-drawer.umd.min.js')]
+      }
+    ] }
+}
+
+
+
 多入口
 yarn add @babel/core @babel/preset-env babel-loader webpack-dev-server -D
 
