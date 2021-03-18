@@ -34,9 +34,10 @@ class Scene{
   }
   // 运行帧
   draw(){
+    let arr = []
     this.#ACTORS.forEach(actor => {
-      actor.update()
-      actor.draw()
+      arr.push.apply(arr, actor.update())
     })
+    return arr
   }
 }

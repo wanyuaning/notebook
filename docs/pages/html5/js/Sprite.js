@@ -1,5 +1,5 @@
 class Sprite{
-  #CHILDREN   = {}
+  #CHILDREN   = []
   #TRANSFORM  = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
   #TWEEN      = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
   #autoWidth  = true
@@ -22,9 +22,9 @@ class Sprite{
     let tf = this.#TRANSFORM
     this.#autoWidth && (this.width = Math.max(this.width, child.x + child.width))
     this.#autoHeight && (this.height = Math.max(this.height, child.y + child.height))
-    this.#CHILDREN[name] = child
+    this.#CHILDREN.push(child)
   }
-  delChild(name){/*递归删除 之后补充*/delete this.#CHILDREN[name]}
+  //delChild(name){/*递归删除 之后补充*/delete this.#CHILDREN[name]}
 
   translate  (x, y){
     let T = this.#TRANSFORM; 
@@ -49,14 +49,13 @@ class Sprite{
     transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - this.#startTimeSX, 1, transform.scaleX, 1000))
     transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - this.#startTimeSY, 1, transform.scaleY, 1000))
     transform.rotate !== tween.rotate && (tween.rotate = tweens.runDefault(now - this.#startTimeR, 0, transform.scaleR, 1000))
+    return children
   }
   draw(){
     //let {x, y, width, height, scale, rotate, translate} = this.#o
     //stage.drawRect(x + translate[0], y + translate[1], width * scale[0], height * scale[1],{fillStyle:'#f00'})
-    let tween = this.#TWEEN, children = this.#CHILDREN
-    for (let i in children) {
-      console.log('=====',children[i].draw())
-    }
+    //let tween = this.#TWEEN, children = this.#CHILDREN
+    return this.#CHILDREN
     //stage.drawRect(this.x + tween.x, this.y + tween.y, 50, 50,{fillStyle:'#f00'})
   }
   addEventListener(event, fn){

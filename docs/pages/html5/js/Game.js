@@ -25,6 +25,10 @@ class Game{
   }
   draw(){
     this.#STAGE.clean()
-    this.#SCENES[this.#CURRENT_SCENE].draw()
+    let arr = this.#SCENES[this.#CURRENT_SCENE].draw()
+    //console.log(arr)
+    arr.forEach(e => {
+      this.#STAGE.draw(e)
+    })
   }
 }

@@ -1,8 +1,6 @@
 class Stage{
   #canvas
   #context
-  #STILL_LIFE = []
-  #ACTORS = []
   #width
   #height
   constructor(canvas, width, height){
@@ -62,11 +60,9 @@ class Stage{
     ctx.stroke()
     ctx.beginPath()
   }
-  draw(){
-    this.#ACTORS.forEach(actor => {
-      actor.update()
-      actor.draw()
-    })
+  draw(obj){
+    console.log(obj)
+    this[obj.type].apply(this, obj.data)
     // sp.update()
     // sp.draw()
     //this[arr[0]].apply(this, arr[1])
