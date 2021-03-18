@@ -43,7 +43,7 @@ class Sprite{
 
   update(){
     let children = this.#CHILDREN, transform = this.#TRANSFORM, tween = this.#TWEEN, now = new Date().getTime()
-    console.log(transform.x,'-', tween.x)
+    //console.log(transform.x,'-', tween.x)
     transform.x !== tween.x && (tween.x = tweens.runDefault(now - this.#startTimeX, 0, transform.x, 10000))
     transform.y !== tween.y && (tween.y = tweens.runDefault(now - this.#startTimeY, 0, transform.y, 10000))
     transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - this.#startTimeSX, 1, transform.scaleX, 1000))
@@ -53,8 +53,11 @@ class Sprite{
   draw(){
     //let {x, y, width, height, scale, rotate, translate} = this.#o
     //stage.drawRect(x + translate[0], y + translate[1], width * scale[0], height * scale[1],{fillStyle:'#f00'})
-    let tween = this.#TWEEN
-    stage.drawRect(this.x + tween.x, this.y + tween.y, 50, 50,{fillStyle:'#f00'})
+    let tween = this.#TWEEN, children = this.#CHILDREN
+    for (let i in children) {
+      console.log('=====',children[i].draw())
+    }
+    //stage.drawRect(this.x + tween.x, this.y + tween.y, 50, 50,{fillStyle:'#f00'})
   }
   addEventListener(event, fn){
     window.addEventListener(event, fn);

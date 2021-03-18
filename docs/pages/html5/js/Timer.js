@@ -10,7 +10,6 @@ class Timer{
     let timer = () => {
       if(this.#STOP) return
       this.#GAME.draw()
-      console.log(11111)
       window.setTimeout(timer, this.fps);
     }
     timer()

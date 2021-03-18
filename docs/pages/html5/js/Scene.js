@@ -15,7 +15,7 @@ class Scene{
   setTransition(transitionKey, options){
     options.key = transitionKey
     this.#Transition = options
-    let sp = new Sprite(0, 0), rect = shape.rect()
+    let sp = new Sprite(0, 0), rect = shape.rect(0, 0, 200, 100, {fillStyle: '#00f'})
     sp.addChild('CURTAIN', rect)
     this.#ACTORS.push(sp)
   }
