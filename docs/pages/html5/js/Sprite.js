@@ -44,11 +44,11 @@ class Sprite{
   update(){
     let children = this.#CHILDREN, transform = this.#TRANSFORM, tween = this.#TWEEN, now = new Date().getTime()
     console.log(transform.x,'-', tween.x)
-    transform.x !== tween.x && (tween.x = tweens.run(now - this.#startTimeX, 0, transform.x, 10000))
-    transform.y !== tween.y && (tween.y = tweens.run(now - this.#startTimeY, 0, transform.y, 10000))
-    transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.run(now - this.#startTimeSX, 1, transform.scaleX, 1000))
-    transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.run(now - this.#startTimeSY, 1, transform.scaleY, 1000))
-    transform.rotate !== tween.rotate && (tween.rotate = tweens.run(now - this.#startTimeR, 0, transform.scaleR, 1000))
+    transform.x !== tween.x && (tween.x = tweens.runDefault(now - this.#startTimeX, 0, transform.x, 10000))
+    transform.y !== tween.y && (tween.y = tweens.runDefault(now - this.#startTimeY, 0, transform.y, 10000))
+    transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - this.#startTimeSX, 1, transform.scaleX, 1000))
+    transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - this.#startTimeSY, 1, transform.scaleY, 1000))
+    transform.rotate !== tween.rotate && (tween.rotate = tweens.runDefault(now - this.#startTimeR, 0, transform.scaleR, 1000))
   }
   draw(){
     //let {x, y, width, height, scale, rotate, translate} = this.#o

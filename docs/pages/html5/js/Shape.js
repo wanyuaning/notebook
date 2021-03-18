@@ -9,4 +9,7 @@ class Shape{
   line(start, end, options, config){
     return new this.#Element('drawLine', [start, end, options, config])
   }
+  rect(x, y, width, height, options, config){
+    return new this.#Element('drawRect', [x, y, width, height, options, config])
+  }
 }
