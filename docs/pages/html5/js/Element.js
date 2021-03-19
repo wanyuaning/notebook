@@ -1,5 +1,4 @@
 function getParent(ele){
-  debugger
   let parent = ele.parent
   parent = parent ? getParent(parent) : ele
   return parent
@@ -26,8 +25,6 @@ class Element{
   dataToScene(){
     if (!this.scene) {
       this.scene = getParent(this).dataList
-      console.log(this,this.parent);
-      
       this.scene.push({type: this.type, data: this.data})
     }
   }
@@ -39,7 +36,6 @@ class Scene extends Element{
     this.dataList = []
     delete this.scene
     delete this.data
-    console.log('Scene', this.dataList);
   }
 }
 
@@ -55,8 +51,9 @@ class Sprite extends Element{
 }
 
 class Rect extends Element{
-  constructor(){
+  constructor(x, y, width, height, options, config){
     super('Rect')
+    this.data = [x, y, width, height, options, config]
   }
   
 }
@@ -72,6 +69,7 @@ scene.addChild(sp)
 
 let rt = new Rect(10, 10, 100, 50, {fillStyle:'#f00'})
 sp.addChild(rt)
-console.log('sp', sp);
+let rt2 = new Rect(100, 100, 50, 50, {fillStyle:'#0f0'})
+rt2.appendTo(sp)
 
 

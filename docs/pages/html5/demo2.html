@@ -13,6 +13,15 @@
 <script src="js/Stage.js"></script>
 <script src="js/Element.js"></script>
 <script>
+// 舞台
+let stage = new Stage()
+stage.setCanvas(document.getElementById("myCanvas"))
+stage.setStageSize(1000, 600)
+stage.showRuler()
+
+scene.dataList.forEach(e => {
+  stage.draw(e)
+})
 
 
 
