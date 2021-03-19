@@ -60,13 +60,7 @@ class Stage{
     ctx.stroke()
     ctx.beginPath()
   }
-  draw(obj){
-    console.log(obj)
-    this[obj.type].apply(this, obj.data)
-    // sp.update()
-    // sp.draw()
-    //this[arr[0]].apply(this, arr[1])
-  }
+  draw(obj){ this['draw'+obj.type].apply(this, obj.data) }
   /**
    * drawRect(x, y, width, height, options)
    */    

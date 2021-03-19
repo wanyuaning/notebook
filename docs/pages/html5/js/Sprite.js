@@ -18,11 +18,15 @@ class Sprite{
     width && (this.#autoWidth = false) 
     height && (this.#autoHeight = false)
   }
-  addChild(name, child){
+  addChild(child){
     let tf = this.#TRANSFORM
     this.#autoWidth && (this.width = Math.max(this.width, child.x + child.width))
     this.#autoHeight && (this.height = Math.max(this.height, child.y + child.height))
-    this.#CHILDREN.push(child)
+    child.parent = this
+    child.appendTo(this.#CHILDREN)
+  }
+  appendTo(scene){
+    scene.push({"type": "Rect", "data": [0, 0, 200, 100, {"fillStyle": "#00f"}, null]})
   }
   //delChild(name){/*递归删除 之后补充*/delete this.#CHILDREN[name]}
 
@@ -40,6 +44,8 @@ class Sprite{
   rotateTo(deg){this.#TRANSFORM.rotate = deg}
   scale  (x, y){let T = this.#TRANSFORM; T.scale[0] += x; T.scale[1] += y}
   scaleTo(x, y){let T = this.#TRANSFORM; T.scale[0] = x; T.scale[1] = y}
+
+  
 
   update(){
     let children = this.#CHILDREN, transform = this.#TRANSFORM, tween = this.#TWEEN, now = new Date().getTime()

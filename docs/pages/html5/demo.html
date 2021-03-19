@@ -61,8 +61,10 @@
   loader.program((rate, id) => { console.log(rate, id) })
   loader.ready(() => { 
     console.log('资源加载完成') 
-    timer.start(game)
-    setTimeout(function(){timer.stops()}, 15000)
+    //timer.start(game)
+    //setTimeout(function(){timer.stops()}, 15000)
+    game.draw()
+
   })
   loader.load(['001.png', '002.png', '003.png', 'marry.png'])
 

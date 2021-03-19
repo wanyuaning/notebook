@@ -1,7 +1,10 @@
+
+
 class Shape{
   #Element = function(type, data){
     this.type = type
     this.data = data
+    this.appendTo()
   }
   constructor(){
     this.#Element.prototype.draw = function(){ return [this.type, this.data] }

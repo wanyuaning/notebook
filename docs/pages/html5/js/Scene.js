@@ -17,11 +17,12 @@ class Scene{
     this.#Transition = options
     let sp = new Sprite(0, 0), rect = shape.rect(0, 0, 200, 100, {fillStyle: '#00f'})
     sp.addChild('CURTAIN', rect)
-    this.#ACTORS.push(sp)
+    this.addActor(sp)
   }
   // 场景元素
   addActor(actor){
-    this.#ACTORS.push(actor)
+    actor.parent = this
+    actor.appendTo(this.#ACTORS)
   }
   // 场景过渡
   in(){
@@ -34,10 +35,9 @@ class Scene{
   }
   // 运行帧
   draw(){
-    let arr = []
-    this.#ACTORS.forEach(actor => {
-      arr.push.apply(arr, actor.update())
-    })
-    return arr
+    console.log('#ACTORS',this.#ACTORS);
+    return this.#ACTORS
   }
 }
+
+//[{"type": "Rect", "data": [0, 0, 200, 100, {"fillStyle": "#00f"}, null]}]
