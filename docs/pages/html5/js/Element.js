@@ -1,12 +1,11 @@
 function getParent(ele){
   let parent = ele.parent
   parent = parent ? getParent(parent) : ele
-  return parent
+  return parent && parent.type === 'SCENE' ? parent : null
 }
 
 class Element{  
   constructor(type){
-    console.log('Element type', type)
     this.type = type
     this.data = {}
     this.parent = null
@@ -22,20 +21,45 @@ class Element{
     child.dataToScene()
     this.children.push(child)
   }
+  appendTo(parent){
+    this.parent = parent
+    this.dataToScene()
+    parent.children.push(this)
+  }
   dataToScene(){
     if (!this.scene) {
-      this.scene = getParent(this).dataList
-      this.scene.push({type: this.type, data: this.data})
+      let scene = getParent(this)
+      scene && (this.scene = scene.dataList)
     }
+    this.scene && this.scene.push({type: this.type, data: this.data})
   }
 }
 
 class Scene extends Element{
-  constructor(){
+  #type // 过渡类型
+  #duration // 过渡时长
+  #mask = {fillStyle:'#000', image: '001.jpg'}     // 过渡遮罩 背景
+  constructor(name){
     super('SCENE')
-    this.dataList = []
     delete this.scene
     delete this.data
+    this.dataList = []
+    this.name = name    
+    this.transition = {active: false, data: {}}
+  }
+  setTransition(options){
+    this.transition.data = {type: 'Rect', data:[0,0,1000,600,{fillStyle:'#000'}], undefined}
+  }
+  in(callback){
+    this.transition.active = true
+    //let transition = this.#Transition
+    //if (!transition) return
+  }
+  out(callback){
+    this.transition.active = true
+    callback()
+    //let transition = this.#Transition
+    //if (!transition) return
   }
 }
 
@@ -58,18 +82,15 @@ class Rect extends Element{
   
 }
 
+class Circle extends Element{
+  constructor(x, y, r, options, config){
+    super('Circle')
+    this.data = [x, y, r, options, config]
+  }
+  
+}
 
-// 场景
-let scene = new Scene()
 
 
-// 演员
-var sp = new Sprite(100, 100)
-scene.addChild(sp)
-
-let rt = new Rect(10, 10, 100, 50, {fillStyle:'#f00'})
-sp.addChild(rt)
-let rt2 = new Rect(100, 100, 50, 50, {fillStyle:'#0f0'})
-rt2.appendTo(sp)
 
 

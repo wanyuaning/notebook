@@ -12,19 +12,42 @@
 </html>
 <script src="js/Stage.js"></script>
 <script src="js/Element.js"></script>
+<script src="js/Game.js"></script>
 <script>
+
+// 演员
+var sp = new Sprite(100, 100)
+let rt = new Rect(10, 10, 100, 50, {fillStyle:'#f00'})
+sp.addChild(rt)
+let rt2 = new Rect(100, 100, 50, 50, {fillStyle:'#0f0'})
+rt2.appendTo(sp)
+let rt3 = new Rect(200, 100, 290, 50, {fillStyle:'#00f'})
+rt3.appendTo(sp)
+let cc = new Circle(200, 250, 50, {fillStyle:'#00f', strokeStyle:'#f00', lineWidth:'15'})
+cc.appendTo(sp)
+
 // 舞台
 let stage = new Stage()
 stage.setCanvas(document.getElementById("myCanvas"))
 stage.setStageSize(1000, 600)
 stage.showRuler()
 
-scene.dataList.forEach(e => {
-  stage.draw(e)
-})
+// 游戏
+let game = new Game()
+game.setStage(stage)
+game.addActor(sp)
+game.draw()
 
-
-
-
+let rt4 = new Rect(0, 100, 250, 100, {fillStyle:'#f00'})
+let scene2 = new Scene('SCENE2')
+scene2.setTransition()
+scene2.addChild(rt4)
+game.addScene(scene2)
+setTimeout(()=>{
+  game.changeSceneTo('SCENE2')
+  rt2.data[0] = 50
+  rt2.data[2] = 100
+  game.draw()
+}, 2000)
 
 </script>

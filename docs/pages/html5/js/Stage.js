@@ -61,16 +61,12 @@ class Stage{
     ctx.beginPath()
   }
   draw(obj){ 
-    console.log('obj', obj.data);
-    
     this['draw'+obj.type].apply(this, obj.data) 
   }
   /**
    * drawRect(x, y, width, height, options)
    */    
   drawRect(x, y, width, height, options, config){ 
-    console.log('=', x, y, width, height, options, config);
-    
     Object.assign(this.#context, options || {})
     this.#context.beginPath()
     options.fillStyle && this.#context.fillRect(x, y, width, height)
