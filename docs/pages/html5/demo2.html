@@ -36,6 +36,7 @@ stage.showRuler()
 let game = new Game()
 game.setStage(stage)
 game.addActor(sp)
+game.update()
 game.draw()
 
 let rt4 = new Rect(0, 100, 250, 100, {fillStyle:'#f00'})
@@ -45,8 +46,7 @@ scene2.addChild(rt4)
 game.addScene(scene2)
 setTimeout(()=>{
   game.changeSceneTo('SCENE2')
-  rt2.data[0] = 50
-  rt2.data[2] = 100
+  game.update()
   game.draw()
 }, 2000)
 

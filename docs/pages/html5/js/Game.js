@@ -28,10 +28,15 @@ class Game{
       e.setTransition('fade', {fillStyle: '#0f0'})
     })
   }
+  update(){
+    let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
+    scene.update()
+  }
   draw(){
     console.log('CURRENT_SCENE', this.#CURRENT_SCENE);
     
     this.#STAGE.clean()
+    this.#STAGE.globalAlpha = 0.5
     let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
     let data = scene.dataList
     let transition = scene.transition

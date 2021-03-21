@@ -45,10 +45,13 @@ class Scene extends Element{
     delete this.data
     this.dataList = []
     this.name = name    
+
     this.transition = {active: false, data: {}}
+    this.mask = new Sprite()
+    this.mask.addChild(new Rect(0, 0, 1000, 600, {fillStyle: '#000'}))
   }
   setTransition(options){
-    this.transition.data = {type: 'Rect', data:[0,0,1000,600,{fillStyle:'#000'}], undefined}
+    this.transition.data = {type: 'Rect', data:[], undefined}
   }
   in(callback){
     this.transition.active = true
@@ -61,6 +64,12 @@ class Scene extends Element{
     //let transition = this.#Transition
     //if (!transition) return
   }
+  update(){
+    this.children.forEach(e => {
+      console.log('e type', e.type);
+    })
+    this.transition.active && this.mask.update()
+  }
 }
 
 class Sprite extends Element{
@@ -72,6 +81,9 @@ class Sprite extends Element{
       child.dataToScene()
     })
   } 
+  update(){
+    
+  }
 }
 
 class Rect extends Element{
