@@ -60,17 +60,33 @@ class Stage{
     ctx.stroke()
     ctx.beginPath()
   }
-  draw(obj){ 
-    this['draw'+obj.type].apply(this, obj.data) 
+  draw({type, data, config}){ 
+
+    
+    if (config) {
+      if (config.alpha) {
+        this.#context.save(); this.#context.globalAlpha = config.alpha
+      }
+    }
+    
+    this['draw'+type].apply(this, data) 
+
+    if (config) {
+      if (config.alpha) {
+        this.#context.restore(); 
+      }
+    }
   }
   /**
    * drawRect(x, y, width, height, options)
    */    
   drawRect(x, y, width, height, options, config){ 
-    Object.assign(this.#context, options || {})
+    options = options || {}
+    Object.assign(this.#context, options)
     this.#context.beginPath()
     options.fillStyle && this.#context.fillRect(x, y, width, height)
     options.strokeStyle && this.#context.strokeRect(x, y, width, height)
+    
   }
   /**
    * drawCircle(x, y, r, options)

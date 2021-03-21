@@ -16,7 +16,7 @@ class Scene{
     options.key = transitionKey
     this.#Transition = options
     let sp = new Sprite(0, 0), rect = shape.rect(0, 0, 200, 100, {fillStyle: '#00f'})
-    sp.addChild('CURTAIN', rect)
+    sp.addChild(rect)
     this.addActor(sp)
   }
   // 场景元素
@@ -35,7 +35,6 @@ class Scene{
   }
   // 运行帧
   draw(){
-    console.log('#ACTORS',this.#ACTORS);
     return this.#ACTORS
   }
 }

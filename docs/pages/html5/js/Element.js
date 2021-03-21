@@ -36,9 +36,9 @@ class Element{
 }
 
 class Scene extends Element{
-  #type // 过渡类型
-  #duration // 过渡时长
-  #mask = {fillStyle:'#000', image: '001.jpg'}     // 过渡遮罩 背景
+  //#type // 过渡类型
+  //#duration // 过渡时长
+  //#mask = {fillStyle:'#000', image: '001.jpg'}     // 过渡遮罩 背景
   constructor(name){
     super('SCENE')
     delete this.scene
@@ -60,7 +60,8 @@ class Scene extends Element{
   }
   out(callback){
     this.transition.active = true
-    callback()
+    
+    //callback()
     //let transition = this.#Transition
     //if (!transition) return
   }

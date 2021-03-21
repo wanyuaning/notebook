@@ -1,15 +1,13 @@
 class Timer{
   #STOP = false
-  #GAME = null
   constructor(fps){
     this.fps = fps
   }
   start(game){
     this.#STOP = false
-    this.#GAME = game
     let timer = () => {
       if(this.#STOP) return
-      this.#GAME.draw()
+      game.draw()
       window.setTimeout(timer, this.fps);
     }
     timer()

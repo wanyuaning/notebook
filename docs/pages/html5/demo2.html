@@ -13,6 +13,7 @@
 <script src="js/Stage.js"></script>
 <script src="js/Element.js"></script>
 <script src="js/Game.js"></script>
+<script src="js/Timer.js"></script>
 <script>
 
 // 演员
@@ -31,23 +32,26 @@ let stage = new Stage()
 stage.setCanvas(document.getElementById("myCanvas"))
 stage.setStageSize(1000, 600)
 stage.showRuler()
+stage.draw({type:'Rect',data:[0,0,1000,600,{fillStyle:'#000'}], config:{alpha: 0.3}})
+stage.draw({type:'Rect',data:[100,50,200,100,{fillStyle:'#f00'}]})
 
 // 游戏
-let game = new Game()
-game.setStage(stage)
-game.addActor(sp)
-game.update()
-game.draw()
+// let game = new Game({fps:1, sceneTransition:{type: 'fade'}})
+// game.setStage(stage)
+// game.addActor(sp)
+// game.start()
 
-let rt4 = new Rect(0, 100, 250, 100, {fillStyle:'#f00'})
-let scene2 = new Scene('SCENE2')
-scene2.setTransition()
-scene2.addChild(rt4)
-game.addScene(scene2)
-setTimeout(()=>{
-  game.changeSceneTo('SCENE2')
-  game.update()
-  game.draw()
-}, 2000)
+
+// let rt4 = new Rect(0, 100, 250, 100, {fillStyle:'#f00'})
+// let scene2 = new Scene('SCENE2')
+// scene2.setTransition()
+// scene2.addChild(rt4)
+// game.addScene(scene2)
+
+// setTimeout(()=>{
+//   game.changeSceneTo('SCENE2')
+// },3000)
+
+
 
 </script>
