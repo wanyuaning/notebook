@@ -44,36 +44,31 @@ class Scene extends Element{
     delete this.scene
     delete this.data
     this.dataList = []
-    this.name = name    
-
-    this.transition = {active: false, data: {}}
-    this.mask = new Sprite()
-    this.mask.addChild(new Rect(0, 0, 1000, 600, {fillStyle: '#000'}))
+    this.name = name 
   }
   setTransition(options){
-    this.transition.data = {type: 'Rect', data:[], undefined}
+    
   }
   in(callback){
-    this.transition.active = true
-    //let transition = this.#Transition
-    //if (!transition) return
+    
+   
   }
   out(callback){
-    this.transition.active = true
-    
     //callback()
-    //let transition = this.#Transition
-    //if (!transition) return
   }
   update(){
     this.children.forEach(e => {
       console.log('e type', e.type);
     })
-    this.transition.active && this.mask.update()
   }
 }
 
 class Sprite extends Element{
+  #TRANSFORM  = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
+  #TWEEN      = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
+  #timerX
+  #timerY
+  #timerR
   constructor(){
     super('SPRITE')
   }
@@ -81,9 +76,31 @@ class Sprite extends Element{
     this.children.forEach(child =>{
       child.dataToScene()
     })
-  } 
+  }
+
+  translate  (x, y){
+    let T = this.#TRANSFORM; 
+    if (x) {T.x += x; this.#timerX = new Date().getTime()}
+    if (y) {T.y += y; this.#timerY = new Date().getTime()}
+  }
+  translateTo(x, y){
+    let T = this.#TRANSFORM;  
+    if (T.x !== x) {T.x = x; this.#timerX = new Date().getTime()}
+    if (T.y !== y) {T.y = y; this.#timerY = new Date().getTime()}
+  }
+  rotate  (deg){this.#TRANSFORM.rotate += deg}
+  rotateTo(deg){this.#TRANSFORM.rotate = deg}
+  scale  (x, y){let T = this.#TRANSFORM; T.scale[0] += x; T.scale[1] += y}
+  scaleTo(x, y){let T = this.#TRANSFORM; T.scale[0] = x; T.scale[1] = y}
   update(){
-    
+    let children = this.children, transform = this.#TRANSFORM, tween = this.#TWEEN, now = new Date().getTime()
+    //console.log(transform.x,'-', tween.x)
+    transform.x !== tween.x && (tween.x = tweens.runDefault(now - this.#timerX, 0, transform.x, 10000))
+    transform.y !== tween.y && (tween.y = tweens.runDefault(now - this.#timerY, 0, transform.y, 10000))
+    transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - this.#timerX, 1, transform.scaleX, 1000))
+    transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - this.#timerY, 1, transform.scaleY, 1000))
+    transform.rotate !== tween.rotate && (tween.rotate = tweens.runDefault(now - this.#timerR, 0, transform.scaleR, 1000))
+    return children
   }
 }
 

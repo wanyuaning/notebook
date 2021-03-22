@@ -35,23 +35,12 @@ class Game{
     this.#TIMER.start(this)
     setTimeout(() => {this.#TIMER.stops()}, 10000)
   }
-  update(){
-    let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
-    scene.update()
-  }
   draw(){
-    console.log('CURRENT_SCENE', this.#CURRENT_SCENE);
-    
-    this.#STAGE.clean()
-    this.#STAGE.globalAlpha = 0.5
     let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
-    let data = scene.dataList
-    let transition = scene.transition
-    
-    data.forEach(e => {
-      this.#STAGE.draw(e)
-    })
+    this.#STAGE.clean()
+    scene.update()
+    scene.dataList.forEach(e => { this.#STAGE.draw(e) })
 
-    transition.active && this.#STAGE.draw(transition.data)
+    //transition.active && this.#STAGE.draw(transition.data)
   }
 }
