@@ -60,8 +60,21 @@ class Stage{
     ctx.stroke()
     ctx.beginPath()
   }
-  draw({type, data, config}){ 
+  drawGroup(){
 
+  }
+  draw({type, data, config}){ 
+    /*
+    [
+       {type:'Rect', data:[0,0,100,50,{fillStyle:'#f00'}]},
+       {type:'Sprite', children:[], config:{}}
+    ]
+    图层结构
+    {
+       0:{type:'Rect', data:[0,0,100,50,{fillStyle:'#f00'}]},
+       1:{type:'Sprite', children:[], config:{}}
+    }
+    */
     
     if (config) {
       if (config.alpha) {
