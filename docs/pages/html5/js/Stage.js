@@ -61,25 +61,24 @@ class Stage{
     ctx.beginPath()
   }
   /* 
-     === options ===
-     ▎fillStyle                填充颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
-     ▎strokeStyle              描边颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
-     ▉lineCap                  线条末端形状：butt  round/square (平直/圆形/夌形)
-     ▉lineJoin                 线条连接形式：miter round/bevel
-     ▉miterLimit               当lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率
-     ▉lineWidth                线条宽度：1.0 及大于0.0 线条在路径上居中 每边有线条宽的一半
-     ▎shadowBlur               指定羽化阴影的程度。默认值是 0
-     ▎shadowColor              把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black
-     ▎shadowOffsetX            指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0
-     ▎shadowOffsetY  
-     ▉font
-     ▉textBaseline             文本基线：alphabetic top/middle/bottom/hanging/ideographic 普通的字母基线/em方框的顶端/em方框的正中/em方框的底端/悬挂基线/表意基线
-     ▉textAlign                文本对齐：start end/center/left/right
-     ▉maxWidth                 文本域宽
-     ▎globalAlpha              不透明度 1.0 及0.0-1.0
-     ▎globalCompositeOperation 新图像如何覆盖旧图像 
-     
-     === config ===
+    ▇▇▇▇▇▇▇▇▇▇▇▇▇ options ▇▇▇▇▇▇▇▇▇▇▇▇▇
+    ▯fillStyle                填充颜色、模式或渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
+    ▯strokeStyle              描边颜色、模式和渐变。值：字符串、CanvasGradient 对象或 CanvasPattern 对象
+    ▮lineCap                  线条末端形状：butt  round/square (平直/圆形/夌形)
+    ▮lineJoin                 线条连接形式：miter round/bevel
+    ▮miterLimit               当lineJoin 为miter时，这个属性指定斜连接长度和线条宽度的最大比率
+    ▮lineWidth                线条宽度：1.0 及大于0.0 线条在路径上居中 每边有线条宽的一半
+    ▯shadowBlur               指定羽化阴影的程度。默认值是 0
+    ▯shadowColor              把阴影颜色指定为CSS字符串或Web样式字符串，且可包含alpha部分来表示透明度。默认值是 black
+    ▯shadowOffsetX            指定阴影水平和垂直偏移。较大值使得阴影化对象漂浮在背景较高位置上。 默认值是 0
+    ▯shadowOffsetY  
+    ▮font
+    ▮textBaseline             文本基线：alphabetic top/middle/bottom/hanging/ideographic 普通的字母基线/em方框的顶端/em方框的正中/em方框的底端/悬挂基线/表意基线
+    ▮textAlign                文本对齐：start end/center/left/right
+    ▮maxWidth                 文本域宽
+    ▯globalAlpha              不透明度 1.0 及0.0-1.0
+    ▯globalCompositeOperation 新图像如何覆盖旧图像
+    ▇▇▇▇▇▇▇▇▇▇▇▇▇ config  ▇▇▇▇▇▇▇▇▇▇▇▇▇
      save      缓存options
      restore   释放缓存
      beginPath 开启新路径
