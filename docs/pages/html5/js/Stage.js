@@ -88,7 +88,57 @@ class Stage{
      缩放 ctx.transform([a],b,c,[d],e,f)
                                  
   */
-  drawGroup(){
+  test(){
+    
+    
+    
+    // skew 30deg
+    
+    
+    
+    let [x, y, w, h] = [100, 100, 100, 50], 
+      {rotate, translate, scale, origin} = {rotate: 0, translate:[0, 0], scale: [1, 1], skew: 30, origin:5}
+    let deg = Math.PI/180, ctx = this.#context
+
+    let a = Math.cos(deg*rotate)*scale[0],  // X缩放
+        d = Math.cos(deg*rotate)*scale[1],  // Y缩放
+        b = Math.sin(deg*rotate)*scale[1],  // Y斜切 一个为零一个非零 得到斜切 / b负c正 旋转方向逆时针
+        c = -Math.sin(deg*rotate)*scale[0], // X斜切        
+        e = x + translate[0],               // X位移 元素定位 + 位移因子
+        f = y + translate[1],               // Y位移
+        startX = 0,                         // 元素原点与画布原点对齐 原点策略config.origin
+        startY = 0
+c += 1
+    ctx.save()
+    this.#context.fillStyle = '#f00'
+    switch(origin){
+      case 2: startX = -w/2; e += w/2; break
+      case 3: startX = -w; e += w; break
+      case 4: startY = -h/2; f += h/2; break
+      case 5: startX = -w/2; startY = -h/2; e += w/2; f += h/2; break
+      case 6: startX = -w; startY = -h/2; e += w; f += h/2; break
+      case 7: startY = -h; f += h; break
+      case 8: startX = -w/2; startY = -h; e += w/2; f += h; break
+      case 9: startX = -w; startY = -h; e += w; f += h; break
+      default: startX = 0; startY = 0
+    }
+    ctx.transform(a, b, c, d, e, f);
+    ctx.fillRect(startX, startY, w, h)
+    ctx.restore()
+
+
+
+
+    this.#context.fillStyle = '#0f0'
+    ctx.fillRect(99, 99, 3, 3)
+    ctx.fillRect(148, 99, 3, 3)
+    ctx.fillRect(199, 99, 3, 3)
+    ctx.fillRect(99, 124, 3, 3)
+    ctx.fillRect(148, 124, 3, 3)
+    ctx.fillRect(199, 124, 3, 3)
+    ctx.fillRect(99, 149, 3, 3)
+    ctx.fillRect(148, 149, 3, 3)
+    ctx.fillRect(199, 149, 3, 3)
 
   }
   draw({type, data, config}){ 
@@ -118,7 +168,7 @@ class Stage{
       }
     }
   }
-  drawSprite(x, y, children, )
+  drawSprite(x, y, children, ){}
   /**
    * drawRect(x, y, width, height, options)
    */    
