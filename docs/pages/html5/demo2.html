@@ -16,6 +16,8 @@
 <script src="js/Timer.js"></script>
 <script>
 
+  
+
 // 演员
 var sp = new Sprite(100, 100)
 let rt = new Rect(10, 10, 100, 50, {fillStyle:'#f00'})
@@ -33,7 +35,28 @@ stage.setCanvas(document.getElementById("myCanvas"))
 stage.setStageSize(1000, 600)
 stage.showGrid()
 stage.showRuler()
-stage.test()
+
+
+
+let arr = [
+  {type: 'Rect', data: {x:200, y:300, width:100, height:50, options: {fillStyle: '#00f', globalAlpha: 0.5}}, config: {save:true, restore:true}},
+  {type: 'Sprite', data: {x:100, y:100, width:100, height:50, options: {fillStyle: '#00f'}, children: [
+    {type: 'Rect', data: {x:0, y:0, width:100, height:50, options: {fillStyle: '#f00'}}}
+  ], transform: {rotate: 45}}},
+  {type: 'Rect', data: {x:99, y:99, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:148, y:99, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:199, y:99, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:99, y:124, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:148, y:124, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:199, y:124, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:99, y:149, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:148, y:149, width:3, height:3, options: {fillStyle: '#0f0'}}},
+  {type: 'Rect', data: {x:199, y:149, width:3, height:3, options: {fillStyle: '#0f0'}}}
+]
+arr.forEach(e => { stage.draw(e) })
+
+//stage.test(100, 100, 100, 50, {translate:[0, 0], scale: [1, 1],rotate: 0,  skew: [1, 0]})
+
 // stage.draw({type:'Rect',data:[0,0,1000,600,{fillStyle:'#000'}], config:{alpha: 0.3}})
 // stage.draw({type:'Rect',data:[100,50,200,100,{fillStyle:'#f00'}]})
 

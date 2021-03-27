@@ -79,139 +79,92 @@ class Stage{
     ▯globalAlpha              不透明度 1.0 及0.0-1.0
     ▯globalCompositeOperation 新图像如何覆盖旧图像
     ▇▇▇▇▇▇▇▇▇▇▇▇▇ config  ▇▇▇▇▇▇▇▇▇▇▇▇▇
-     save      缓存options
-     restore   释放缓存
-     beginPath 开启新路径
-     
+     save        缓存options
+     restore     释放缓存
+     beginPath   开启新路径
+     clip: true, 通过save/restore做到撤消的效果
+     ▇▇▇▇▇▇▇▇▇▇▇ transform ▇▇▇▇▇▇▇▇▇▇▇▇
+     rotate: 45
+     translate: [10, 10]
+     scale: [2, 1.5]
+     skew: [1, 1] [1=45度,直角锐角邻边与对边之比]
+     origin: 5    [1/2/3/4/5/6/7/8/9]
+
      位移 ctx.transform(a,b,c,d,[e],[f])
      旋转 ctx.transform([a],[b],[c],[d],e,f)
      缩放 ctx.transform([a],b,c,[d],e,f)
                                  
   */
-  test(){
-    
-    
-    
-    // skew 30deg
-    
-    
-    
-    let [x, y, w, h] = [100, 100, 100, 50], 
-      {rotate, translate, scale, origin} = {rotate: 0, translate:[0, 0], scale: [1, 1], skew: 30, origin:5}
-    let deg = Math.PI/180, ctx = this.#context
-
-    let a = Math.cos(deg*rotate)*scale[0],  // X缩放
-        d = Math.cos(deg*rotate)*scale[1],  // Y缩放
-        b = Math.sin(deg*rotate)*scale[1],  // Y斜切 一个为零一个非零 得到斜切 / b负c正 旋转方向逆时针
-        c = -Math.sin(deg*rotate)*scale[0], // X斜切        
-        e = x + translate[0],               // X位移 元素定位 + 位移因子
-        f = y + translate[1],               // Y位移
-        startX = 0,                         // 元素原点与画布原点对齐 原点策略config.origin
-        startY = 0
-c += 1
-    ctx.save()
-    this.#context.fillStyle = '#f00'
-    switch(origin){
-      case 2: startX = -w/2; e += w/2; break
-      case 3: startX = -w; e += w; break
-      case 4: startY = -h/2; f += h/2; break
-      case 5: startX = -w/2; startY = -h/2; e += w/2; f += h/2; break
-      case 6: startX = -w; startY = -h/2; e += w; f += h/2; break
-      case 7: startY = -h; f += h; break
-      case 8: startX = -w/2; startY = -h; e += w/2; f += h; break
-      case 9: startX = -w; startY = -h; e += w; f += h; break
-      default: startX = 0; startY = 0
-    }
-    ctx.transform(a, b, c, d, e, f);
-    ctx.fillRect(startX, startY, w, h)
-    ctx.restore()
-
-
-
-
-    this.#context.fillStyle = '#0f0'
-    ctx.fillRect(99, 99, 3, 3)
-    ctx.fillRect(148, 99, 3, 3)
-    ctx.fillRect(199, 99, 3, 3)
-    ctx.fillRect(99, 124, 3, 3)
-    ctx.fillRect(148, 124, 3, 3)
-    ctx.fillRect(199, 124, 3, 3)
-    ctx.fillRect(99, 149, 3, 3)
-    ctx.fillRect(148, 149, 3, 3)
-    ctx.fillRect(199, 149, 3, 3)
-
-  }
   draw({type, data, config}){ 
-    /*
-    [
-       {type:'Rect', data:[0,0,100,50,{fillStyle:'#f00'}]},
-       {type:'Sprite', children:[], config:{}}
-    ]
-    图层结构
-    {
-       0:{type:'Rect', data:[0,0,100,50,{fillStyle:'#f00'}]},
-       1:{type:'Sprite', children:[], config:{}}
-    }
-    */
-    
     if (config) {
-      if (config.alpha) {
-        this.#context.save(); this.#context.globalAlpha = config.alpha
-      }
+      config.save && this.#context.save()
+      config.beginPath && this.#context.beginPath()
+      config.clip && this.#context.clip()
     }
-    
-    this['draw'+type].apply(this, data) 
-
-    if (config) {
-      if (config.alpha) {
-        this.#context.restore(); 
-      }
-    }
+    this['draw'+type](data)
+    config && config.restore && this.#context.restore()
   }
-  drawSprite(x, y, children, ){}
+  drawSprite({x, y, width, height, children, transform}){
+    children = children || []
+    if (transform) {
+      let {rotate, translate, scale, skew, origin} = transform
+      this.#context.save()
+      let deg = Math.PI/180, ctx = this.#context
+      // X缩放 Y缩放
+      // Y斜切 正>下 负>上 锐角邻边:对边 1=45度
+      // X斜切 正>左 负>右
+      // X位移 元素定位 + 位移因子
+      // Y位移
+      // 元素原点与画布原点对齐 原点策略config.origin
+      let a = 1, d = 1, b = 0, c = 0, e = x, f = y, startX = 0, startY = 0 
+      if (rotate){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate) }
+      if (scale){ a *= scale[0]; d *= scale[1]; b *= scale[1]; c *= scale[0] }   
+      if (skew) { b += skew[1]; c += skew[0] }  
+      if (translate) { e += translate[0]; f += translate[1] }
+          
+      switch(origin){
+        case 2: startX = -width/2; e += width/2; break
+        case 3: startX = -width; e += width; break
+        case 4: startY = -height/2; f += height/2; break
+        case 5: startX = -width/2; startY = -height/2; e += width/2; f += height/2; break
+        case 6: startX = -width; startY = -height/2; e += width; f += height/2; break
+        case 7: startY = -height; f += height; break
+        case 8: startX = -width/2; startY = -height; e += width/2; f += height; break
+        case 9: startX = -width; startY = -height; e += width; f += height; break
+        default: startX = 0; startY = 0
+      }
+      ctx.transform(a, b, c, d, e, f)
+    }
+    children.forEach(e => { this.draw(e) })
+    transform && this.#context.restore()
+  }
   /**
    * drawRect(x, y, width, height, options)
    */    
-  drawRect(x, y, width, height, options, config){ 
+  drawRect({x, y, width, height, options}){ 
     options = options || {}
     Object.assign(this.#context, options)
-    this.#context.beginPath()
     options.fillStyle && this.#context.fillRect(x, y, width, height)
     options.strokeStyle && this.#context.strokeRect(x, y, width, height)
-    
   }
-  /**
-   * drawCircle(x, y, r, options)
-   */
-  drawCircle(x, y, r, options, config){
-    if (!options) { console.error('Stage: drawCircle(x, y, r, options), Please configure options'); return }
-    Object.assign(this.#context, options || {})
-    this.#context.beginPath()
+  drawCircle({x, y, r, options}){
+    options = options || {}
+    Object.assign(this.#context, options)
     this.#context.arc(x, y, r, 0, 2*Math.PI, false);
     this.#context.closePath();
     options.fillStyle && this.#context.fill();
     options.strokeStyle && this.#context.stroke();
   }
-  drawText(text, x, y, options, config){
-    
-    if (!options) { 
-      console.error('Stage: drawText(text, x, y, options), Please configure options')
-      console.info('For example: {fillStyle:"#999", strokeStyle:"#000", maxWidth:100, font:"20px Arial", textBaseline:"top", textAlign:"center"}')
-      return 
-    }
-    if (options.font && options.font.indexOf(' ') < 0) options.font += ' Arial'
+  drawText({text, x, y, options}){
+    options = options || {}
     Object.assign(this.#context, options)
     let maxWidth = options.maxWidth || this.#context.measureText(text).width
     this.#context.beginPath()
     options.fillStyle && this.#context.fillText(text, x, y, maxWidth)
     options.strokeStyle && this.#context.strokeText(text, x, y, maxWidth)
   }
-  drawLine(start, end, options, config){
-    if (!options) { 
-      console.error('Stage: drawLine(start, end, options), Please configure options')
-      console.info('For example: {strokeStyle:"#000", lineWidth:5, lineCap:"round"}')
-      return 
-    }
+  drawLine({start, end, options}){
+    options = options || {}
     Object.assign(this.#context, options)
     this.#context.beginPath();
     this.#context.lineTo(start[0], start[1]);
@@ -249,17 +202,10 @@ c += 1
      swidth sheight	可选。被剪切图像的宽度高度。
      x y	          在画布上放置图像的 xy 坐标位置。
      width height	  可选。要使用的图像的宽度高度。（伸展或缩小图像）
-   * config{save: true, clip: true, transform:[]}
    */
-  drawImage(img, sx, sy, swidth, sheight, x, y, width, height, config){
+  drawImage({img, sx, sy, swidth, sheight, x, y, width, height}){
     let ctx = this.#context;
-    if(config) {
-      config.save && ctx.save()
-      config.clip && ctx.clip()
-      config.transform && this.transform(config.transform)
-    }
     ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
-    config && config.save && ctx.restore()
   }
   /**
    * [
