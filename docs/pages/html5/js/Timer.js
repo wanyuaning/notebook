@@ -8,7 +8,6 @@ class Timer{
     let count = 0
     let timer = () => {
       if(this.#STOP) return
-      console.log(count);
       game.draw()
       window.setTimeout(timer, this.fps)
       count++

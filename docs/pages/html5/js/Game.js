@@ -39,16 +39,19 @@ class Game{
     let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
     this.#STAGE.clean()
     scene.update()
+    
     /*
     [
        {type:'Rect', data:[0,0,100,50,{fillStyle:'#f00'}]},
        {type:'Sprite', children:[], config:{}}
     ]
     */
+    this.#STAGE.showGrid()
+    this.#STAGE.showRuler()
 
-
-    scene.dataList.forEach(e => { this.#STAGE.draw(e) })
+    scene.children.forEach(e => { this.#STAGE.draw(e) })
 
     //transition.active && this.#STAGE.draw(transition.data)
   }
+  
 }

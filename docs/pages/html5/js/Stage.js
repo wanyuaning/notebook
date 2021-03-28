@@ -31,13 +31,17 @@ class Stage{
     let w = this.#width, h = this.#height, ctx = this.#context
     ctx.strokeStyle = '#ccc'
     ctx.beginPath()
-    for(let i = 10; i < w; i += 10){ ctx.moveTo(i+0.5, 0); ctx.lineTo(i+0.5, 4) }
-    for(let i = 10; i < h; i += 10){ ctx.moveTo(0, i+0.5); ctx.lineTo(4, i+0.5) }
-    for(let i = 100; i < w; i += 100){ ctx.moveTo(i+0.5, 0); ctx.lineTo(i+0.5, 8) }
-    for(let i = 100; i < h; i += 100){ ctx.moveTo(0, i+0.5); ctx.lineTo(8, i+0.5) }
+    ctx.lineWidth = 1
+    for(let i = 10; i < w; i += 10){ ctx.moveTo(i, 0); ctx.lineTo(i, 4) }
+    for(let i = 10; i < h; i += 10){ ctx.moveTo(0, i); ctx.lineTo(4, i) }
     ctx.moveTo(0, h)
     ctx.lineTo(0, 0)
     ctx.lineTo(w, 0)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.lineWidth = 2
+    for(let i = 100; i < w; i += 100){ ctx.moveTo(i, 0); ctx.lineTo(i, 8) }
+    for(let i = 100; i < h; i += 100){ ctx.moveTo(0, i); ctx.lineTo(8, i) }
     ctx.stroke()
     ctx.beginPath()
   }
@@ -96,16 +100,24 @@ class Stage{
                                  
   */
   draw({type, data, config}){ 
+    this.#context.beginPath()
     if (config) {
-      config.save && this.#context.save()
-      config.beginPath && this.#context.beginPath()
-      config.clip && this.#context.clip()
+      if (config.save || config.clip) {
+        this.#context.save()
+      }
     }
     this['draw'+type](data)
-    config && config.restore && this.#context.restore()
+    if (config) {
+      config.clip && this.#context.clip()
+      if (config.restore || config.unclip) {
+        this.#context.restore()
+      }
+    }
   }
-  drawSprite({x, y, width, height, children, transform}){
+  drawSprite({x, y, width, height, options, children, transform}){
     children = children || []
+    options = options || {}
+    let startX = 0, startY = 0
     if (transform) {
       let {rotate, translate, scale, skew, origin} = transform
       this.#context.save()
@@ -116,7 +128,7 @@ class Stage{
       // X位移 元素定位 + 位移因子
       // Y位移
       // 元素原点与画布原点对齐 原点策略config.origin
-      let a = 1, d = 1, b = 0, c = 0, e = x, f = y, startX = 0, startY = 0 
+      let a = 1, d = 1, b = 0, c = 0, e = x, f = y 
       if (rotate){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate) }
       if (scale){ a *= scale[0]; d *= scale[1]; b *= scale[1]; c *= scale[0] }   
       if (skew) { b += skew[1]; c += skew[0] }  
@@ -135,7 +147,12 @@ class Stage{
       }
       ctx.transform(a, b, c, d, e, f)
     }
-    children.forEach(e => { this.draw(e) })
+    children.forEach(e => { 
+      !e.data.options && (e.data.options = options)
+      startX !== 0 && (e.data.x += startX)
+      startY !== 0 && (e.data.y += startY)
+      this.draw(e) 
+    })
     transform && this.#context.restore()
   }
   /**
@@ -144,8 +161,9 @@ class Stage{
   drawRect({x, y, width, height, options}){ 
     options = options || {}
     Object.assign(this.#context, options)
-    options.fillStyle && this.#context.fillRect(x, y, width, height)
-    options.strokeStyle && this.#context.strokeRect(x, y, width, height)
+    this.#context.rect(x, y, width, height)
+    options.fillStyle && this.#context.fill()
+    options.strokeStyle && this.#context.stroke()
   }
   drawCircle({x, y, r, options}){
     options = options || {}

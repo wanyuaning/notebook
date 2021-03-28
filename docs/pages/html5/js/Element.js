@@ -3,14 +3,17 @@ function getParent(ele){
   parent = parent ? getParent(parent) : ele
   return parent && parent.type === 'SCENE' ? parent : null
 }
-
+/**
+ * ▇元素基类▇
+ * 属性：type/children/parent/data
+ * 方法：addChild/appendTo
+ */
 class Element{  
   constructor(type){
     this.type = type
     this.data = {}
     this.parent = null
     this.children = []
-    this.scene = null
   }
   addChild(child){
     if (!(child instanceof Element)) {
@@ -18,66 +21,54 @@ class Element{
       return
     } 
     child.parent = this
-    child.dataToScene()
     this.children.push(child)
   }
   appendTo(parent){
     this.parent = parent
-    this.dataToScene()
     parent.children.push(this)
-  }
-  dataToScene(){
-    if (!this.scene) {
-      let scene = getParent(this)
-      scene && (this.scene = scene.dataList)
-    }
-    this.scene && this.scene.push({type: this.type, data: this.data})
   }
 }
 
+/**
+ * ▇场景▇
+ * 属性：type/children/name
+ * 方法：addChild
+ *       update/in/out
+ */
 class Scene extends Element{
-  //#type // 过渡类型
-  //#duration // 过渡时长
-  //#mask = {fillStyle:'#000', image: '001.jpg'}     // 过渡遮罩 背景
   constructor(name){
     super('SCENE')
-    delete this.scene
+    delete this.parent
     delete this.data
-    this.dataList = []
+    delete this.appendTo
     this.name = name 
-  }
-  setTransition(options){
-    
-  }
-  in(callback){
-    
-   
-  }
-  out(callback){
-    //callback()
   }
   update(){
     this.children.forEach(e => {
-      console.log('e type', e.type);
     })
   }
+  in(){}
+  out(){}
 }
 
+/**
+ * ▇精灵元素▇
+ * 属性：type/children/parent/data/transform
+ * 方法：addChild/appendTo
+ *      translate/translateTo/rotate/rotateTo/scale/scaleTo/update
+ */
 class Sprite extends Element{
   #TRANSFORM  = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
   #TWEEN      = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
   #timerX
   #timerY
   #timerR
-  constructor(){
-    super('SPRITE')
+  constructor(x, y, width, height, options, transform){
+    super('Sprite')
+    this.data = {x, y, width, height, options, transform}
+    this.data.children = this.children
+    this.transform = transform
   }
-  dataToScene(){
-    this.children.forEach(child =>{
-      child.dataToScene()
-    })
-  }
-
   translate  (x, y){
     let T = this.#TRANSFORM; 
     if (x) {T.x += x; this.#timerX = new Date().getTime()}
@@ -104,20 +95,28 @@ class Sprite extends Element{
   }
 }
 
+/**
+ * ▇Shape元素▇
+ * 属性：type/parent/data/config
+ * 方法：appendTo
+ */
 class Rect extends Element{
   constructor(x, y, width, height, options, config){
     super('Rect')
-    this.data = [x, y, width, height, options, config]
-  }
-  
+    delete this.children
+    delete this.addChild
+    this.data = {x, y, width, height, options}
+    this.config = config
+  }  
 }
-
 class Circle extends Element{
   constructor(x, y, r, options, config){
     super('Circle')
-    this.data = [x, y, r, options, config]
-  }
-  
+    delete this.children
+    delete this.addChild
+    this.data = {x, y, r, options}
+    this.config = config
+  }  
 }
 
 
