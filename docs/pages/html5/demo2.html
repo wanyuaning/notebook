@@ -72,8 +72,13 @@ var sp = new Sprite(100, 100, 200, 200),
     rt4 = new Rect(200, 200, 250, 100, {fillStyle:'#0f0'}),
     rt5 = new Rect(200, 230, 50, 200, {fillStyle:'#999'}, {unclip: true})
     r6 = new Rect(360, 210, 50, 200, {fillStyle:'#333'})
-var sp2 = new Sprite(500, 100, 200, 100, {}, {rotate: 45, origin: 10}),
+var sp2 = new Sprite(500, 100, 200, 100, {}, {rotate: 45, translate:[50, 10], origin: 5}, {showRange: true}),
     r7 = new Rect(0, 0, 200, 100, {fillStyle:'#f90'})
+var d1 = new Polygon([[0,0],[100,20],[50,100]], {strokeStyle:'#0f0', fillStyle:'#00f'},{clip:true})
+var sp3 = new Sprite(500, 400, 200, 100, {}, {}, {showRange: true})
+sp3.addChild(d1)
+sp3.addChild(new Rect(20, 20, 50, 100, {fillStyle:'#f90'},{unclip:true}))
+sp3.addChild(new Rect(40, 50, 50, 100, {fillStyle:'#0f0'}))
 
 //sp.addChild(rt)
 sp.addChild(rt2)
@@ -87,15 +92,8 @@ sp2.addChild(r7)
 game.addActor(rt)
 game.addActor(sp)
 game.addActor(sp2)
-game.addActor(new Rect(498, 98, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(598, 98, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(698, 98, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(498, 148, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(598, 148, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(698, 148, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(498, 198, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(598, 198, 4, 4, {fillStyle:'#f00'}))
-game.addActor(new Rect(698, 198, 4, 4, {fillStyle:'#f00'}))
+game.addActor(sp3)
+
 //game.start()
 game.draw()
 

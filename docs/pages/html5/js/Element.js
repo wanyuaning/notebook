@@ -53,7 +53,7 @@ class Scene extends Element{
 
 /**
  * ▇精灵元素▇
- * 属性：type/children/parent/data/transform
+ * 属性：type/children/parent/data
  * 方法：addChild/appendTo
  *      translate/translateTo/rotate/rotateTo/scale/scaleTo/update
  */
@@ -63,11 +63,10 @@ class Sprite extends Element{
   #timerX
   #timerY
   #timerR
-  constructor(x, y, width, height, options, transform){
+  constructor(x, y, width, height, options, transform, config){
     super('Sprite')
-    this.data = {x, y, width, height, options, transform}
+    this.data = {x, y, width, height, options, transform, config}
     this.data.children = this.children
-    this.transform = transform
   }
   translate  (x, y){
     let T = this.#TRANSFORM; 
@@ -117,6 +116,15 @@ class Circle extends Element{
     this.data = {x, y, r, options}
     this.config = config
   }  
+}
+class Polygon extends Element{
+  constructor(points, options, config){
+    super('Polygon')
+    delete this.children
+    delete this.addChild
+    this.data = {points, options, config}
+    this.config = config
+  } 
 }
 
 

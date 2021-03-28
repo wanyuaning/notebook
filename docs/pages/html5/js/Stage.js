@@ -83,10 +83,12 @@ class Stage{
     ▯globalAlpha              不透明度 1.0 及0.0-1.0
     ▯globalCompositeOperation 新图像如何覆盖旧图像
     ▇▇▇▇▇▇▇▇▇▇▇▇▇ config  ▇▇▇▇▇▇▇▇▇▇▇▇▇
-     save        缓存options
-     restore     释放缓存
-     beginPath   开启新路径
-     clip: true, 通过save/restore做到撤消的效果
+     save              缓存options
+     restore           释放缓存
+     beginPath         开启新路径
+     clip: true,       通过save/restore做到撤消的效果
+     showRange: true   显示范围
+     rangeColor:'#0f0' 范围颜色 默认黑色
      ▇▇▇▇▇▇▇▇▇▇▇ transform ▇▇▇▇▇▇▇▇▇▇▇▇
      rotate: 45
      translate: [10, 10]
@@ -114,7 +116,7 @@ class Stage{
       }
     }
   }
-  drawSprite({x, y, width, height, options, children, transform}){
+  drawSprite({x, y, width, height, options, children, transform, config}){
     children = children || []
     options = options || {}
     let startX = 0, startY = 0
@@ -149,11 +151,32 @@ class Stage{
     }
     children.forEach(e => { 
       !e.data.options && (e.data.options = options)
-      startX !== 0 && (e.data.x += startX)
-      startY !== 0 && (e.data.y += startY)
+      if (startX || startY) {
+        if (e.type === 'Polygon') {
+          e.data.points.forEach(point => {
+            point[0] += startX
+            point[1] += startY
+          })
+        } else {
+          e.data.x += startX
+          e.data.y += startY
+        }
+      }
       this.draw(e) 
     })
     transform && this.#context.restore()
+    if (config && config.showRange) {
+      let fillStyle = config.rangeColor || '#000'
+      this.draw({type: 'Rect', data: {x:x-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
+      this.draw({type: 'Rect', data: {x:x+width-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
+    }
   }
   /**
    * drawRect(x, y, width, height, options)
@@ -196,27 +219,28 @@ class Stage{
    * options{fillStyle:'#ccc', strokeStyle:'#000', lineWidth:5, lineCap:'round'}
    * config{closePath: true, startPosition: [0, 0]}
    */
-  drawPolygon(pointsArr, options, config){
+  drawPolygon({points, options, config}){
+    //console.log('11',points, options, config);
+    
+    options = options || {}
+    config = config || {}
     let xPos = 0, yPos = 0, ctx = this.#context      
-    Object.assign(ctx, options || {})
+    Object.assign(ctx, options)
     ctx.beginPath()
     if (config && config.startPosition) {xPos = config.startPosition[0], yPos = config.startPosition[1]} 
-    for(let i = 0, len = pointsArr.length; i < len - 1; i++){
-      let start=pointsArr[i], end=pointsArr[i+1]
+    for(let i = 0, len = points.length; i < len - 1; i++){
+      let start=points[i], end=points[i+1]
       ctx.lineTo(start[0] + xPos, start[1] + yPos)
       ctx.lineTo(end[0] + xPos, end[1] + yPos)
     }
-    if(options.fillStyle) {
-      ctx.closePath()
-      ctx.fill()
-    }
-    config && config.closePath && ctx.closePath()
+    (options.fillStyle || config.closePath) && ctx.closePath()
+    options.fillStyle && ctx.fill()
     options.strokeStyle && ctx.stroke()
   }
   /**
    * 绘制图片
    * img	          规定要使用的图像、画布或视频。
-     sx	sy	        可选。开始剪切的 xy 坐标位置。
+     sx	sy	        可选。开始剪切的 xy 坐标位置。 
      swidth sheight	可选。被剪切图像的宽度高度。
      x y	          在画布上放置图像的 xy 坐标位置。
      width height	  可选。要使用的图像的宽度高度。（伸展或缩小图像）
