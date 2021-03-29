@@ -66,6 +66,7 @@ class Sprite extends Element{
     this.data.children = this.children
     this.TRANSFORM = {
       transform,
+      transformCopy: JSON.parse(JSON.stringify(transform)),
       tween: Object.assign({x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}, transform),
       timerX: null,
       timerY: null,
@@ -106,12 +107,12 @@ class Sprite extends Element{
 
   }
   update(){
-    let {transform, tween, timerX, timerY} = this.TRANSFORM, now = new Date().getTime()
+    let {transform, transformCopy, tween, timerX, timerY, timerR} = this.TRANSFORM, now = new Date().getTime()
     // transform.x !== tween.x && (transform.x = tweens.runDefault(now - timerX, 0, transform.x, 10000))
     // transform.y !== tween.y && (tween.y = tweens.runDefault(now - timerY, 0, transform.y, 10000))
     // transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - timerX, 1, transform.scaleX, 1000))
     // transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - timerY, 1, transform.scaleY, 1000))
-    //transform.rotate !== tween.rotate && (transform.rotate = tweens.runDefault(now - timerR, 0, transform.scaleR, 1000))
+    transform.rotate !== tween.rotate && (transform.rotate = tweens.runDefault(now - timerR, transformCopy.rotate, tween.rotate, 1000))
   }
 }
 
