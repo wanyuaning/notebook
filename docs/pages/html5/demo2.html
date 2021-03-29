@@ -16,96 +16,37 @@
 <script src="js/Timer.js"></script>
 <script>
 
-  
 
-
-
-
-
-// let arr = [
-//   {type: 'Rect', data: {x:200, y:300, width:100, height:50, options: {fillStyle: '#00f', globalAlpha: 0.5}}, config: {save:true, restore:true}},
-//   {type: 'Sprite', data: {x:100, y:100, width:100, height:50, options: {fillStyle: '#00f'}, children: [
-//     {type: 'Rect', data: {x:0, y:0, width:100, height:50, options: {fillStyle: '#f00'}}}
-//   ], transform: {rotate: 45}}},
-//   {type: 'Sprite', data: {x:100, y:100, width:100, height:50, options: {fillStyle: '#999'}, children: [
-//     {type: 'Rect', data: {x:99, y:99, width:3, height:3, options: {fillStyle: '#0f0'}}},
-//     {type: 'Rect', data: {x:148, y:99, width:3, height:3, options: {fillStyle: '#0f0'}}},
-//     {type: 'Rect', data: {x:199, y:99, width:3, height:3, options: {fillStyle: '#00f'}}},
-//     {type: 'Rect', data: {x:99, y:124, width:3, height:3}},
-//     {type: 'Rect', data: {x:148, y:124, width:3, height:3}},
-//     {type: 'Rect', data: {x:199, y:124, width:3, height:3}},
-//     {type: 'Rect', data: {x:99, y:149, width:3, height:3}},
-//     {type: 'Rect', data: {x:148, y:149, width:3, height:3}},
-//     {type: 'Rect', data: {x:199, y:149, width:3, height:3}}
-//   ]}}
-// ]
-// arr.forEach(e => { stage.draw(e) })
-
-
-
-//stage.test(100, 100, 100, 50, {translate:[0, 0], scale: [1, 1],rotate: 0,  skew: [1, 0]})
-
-// stage.draw({type:'Rect',data:[0,0,1000,600,{fillStyle:'#000'}], config:{alpha: 0.3}})
-// stage.draw({type:'Rect',data:[100,50,200,100,{fillStyle:'#f00'}]})
-
-
-
-
-// 舞台
-let stage = new Stage()
-stage.setCanvas(document.getElementById("myCanvas"))
-stage.setStageSize(1000, 600)
-
-
-// 游戏
-let game = new Game({fps:1, sceneTransition:{type: 'fade'}})
-game.setStage(stage)
-//game.showGrid()
-//game.showRuler()
 
 // 演员
-var sp = new Sprite(100, 100, 200, 200),
-    rt = new Rect(10, 10, 100, 50, {fillStyle:'#f00'}),
-    rt2 = new Rect(300, 100, 50, 50, {fillStyle:'#0f0'}),
-    rt3 = new Rect(150, 200, 290, 50, {strokeStyle:'#00f'}),
-    cc = new Circle(200, 250, 50, {fillStyle:'#00f', strokeStyle:'#f00', lineWidth:'15'}, {clip: true}),
-    rt4 = new Rect(200, 200, 250, 100, {fillStyle:'#0f0'}),
-    rt5 = new Rect(200, 230, 50, 200, {fillStyle:'#999'}, {unclip: true})
-    r6 = new Rect(360, 210, 50, 200, {fillStyle:'#333'})
-var sp2 = new Sprite(500, 100, 200, 100, {}, {rotate: 45, translate:[50, 10], origin: 5}, {showRange: true}),
-    r7 = new Rect(0, 0, 200, 100, {fillStyle:'#f90'})
-var d1 = new Polygon([[0,0],[100,20],[50,100]], {strokeStyle:'#0f0', fillStyle:'#00f'},{clip:true})
-var sp3 = new Sprite(500, 400, 200, 100, {}, {}, {showRange: true})
-sp3.addChild(d1)
-sp3.addChild(new Rect(20, 20, 50, 100, {fillStyle:'#f90'},{unclip:true}))
-sp3.addChild(new Rect(40, 50, 50, 100, {fillStyle:'#0f0'}))
 
-//sp.addChild(rt)
-sp.addChild(rt2)
-sp.addChild(rt3)
-sp.addChild(cc)
-sp.addChild(rt5)
-sp.addChild(r6)
 
-sp2.addChild(r7)
 
-game.addActor(rt)
+// 游戏(自建默认场景)
+let game = new Game({
+  fps:1, 
+  sceneTransition:{type: 'fade'},
+  //showGrid: true,
+  //showRuler: true,
+  debug: true
+})
+let sp = new Sprite(50, 50, 100, 50)
+let r1 = new Rect(0, 0, 100, 50, {fillStyle: '#f00'})
+let r2 = new Rect(100, 100, 200, 100, {fillStyle: '#0f0'}, {clip: true})
+let r3 = new Rect(120, 120, 100, 500, {fillStyle: '#00f'}, {unclip: true})
+sp.addChild(r1)
+//sp.addChild(r2)
 game.addActor(sp)
-game.addActor(sp2)
-game.addActor(sp3)
+game.addActor(r2)
+game.addActor(r3)
 
-//game.start()
-game.draw()
-
-
-let scene2 = new Scene('SCENE2')
-scene2.addChild(rt4)
-game.addScene(scene2)
+game.start()
+//game.draw()
 
 setTimeout(()=>{
-  game.changeSceneTo('SCENE2')
-},2000)
-
+  //sp.rotateTo(45)
+  sp.rotate(45)
+}, 3000)
 //sp.translate(100, 100)
 
 

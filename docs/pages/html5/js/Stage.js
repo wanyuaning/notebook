@@ -29,20 +29,22 @@ class Stage{
   }
   showRuler(){
     let w = this.#width, h = this.#height, ctx = this.#context
+    ctx.save()
     ctx.strokeStyle = '#ccc'
+    ctx.lineWidth = '1px'
     ctx.beginPath()
-    ctx.lineWidth = 1
-    for(let i = 10; i < w; i += 10){ ctx.moveTo(i, 0); ctx.lineTo(i, 4) }
-    for(let i = 10; i < h; i += 10){ ctx.moveTo(0, i); ctx.lineTo(4, i) }
-    ctx.moveTo(0, h)
-    ctx.lineTo(0, 0)
-    ctx.lineTo(w, 0)
+    for(let i = 10; i < w; i += 10){ ctx.moveTo(i+0.5, 1); ctx.lineTo(i+0.5, 3) }
+    for(let i = 10; i < h; i += 10){ ctx.moveTo(1, i+0.5); ctx.lineTo(3, i+0.5) }
+    ctx.moveTo(0.5, h)
+    ctx.lineTo(0.5, 0.5)
+    ctx.lineTo(w, 0.5)
     ctx.stroke()
     ctx.beginPath()
     ctx.lineWidth = 2
-    for(let i = 100; i < w; i += 100){ ctx.moveTo(i, 0); ctx.lineTo(i, 8) }
-    for(let i = 100; i < h; i += 100){ ctx.moveTo(0, i); ctx.lineTo(8, i) }
+    for(let i = 100; i < w; i += 100){ ctx.moveTo(i, 0); ctx.lineTo(i, 6) }
+    for(let i = 100; i < h; i += 100){ ctx.moveTo(0, i); ctx.lineTo(6, i) }
     ctx.stroke()
+    ctx.restore()
     ctx.beginPath()
   }
   // config{cellSize: 10}
@@ -53,6 +55,7 @@ class Stage{
       config.strokeStyle && (color = config.strokeStyle)
       config.lineWidth && (lineWidth = config.lineWidth)
     }
+    ctx.save()
     ctx.strokeStyle = color
     ctx.lineWidth = lineWidth
     ctx.beginPath()
@@ -62,6 +65,7 @@ class Stage{
     ctx.lineTo(w, h)
     ctx.lineTo(0, h)
     ctx.stroke()
+    ctx.restore()
     ctx.beginPath()
   }
   /* 
@@ -117,6 +121,7 @@ class Stage{
     }
   }
   drawSprite({x, y, width, height, options, children, transform, config}){
+    console.log(transform.rotate);
     children = children || []
     options = options || {}
     let startX = 0, startY = 0
@@ -124,12 +129,7 @@ class Stage{
       let {rotate, translate, scale, skew, origin} = transform
       this.#context.save()
       let deg = Math.PI/180, ctx = this.#context
-      // X缩放 Y缩放
-      // Y斜切 正>下 负>上 锐角邻边:对边 1=45度
-      // X斜切 正>左 负>右
-      // X位移 元素定位 + 位移因子
-      // Y位移
-      // 元素原点与画布原点对齐 原点策略config.origin
+      
       let a = 1, d = 1, b = 0, c = 0, e = x, f = y 
       if (rotate){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate) }
       if (scale){ a *= scale[0]; d *= scale[1]; b *= scale[1]; c *= scale[0] }   

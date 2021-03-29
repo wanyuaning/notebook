@@ -1,8 +1,3 @@
-function getParent(ele){
-  let parent = ele.parent
-  parent = parent ? getParent(parent) : ele
-  return parent && parent.type === 'SCENE' ? parent : null
-}
 /**
  * ▇元素基类▇
  * 属性：type/children/parent/data
@@ -30,7 +25,7 @@ class Element{
 }
 
 /**
- * ▇场景▇
+ * ▇场景元素▇
  * 属性：type/children/name
  * 方法：addChild
  *       update/in/out
@@ -43,12 +38,12 @@ class Scene extends Element{
     delete this.appendTo
     this.name = name 
   }
+  in(){}
+  out(){}
   update(){
     this.children.forEach(e => {
     })
   }
-  in(){}
-  out(){}
 }
 
 /**
@@ -58,39 +53,65 @@ class Scene extends Element{
  *      translate/translateTo/rotate/rotateTo/scale/scaleTo/update
  */
 class Sprite extends Element{
-  #TRANSFORM  = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
-  #TWEEN      = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
+  
   #timerX
   #timerY
   #timerR
   constructor(x, y, width, height, options, transform, config){
     super('Sprite')
+    transform = transform || {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}
+    transform.x += x
+    transform.y += y
     this.data = {x, y, width, height, options, transform, config}
     this.data.children = this.children
+    this.TRANSFORM = {
+      transform,
+      tween: Object.assign({x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}, transform),
+      timerX: null,
+      timerY: null,
+      timerR: null
+    }
   }
-  translate  (x, y){
-    let T = this.#TRANSFORM; 
-    if (x) {T.x += x; this.#timerX = new Date().getTime()}
-    if (y) {T.y += y; this.#timerY = new Date().getTime()}
+  translate (x, y){
+    let {tween, timerX, timerY} = this.TRANSFORM; 
+    if (x) {tween.x += x; timerX = new Date().getTime()}
+    if (y) {tween.y += y; timerY = new Date().getTime()}
   }
   translateTo(x, y){
-    let T = this.#TRANSFORM;  
-    if (T.x !== x) {T.x = x; this.#timerX = new Date().getTime()}
-    if (T.y !== y) {T.y = y; this.#timerY = new Date().getTime()}
+    let {transform, tween} = this.TRANSFORM
+    !transform && (transform = this.data.transform = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0})
+    tween.x === transform.x && (tween.x = x)
+    tween.y === transform.y && (tween.y = y)
+    transform.x = x
+    transform.y = y
   }
-  rotate  (deg){this.#TRANSFORM.rotate += deg}
-  rotateTo(deg){this.#TRANSFORM.rotate = deg}
-  scale  (x, y){let T = this.#TRANSFORM; T.scale[0] += x; T.scale[1] += y}
-  scaleTo(x, y){let T = this.#TRANSFORM; T.scale[0] = x; T.scale[1] = y}
+  rotate (deg){
+    this.TRANSFORM.tween.rotate += deg
+    this.TRANSFORM.timerR = new Date().getTime()
+  }
+  rotateTo(deg){
+    let {transform, tween} = this.TRANSFORM
+    !transform && (transform = this.data.transform = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0})
+    tween.rotate === transform.rotate && (tween.rotate = deg)
+    transform.rotate = deg
+  }
+  scale  (x, y){let {transform} = this.TRANSFORM; transform.scale[0] += x; transform.scale[1] += y}
+  scaleTo(x, y){
+    let {transform, tween} = this.TRANSFORM
+    !transform && (transform = this.data.transform = {x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0})
+    tween.scale[0] === transform.scale[0] && (tween.scale[0] = x)
+    tween.scale[1] === transform.scale[1] && (tween.scale[1] = y)
+    transform.scale[0] = x
+    transform.scale[1] = y
+
+  }
   update(){
-    let children = this.children, transform = this.#TRANSFORM, tween = this.#TWEEN, now = new Date().getTime()
-    //console.log(transform.x,'-', tween.x)
-    transform.x !== tween.x && (tween.x = tweens.runDefault(now - this.#timerX, 0, transform.x, 10000))
-    transform.y !== tween.y && (tween.y = tweens.runDefault(now - this.#timerY, 0, transform.y, 10000))
-    transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - this.#timerX, 1, transform.scaleX, 1000))
-    transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - this.#timerY, 1, transform.scaleY, 1000))
-    transform.rotate !== tween.rotate && (tween.rotate = tweens.runDefault(now - this.#timerR, 0, transform.scaleR, 1000))
-    return children
+    let {transform, tween, timerX, timerY} = this.TRANSFORM, now = new Date().getTime()
+    // transform.x !== tween.x && (transform.x = tweens.runDefault(now - timerX, 0, transform.x, 10000))
+    // transform.y !== tween.y && (tween.y = tweens.runDefault(now - timerY, 0, transform.y, 10000))
+    // transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - timerX, 1, transform.scaleX, 1000))
+    // transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - timerY, 1, transform.scaleY, 1000))
+    //transform.rotate !== tween.rotate && (transform.rotate = tweens.runDefault(now - timerR, 0, transform.scaleR, 1000))
   }
 }
 

@@ -1,20 +1,33 @@
 class Timer{
-  #STOP = false
-  constructor(fps){
-    this.fps = fps
+  constructor({FPS}){
+    this.FPS = FPS || 33.3333
+    this.stop = true
   }
-  start(game){
-    this.#STOP = false
+  testStart(game, {FPS, duration}){
+    this.stop = false
+    duration && setTimeout(()=>{this.stop = true}, duration)
     let count = 0
     let timer = () => {
-      if(this.#STOP) return
+      if(this.stop) return
       game.draw()
-      window.setTimeout(timer, this.fps)
+      window.setTimeout(timer, FPS || this.FPS)
+      //console.log(count);
+      count++
+    }
+    timer()
+  }
+  start(game){
+    this.stop = false
+    let count = 0
+    let timer = () => {
+      if(this.stop) return
+      game.draw()
+      window.setTimeout(timer, this.FPS)
       count++
     }
     timer()
   }
   stops(){
-    this.#STOP = true
+    this.stop = true
   }
-}
+} 
