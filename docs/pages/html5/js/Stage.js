@@ -121,7 +121,6 @@ class Stage{
     }
   }
   drawSprite({x, y, width, height, options, children, transform, config}){
-    console.log(transform.rotate);
     children = children || []
     options = options || {}
     let startX = 0, startY = 0
