@@ -66,11 +66,11 @@ class Sprite extends Element{
     this.data.children = this.children
     this.TRANSFORM = {
       transform,
-      transformCopy: JSON.parse(JSON.stringify(transform)),
+      _transform: JSON.parse(JSON.stringify(transform)),
       tween: Object.assign({x: 0, y: 0, scaleX: 1, scaleY: 1, rotate: 0}, transform),
       timerX: null,
       timerY: null,
-      timerR: null, rotatePointer: ''
+      timerR: null
     }
   }
   translate (x, y){
@@ -107,25 +107,27 @@ class Sprite extends Element{
 
   }
   update(){
-    let T = this.TRANSFORM, {transform, transformCopy, tween, timerX, timerY, timerR, rotatePointer} = T, now = new Date().getTime();
+    let T = this.TRANSFORM, {transform, _transform, tween, timerX, timerY, timerR} = T, now = new Date().getTime();
     
-    if ((rotatePointer == '+' && transform.rotate > tween.rotate) || (rotatePointer == '-' && transform.rotate < tween.rotate)) {
-      transform.rotate = tween.rotate %= 360
-      T.rotatePointer = ''
-    }
     // transform.x !== tween.x && (transform.x = tweens.runDefault(now - timerX, 0, transform.x, 10000))
     // transform.y !== tween.y && (tween.y = tweens.runDefault(now - timerY, 0, transform.y, 10000))
     // transform.scaleX !== tween.scaleX && (tween.scaleX = tweens.runDefault(now - timerX, 1, transform.scaleX, 1000))
     // transform.scaleY !== tween.scaleY && (tween.scaleY = tweens.runDefault(now - timerY, 1, transform.scaleY, 1000))
-    console.log(rotatePointer+'1', transform.rotate, tween.rotate);
-    if (transform.rotate < tween.rotate) {T.rotatePointer = '+'; transform.rotate = tweens.runDefault(now - timerR, transformCopy.rotate, tween.rotate, 1000)}
-    if (transform.rotate > tween.rotate) {T.rotatePointer = '-'; transform.rotate = tweens.runDefault(now - timerR, transformCopy.rotate, tween.rotate, 1000)}
-    console.log(rotatePointer+'2', transform.rotate, tween.rotate);
     
-    
-    //console.log('rotate', transform.rotate, tween.rotate);
-    
-    
+    if (transform.rotate < tween.rotate) {
+      transform.rotate = tweens.runDefault(now - timerR, _transform.rotate, tween.rotate, 1000)
+      if (transform.rotate > tween.rotate) {
+        transform.rotate = tween.rotate %= 360; 
+        Object.assign(_transform, transform)
+      }
+    }
+    if (transform.rotate > tween.rotate) {
+      transform.rotate = tweens.runDefault(now - timerR, _transform.rotate, tween.rotate, 1000)
+      if (transform.rotate < tween.rotate) {
+        transform.rotate = tween.rotate %= 360
+        Object.assign(_transform, transform)
+      }
+    }
   }
 }
 
