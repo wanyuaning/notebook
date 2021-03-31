@@ -128,6 +128,8 @@ class Stage{
     if (transform) {
       let {translateX, translateY, scaleX, scaleY, skewX, skewY, rotate, origin} = transform, deg = Math.PI/180, ctx = this.#context
       let a = 1, d = 1, b = 0, c = 0, e = x, f = y 
+      //console.log(scaleX);
+      
 
       if (Object.prototype.toString.call(origin) === '[object Array]') { startX = -origin[0]; startY = -origin[1]; e += origin[0]; f += origin[1] }
       if (Object.prototype.toString.call(origin) === '[object Number]') {
@@ -150,9 +152,8 @@ class Stage{
       if (skewX) { c += skewX }  
       if (skewY) { b += skewY }
 
-      if (translateX) { e += translateX + startX }
-      if (translateY) { f += translateY + startY }
-      console.log(a, b, c, d, e, f);
+      if (translateX) { e += translateX }
+      if (translateY) { f += translateY }
       
       ctx.transform(a, b, c, d, e, f)
     }
@@ -170,6 +171,7 @@ class Stage{
           e.data.y += startY
         }
       }
+      
       this.draw(e) 
     })
     transform && this.#context.restore()

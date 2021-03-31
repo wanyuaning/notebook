@@ -55,7 +55,7 @@ class Game{
   start(){
     let {debug} = this.#CONFIG
     let {timer} = this.#ENGINES
-    debug ? timer.testStart(this, {duration: 20000}) : timer.start(this)
+    debug ? timer.testStart(this, {duration: 5000}) : timer.start(this)
   }
 
   draw(){
