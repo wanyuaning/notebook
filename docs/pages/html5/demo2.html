@@ -32,7 +32,7 @@ let game = new Game({
   //showRuler: true,
   debug: true
 })
-let sp = new Sprite(50, 50, 100, 50)
+let sp = new Sprite(50, 50, 100, 50,{},{origin:5},{showRange:true})
 let r1 = new Rect(0, 0, 100, 50, {fillStyle: '#f00'})
 let r2 = new Rect(100, 100, 200, 100, {fillStyle: '#0f0'}, {clip: true})
 let r3 = new Rect(120, 120, 100, 500, {fillStyle: '#00f'}, {unclip: true})
@@ -43,23 +43,23 @@ game.addActor(r2)
 game.addActor(r3)
 
 game.start()
-//game.draw()
 
 setTimeout(()=>{
   //sp.rotateTo(45)
-  sp.rotate(45)
+  //sp.rotate(45)
+  sp.translate(100)
 }, 1000)
 setTimeout(()=>{
   //sp.rotateTo(45)
-  sp.rotate(45)
+  //sp.rotate(45)
 }, 3000)
 setTimeout(()=>{
   //sp.rotateTo(45)
-  sp.rotate(45)
+  //sp.rotate(45)
 }, 5000)
 setTimeout(()=>{
   //sp.rotateTo(45)
-  sp.rotate(45)
+  //sp.rotate(45)
 }, 7000)
 //sp.translate(100, 100)
 

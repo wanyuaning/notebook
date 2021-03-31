@@ -28,7 +28,7 @@ tweens.setData({
 tweens.setDefault('linear')
 
 // 获取数据值(key有值为获取状态 key无值为获取策略(默认))
-// get(key) 
+// get(key)
 
 // 运行数据值(当值为函数时)
 // tweens.runDefault(          t - startTime, startPos, endPos, duration) // 策略运行(默认)
