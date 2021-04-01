@@ -14,9 +14,11 @@
 // 策略使用
 // tweens.run(t - startTime, startPos, endPos, duration)
 
+
+
 let tweens = new StateAndStrategy()
 tweens.setData({
-  linear: (t,b,c,d) => c * t / d + b,
+  linear: (t,b,c,d) => (c - b) * (t / d) + b, //c * t / d + b,
   easeIn: (t,b,c,d) => c * (t /= d) * t + b,
   strongEaseIn: (t,b,c,d) => c * (t /= d) * t * t * t * t + b,
   strongEaseOut: (t,b,c,d) => c * ((t = t / d - 1) * t * t * t * t + 1) + b,

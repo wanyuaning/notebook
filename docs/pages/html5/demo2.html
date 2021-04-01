@@ -8,6 +8,17 @@
 </head>
 <body>
   <canvas id="myCanvas" width="1000" height="600"></canvas>
+  <div id="test">
+    <button data-type="translate">translata</button>
+    <button data-type="translateX1">translataX 正</button>
+    <button data-type="translateX2">translataX 负</button>
+    <br>
+    <button data-type="scale1">放大</button>
+    <button data-type="scale2">缩小</button>
+    <br>
+    <button data-type="rotate">rotate 顺时针</button>
+    <button data-type="rotate2">rotate 逆时针</button>
+  </div>
 </body>
 </html>
 <script src="js/Pattern.js"></script>
@@ -17,7 +28,7 @@
 <script src="js/Game.js"></script>
 <script src="js/Timer.js"></script>
 <script>
-
+  
 
 
 // 演员
@@ -45,26 +56,21 @@ game.addActor(r3)
 game.start()
 //game.draw()
 
-setTimeout(()=>{
-  //sp.rotateTo(45)
-  sp.rotate(45)
-  sp.translate(100)
-  sp.scale(-0.5, -0.5)
-}, 1000)
-setTimeout(()=>{
-  //sp.rotateTo(45)
-  //sp.rotate(45)
-}, 3000)
-setTimeout(()=>{
-  //sp.rotateTo(45)
-  //sp.rotate(45)
-}, 5000)
-setTimeout(()=>{
-  //sp.rotateTo(45)
-  //sp.rotate(45)
-}, 7000)
 //sp.translate(100, 100)
+$test = document.querySelector('#test')
+  $test.addEventListener('click', function(e){
+    var target = e.target, type = target.getAttribute('data-type')
+    if (target.tagName !== 'BUTTON') return 
+    switch(type){
+      case 'translate': sp.translate(100); break;
+      case 'translateX1': sp.translateX(100); break;
+      case 'translateX2': sp.translateX(-50); break;
 
+      case 'scale1': sp.scale(1,1); break;
+      case 'scale2': sp.scale(-0.5,-0.5); break;
+    }
+    
+  })
 
 
 </script>
