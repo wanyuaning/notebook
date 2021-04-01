@@ -9,15 +9,21 @@
 <body>
   <canvas id="myCanvas" width="1000" height="600"></canvas>
   <div id="test">
-    <button data-type="translate">translata</button>
-    <button data-type="translateX1">translataX 正</button>
-    <button data-type="translateX2">translataX 负</button>
+    <button data-type="translate1">translata 100</button>
+    <button data-type="translate2">translata -50</button>
+    <button data-type="translateX1">translataX 100</button>
+    <button data-type="translateX2">translataX -50</button>
+    <button data-type="translateTo1">translataTo 100 &gt;</button>
+    <button data-type="translateTo2">&lt; translataTo -50</button>
     <br>
-    <button data-type="scale1">放大</button>
-    <button data-type="scale2">缩小</button>
+    <button data-type="scale1">放大1,1</button>
+    <button data-type="scale2">缩小-0.5,-0.5</button>
     <br>
-    <button data-type="rotate">rotate 顺时针</button>
-    <button data-type="rotate2">rotate 逆时针</button>
+    <button data-type="rotate1">顺时针45</button>
+    <button data-type="rotate2">逆时针90</button>
+    <br>
+    <button data-type="all1">综合一</button>
+    <button data-type="all2">综合二</button>
   </div>
 </body>
 </html>
@@ -62,12 +68,21 @@ $test = document.querySelector('#test')
     var target = e.target, type = target.getAttribute('data-type')
     if (target.tagName !== 'BUTTON') return 
     switch(type){
-      case 'translate': sp.translate(100); break;
+      case 'translate1': sp.translate(100); break;
+      case 'translate2': sp.translate(-50); break;
       case 'translateX1': sp.translateX(100); break;
       case 'translateX2': sp.translateX(-50); break;
+      case 'translateTo1': sp.translateTo(100); break;
+      case 'translateTo2': sp.translateTo(-50); break;
 
       case 'scale1': sp.scale(1,1); break;
       case 'scale2': sp.scale(-0.5,-0.5); break;
+
+      case 'rotate1': sp.rotate(45); break;
+      case 'rotate2': sp.rotate(-90); break;
+
+      case 'all1': sp.translate(100); sp.rotate(90); sp.scale(1,1); break;
+      case 'all2': sp.translate(-50, 100); sp.rotate(-45); sp.scale(-0.5,-0.5); break;
     }
     
   })
