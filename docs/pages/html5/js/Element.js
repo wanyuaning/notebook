@@ -142,6 +142,16 @@ class Sprite extends Element{
 }
 
 /**
+ * ▇精灵列表▇
+ */
+class SpriteSheet extends Sprite{
+  constructor(x, y, width, height, options, transform, config){
+    super(x, y, width, height, options, transform, config)
+    
+  }  
+}
+
+/**
  * ▇Shape元素▇
  * 属性：type/parent/data/config
  * 方法：appendTo

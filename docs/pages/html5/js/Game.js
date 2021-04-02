@@ -24,7 +24,7 @@ class Game{
     // 舞台&设施
     let stage = new Stage()
     stage.setCanvas(document.getElementById("myCanvas"))
-    stage.setStageSize(1000, 600)
+    stage.setStageSize(1000, 400)
     stage && (this.#ENGINES.stage = stage)
     
     // 场景管理
@@ -64,16 +64,14 @@ class Game{
     let scene = this.#SCENES_MAP[this.#CURRENT_SCENE]
     let {showGrid, showRuler} = this.#CONFIG
     let {stage} = this.#ENGINES
-    stage.clean()
     // 1.清除画布
-    scene.update()
+    stage.clean()
     // 2.公共设施
     showGrid && stage.showGrid()
     showRuler && stage.showRuler()
 
     scene.children.forEach(e => { 
       e.type === 'Sprite' && e.update()
-      
       stage.draw(e) 
     })
 

@@ -7,8 +7,11 @@
   <title>Document</title>
 </head>
 <body>
-  <canvas id="myCanvas" width="1000" height="600"></canvas>
+  <canvas id="myCanvas" width="1000" height="400"></canvas>
   <div id="test">
+
+    <button data-type="spritSheet1">spritSheet</button>
+    <br>
     <button data-type="translate1">translata 100</button>
     <button data-type="translate2">translata -50</button>
     <button data-type="translateX1">translataX 100</button>
@@ -46,7 +49,7 @@ let game = new Game({
   FPS:1, 
   sceneTransition:{type: 'fade'},
   //showGrid: true,
-  //showRuler: true,
+  showRuler: true,
   debug: true
 })
 let sp = new Sprite(50, 50, 100, 50,{},{origin:5},{showRange:true})
@@ -54,20 +57,25 @@ let r1 = new Rect(0, 0, 100, 50, {fillStyle: '#f00'})
 let r2 = new Rect(100, 100, 200, 100, {fillStyle: '#0f0'}, {clip: true})
 let r3 = new Rect(120, 120, 100, 500, {fillStyle: '#00f'}, {unclip: true})
 sp.addChild(r1)
+let ss = new Sprite(400, 100, 100, 50)
+ss.addChild(r2)
 //sp.addChild(r2)
 game.addActor(sp)
-game.addActor(r2)
-game.addActor(r3)
+//game.addActor(r2)
+//game.addActor(r3)
+game.addActor(ss)
 
-game.start()
-//game.draw()
+//game.start()
+game.draw()
 
-//sp.translate(100, 100)
+
 $test = document.querySelector('#test')
   $test.addEventListener('click', function(e){
     var target = e.target, type = target.getAttribute('data-type')
     if (target.tagName !== 'BUTTON') return 
     switch(type){
+      case 'spritSheet1': sp.translate(100); break;
+      
       case 'translate1': sp.translate(100); break;
       case 'translate2': sp.translate(-50); break;
       case 'translateX1': sp.translateX(100); break;
