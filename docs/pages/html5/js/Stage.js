@@ -250,12 +250,12 @@ class Stage{
   /**
    * 绘制图片
    * img	          规定要使用的图像、画布或视频。
-     sx	sy	        可选。开始剪切的 xy 坐标位置。 
+     sx	sy	        可选。开始剪切的 xy 坐标位置(图片定位)
      swidth sheight	可选。被剪切图像的宽度高度。
-     x y	          在画布上放置图像的 xy 坐标位置。
+     x y	          在画布上放置图像的 xy 坐标位置(画布定位)
      width height	  可选。要使用的图像的宽度高度。（伸展或缩小图像）
    */
-  drawImage({img, sx, sy, swidth, sheight, x, y, width, height}){
+  drawImagee({img, sx, sy, swidth, sheight, x, y, width, height}){
     let ctx = this.#context;
     ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
   }

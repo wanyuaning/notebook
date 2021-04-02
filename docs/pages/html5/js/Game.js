@@ -52,10 +52,21 @@ class Game{
     })
   }
   addActor(actor){this.scene.addChild(actor)}
+  addActorForName(name, options){
+    let actor = new SpriteSheet(500, 100, 50, 60, options.data[4], {origin: 5}, {
+      matrix:[[1,1,1],[1,1,1]],
+      children: {
+        'righter': [0,1,2],
+        'lefter': [3,4,5]
+      },
+      defaultName: 'lefter'
+    })
+    this.scene.addChild(actor)
+  }
   start(){
     let {debug} = this.#CONFIG
     let {timer} = this.#ENGINES
-    debug ? timer.testStart(this, {duration: 20000}) : timer.start(this)
+    debug ? timer.testStart(this, {duration: 10000}) : timer.start(this)
   }
 
   draw(){
@@ -69,7 +80,8 @@ class Game{
     // 2.公共设施
     showGrid && stage.showGrid()
     showRuler && stage.showRuler()
-
+    //console.log(scene.children);
+    
     scene.children.forEach(e => { 
       e.type === 'Sprite' && e.update()
       stage.draw(e) 

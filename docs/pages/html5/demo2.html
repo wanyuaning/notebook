@@ -11,6 +11,8 @@
   <div id="test">
 
     <button data-type="spritSheet1">spritSheet</button>
+    <button data-type="spritSheet2">向右</button>
+    <button data-type="spritSheet3">向左</button>
     <br>
     <button data-type="translate1">translata 100</button>
     <button data-type="translate2">translata -50</button>
@@ -54,19 +56,36 @@ let game = new Game({
 })
 let sp = new Sprite(50, 50, 100, 50,{},{origin:5},{showRange:true})
 let r1 = new Rect(0, 0, 100, 50, {fillStyle: '#f00'})
-let r2 = new Rect(100, 100, 200, 100, {fillStyle: '#0f0'}, {clip: true})
-let r3 = new Rect(120, 120, 100, 500, {fillStyle: '#00f'}, {unclip: true})
+let r2 = new Rect(100, 100, 200, 100, {fillStyle: '#0f0'})
+let r3 = new Rect(120, 120, 100, 500, {fillStyle: '#00f'})
 sp.addChild(r1)
-let ss = new Sprite(400, 100, 100, 50)
-ss.addChild(r2)
-//sp.addChild(r2)
+
+let ss
+let img = new Image()
+img.onload = function(){
+  ss = new SpriteSheet(400, 100, 50, 60, this, {origin: 5}, {
+    matrix:[[1,1,1],[1,1,1]],
+    children: {
+      'righter': [0,1,2],
+      'lefter': [3,4,5]
+    },
+    defaultName: 'lefter'
+  })
+  game.addActor(ss)
+  game.addActorForName('marry', {type: 'SpriteSheet', data:[500, 100, 50, 60, this, {origin: 5}, {matrix:[[1,1,1],[1,1,1]], children: {'righter': [0,1,2], 'lefter': [3,4,5]}, defaultName: 'lefter'}]})
+}
+img.src = './images/marry.png'
+
+
+
+
 game.addActor(sp)
 //game.addActor(r2)
 //game.addActor(r3)
-game.addActor(ss)
 
-//game.start()
-game.draw()
+
+game.start()
+//game.draw()
 
 
 $test = document.querySelector('#test')
@@ -74,7 +93,9 @@ $test = document.querySelector('#test')
     var target = e.target, type = target.getAttribute('data-type')
     if (target.tagName !== 'BUTTON') return 
     switch(type){
-      case 'spritSheet1': sp.translate(100); break;
+      case 'spritSheet1': ss.rotate(180); break;
+      case 'spritSheet2': ss.changeName('righter'); break;
+      case 'spritSheet3': ss.changeName('lefter'); break;
       
       case 'translate1': sp.translate(100); break;
       case 'translate2': sp.translate(-50); break;
