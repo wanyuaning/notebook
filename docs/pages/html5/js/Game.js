@@ -14,6 +14,8 @@ class Game{
 
   #SCENES_MAP = {}
   #CURRENT_SCENE = 'SCENE0'
+
+  #ACTOR_MANAGER = {}
   
   constructor({showGrid, showRuler, FPS, debug}){
     showGrid && (this.#CONFIG.showGrid = true)
@@ -52,16 +54,13 @@ class Game{
     })
   }
   addActor(actor){this.scene.addChild(actor)}
-  addActorForName(name, options){
-    let actor = new SpriteSheet(500, 100, 50, 60, options.data[4], {origin: 5}, {
-      matrix:[[1,1,1],[1,1,1]],
-      children: {
-        'righter': [0,1,2],
-        'lefter': [3,4,5]
-      },
-      defaultName: 'lefter'
-    })
+  create(name, options){
+    let map={
+      SpriteSheet(x, y, width, height, image, transform, config){return new SpriteSheet(x, y, width, height, image, transform, config)}
+    }
+    let actor = map[options.type].apply(null, options.data)
     this.scene.addChild(actor)
+    this.#ACTOR_MANAGER[name] = actor
   }
   start(){
     let {debug} = this.#CONFIG
