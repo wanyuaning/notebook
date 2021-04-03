@@ -3,6 +3,7 @@ class Stage{
   #context
   #width
   #height
+  #scale = [1, 1]
   constructor(canvas, width, height){
     if (canvas) {
       this.#canvas = canvas
@@ -11,7 +12,12 @@ class Stage{
     if (width && height) {
       this.#width = width
       this.#height = height
+      if (canvas) {
+        canvas.width = width
+        canvas.height = height
+      }
     }
+    
   }
   beginPath(){this.#context.beginPath()}
   moveTo(x, y){this.#context.moveTo(x, y)}
@@ -23,9 +29,16 @@ class Stage{
     this.#canvas = canvas
     this.#context = canvas.getContext("2d")
   }
-  setStageSize(width, height){
+  setStageSize(width, height, styleWidth, styleHeight){
     this.#width = width
     this.#height = height
+    this.#canvas.width = width
+    this.#canvas.height = height
+    if (styleWidth && styleHeight) {
+      this.#canvas.style.width = styleWidth + 'px'
+      this.#canvas.style.height= styleHeight + 'px'
+    }
+    //let style = tool.getStyle(this.#canvas)
   }
   showRuler(){
     let w = this.#width, h = this.#height, ctx = this.#context
@@ -126,10 +139,8 @@ class Stage{
     let startX = 0, startY = 0
     
     if (transform) {
-      let {translateX, translateY, scaleX, scaleY, skewX, skewY, rotate, origin} = transform, deg = Math.PI/180, ctx = this.#context
+      let {translateX, translateY, scaleX, scaleY, skewX, skewY, rotate, alpha, origin} = transform, deg = Math.PI/180, ctx = this.#context
       let a = 1, d = 1, b = 0, c = 0, e = x, f = y 
-      //console.log(scaleX);
-      
 
       if (Object.prototype.toString.call(origin) === '[object Array]') { startX = -origin[0]; startY = -origin[1]; e += origin[0]; f += origin[1] }
       if (Object.prototype.toString.call(origin) === '[object Number]') {
@@ -146,6 +157,7 @@ class Stage{
         }
       }
       ctx.save()
+      ctx.globalAlpha = alpha
       if (rotate){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate) }
       if (scaleX){ a *= scaleX; c *= scaleX }   
       if (scaleY){ d *= scaleY; b *= scaleY }

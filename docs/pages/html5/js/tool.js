@@ -23,7 +23,7 @@ let tool = {
   },
   getStyle: (() => {
       var b = document.body || document.documentElement;
-      return b.currentStyle ? (e) => e.currentStyle : (e) => document.defaultView.getComputedStyle(e, null);
+      return b.currentStyle ? (e) => e.currentStyle : (e, pseudoClasses) => document.defaultView.getComputedStyle(e, pseudoClasses);
   })(),
   isUndefined: (x) => typeof x === "undefined",
   isArray: (elem) => Object.prototype.toString.call(elem) === "[object Array]",

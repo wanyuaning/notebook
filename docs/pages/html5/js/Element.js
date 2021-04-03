@@ -55,7 +55,9 @@ class Scene extends Element{
 class Sprite extends Element{
   constructor(x, y, width, height, options, transform, config){
     super('Sprite')
-    transform = Object.assign({x, y, translateX: 0, translateY: 0, scaleX: 1, scaleY: 1, rotate: 0, origin: 1}, transform || {})
+    transform = Object.assign({x, y, translateX: 0, translateY: 0, scaleX: 1, scaleY: 1, rotate: 0, alpha: 1, origin: 1}, transform || {})
+    console.log('transform',transform);
+    
     this.data = {x, y, width, height, options, transform, config}
     this.data.children = this.children
     this.TRANSFORM = {
@@ -66,7 +68,8 @@ class Sprite extends Element{
       timerY: 0,
       timerR: 0,
       timerSX: 0,
-      timerSY: 0
+      timerSY: 0,
+      timerA: 0
     }
   }
   translate (x, y){
@@ -90,11 +93,12 @@ class Sprite extends Element{
   scaleY  (y){ let T = this.TRANSFORM, {transform, _transform, tween} = T; if (y) { tween.scaleY += y; T.timerSY = new Date().getTime(); _transform.scaleY = transform.scaleY } }
   scaleTo(x, y){ let {transform, _transform, tween} = this.TRANSFORM; x && (_transform.scaleX = transform.scaleX = tween.scaleX = x); y && (_transform.scaleY = transform.scaleY = tween.scaleY = y) }
 
+  alpha (a){ let T = this.TRANSFORM, {transform, _transform, tween, timerA} = T; tween.alpha += a; T.timerA = new Date().getTime(); _transform.alpha = transform.alpha }
   rotate (deg){ let T = this.TRANSFORM, {transform, _transform, tween, timerR} = T; tween.rotate += deg; T.timerR = new Date().getTime(); _transform.rotate = transform.rotate }
   rotateTo(deg){ let {transform, _transform, tween} = this.TRANSFORM; deg && (_transform.rotate = transform.rotate = tween.rotate = deg) }  
   
   update(){
-    let T = this.TRANSFORM, {transform, _transform, tween, timerX, timerY, timerR, timerSX, timerSY} = T, now = new Date().getTime();
+    let T = this.TRANSFORM, {transform, _transform, tween, timerX, timerY, timerR, timerSX, timerSY, timerA} = T, now = new Date().getTime();
     // 缩放
     if (transform.scaleX < tween.scaleX) {
       transform.scaleX = tweens.runDefault(now - timerSX, _transform.scaleX, tween.scaleX, 2000) 
@@ -137,6 +141,15 @@ class Sprite extends Element{
     if (transform.rotate > tween.rotate) {
       transform.rotate = tweens.runDefault(now - timerR, _transform.rotate, tween.rotate, 2000)
       transform.rotate < tween.rotate && (_transform.rotate = transform.rotate = tween.rotate %= 360)
+    }
+    // 透明度
+    if (transform.alpha < tween.alpha) {
+      transform.alpha = tweens.runDefault(now - timerA, _transform.alpha, tween.alpha, 2000)
+      transform.alpha > tween.alpha && (_transform.alpha = transform.alpha = tween.alpha)
+    }
+    if (transform.alpha > tween.alpha) {
+      transform.alpha = tweens.runDefault(now - timerA, _transform.alpha, tween.alpha, 2000)
+      transform.alpha < tween.alpha && (_transform.alpha = transform.alpha = tween.alpha)
     }
   }
 }

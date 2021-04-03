@@ -1,3 +1,7 @@
+
+
+
+
 class Game{
   // 配置
   #CONFIG = {
@@ -16,6 +20,14 @@ class Game{
   #CURRENT_SCENE = 'SCENE0'
 
   #ACTOR_MANAGER = {}
+  #CREATE_MAP = {
+    Sprite: (x, y, width, height, options, transform, config) => new Sprite(x, y, width, height, options, transform, config),
+    SpriteSheet: (x, y, width, height, image, transform, config) => new SpriteSheet(x, y, width, height, image, transform, config),
+    Rect: (x, y, width, height, options, config) => new Rect(x, y, width, height, options, config),
+    Circle: (x, y, r, options, config) => new Circle(x, y, r, options, config),
+    Polygon: (points, options, config) => new Polygon(points, options, config),
+    Imagee: (img, sx, sy, swidth, sheight, x, y, width, height) => new Imagee(img, sx, sy, swidth, sheight, x, y, width, height)
+  }
   
   constructor({showGrid, showRuler, FPS, debug}){
     showGrid && (this.#CONFIG.showGrid = true)
@@ -24,8 +36,9 @@ class Game{
     FPS && (this.#CONFIG.FPS = FPS)
     
     // 舞台&设施
+    let canvas = document.getElementById("myCanvas")
     let stage = new Stage()
-    stage.setCanvas(document.getElementById("myCanvas"))
+    stage.setCanvas(canvas)
     stage.setStageSize(1000, 400)
     stage && (this.#ENGINES.stage = stage)
     
@@ -54,13 +67,20 @@ class Game{
     })
   }
   addActor(actor){this.scene.addChild(actor)}
-  create(name, options){
-    let map={
-      SpriteSheet(x, y, width, height, image, transform, config){return new SpriteSheet(x, y, width, height, image, transform, config)}
-    }
-    let actor = map[options.type].apply(null, options.data)
-    this.scene.addChild(actor)
+  create(name, options, parent){
+    let actor = this.#CREATE_MAP[options.type].apply(null, options.data)
     this.#ACTOR_MANAGER[name] = actor
+    parent ? this.#ACTOR_MANAGER[parent].addChild(actor) : this.scene.addChild(actor)
+  }
+  transform(name, transform){
+    for (let key in transform) {
+      this.#ACTOR_MANAGER[name][key](transform[key])
+    }
+  }
+  getActor(name){
+    console.log(this.#ACTOR_MANAGER[name]);
+    
+    return this.#ACTOR_MANAGER[name]
   }
   start(){
     let {debug} = this.#CONFIG
@@ -79,7 +99,6 @@ class Game{
     // 2.公共设施
     showGrid && stage.showGrid()
     showRuler && stage.showRuler()
-    //console.log(scene.children);
     
     scene.children.forEach(e => { 
       e.type === 'Sprite' && e.update()

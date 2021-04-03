@@ -5,11 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    #test:before{content: '123';background-color: #f00; display: inline-block;}
+  </style>
 </head>
 <body>
   <canvas id="myCanvas" width="1000" height="400"></canvas>
+ 
   <div id="test">
-
+    Game管理
+    <button data-type="game01">game.getActor['marry']</button>
+    自由组织
     <button data-type="spritSheet1">spritSheet</button>
     <button data-type="spritSheet2">向右</button>
     <button data-type="spritSheet3">向左</button>
@@ -32,6 +38,7 @@
   </div>
 </body>
 </html>
+<script src="js/tool.js"></script>
 <script src="js/Pattern.js"></script>
 <script src="js/tweens.js"></script>
 <script src="js/Stage.js"></script>
@@ -63,14 +70,12 @@ sp.addChild(r1)
 let ss
 let img = new Image()
 img.onload = function(){
+  
   ss = new SpriteSheet(400, 100, 50, 60, this, {origin: 5}, {
-    matrix:[[1,1,1],[1,1,1]],
-    children: {
-      'righter': [0,1,2],
-      'lefter': [3,4,5]
-    },
-    defaultName: 'lefter'
-  })
+      matrix:[[1,1,1],[1,1,1]], 
+      children: {'righter': [0,1,2], 'lefter': [3,4,5]}, 
+      defaultName: 'lefter'
+    })
   game.addActor(ss)
   game.create('marry', {
     type: 'SpriteSheet', 
@@ -79,6 +84,17 @@ img.onload = function(){
       children: {'righter': [0,1,2], 'lefter': [3,4,5]}, 
       defaultName: 'lefter'
     }]})
+  game.create('blueRect', {
+    type: 'Rect',
+    data: [120, 120, 100, 500, {fillStyle: '#00f'}]
+  })
+  game.create('mask', {
+    type: 'Sprite',
+    data: [0, 0, 1000, 400, {fillStyle: '#fff'}]
+  })
+  game.create('bg', {type: 'Rect', data: [0, 0, 1000, 400]}, 'mask')
+  game.transform('mask', {alpha: -1})
+  //game.draw()
 }
 img.src = './images/marry.png'
 
@@ -99,6 +115,8 @@ $test = document.querySelector('#test')
     var target = e.target, type = target.getAttribute('data-type')
     if (target.tagName !== 'BUTTON') return 
     switch(type){
+      case 'game01': game.getActor('marry').changeName('righter'); break; 
+
       case 'spritSheet1': ss.rotate(180); break;
       case 'spritSheet2': ss.changeName('righter'); break;
       case 'spritSheet3': ss.changeName('lefter'); break;
@@ -121,6 +139,9 @@ $test = document.querySelector('#test')
     }
     
   })
+  
 
+
+ 
 
 </script>
