@@ -8,9 +8,12 @@
 - 代码风格：TSLint
 - 美化代码格式：Prettier
 
-https://www.tslang.cn/docs/handbook/basic-types.html
-类型：string object boolean 
 
+类型：
+```
+string 
+object 
+boolean 
 数字  
 let decLiteral: number = 6;         // 十进制
 let hexLiteral: number = 0xf00d;    // 十六进制
@@ -49,7 +52,7 @@ function inifiniteLoop(): never { while(true){}}
 let item: string | number = 'a'  item = 1
 
 类型断言
-
+```
 
 
 
@@ -172,11 +175,11 @@ src/index.ts
 
 demo编写: 
   "webpack": "^4.28.4",
-  "ts-loader": "^5.3.3"
-  "tslint-loader": "^3.5.4"
-  "express": "^4.16.4"
-  "webpack-dev-middleware": "^3.5.0"  // express的webpack中间件
-  "webpack-hot-middleware": "^2.24.3" // express的webpack中间件
+  "ts-loader": "^5.3.3",
+  "tslint-loader": "^3.5.4",
+  "express": "^4.16.4",
+  "webpack-dev-middleware": "^3.5.0",
+  "webpack-hot-middleware": "^2.24.3",
   "body-parser": "^1.18.3"
 
 examples
