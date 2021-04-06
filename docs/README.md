@@ -1,4 +1,17 @@
-ewan96 ewan... ...  ewan9616696010@gmail.com
+JS模块标准
+CommonJS  面向Node
+AMD       面向浏览器
+UMD       通用模块定义规范 所有运行环境中都可发挥作用
+ES6
+ES2015
+System
+
+UMD理解与实践
+function factory() {
+    return {
+        name: '我是一个UMD模块'
+    }
+}
 
 构建canvas动画框架
 通用类的提取 https://www.cnblogs.com/shawn-xie/archive/2012/07/11/2585551.html
@@ -311,6 +324,10 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
   <li><a href="#/pages/server/index.md">服务</a></li>
   <li><a href="#/pages/server/express/index.md">Express</a></li>
   <li><a href="#/pages/server/koa/index.md">Koa</a></li>
+</ul>
+<ul class="no-list block-list">
+  <li><a href="#/pages/projects/index.md">项目</a></li>
+  <li><a href="#/pages/projects/game-frame/index.md">game-frame</a></li>
 </ul>
 
 
