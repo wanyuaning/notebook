@@ -297,6 +297,8 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
   <li><a href="#/pages/tools/regular-expression">正则表达式</a></li>
   <li><a href="#/pages/tools/webpack/webpack4">Webpack4.0</a></li>
   <li><a href="#/pages/tools/webpack/webpack5">Webpack5.0</a></li>
+  <li><a href="#/pages/tools/doc/vuepress.md">Vuepress</a></li>
+  <li><a href="#/pages/tools/doc/docsify.md">Docsify</a></li>
 </ul>
 <ul class="no-list block-list">
   <li>VSCode</li>
@@ -331,7 +333,7 @@ h ttps://blog.csdn.net/lilang_9920/article/details/81005345
 <ul class="no-list block-list">
   <li><a href="#/pages/projects/index.md">项目</a></li>
   <li><a href="#/pages/projects/game-frame/index.md">game-frame</a></li>
-  <li><a href="#/pages/projects/es6/index.md">es6</a></li>
+  <li><a href="#/pages/projects/es6/index.md">es6-develop</a></li>
 </ul>
 
 

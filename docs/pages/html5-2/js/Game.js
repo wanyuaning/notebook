@@ -21,12 +21,12 @@ class Game{
 
   #ACTOR_MANAGER = {}
   #CREATE_MAP = {
-    Sprite: (x, y, width, height, options, transform, config) => new Sprite(x, y, width, height, options, transform, config),
-    SpriteSheet: (x, y, width, height, image, transform, config) => new SpriteSheet(x, y, width, height, image, transform, config),
-    Rect: (x, y, width, height, options, config) => new Rect(x, y, width, height, options, config),
-    Circle: (x, y, r, options, config) => new Circle(x, y, r, options, config),
-    Polygon: (points, options, config) => new Polygon(points, options, config),
-    Imagee: (img, sx, sy, swidth, sheight, x, y, width, height) => new Imagee(img, sx, sy, swidth, sheight, x, y, width, height)
+    Sprite: (options) => new Sprite(options),
+    SpriteSheet: (options) => new SpriteSheet(options),
+    Rect: (options) => new Rect(options),
+    Circle: (options) => new Circle(options),
+    Polygon: (options) => new Polygon(options),
+    Imagee: (options) => new Imagee(options)
   }
   /**
    * FPS:1, 
@@ -73,10 +73,12 @@ class Game{
     })
   }
   addActor(actor){this.scene.addChild(actor)}
+
+  // 综合创建
   create(name, options, parent){
-    let actor = this.#CREATE_MAP[options.type].apply(null, options.data)
+    let actor = this.#CREATE_MAP[options.type](options.data)
     this.#ACTOR_MANAGER[name] = actor
-    parent ? this.#ACTOR_MANAGER[parent].addChild(actor) : this.scene.addChild(actor)
+    parent && this.#ACTOR_MANAGER[parent] ? this.#ACTOR_MANAGER[parent].addChild(actor) : this.scene.addChild(actor)
   }
   transform(name, transform){
     for (let key in transform) {
