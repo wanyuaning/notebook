@@ -133,72 +133,70 @@ class Stage{
       }
     }
   }
+  getOrigin(width, height, type){
+    const origin = [0, 0]
+    switch(type){
+      case 2: origin[0] = -width/2; break
+      case 3: origin[0] = -width; break
+      case 4: origin[1] = -height/2; break
+      case 5: origin[0] = -width/2; origin[1] = -height/2; break
+      case 6: origin[0] = -width; origin[1] = -height/2; break
+      case 7: origin[1] = -height; break
+      case 8: origin[0] = -width/2; origin[1] = -height; break
+      case 9: origin[0] = -width; origin[1] = -height; break
+    }
+    return origin
+  }
+  // 绘制精灵
   drawSprite({x, y, width, height, options, children, transform, config}){
     children = children || []
     options = options || {}
-    let startX = 0, startY = 0
+    const ctx = this.#context, deg = Math.PI/180
+    let originX = 0, originY = 0 // 变换原点计算
+
+    // 变换
+    ctx.save()
+    let {translateX, translateY, scaleX, scaleY, skewX, skewY, rotate, alpha, origin} = transform
+    let a = 1, d = 1, b = 0, c = 0, e = x, f = y, isTansform = false    
+    if (alpha < 1) {ctx.globalAlpha = alpha; isTansform = true}
+    if (origin != 1){
+      let type = Object.prototype.toString.call(origin)
+      if (type === '[object Array]') { originX = -origin[0]; originY = -origin[1] }
+      type === '[object Number]' && ([originX, originY] = this.getOrigin(width, height, origin))
+      isTansform = true
+    }        
+    if (rotate != 0){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate); isTansform = true}
+    if (scaleX != 1){ a *= scaleX; c *= scaleX; isTansform = true}   
+    if (scaleY != 1){ d *= scaleY; b *= scaleY; isTansform = true}
+    if (skewX) { c += skewX; isTansform = true}  
+    if (skewY) { b += skewY; isTansform = true}
+    if (translateX != 0) { e += translateX; isTansform = true}
+    if (translateY != 0) { f += translateY; isTansform = true}
+    if (isTansform) { e -= originX; f -= originY; ctx.transform(a, b, c, d, e, f) } 
     
-    if (transform) {
-      let {translateX, translateY, scaleX, scaleY, skewX, skewY, rotate, alpha, origin} = transform, deg = Math.PI/180, ctx = this.#context
-      let a = 1, d = 1, b = 0, c = 0, e = x, f = y 
-
-      if (Object.prototype.toString.call(origin) === '[object Array]') { startX = -origin[0]; startY = -origin[1]; e += origin[0]; f += origin[1] }
-      if (Object.prototype.toString.call(origin) === '[object Number]') {
-        switch(origin){
-          case 2: startX = -width/2; e += width/2; break
-          case 3: startX = -width; e += width; break
-          case 4: startY = -height/2; f += height/2; break
-          case 5: startX = -width/2; startY = -height/2; e += width/2; f += height/2; break
-          case 6: startX = -width; startY = -height/2; e += width; f += height/2; break
-          case 7: startY = -height; f += height; break
-          case 8: startX = -width/2; startY = -height; e += width/2; f += height; break
-          case 9: startX = -width; startY = -height; e += width; f += height; break
-          default: startX = 0; startY = 0
-        }
-      }
-      ctx.save()
-      ctx.globalAlpha = alpha
-      if (rotate){ a = Math.cos(deg*rotate); d = Math.cos(deg*rotate); b = Math.sin(deg*rotate); c = -Math.sin(deg*rotate) }
-      if (scaleX){ a *= scaleX; c *= scaleX }   
-      if (scaleY){ d *= scaleY; b *= scaleY }
-      if (skewX) { c += skewX }  
-      if (skewY) { b += skewY }
-
-      if (translateX) { e += translateX }
-      if (translateY) { f += translateY }
-      
-      ctx.transform(a, b, c, d, e, f)
-    }
     children.forEach(({type, data, parent, config}) => { 
       !data.options && (data.options = options)
       let e = {type, data: {...data}, parent, config}
-      if (startX || startY) {
-        if (e.type === 'Polygon') {
-          e.data.points.forEach(point => {
-            point[0] += startX
-            point[1] += startY
-          })
-        } else {
-          e.data.x += startX
-          e.data.y += startY
-        }
-      }
-      
+      // 变换原点非默认时(默认[0,0])
+      if (originX || originY) {if (e.type === 'Polygon') {e.data.points.forEach(point => {point[0] += originX; point[1] += originY})} else {e.data.x += originX; e.data.y += originY}} 
       this.draw(e) 
     })
-    transform && this.#context.restore()
-    if (config && config.showRange) {
-      let fillStyle = config.rangeColor || '#000'
-      this.draw({type: 'Rect', data: {x:x-2, y:y-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width-2, y:y-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
-      this.draw({type: 'Rect', data: {x:x+width-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
-    }
+
+    ctx.restore()
+    // 显示元素范围节点
+    if (config && config.showRange) this.drawRangePointer({x, y, width, height}, config.rangeColor)
+  }
+  drawRangePointer({x, y, width, height}, color){
+    let fillStyle = color || '#000'
+    this.draw({type: 'Rect', data: {x:x-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width/2-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width-2, y:y-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width-2, y:y+height/2-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width/2-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
+    this.draw({type: 'Rect', data: {x:x+width-2, y:y+height-2, width:4, height:4, options:{fillStyle}}})
   }
   /**
    * drawRect(x, y, width, height, options)

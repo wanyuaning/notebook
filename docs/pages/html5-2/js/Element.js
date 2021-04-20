@@ -1,3 +1,5 @@
+function n(){ return new Date().getTime() }
+
 /**
  * ▇元素基类▇
  * 属性：type/children/parent/data
@@ -55,47 +57,35 @@ class Sprite extends Element{
   constructor({x, y, width, height, options, transform, config}){
     super('Sprite')
     transform = Object.assign({x, y, translateX: 0, translateY: 0, scaleX: 1, scaleY: 1, rotate: 0, alpha: 1, origin: 1}, transform || {})
-    
-    this.data = {x, y, width, height, options, transform, config}
-    this.data.children = this.children
-    this.TRANSFORM = {
-      transform,
-      transformOrigin: JSON.parse(JSON.stringify(transform)),
-      transformTarget: JSON.parse(JSON.stringify(transform)),
-      timerX: 0,
-      timerY: 0,
-      timerR: 0,
-      timerSX: 0,
-      timerSY: 0,
-      timerA: 0
-    }
+    this.data = {x, y, width, height, options, transform, config, children: this.children}
+    this.TRANSFORM = {transform, transformOrigin: JSON.parse(JSON.stringify(transform)), transformTarget: JSON.parse(JSON.stringify(transform)), timerX: 0, timerY: 0, timerR: 0, timerSX: 0, timerSY: 0, timerA: 0}
   }
   
   translate (x, y){
     let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; 
-    if (x) {transformTarget.translateX += x; T.timerX = new Date().getTime(); transformOrigin.translateX = transform.translateX }
-    if (y) {transformTarget.translateY += y; T.timerY = new Date().getTime(); transformOrigin.translateY = transform.translateY }
+    if (x) {transformTarget.translateX += x; T.timerX = n(); transformOrigin.translateX = transform.translateX }
+    if (y) {transformTarget.translateY += y; T.timerY = n(); transformOrigin.translateY = transform.translateY }
   }
-  translateX (x){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (x) { transformTarget.translateX += x; T.timerX = new Date().getTime(); transformOrigin.translateX = transform.translateX } }
-  translateY (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.translateY += y; T.timerY = new Date().getTime(); transformOrigin.translateY = transform.translateY } }
+  translateX (x){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (x) { transformTarget.translateX += x; T.timerX = n(); transformOrigin.translateX = transform.translateX } }
+  translateY (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.translateY += y; T.timerY = n(); transformOrigin.translateY = transform.translateY } }
   translateTo(x, y){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; x && (transformOrigin.translateX = transform.translateX = transformTarget.translateX = x); y && (transformOrigin.translateY = transform.translateY = transformTarget.translateY = y) }  
 
   
   scale  (x, y){
     let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T
-    if (x) { transformTarget.scaleX += x; T.timerSX = new Date().getTime(); transformOrigin.scaleX = transform.scaleX }
-    if (y) { transformTarget.scaleY += y; T.timerSY = new Date().getTime(); transformOrigin.scaleY = transform.scaleY }
+    if (x) { transformTarget.scaleX += x; T.timerSX = n(); transformOrigin.scaleX = transform.scaleX }
+    if (y) { transformTarget.scaleY += y; T.timerSY = n(); transformOrigin.scaleY = transform.scaleY }
   }
-  scaleX  (x){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (x) { transformTarget.scaleX += x; T.timerSX = new Date().getTime(); transformOrigin.scaleX = transform.scaleX } }
-  scaleY  (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.scaleY += y; T.timerSY = new Date().getTime(); transformOrigin.scaleY = transform.scaleY } }
+  scaleX  (x){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (x) { transformTarget.scaleX += x; T.timerSX = n(); transformOrigin.scaleX = transform.scaleX } }
+  scaleY  (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.scaleY += y; T.timerSY = n(); transformOrigin.scaleY = transform.scaleY } }
   scaleTo(x, y){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; x && (transformOrigin.scaleX = transform.scaleX = transformTarget.scaleX = x); y && (transformOrigin.scaleY = transform.scaleY = transformTarget.scaleY = y) }
 
-  alpha (a){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerA} = T; transformTarget.alpha += a; T.timerA = new Date().getTime(); transformOrigin.alpha = transform.alpha }
-  rotate (deg){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerR} = T; transformTarget.rotate += deg; T.timerR = new Date().getTime(); transformOrigin.rotate = transform.rotate }
+  alpha (a){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerA} = T; transformTarget.alpha += a; T.timerA = n(); transformOrigin.alpha = transform.alpha }
+  rotate (deg){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerR} = T; transformTarget.rotate += deg; T.timerR = n(); transformOrigin.rotate = transform.rotate }
   rotateTo(deg){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; deg && (transformOrigin.rotate = transform.rotate = transformTarget.rotate = deg) }  
   
   update(){
-    let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, timerA} = T, now = new Date().getTime();
+    let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, timerA} = T, now = n();
     // 缩放
     if (transform.scaleX < transformTarget.scaleX) {
       transform.scaleX = tweens.runDefault(now - timerSX, transformOrigin.scaleX, transformTarget.scaleX, 2000) 
@@ -164,7 +154,7 @@ class SpriteSheet extends Sprite{
     this.children.push(img)
     this._data = img.data
     this.duration = duration || 100 
-    this.startTime = new Date().getTime()
+    this.startTime = n()
     this.frames = []
     this.group = {
       'MAIN':[],
@@ -194,7 +184,7 @@ class SpriteSheet extends Sprite{
   }
   update(){
     super.update()
-    let now = new Date().getTime()
+    let now = n()
     
     if (now - this.startTime > this.duration) {
       this.startTime = now
