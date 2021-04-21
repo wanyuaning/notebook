@@ -1,60 +1,41 @@
 class Game{
   // 配置
   #CONFIG = {showGrid: false, showRuler: false, FPS: 33.3333, debug: false}
-  // 引擎
-  #ENGINES = {stage: null, timer: null}
-  #SCENES_MAP = {}
-  #CURRENT_SCENE = 'SCENE0'
-
-  #ACTOR_MANAGER = {}
-  #CREATE_MAP = {
-    Sprite: (options) => new Sprite(options), SpriteSheet: (options) => new SpriteSheet(options), Rect: (options) => new Rect(options),
-    Circle: (options) => new Circle(options), Polygon: (options) => new Polygon(options), Imagee: (options) => new Imagee(options)
-  }
-  /**
-   * FPS:1, sceneTransition:{type: 'fade'}, showGrid: true, showRuler: true, debug
-   */
-  constructor({showGrid, showRuler, FPS, debug}){
-    showGrid && (this.#CONFIG.showGrid = true)
-    showRuler && (this.#CONFIG.showRuler = true)
-    debug && (this.#CONFIG.debug = true)
-    FPS && (this.#CONFIG.FPS = FPS)
-    
+  constructor(options){
+    Object.assign(this.#CONFIG, options)    
     // 舞台&设施
-    let canvas = document.getElementById("myCanvas")
-    let stage = new Stage()
-    stage.setCanvas(canvas); stage.setStageSize(1000, 400); stage && (this.#ENGINES.stage = stage)    
+    this.stage = new Stage(document.getElementById("myCanvas"), 1000, 400)
     // 场景管理
-    this.scene = new Scene('SCENE0')
-    this.scenes = [this.scene]
-    this.#SCENES_MAP['SCENE0'] = this.scene
+    this.sceneMap = {'SCENE0': new Scene('SCENE0')}
+    this.sceneCurrent = this.sceneMap['SCENE0']
+    // 演员管理
+    this.actorMap ={} 
     // 帧率引擎
-    this.#ENGINES.timer = new Timer({FPS: this.#CONFIG.FPS})
+    this.timer = new Timer({FPS: this.#CONFIG.FPS})
   }
-  setStage(stage){ this.#ENGINES.stage = stage }
-  // 场景
-  addScene(scene){ this.scenes.push(scene); this.#SCENES_MAP[scene.name] = scene}
-  setSceneTransition(){ this.scenes.forEach(e => { e.setTransition('fade', {fillStyle: '#0f0'}) }) }
-  changeSceneTo(name){
-    let currentScene = this.#SCENES_MAP[this.#CURRENT_SCENE], nextScene = this.#SCENES_MAP[name]
-    if(!nextScene) return
-    currentScene.out(() => { nextScene.in(); this.#CURRENT_SCENE = name })
-  }
-  addActor(actor){this.scene.addChild(actor)}
+  setStage(stage){ this.stage = stage }
+  setSceneTransition(){  }
+  addScene(scene){ this.sceneMap[scene.name] = scene}
+  addActor(actor){this.sceneCurrent.addChild(actor)}
   // 综合创建
   create(name, options, parent){
-    let actor = this.#CREATE_MAP[options.type](options.data); this.#ACTOR_MANAGER[name] = actor
-    parent && this.#ACTOR_MANAGER[parent] ? this.#ACTOR_MANAGER[parent].addChild(actor) : this.scene.addChild(actor)
+    let actor = {
+      Sprite: (options) => new Sprite(options), SpriteSheet: (options) => new SpriteSheet(options), Rect: (options) => new Rect(options),
+      Circle: (options) => new Circle(options), Polygon: (options) => new Polygon(options), Imagee: (options) => new Imagee(options)
+    }[options.type](options.data); 
+    this.actorMap[name] = actor; 
+    parent && this.actorMap[parent] ? this.actorMap[parent].addChild(actor) : this.sceneCurrent.addChild(actor)
   }
-  transform(name, transform){ for (let key in transform) {this.#ACTOR_MANAGER[name][key](transform[key])} }
-  getActor(name){ return this.#ACTOR_MANAGER[name] }
-  start(){ let {debug} = this.#CONFIG, {timer} = this.#ENGINES; debug ? timer.testStart(this, {duration: 10000}) : timer.start(this) }
+  changeSceneTo(name){let nextScene = this.sceneMap[name]; if(!nextScene) return; this.sceneCurrent.out(() => { nextScene.in(); this.sceneCurrent = this.sceneMap[name] })}
+  transform(name, transform){ for (let key in transform) {this.actorMap[name][key](transform[key])} }
+  getActor(name){ return this.actorMap[name] }
+  start(){this.#CONFIG.debug ? this.timer.testStart(this, {duration: 10000}) : this.timer.start(this) }
   draw(){
-    let scene = this.#SCENES_MAP[this.#CURRENT_SCENE], {showGrid, showRuler} = this.#CONFIG, {stage} = this.#ENGINES    
-    stage.clean() // 1.清除画布    
-    showGrid && stage.showGrid() // 2.公共设施
-    showRuler && stage.showRuler()    
-    scene.children.forEach(e => { e.type === 'Sprite' && e.update(); stage.draw(e) })
-    //transition.active && stage.draw(transition.data)
+    let {showGrid, showRuler} = this.#CONFIG   
+    this.stage.clean() // 1.清除画布    
+    showGrid && this.stage.showGrid() // 2.公共设施
+    showRuler && this.stage.showRuler()    
+    this.sceneCurrent.children.forEach(e => { e.type === 'Sprite' && e.update(); this.stage.draw(e) })
+    //transition.active && this.stage.draw(transition.data)
   }  
 }

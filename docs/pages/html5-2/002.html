@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>follow mouse</title>
+   <style type="text/css">
+      #screen { position: absolute; width: 100%; height: 100%}
+      #screen span { background: #f00; font-size: 0; overflow: hidden; width: 50px; height: 50px; position:absolute; left:-1000px; top:100px}
+   </style>
+   <script type="text/javascript">
+      var $ = function (i) {return document.getElementById(i)},addEvent = function (o, e, f) {o.addEventListener ? o.addEventListener(e, f, false) : o.attachEvent('on'+e, function(){f.call(o)})};
+      var testDDX="";
+      var testX="";
+
+      //Algorithm[趋近]
+      function agtReaching(a,b,c,d){
+         console.log(c);
+         return (b - a - c) / d;
+      }
+
+      var Follow = function () {
+         var OBJ, sp, rs, N = 0,
+               target,
+               Timer;
+         var init = function (id, config) {
+            this.config = config || {};
+            this.obj = $(id);
+            sp = 4;
+            rs = 1;
+            target = {x: 600, y: $(id).offsetHeight * .5};    //中点
+            this.setXY(); this.start();
+         };
+         init.prototype = {
+            setXY : function () { var _this = this; addEvent(this.obj, 'mousemove', function (e) {  e = e || window.event; target.x = e.clientX; target.y = e.clientY;  })  },
+            start : function () {
+               OBJ= new CObj( 0, 100);
+               Timer=setInterval(function() { OBJ.run(); }, 40);
+               setTimeout(function(){clearInterval(Timer)},10000);
+            }
+         };
+         var CObj = function (cx, cy) {
+            var obj = document.createElement("span");
+            document.getElementById("screen").appendChild(obj);
+            this.css = obj.style;
+            this.ddx = 0;
+            this.x = 0;
+            this.x0 = 0;//目标点
+            this.cx = cx;//偏移
+         };
+         CObj.prototype.run = function () {
+
+            this.ddx += agtReaching(this.x,target.x,this.ddx,rs);
+            this.x += this.ddx / sp;
+            this.css.left = Math.round(this.x) + 'px';
+
+
+
+
+
+
+
+         };
+         return init;
+      }();
+   </script>
+
+
+</head>
+<body>
+
+
+
+
+<div id="screen"></div>
+<script type="text/javascript">
+
+   new Follow('screen', { speed: 1, animR : 2});
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

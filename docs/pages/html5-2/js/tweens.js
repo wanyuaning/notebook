@@ -15,7 +15,12 @@
 // tweens.run(t - startTime, startPos, endPos, duration)
 
 
-
+/**
+ * b 开始位置
+ * c 目标位置
+ * d 持续时长
+ * t 当前用时
+ */
 let tweens = new StateAndStrategy()
 tweens.setData({
   linear: (t,b,c,d) => (c - b) * (t / d) + b, //c * t / d + b,
