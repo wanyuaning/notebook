@@ -8,8 +8,6 @@ class Game{
     // 场景管理
     this.sceneMap = {'SCENE0': new Scene('SCENE0')}
     this.sceneCurrent = this.sceneMap['SCENE0']
-    // 演员管理
-    this.actorMap ={} 
     // 帧率引擎
     this.timer = new Timer({FPS: this.#CONFIG.FPS})
   }
@@ -17,15 +15,7 @@ class Game{
   setSceneTransition(){  }
   addScene(scene){ this.sceneMap[scene.name] = scene}
   addActor(actor){this.sceneCurrent.addChild(actor)}
-  // 综合创建
-  create(name, options, parent){
-    let actor = {
-      Sprite: (options) => new Sprite(options), SpriteSheet: (options) => new SpriteSheet(options), Rect: (options) => new Rect(options),
-      Circle: (options) => new Circle(options), Polygon: (options) => new Polygon(options), Imagee: (options) => new Imagee(options)
-    }[options.type](options.data); 
-    this.actorMap[name] = actor; 
-    parent && this.actorMap[parent] ? this.actorMap[parent].addChild(actor) : this.sceneCurrent.addChild(actor)
-  }
+  
   changeSceneTo(name){let nextScene = this.sceneMap[name]; if(!nextScene) return; this.sceneCurrent.out(() => { nextScene.in(); this.sceneCurrent = this.sceneMap[name] })}
   transform(name, transform){ for (let key in transform) {this.actorMap[name][key](transform[key])} }
   getActor(name){ return this.actorMap[name] }

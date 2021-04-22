@@ -1,33 +1,36 @@
+
 class Timer{
-  constructor({FPS}){
-    this.FPS = FPS || 33.3333
+  #CONFIG = {FPS: 33.3333}
+  constructor(options){
+    Object.assign(this.#CONFIG, options)
+    this.#CONFIG.FPS < 33.3333 && (this.#CONFIG.FPS = 33.3333)
+    this.time = 0
     this.stop = true
+
   }
   testStart(game, {FPS, duration}){
     this.stop = false
     duration && setTimeout(()=>{this.stop = true}, duration)
-    let count = 0
+    
     let timer = () => {
       if(this.stop) return
       game.draw()
       window.setTimeout(timer, FPS || this.FPS)
-      //console.log(count);
-      count++
+      
     }
     timer()
   }
   start(game){
     this.stop = false
-    let count = 0
     let timer = () => {
       if(this.stop) return
       game.draw()
+      this.time = new Date().getTime() - this.startTime
       window.setTimeout(timer, this.FPS)
-      count++
+      
     }
     timer()
   }
-  stops(){
-    this.stop = true
-  }
-} 
+  pause(){this.stop = true}
+  stops(){this.stop = true; this.time = 0}
+}  

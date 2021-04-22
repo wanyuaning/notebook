@@ -67,27 +67,6 @@ let sp = new Sprite({x:50, y:50, width:100, height:50,options:{},transform:{orig
 let r1 = new Rect({x:0, y:0, width:100, height:50, options:{fillStyle: '#f00'}})
 sp.addChild(r1)
 
-let img = new Image()
-img.onload = function(){
-  
-  game.create('marry', {
-    type: 'SpriteSheet', 
-    data:{x:500, y:100, width:50, height:60, image:this, transform:{origin: 5}, config:{
-      matrix:[[1,1,1],[1,1,1]], 
-      children: {'righter': [0,1,2], 'lefter': [3,4,5]}, 
-      defaultName: 'lefter'
-    }}})
-  
-  game.create('mask', {
-    type: 'Sprite',
-    data: [{x:0, y:0, width:1000, height:400, options:{fillStyle: '#fff'}}]
-  })
-  //game.create('bg', {type: 'Rect', data: [0, 0, 1000, 400]}, 'mask')
-  game.transform('mask', {alpha: -1})
-  //game.draw()
-}
-img.src = './images/marry.png'
-
 game.addActor(sp)
 
 game.start()
