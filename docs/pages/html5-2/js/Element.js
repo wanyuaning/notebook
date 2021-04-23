@@ -1,5 +1,5 @@
 function n(){ return new Date().getTime() }
-
+let testState = 0
 /**
  * ▇元素基类▇
  * 属性：type/children/parent/data
@@ -108,6 +108,8 @@ class Sprite extends Element{
   rotateTo(deg){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; deg && (transformOrigin.rotate = transform.rotate = transformTarget.rotate = deg) }  
   
   update(){
+    console.log('testState', testState);
+    testState = 1
     let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, operateAlpha, cbAU, cbAD} = T, now = n();
     // 缩放
     if (transform.scaleX < transformTarget.scaleX) {
@@ -145,11 +147,11 @@ class Sprite extends Element{
     }
     // 旋转
     if (transform.rotate < transformTarget.rotate) {
-      transform.rotate = tweens.runDefault(now - timerR, transformOrigin.rotate, transformTarget.rotate, 2000)
+      transform.rotate = tweens.runDefault(now - timerR, transformOrigin.rotate, transformTarget.rotate, 5000)
       transform.rotate > transformTarget.rotate && (transformOrigin.rotate = transform.rotate = transformTarget.rotate %= 360)
     }
     if (transform.rotate > transformTarget.rotate) {
-      transform.rotate = tweens.runDefault(now - timerR, transformOrigin.rotate, transformTarget.rotate, 2000)
+      transform.rotate = tweens.runDefault(now - timerR, transformOrigin.rotate, transformTarget.rotate, 5000)
       transform.rotate < transformTarget.rotate && (transformOrigin.rotate = transform.rotate = transformTarget.rotate %= 360)
     }
     // 透明度
@@ -158,6 +160,8 @@ class Sprite extends Element{
       if (transform.alpha > transformTarget.alpha) {
         transformOrigin.alpha = transform.alpha = transformTarget.alpha
         operateAlpha.callback()
+        testState = 0
+         
       }
     }
     if (transform.alpha > transformTarget.alpha) {
@@ -165,6 +169,7 @@ class Sprite extends Element{
       if (transform.alpha < transformTarget.alpha) {  
         transformOrigin.alpha = transform.alpha = transformTarget.alpha
         operateAlpha.callback()
+        testState = 0
       }
     }
   }
