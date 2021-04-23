@@ -10,12 +10,11 @@ class Timer{
     this.duration = this.#CONFIG.duration
     this.game = this.#CONFIG.game || {draw:() => {console.log(this.time)}}
   }
-  start(game){
+  start(){
     this.startTime = new Date().getTime()
     this.play()
   }
   play(){
-    this.time > this.duration && (this.state = 0)
     this.state === 2 && (this.startTime = new Date().getTime() - this.time)
     this.state = 1
     let timer = () => {
@@ -23,6 +22,7 @@ class Timer{
       this.time = new Date().getTime() - this.startTime
       this.game.draw()
       window.setTimeout(timer, this.FPS)
+      this.time > this.duration && (this.state = 0)
     }
     timer()
   }

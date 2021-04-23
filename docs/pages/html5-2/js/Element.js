@@ -33,17 +33,27 @@ class Element{
  *       update/in/out
  */
 class Scene extends Element{
-  constructor(name){
+  constructor(name, stage){
     super('SCENE')
     delete this.parent
     delete this.data
     delete this.appendTo
     this.name = name 
+    this.stage = stage
+    this.mask = new Sprite({x:0, y:0, transform:{alpha: 0}, children:[{type:'Rect', data:{x:0, y:0, width:1000, height:400, options:{fillStyle:'#000'}}}]})
   }
-  in(){}
-  out(){}
+  in(callback){
+    this.mask.alphaTo(1)
+    this.mask.alpha(-1, callback)
+  }
+  out(callback){
+    this.mask.alphaTo(0)
+    this.mask.alpha(1, callback)
+  }
   update(){
-    this.children.forEach(e => {})
+    this.children.forEach(e => { e.type === 'Sprite' && e.update(); this.stage.draw(e) })
+    this.mask.update()
+    this.stage.draw(this.mask)
   }
 }
  
@@ -54,11 +64,24 @@ class Scene extends Element{
  *      translate/translateTo/rotate/rotateTo/scale/scaleTo/update
  */
 class Sprite extends Element{
-  constructor({x, y, width, height, options, transform, config}){
+  constructor({x, y, width, height, options, transform, config, children}){
     super('Sprite')
     transform = Object.assign({x, y, translateX: 0, translateY: 0, scaleX: 1, scaleY: 1, rotate: 0, alpha: 1, origin: 1}, transform || {})
     this.data = {x, y, width, height, options, transform, config, children: this.children}
-    this.TRANSFORM = {transform, transformOrigin: JSON.parse(JSON.stringify(transform)), transformTarget: JSON.parse(JSON.stringify(transform)), timerX: 0, timerY: 0, timerR: 0, timerSX: 0, timerSY: 0, timerA: 0}
+    this.TRANSFORM = {
+      transform, 
+      transformOrigin: JSON.parse(JSON.stringify(transform)), 
+      transformTarget: JSON.parse(JSON.stringify(transform)), 
+      timerX: 0, 
+      timerY: 0, 
+      timerR: 0, 
+      timerSX: 0, 
+      timerSY: 0, 
+      operateAlpha: {timer:0, callback:function(){}}
+    }
+    children && children.forEach(child => {
+      if(child.type==='Rect') this.addChild(new Rect(child.data))
+    })
   }
   
   translate (x, y){
@@ -69,8 +92,7 @@ class Sprite extends Element{
   translateX (x){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (x) { transformTarget.translateX += x; T.timerX = n(); transformOrigin.translateX = transform.translateX } }
   translateY (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.translateY += y; T.timerY = n(); transformOrigin.translateY = transform.translateY } }
   translateTo(x, y){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; x && (transformOrigin.translateX = transform.translateX = transformTarget.translateX = x); y && (transformOrigin.translateY = transform.translateY = transformTarget.translateY = y) }  
-
-  
+ 
   scale  (x, y){
     let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T
     if (x) { transformTarget.scaleX += x; T.timerSX = n(); transformOrigin.scaleX = transform.scaleX }
@@ -80,12 +102,13 @@ class Sprite extends Element{
   scaleY  (y){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget} = T; if (y) { transformTarget.scaleY += y; T.timerSY = n(); transformOrigin.scaleY = transform.scaleY } }
   scaleTo(x, y){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; x && (transformOrigin.scaleX = transform.scaleX = transformTarget.scaleX = x); y && (transformOrigin.scaleY = transform.scaleY = transformTarget.scaleY = y) }
 
-  alpha (a){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerA} = T; transformTarget.alpha += a; T.timerA = n(); transformOrigin.alpha = transform.alpha }
+  alpha (a, callback){ let {transform, transformOrigin, transformTarget, operateAlpha} = this.TRANSFORM; transformTarget.alpha += a; operateAlpha.timer = n(); transformOrigin.alpha = transform.alpha; callback && (operateAlpha.callback = callback) }
+  alphaTo (a){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; transformOrigin.alpha = transform.alpha = transformTarget.alpha = a }
   rotate (deg){ let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerR} = T; transformTarget.rotate += deg; T.timerR = n(); transformOrigin.rotate = transform.rotate }
   rotateTo(deg){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; deg && (transformOrigin.rotate = transform.rotate = transformTarget.rotate = deg) }  
   
   update(){
-    let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, timerA} = T, now = n();
+    let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, operateAlpha, cbAU, cbAD} = T, now = n();
     // 缩放
     if (transform.scaleX < transformTarget.scaleX) {
       transform.scaleX = tweens.runDefault(now - timerSX, transformOrigin.scaleX, transformTarget.scaleX, 2000) 
@@ -131,12 +154,18 @@ class Sprite extends Element{
     }
     // 透明度
     if (transform.alpha < transformTarget.alpha) {
-      transform.alpha = tweens.runDefault(now - timerA, transformOrigin.alpha, transformTarget.alpha, 2000)
-      transform.alpha > transformTarget.alpha && (transformOrigin.alpha = transform.alpha = transformTarget.alpha)
+      transform.alpha = tweens.runDefault(now - operateAlpha.timer, transformOrigin.alpha, transformTarget.alpha, 2000)
+      if (transform.alpha > transformTarget.alpha) {
+        transformOrigin.alpha = transform.alpha = transformTarget.alpha
+        operateAlpha.callback()
+      }
     }
     if (transform.alpha > transformTarget.alpha) {
-      transform.alpha = tweens.runDefault(now - timerA, transformOrigin.alpha, transformTarget.alpha, 2000)
-      transform.alpha < transformTarget.alpha && (transformOrigin.alpha = transform.alpha = transformTarget.alpha)
+      transform.alpha = tweens.runDefault(now - operateAlpha.timer, transformOrigin.alpha, transformTarget.alpha, 2000)
+      if (transform.alpha < transformTarget.alpha) {  
+        transformOrigin.alpha = transform.alpha = transformTarget.alpha
+        operateAlpha.callback()
+      }
     }
   }
 }

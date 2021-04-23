@@ -6,26 +6,35 @@ class Game{
     // 舞台&设施
     this.stage = new Stage(document.getElementById("myCanvas"), 1000, 400)
     // 场景管理
-    this.sceneMap = {'SCENE0': new Scene('SCENE0')}
+    this.sceneMap = {'SCENE0': new Scene('SCENE0', this.stage)}
     this.sceneCurrent = this.sceneMap['SCENE0']
     // 帧率引擎
-    this.timer = new Timer({FPS: this.#CONFIG.FPS})
+    this.timer = new Timer({FPS: this.#CONFIG.FPS, game: this, duration:10000})
   }
   setStage(stage){ this.stage = stage }
   setSceneTransition(){  }
-  addScene(scene){ this.sceneMap[scene.name] = scene}
+  addScene(name){ this.sceneMap[name] = new Scene(name, this.stage)}
+  getScene(name){return this.sceneMap[name]}
   addActor(actor){this.sceneCurrent.addChild(actor)}
-  
-  changeSceneTo(name){let nextScene = this.sceneMap[name]; if(!nextScene) return; this.sceneCurrent.out(() => { nextScene.in(); this.sceneCurrent = this.sceneMap[name] })}
+  // 转场
+  changeSceneTo(name){
+    let nextScene = this.sceneMap[name]; 
+    if(!nextScene) return; 
+    this.sceneCurrent.out(() => { 
+      console.log('SCENE0退场完成！')
+      this.sceneCurrent = this.sceneMap[name]
+      nextScene.in(function(){console.log('SCENE2入场完成！')})
+    })
+  }
   transform(name, transform){ for (let key in transform) {this.actorMap[name][key](transform[key])} }
   getActor(name){ return this.actorMap[name] }
-  start(){this.timer.start(this) }
+  start(){this.timer.start(this)}
   draw(){
     let {showGrid, showRuler} = this.#CONFIG   
     this.stage.clean() // 1.清除画布    
     showGrid && this.stage.showGrid() // 2.公共设施
     showRuler && this.stage.showRuler()    
-    this.sceneCurrent.children.forEach(e => { e.type === 'Sprite' && e.update(); this.stage.draw(e) })
+    this.sceneCurrent.update()
     //transition.active && this.stage.draw(transition.data)
   }  
 }
