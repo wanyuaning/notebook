@@ -82,7 +82,7 @@ console.log('scene1', scene1);
 
 $test = document.querySelector('#test')
   $test.addEventListener('click', function(e){
-    var target = e.target, type = target.getAttribute('data-type')
+    var target = e.target, type = target.getAttribute('data-type') 
     if (target.tagName !== 'BUTTON') return 
     switch(type){
       case 'game01': game.getActor('marry').changeName('righter'); break; 
