@@ -2,6 +2,9 @@
 //   bind: (() => window.addEventListener ? function (e, t, h) {e.addEventListener(t, h, false)} : function (e, t, h) {e.attachEvent("on" + t, h)} )(),
 //   unbind: (() => window.addEventListener ? function (e, t, h) {e.removeEventListerner(t, h, false)} : function (e, t, h) {e.detachEvent("on" + t, h)})()
 // }
+/**
+ * new Loader({publicPath:'../images/'})
+ */
 
 class Loader{
   #resource = {}

@@ -272,6 +272,24 @@ class Imagee extends Element{
     this.data = {img, sx, sy, swidth, sheight, x, y, width, height}
   } 
 }
+class Pattern extends Imagee{
+  constructor(img, width, height){
+    let canvas = document.createElement("canvas");
+canvas.width =240;
+canvas.height = 360;
+canvas.getContext("2d").drawImage(img, 0, 0);
+// 我们在实际的开发中，需要将抓换后的base64图片编码传输到后台图片服务器，由server直接存储或者生成一张图片；
+// 所以会用到 toDataURL
+console.log(canvas.toDataURL('image/jpeg'))
+
+    
+    
+    
+    
+    
+    super(img, 0, 0, 240, 320, 0, 0, 24, 32)
+  } 
+}
 
 
 
