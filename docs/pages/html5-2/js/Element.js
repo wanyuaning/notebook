@@ -108,7 +108,7 @@ class Sprite extends Element{
   rotateTo(deg){ let {transform, transformOrigin, transformTarget} = this.TRANSFORM; deg && (transformOrigin.rotate = transform.rotate = transformTarget.rotate = deg) }  
   
   update(){
-    console.log('testState', testState);
+    //console.log('testState', testState);
     testState = 1
     let T = this.TRANSFORM, {transform, transformOrigin, transformTarget, timerX, timerY, timerR, timerSX, timerSY, operateAlpha, cbAU, cbAD} = T, now = n();
     // 缩放
@@ -274,20 +274,34 @@ class Imagee extends Element{
 }
 class Pattern extends Imagee{
   constructor(img, width, height){
-    let canvas = document.createElement("canvas");
-canvas.width =240;
-canvas.height = 360;
-canvas.getContext("2d").drawImage(img, 0, 0);
-// 我们在实际的开发中，需要将抓换后的base64图片编码传输到后台图片服务器，由server直接存储或者生成一张图片；
-// 所以会用到 toDataURL
-console.log(canvas.toDataURL('image/jpeg'))
+    
+   
+      var img2 = img.cloneNode()
+      img2.crossOrigin = "anonymous"
+      ctx01.drawImage(img2, 0, 0, 569, 357, 0, 0, 569, 357)
+    var data = ctx01.getImageData(0,0,200,200);
+      console.log('data', data);
 
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      const img3 = new Image()
+      canvas.width = 200
+      canvas.height = 200
+      ctx.putImageData(data, 0, 0);
+      let aas = canvas.toDataURL("image/png")
+      img3.src = aas
+    
+    console.log('img3', img3);
+    document.getElementById('avatar').src = aas
+    
+
+      super(img3, 0, 0, 240, 320, 0, 0, 240, 320)
+    
+    //https://www.jb51.net/article/169684.htm
+    //console.log('img',img);
     
     
     
-    
-    
-    super(img, 0, 0, 240, 320, 0, 0, 24, 32)
   } 
 }
 

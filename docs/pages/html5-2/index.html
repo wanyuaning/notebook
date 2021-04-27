@@ -10,7 +10,9 @@
   </style>
 </head>
 <body>
+  
   <canvas id="myCanvas" width="1000" height="400"></canvas>
+  <canvas id="clipcanvas" width="240" height="320" ></canvas>
 
   <div id="test">
     Game管理
@@ -46,7 +48,7 @@
 <script src="js/Pattern.js"></script>
 <script src="js/tweens.js"></script>
 <script src="js/Stage.js"></script>
-<script src="js/Element.js"></script>
+<script src="js/Element.js?v=1"></script>
 <script src="js/Game.js"></script>
 <script src="js/Timer.js"></script>
 <script src="js/Loader.js"></script>
@@ -69,6 +71,9 @@ let game = new Game({
 
 let sp = new Sprite({x:50, y:50, width:100, height:50,options:{},transform:{origin:[25, 0]},config:{showRange:true}})
 let r1 = new Rect({x:0, y:0, width:100, height:50, options:{fillStyle: '#f00'}})
+
+var canvas01 = document.getElementById('clipcanvas')
+var ctx01 = canvas01.getContext("2d")
 
 let ld = new Loader({publicPath:'./images/'})
 ld.load(['r0.png'])

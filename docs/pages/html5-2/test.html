@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div style="border:#f00 1px solid">
+    <canvas id="drawcanvas" width="569" height="357" ></canvas>
+  </div>
+  <div style="border:#0f0 1px solid">
+    <canvas id="clipcanvas" width="240" height="320" ></canvas>
+  </div>
+  <img id="asdf"> 
+</body>
+</html>
+<script>
+    
+    
+    var drawcanvas = document.getElementById("drawcanvas"), clipCtx = drawcanvas.getContext("2d"); 
+    var clipcanvas = document.getElementById("clipcanvas"),     ctx = clipcanvas.getContext("2d"); 
+   
+    var clipImg = document.createElement("img"); 
+    clipImg.crossOrigin = "anonymous"; 
+    //clipImg.src = './images/r0.png';
+    clipImg.src = 'https://i.guancha.cn/bbs/2021/04/27/20210427110540328.png'
+    clipImg.onload = function(){
+      clipCtx.drawImage(this, 0, 0, 569, 357, 0, 0, 569, 357);
+      startClip()
+    }
+ 
+
+    function startClip(){
+     
+        
+      var data = clipCtx.getImageData(0,0,200,100);
+        
+      console.log('data', data);
+      
+      
+    }
+
+
+
+//var canvas = document.createElement("canvas");
+// var canvas = document.getElementById('test')
+//   canvas.width = 240;
+//   canvas.height = 320;
+//   var context = canvas.getContext("2d");
+  
+//   var img = new Image()
+//     img.crossOrigin = ''    //这里！！！
+//     img.onload = function () {
+//         context.drawImage(this, 0, 0)
+//         context.getImageData(0, 0, this.width, this.height)
+//         console.log('111', canvas.toDataURL("image/png"));
+        
+//     };
+//     img.src = './images/r0.png';
+
+
+</script>
