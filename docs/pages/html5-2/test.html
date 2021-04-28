@@ -7,40 +7,59 @@
   <title>Document</title>
 </head>
 <body>
-  <div style="border:#f00 1px solid">
-    <canvas id="drawcanvas" width="569" height="357" ></canvas>
-  </div>
-  <div style="border:#0f0 1px solid">
-    <canvas id="clipcanvas" width="240" height="320" ></canvas>
-  </div>
-  <img id="asdf"> 
+  <img id="asdf" src="./images/001.png"> 
 </body>
 </html>
+<script src="js/tool.js"></script>
+<script src="js/Loader.js"></script>
 <script>
+  
+  // function getBase64Image(img){
+  //   var canvas = document.createElement("canvas");// 创建一个canvas
+  //   canvas.width = img.width; // 设置对应的宽高
+  //   canvas.height = img.height;
+  //   var ctx = canvas.getContext("2d"); // 二维绘图环境
+
+  //   ctx.drawImage(img, 0, 0, img.width, img.height); // 将图片画在画布上
+  //   var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase(); // 获取到图片的格式
+  //   var dataURL = canvas.toDataURL("image/" + ext); // 得到base64 编码的 dataURL
+  //   return dataURL;
+  // }
     
+    var canvas = document.createElement('canvas'); canvas.width = 1000; canvas.height = 500; var ctx = canvas.getContext("2d")
     
-    var drawcanvas = document.getElementById("drawcanvas"), clipCtx = drawcanvas.getContext("2d"); 
-    var clipcanvas = document.getElementById("clipcanvas"),     ctx = clipcanvas.getContext("2d"); 
-   
-    var clipImg = document.createElement("img"); 
-    clipImg.crossOrigin = "anonymous"; 
-    //clipImg.src = './images/r0.png';
-    clipImg.src = 'https://i.guancha.cn/bbs/2021/04/27/20210427110540328.png'
-    clipImg.onload = function(){
-      clipCtx.drawImage(this, 0, 0, 569, 357, 0, 0, 569, 357);
-      startClip()
+    // let ld = new Loader({publicPath:'./images/'})
+    // ld.load(['r0.png'])
+    // ld.ready(function(){
+    //   var img = ld.get('r0.png').cloneNode()
+    //   img.crossOrigin = "anonymous"
+      
+    //   ctx.drawImage(img, 0, 0, 569, 357, 0, 0, 200, 150);
+    //   var data = ctx.getImageData(0, 0, 200, 150) // 复制画布上指定矩形的像素数据
+      
+    //   ctx.putImageData(data, 200, 0); 
+    //   ctx.putImageData(data, 400, 0);
+    //   let aas = canvas.toDataURL("image/png")
+    //   document.getElementById('asdf').src = aas
+    // })
+
+    var img = document.createElement("img"); 
+    img.crossOrigin = "anonymous"; 
+    img.src = './images/r0.png';
+    //img.src = 'https://i.guancha.cn/bbs/2021/04/27/20210427110540328.png'
+    img.onload = function(){
+      console.log('img', this);
+      
+      ctx.drawImage(this, 0, 0, 569, 357, 0, 0, 200, 150);
+      var data = ctx.getImageData(0, 0, 200, 150) // 复制画布上指定矩形的像素数据
+      
+      ctx.putImageData(data, 200, 0); 
+      ctx.putImageData(data, 400, 0);
+      let aas = canvas.toDataURL("image/png")
+      document.getElementById('asdf').src = aas
     }
  
 
-    function startClip(){
-     
-        
-      var data = clipCtx.getImageData(0,0,200,100);
-        
-      console.log('data', data);
-      
-      
-    }
 
 
 

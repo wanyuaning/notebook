@@ -274,28 +274,23 @@ class Imagee extends Element{
 }
 class Pattern extends Imagee{
   constructor(img, width, height){
-    
-   
-      var img2 = img.cloneNode()
-      img2.crossOrigin = "anonymous"
-      ctx01.drawImage(img2, 0, 0, 569, 357, 0, 0, 569, 357)
-    var data = ctx01.getImageData(0,0,200,200);
-      console.log('data', data);
+    let canvas = document.createElement('canvas') 
+    canvas.width = 1000 
+    canvas.height = 500 
+    let ctx = canvas.getContext("2d")
 
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      const img3 = new Image()
-      canvas.width = 200
-      canvas.height = 200
-      ctx.putImageData(data, 0, 0);
-      let aas = canvas.toDataURL("image/png")
-      img3.src = aas
+    ctx.drawImage(img, 0, 0, 240, 320, 0, 0, 240, 320);
+    var data = ctx.getImageData(0, 0, 200, 150) // 复制画布上指定矩形的像素数据
     
-    console.log('img3', img3);
+    ctx.putImageData(data, 240, 0); 
+    ctx.putImageData(data, 480, 0);
+    let aas = canvas.toDataURL("image/png")
     document.getElementById('avatar').src = aas
+   
+     
     
 
-      super(img3, 0, 0, 240, 320, 0, 0, 240, 320)
+    super(img, 0, 0, 240, 320, 0, 0, 240, 320)
     
     //https://www.jb51.net/article/169684.htm
     //console.log('img',img);
