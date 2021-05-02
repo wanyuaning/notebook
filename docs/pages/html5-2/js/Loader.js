@@ -23,9 +23,11 @@ class Loader{
   load(arr){
     let root = this
     root.#total = arr.length
-    arr.forEach(src => {
-      let img = new Image()
+    arr.forEach(src => {      
+      let img = new Image()      
       tool.bind(img, 'load', function(){
+        console.log('加载完成',this);
+        
         img.onLoad = img.load = null
         root.#resource[this.id] = this
         root.#loaded++
@@ -37,9 +39,11 @@ class Loader{
         root.#loaderror++
         root.#handleProgram((root.#loaded + root.#loaderror)/root.#total, this.id)
         root.#loaded + root.#loaderror >= root.#total && root.#handleReady()
-      })
-      img.src = this.#publicPath + src
+      })      
+      img.src = src.slice(0,4) == 'http' ? src : this.#publicPath + src
+      //img.crossOrigin = 'anonymous'
       img.id = src
+      console.log('new img',img);
     })
   }
   get(id){return this.#resource[id]}
