@@ -287,8 +287,10 @@ class Pattern extends Imagee{
     //   var data = ctx.getImageData(0, 0, 200, 150)
     //   console.log('data2', data);
       
+      
     let img = new Image()
     img.onload = function(){
+      console.log('this', this.width, this.height);
       let canvas = document.createElement('canvas') 
       canvas.width = 1000 
       canvas.height = 500 
@@ -303,8 +305,7 @@ class Pattern extends Imagee{
       console.log('data',aas);
       document.getElementById('avatar').src = aas
     }
-    img.src = blob
-
+    img.src = blob    
     super(img, 0, 0, 240, 320, 0, 0, 240, 320)
     
     //https://www.jb51.net/article/169684.htm
