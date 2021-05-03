@@ -8,11 +8,13 @@
 
 class Loader{
   #resource = {}
+  #resourceArr = []
   #total = 0
   #loaded = 0
   #loaderror = 0
   #handleProgram = function(rate, id){}
   #handleReady = function(){}
+  #handleError = function(err){console.log(err)}
   #publicPath = ''
   /**
    * {publicPath:'images/'}
@@ -32,22 +34,46 @@ class Loader{
         root.#resource[this.id] = this
         root.#loaded++
         root.#handleProgram((root.#loaded + root.#loaderror)/root.#total, this.id)
-        root.#loaded + root.#loaderror >= root.#total && root.#handleReady()
+        root.#loaded + root.#loaderror >= root.#total && root.#handleReady(root.#resourceArr)
       })
-      tool.bind(img, 'error', function(){
+      tool.bind(img, 'error', function(err){
         this.οnerrοr= this.error = null
         root.#loaderror++
         root.#handleProgram((root.#loaded + root.#loaderror)/root.#total, this.id)
-        root.#loaded + root.#loaderror >= root.#total && root.#handleReady()
+        root.#loaded + root.#loaderror >= root.#total && root.#handleError(err)
       })      
       img.src = src.slice(0,4) == 'http' ? src : this.#publicPath + src
       //img.crossOrigin = 'anonymous'
       img.id = src
-      console.log('new img',img);
+      root.#resourceArr.push(img)
     })
+  }
+  getBase64(url) {
+    return new Promise((resolve, reject) => {
+      //window.URL = window.URL || window.webkitURL
+      var xhr = new XMLHttpRequest()
+      xhr.open("get", url, true)    
+      xhr.responseType = "blob" // 至关重要
+      xhr.onload = function () {
+        console.log('xhr', this);
+        
+        if (this.status == 200) {        
+          var blob = this.response //得到一个blob对象        
+          let oFileReader = new FileReader() // 至关重要
+          oFileReader.onloadend = function (e) {
+            resolve(e.target.result) // 此处拿到的已经是 base64的图片了
+          }
+          oFileReader.readAsDataURL(blob)
+        }
+      }
+      xhr.send()
+    })    
   }
   get(id){return this.#resource[id]}
   program(fn){this.#handleProgram = fn}
-  ready(fn){this.#handleReady = fn}
+  ready(fn, err){
+    fn && (this.#handleReady = fn)
+    err && (this.#handleError = err)
+  }
 }
 
