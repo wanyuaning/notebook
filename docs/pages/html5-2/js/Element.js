@@ -273,46 +273,26 @@ class Imagee extends Element{
   } 
 }
 class Pattern extends Imagee{
-  constructor(blob, width, height){
+  constructor(img, W, H, options){
+    W = W || 0
+    H = H || 0
+    const defaultValue = Object.assign({
+      x: 0,
+      y: 0,
+      width: img.width,
+      height: img.height
+    }, options || {})
     
-    
-    // img.crossOrigin = 'use-credentials' // anonymous / use-credentials
-    
-    //   let canvas = document.createElement('canvas') 
-    // canvas.width = 1000 
-    // canvas.height = 500 
-    // let ctx = canvas.getContext("2d")
-
-    //   ctx.drawImage(img, 0, 0, 240, 320, 0, 0, 240, 320);
-    //   var data = ctx.getImageData(0, 0, 200, 150)
-    //   console.log('data2', data);
-      
-      
-    let img = new Image()
-    img.onload = function(){
-      console.log('this', this.width, this.height);
-      let canvas = document.createElement('canvas') 
-      canvas.width = 1000 
-      canvas.height = 500 
-      let ctx = canvas.getContext("2d")
-      ctx.drawImage(img, 0, 0, 240, 320, 0, 0, 240, 320);
-      var data = ctx.getImageData(0, 0, 200, 150) // 复制画布上指定矩形的像素数据
-      
-      
-      ctx.putImageData(data, 240, 0); 
-      ctx.putImageData(data, 480, 0);
-      let aas = canvas.toDataURL("image/png")
-      console.log('data',aas);
-      document.getElementById('avatar').src = aas
+    const canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H
+    const ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, defaultValue.width, defaultValue.height);
+    const data = ctx.getImageData(0, 0, defaultValue.width, defaultValue.height)     
+    for (let i = 0; i < W; i+=defaultValue.width) { 
+      for (let j = 0; j < H; j+=defaultValue.height) {
+        ctx.putImageData(data, i, j) 
+      }
     }
-    img.src = blob    
-    super(img, 0, 0, 240, 320, 0, 0, 240, 320)
-    
-    //https://www.jb51.net/article/169684.htm
-    //console.log('img',img);
-    
-    
-    
+    img.src = canvas.toDataURL("image/png")
+    super(img, 0, 0, W, H, defaultValue.x, defaultValue.y, W, H)
   } 
 }
 

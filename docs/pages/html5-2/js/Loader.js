@@ -51,17 +51,17 @@ class Loader{
   getBase64(url) {
     return new Promise((resolve, reject) => {
       //window.URL = window.URL || window.webkitURL
-      var xhr = new XMLHttpRequest()
+      const xhr = new XMLHttpRequest()
       xhr.open("get", url, true)    
       xhr.responseType = "blob" // 至关重要
       xhr.onload = function () {
-        console.log('xhr', this);
-        
         if (this.status == 200) {        
-          var blob = this.response //得到一个blob对象        
-          let oFileReader = new FileReader() // 至关重要
+          const blob = this.response //得到一个blob对象        
+          const oFileReader = new FileReader() // 至关重要
           oFileReader.onloadend = function (e) {
-            resolve(e.target.result) // 此处拿到的已经是 base64的图片了
+            const img = new Image()
+            img.onload = function(){ resolve(this) }
+            img.src = e.target.result
           }
           oFileReader.readAsDataURL(blob)
         }

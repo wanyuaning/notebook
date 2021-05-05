@@ -49,6 +49,9 @@ HTML事件：load、unload、abort、error、select、change、submit、reset、
 　　方档规范 | 当前URL信息 | 浏览器信息 | 显示屏信息 | 用户访问信息 | 窗口集
 ```tree
 [Window](pages/javascript/bom?id=Window) [BOM规范](pages/javascript/bom?id=浏览器对象模型)
+  event: 
+    非标准：依赖DOM触发 参考document事件，非DOM类事件无法监听
+    标准：事件提升为window全局管理 非DOM类事件也可以监听 如：window.addEventListener("hashchange", urlReroute)
   document: [Document](pages/javascript/bom?id=document) [DOM规范](pages/javascript/bom?id=文档对象模型) [浏览器静默与激活](pages/solution/scene?id=浏览器静默与激活)
     element:[Element](pages/javascript/bom?id=element)
     title
